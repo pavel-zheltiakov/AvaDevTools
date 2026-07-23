@@ -27,9 +27,41 @@
   <div class="install"><span>dotnet add package AvaDevTools</span><button onclick="copyInstall(this)">复制</button></div>
   <div class="cta">
     <a class="btn primary" href="docs.html">快速上手</a>
-    <a class="btn ghost" href="#features">查看功能</a>
+    <a class="btn ghost" href="#demo">▶ 观看演示</a>
   </div>
 </div></div>
+
+
+<section id="demo" class="demo"><div class="wrap">
+  <h2 class="sec">实际效果</h2>
+  <p class="sub">从 F12 到修好，只要二十秒。</p>
+  <video controls playsinline preload="metadata" poster="../assets/img/poster.jpg">
+    <source src="../assets/demo.mp4" type="video/mp4">
+  </video>
+</div></section>
+
+<section id="tour"><div class="wrap">
+<div class="tour-block first">
+  <div class="shot"><img src="../assets/img/tab-properties.png" alt="实时检查与编辑一切" loading="lazy"></div>
+  <div><h3>实时检查与编辑一切</h3><p>所选元素的每个属性都有类型化编辑器和完整的取值来源。</p><ul><li>附加属性分组、列宽可调、即时过滤</li><li>带取色器的色板、分段枚举开关、复选框</li><li>来源徽标：✏️ 手动 · 🎨 样式 · ⇡ 继承 —— 点击查看在哪里、如何设置</li><li>本地设置的值高亮显示，覆盖一目了然</li></ul></div>
+</div>
+<div class="tour-block rev">
+  <div class="shot"><img src="../assets/img/tab-styles.png" alt="样式与源码跳转" loading="lazy"></div>
+  <div><h3>样式与源码跳转</h3><p>元素的完整级联：主题、带选择器的样式、模板与本地值。</p><ul><li>以实时本地覆盖方式编辑 setter（浏览器 DevTools 风格）</li><li>file:line 链接与语法高亮的 XAML 预览</li><li>绑定可追溯到 ViewModel 成员 —— 一键跳转编辑器</li></ul></div>
+</div>
+<div class="tour-block">
+  <div class="shot"><img src="../assets/img/tab-3d.png" alt="3D 呈现你的 UI" loading="lazy"></div>
+  <div><h3>3D 呈现你的 UI</h3><p>基于实时快照，把窗口展开为带纹理的图层。</p><ul><li>拖动旋转、滚轮缩放、点击图层即在树中选中</li><li>Visual · merged、Visual · all 或 Logical 粒度</li><li>多余的覆盖层和 z 顺序问题一眼看穿</li></ul></div>
+</div>
+<div class="tour-block rev">
+  <div class="shot"><img src="../assets/img/tab-layout.png" alt="像浏览器一样的盒模型" loading="lazy"></div>
+  <div><h3>像浏览器一样的盒模型</h3><p>margin、border、padding 化为可交互色带 —— 任意一边就地编辑。</p><ul><li>尺寸、min/max、desired、bounds 与对齐一目了然</li><li>修改立即作用于正在运行的应用</li></ul></div>
+</div>
+<div class="tour-block">
+  <div class="shot"><img src="../assets/img/tab-events.png" alt="事件与日志，尽在掌握" loading="lazy"></div>
+  <div><h3>事件与日志，尽在掌握</h3><p>观察路由事件完成路由，并阅读 Avalonia 自身的日志。</p><ul><li>完整事件注册表 + Common 预设，来源与 handled 状态</li><li>日志查看器带级别/区域/文本过滤 —— 无反馈循环</li></ul></div>
+</div>
+</div></section>
 
 <section id="features"><div class="wrap">
   <h2 class="sec">DevTools 应有的一切</h2>

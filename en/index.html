@@ -27,9 +27,41 @@
   <div class="install"><span>dotnet add package AvaDevTools</span><button onclick="copyInstall(this)">copy</button></div>
   <div class="cta">
     <a class="btn primary" href="docs.html">Get started</a>
-    <a class="btn ghost" href="#features">See features</a>
+    <a class="btn ghost" href="#demo">▶ Watch the demo</a>
   </div>
 </div></div>
+
+
+<section id="demo" class="demo"><div class="wrap">
+  <h2 class="sec">See it in action</h2>
+  <p class="sub">Twenty seconds from F12 to fixed.</p>
+  <video controls playsinline preload="metadata" poster="../assets/img/poster.jpg">
+    <source src="../assets/demo.mp4" type="video/mp4">
+  </video>
+</div></section>
+
+<section id="tour"><div class="wrap">
+<div class="tour-block first">
+  <div class="shot"><img src="../assets/img/tab-properties.png" alt="Inspect and edit everything — live" loading="lazy"></div>
+  <div><h3>Inspect and edit everything — live</h3><p>Every property of the selected element with typed editors and full provenance.</p><ul><li>Grouped attached properties, resizable columns, instant filter</li><li>Color swatches with a live picker, segmented enum switches, checkboxes</li><li>Source badges: ✏️ set by hand · 🎨 style · ⇡ inherited — click to see where and how</li><li>Locally-set values highlighted so overrides stand out</li></ul></div>
+</div>
+<div class="tour-block rev">
+  <div class="shot"><img src="../assets/img/tab-styles.png" alt="Styles with go-to-source" loading="lazy"></div>
+  <div><h3>Styles with go-to-source</h3><p>The full cascade for the element: theme, styles with selectors, template and local values.</p><ul><li>Edit setter values as live local overrides, browser-devtools style</li><li>file:line links with syntax-highlighted XAML previews</li><li>Bindings traced to the view-model member — one click to Rider</li></ul></div>
+</div>
+<div class="tour-block">
+  <div class="shot"><img src="../assets/img/tab-3d.png" alt="Your UI in 3D" loading="lazy"></div>
+  <div><h3>Your UI in 3D</h3><p>The window exploded into textured layers from a live snapshot.</p><ul><li>Drag to orbit, wheel to zoom, click a layer to select it in the tree</li><li>Visual · merged, Visual · all or Logical granularity</li><li>Spot stray overlays and z-order surprises instantly</li></ul></div>
+</div>
+<div class="tour-block rev">
+  <div class="shot"><img src="../assets/img/tab-layout.png" alt="Box model like the browser" loading="lazy"></div>
+  <div><h3>Box model like the browser</h3><p>Margin, border and padding as interactive bands — edit any side in place.</p><ul><li>Size, min/max, desired, bounds and alignment at a glance</li><li>Changes apply to the running app immediately</li></ul></div>
+</div>
+<div class="tour-block">
+  <div class="shot"><img src="../assets/img/tab-events.png" alt="Events and logs, tamed" loading="lazy"></div>
+  <div><h3>Events and logs, tamed</h3><p>Watch routed events finish routing and read Avalonia’s own logs.</p><ul><li>Full event registry with a Common preset, source + handled state</li><li>Log viewer with level/area/text filters — feedback-loop safe</li></ul></div>
+</div>
+</div></section>
 
 <section id="features"><div class="wrap">
   <h2 class="sec">Everything you expect from DevTools</h2>

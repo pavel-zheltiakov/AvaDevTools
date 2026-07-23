@@ -67,3 +67,14 @@ pre .c{color:#6a9955}pre .k{color:#6fa8ff}pre .s{color:#ce9178}pre .m{color:#9cd
 footer{border-top:1px solid var(--border);padding:28px 0;margin-top:40px;color:var(--muted);font-size:13px;display:block}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 @media(max-width:640px){.hero h1{font-size:32px}.nav .links{gap:12px}}
+
+/* --- demo video + feature tour (whatsnew-style) --- */
+.demo video{width:100%;border:1px solid var(--border);border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,.55);display:block;background:#000}
+.tour-block{display:grid;grid-template-columns:1.22fr 1fr;gap:42px;align-items:center;padding:38px 0;border-top:1px solid var(--border)}
+.tour-block.first{border-top:0}
+.tour-block .shot img{width:100%;border:1px solid var(--border);border-radius:12px;box-shadow:0 18px 60px rgba(0,0,0,.5)}
+.tour-block.rev .shot{order:2}
+.tour-block h3{font-size:21px;margin-bottom:8px}
+.tour-block>div p{color:var(--muted);font-size:14.5px}
+.tour-block ul{margin:12px 0 0 18px;color:var(--muted);font-size:13.5px;line-height:1.8}
+@media(max-width:820px){.tour-block{grid-template-columns:1fr;gap:18px}.tour-block.rev .shot{order:0}}
