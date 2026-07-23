@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>版本历史 — AvaDevTools</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/site.js" defer></script>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="./"><span class="dot"></span>AvaDevTools</a>
+  <div class="links">
+    <a href="./#features">功能</a>
+    <a href="docs.html">文档</a>
+    <a href="releases.html">版本</a>
+    <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a>
+    <span class="langs"><a href="../en/releases.html">EN</a><a href="../uk/releases.html">УК</a><a class="on" href="../zh/releases.html">中文</a></span>
+  </div>
+</div></header>
+
+<div class="wrap docs">
+<h1>版本历史</h1>
+<p>所有版本及其说明和可下载的包。另见
+<a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub Releases</a> 和
+<a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a>。</p>
+<div id="rel" style="margin-top:20px"><p style="color:var(--muted)">正在加载版本历史…</p></div>
+</div>
+
+<footer><div class="wrap">
+  <span>© 2026 Pavel Zheltiakov · MIT 许可证</span>
+  <span><a href="./">首页</a> · <a href="docs.html">文档</a> · <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a></span>
+</div></footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => loadReleases(document.getElementById('rel'), {
+  locale: 'zh-CN',
+  none: '暂无版本 —— 首个版本即将发布。',
+  view: '在 GitHub 上查看',
+  fail: '无法加载版本列表 —— 请见',
+}));
+</script>
+</body>
+</html>

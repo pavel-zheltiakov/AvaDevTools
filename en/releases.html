@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Releases — AvaDevTools</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/site.js" defer></script>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="./"><span class="dot"></span>AvaDevTools</a>
+  <div class="links">
+    <a href="./#features">Features</a>
+    <a href="docs.html">Documentation</a>
+    <a href="releases.html">Releases</a>
+    <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a>
+    <span class="langs"><a class="on" href="../en/releases.html">EN</a><a href="../uk/releases.html">УК</a><a href="../zh/releases.html">中文</a></span>
+  </div>
+</div></header>
+
+<div class="wrap docs">
+<h1>Releases</h1>
+<p>Every version with notes and downloadable packages. Also on
+<a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub Releases</a> and
+<a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a>.</p>
+<div id="rel" style="margin-top:20px"><p style="color:var(--muted)">Loading release history…</p></div>
+</div>
+
+<footer><div class="wrap">
+  <span>© 2026 Pavel Zheltiakov · MIT License</span>
+  <span><a href="./">Home</a> · <a href="docs.html">Docs</a> · <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a></span>
+</div></footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => loadReleases(document.getElementById('rel'), {
+  locale: 'en-US',
+  none: 'No releases yet — the first one is coming soon.',
+  view: 'View on GitHub',
+  fail: 'Could not load the release list — see',
+}));
+</script>
+</body>
+</html>

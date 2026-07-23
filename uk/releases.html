@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Релізи — AvaDevTools</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/site.js" defer></script>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="./"><span class="dot"></span>AvaDevTools</a>
+  <div class="links">
+    <a href="./#features">Можливості</a>
+    <a href="docs.html">Документація</a>
+    <a href="releases.html">Релізи</a>
+    <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a>
+    <span class="langs"><a href="../en/releases.html">EN</a><a class="on" href="../uk/releases.html">УК</a><a href="../zh/releases.html">中文</a></span>
+  </div>
+</div></header>
+
+<div class="wrap docs">
+<h1>Релізи</h1>
+<p>Усі версії з нотатками та пакетами для завантаження. Також на
+<a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub Releases</a> і
+<a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a>.</p>
+<div id="rel" style="margin-top:20px"><p style="color:var(--muted)">Завантаження історії релізів…</p></div>
+</div>
+
+<footer><div class="wrap">
+  <span>© 2026 Pavel Zheltiakov · Ліцензія MIT</span>
+  <span><a href="./">Головна</a> · <a href="docs.html">Документація</a> · <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a></span>
+</div></footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => loadReleases(document.getElementById('rel'), {
+  locale: 'uk-UA',
+  none: 'Релізів ще немає — перший незабаром.',
+  view: 'Переглянути на GitHub',
+  fail: 'Не вдалося завантажити список релізів — див.',
+}));
+</script>
+</body>
+</html>
