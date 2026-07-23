@@ -78,3 +78,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .tour-block>div p{color:var(--muted);font-size:14.5px}
 .tour-block ul{margin:12px 0 0 18px;color:var(--muted);font-size:13.5px;line-height:1.8}
 @media(max-width:820px){.tour-block{grid-template-columns:1fr;gap:18px}.tour-block.rev .shot{order:0}}
+
+/* telegram footer link */
+.tg svg{width:15px;height:15px;vertical-align:-2.5px;margin-right:5px;fill:currentColor}
+.tg{white-space:nowrap}
