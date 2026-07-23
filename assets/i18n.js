@@ -72,7 +72,8 @@ en: {
     <span class="k">this</span>.AttachAvaDevTools();          <span class="c">// all windows, F12 opens the tools</span>
 <span class="c">#endif</span>
 }</code></pre>
-<p>Or attach to a single window: <code>myWindow.AttachAvaDevTools()</code>. Press <span class="kbd">F12</span> in the app window to open DevTools for it. The DevTools window stays on top by default (📌 toggle in the toolbar).</p>` },
+<p>Or attach to a single window: <code>myWindow.AttachAvaDevTools()</code>. Press <span class="kbd">F12</span> in the app window to open DevTools for it. The DevTools window stays on top by default (📌 toggle in the toolbar).</p>
+<p>Hold <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> over the running app to inspect the element under the pointer — exactly like the classic DevTools.</p>` },
       { id: 'tabs', t: 'Tabs', html: `<h3>Properties</h3>
 <ul><li>Styled, direct, attached (grouped under 📎 owners) and plain CLR properties.</li>
 <li>Typed editors: checkboxes, enum dropdowns, flat segmented switches, color swatches with a live picker, monospace text (Enter commits, Escape reverts).</li>
@@ -189,7 +190,8 @@ uk: {
     <span class="k">this</span>.AttachAvaDevTools();
 <span class="c">#endif</span>
 }</code></pre>
-<p>Або для одного вікна: <code>myWindow.AttachAvaDevTools()</code>. Натисніть <span class="kbd">F12</span> у вікні застосунку. Вікно DevTools за замовчуванням поверх інших (перемикач 📌 на панелі).</p>` },
+<p>Або для одного вікна: <code>myWindow.AttachAvaDevTools()</code>. Натисніть <span class="kbd">F12</span> у вікні застосунку. Вікно DevTools за замовчуванням поверх інших (перемикач 📌 на панелі).</p>
+<p>Утримуйте <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> над застосунком, щоб інспектувати елемент під курсором — як у класичних DevTools.</p>` },
       { id: 'tabs', t: 'Вкладки', html: `<h3>Properties</h3>
 <ul><li>Styled-, direct-, attached- (згруповані під 📎 власниками) та звичайні CLR-властивості.</li>
 <li>Типізовані редактори: чекбокси, списки enum, сегментні перемикачі, зразки кольору з пікером, моноширинний текст (Enter — застосувати, Escape — скасувати).</li>
@@ -306,7 +308,8 @@ zh: {
     <span class="k">this</span>.AttachAvaDevTools();
 <span class="c">#endif</span>
 }</code></pre>
-<p>也可以只附加到单个窗口：<code>myWindow.AttachAvaDevTools()</code>。在应用窗口中按 <span class="kbd">F12</span> 即可打开。工具窗口默认置顶（工具栏上的 📌 可切换）。</p>` },
+<p>也可以只附加到单个窗口：<code>myWindow.AttachAvaDevTools()</code>。在应用窗口中按 <span class="kbd">F12</span> 即可打开。工具窗口默认置顶（工具栏上的 📌 可切换）。</p>
+<p>在运行中的应用上按住 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>，即可检查指针下的元素 —— 与经典 DevTools 完全一致。</p>` },
       { id: 'tabs', t: '选项卡', html: `<h3>Properties（属性）</h3>
 <ul><li>Styled、direct、attached（按 📎 所有者分组）以及普通 CLR 属性。</li>
 <li>类型化编辑器：复选框、枚举下拉、分段开关、带取色器的色板、等宽文本框（Enter 提交，Escape 还原）。</li>
