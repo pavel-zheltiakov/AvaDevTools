@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AvaDevTools — безкоштовні DevTools для Avalonia 12</title>
+<meta name="description" content="Безкоштовні інструменти розробника для Avalonia 12: інспектор дерева, живе редагування властивостей, стилі, 3D-вигляд, події, логи та перехід до коду. Натисніть F12.">
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/site.js" defer></script>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="./"><span class="dot"></span>AvaDevTools</a>
+  <div class="links">
+    <a href="#features">Можливості</a>
+    <a href="docs.html">Документація</a>
+    <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a>
+    <span class="langs"><a href="../en/">EN</a><a class="on" href="../uk/">УК</a><a href="../zh/">中文</a></span>
+  </div>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <h1>DevTools для <em>Avalonia 12</em>.<br>Безкоштовно. In-process. Одна клавіша.</h1>
+  <p class="tag">Вбудованих інструментів F12 в Avalonia 12 більше немає. AvaDevTools повертає їх — інспектор,
+  живі редактори, стилі, 3D-вигляд, події та логи — одним open-source NuGet-пакетом.</p>
+  <div class="install"><span>dotnet add package AvaDevTools</span><button onclick="copyInstall(this)">копіювати</button></div>
+  <div class="cta">
+    <a class="btn primary" href="docs.html">Почати</a>
+    <a class="btn ghost" href="#features">Можливості</a>
+  </div>
+</div></div>
+
+<section id="features"><div class="wrap">
+  <h2 class="sec">Усе, що очікуєш від DevTools</h2>
+  <p class="sub">Підключіть один раз і натискайте <span class="kbd">F12</span> у будь-якому вікні.</p>
+  <div class="grid">
+    <div class="card"><div class="ico">🌳</div><h3>Інспектор дерева</h3><p>Візуальне та логічне дерево з іменами і класами стилів, підсвічування з зонами margin/padding та режим вибору елемента кліком.</p></div>
+    <div class="card"><div class="ico">✏️</div><h3>Живе редагування властивостей</h3><p>Типізовані редактори — чекбокси, списки enum, плоскі сегментні перемикачі — згруповані attached-властивості та миттєвий результат без перезбирання.</p></div>
+    <div class="card"><div class="ico">🎨</div><h3>Палітра кольорів</h3><p>Кожен Color і пензель має зразок кольору з повноцінним колірним пікером. Зміни застосовуються наживо.</p></div>
+    <div class="card"><div class="ico">📐</div><h3>Боксова модель</h3><p>Інтерактивні зони margin / border / padding із редагуванням кожної сторони, а також розміри, обмеження та вирівнювання.</p></div>
+    <div class="card"><div class="ico">🧩</div><h3>Стилі та фрейми значень</h3><p>Усі застосовані стилі, тема і локальні значення з сеттерами, пріоритетом та станом активності. Редагування — як живі локальні перевизначення.</p></div>
+    <div class="card"><div class="ico">🧊</div><h3>3D-вигляд шарами</h3><p>Ваше вікно як текстуровані шари у 3D — обертайте, масштабуйте, клікайте для вибору. Візуальне, згорнуте або логічне дерево.</p></div>
+    <div class="card"><div class="ico">🔗</div><h3>Перехід до коду</h3><p>file:line для елементів, стилів, біндінгів і в’ю-моделей. Підсвічені фрагменти XAML/C# та перехід у редактор одним кліком.</p></div>
+    <div class="card"><div class="ico">⚡</div><h3>Інспектор подій</h3><p>Обирайте routed-події з повного реєстру та спостерігайте: джерело, час і фінальний стан handled.</p></div>
+    <div class="card"><div class="ico">📜</div><h3>Перегляд логів</h3><p>Помилки біндінгів, layout і система властивостей — навіть без LogToTrace(). З фільтрами, батчингом і захистом від зациклення.</p></div>
+    <div class="card"><div class="ico">📊</div><h3>Оверлеї рендерера</h3><p>Лічильник FPS, графіки часу layout/render та підсвічування dirty-rect — одним перемикачем.</p></div>
+    <div class="card"><div class="ico">🕵️</div><h3>Джерело кожного значення</h3><p>Одразу видно: значення типове, задане вручну, зі стилю, шаблону чи успадковане — з переходом до предка або точного місця в XAML.</p></div>
+    <div class="card"><div class="ico">🌒</div><h3>Темна тема в стилі IDE</h3><p>Компактні елементи в дусі Rider/Unity, лише у вікні інструментів. Тема вашого застосунку не змінюється.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="sec">Швидкий старт</h2>
+  <p class="sub">Два рядки в <code>App.axaml.cs</code> — лише в Debug, у Release нічого не потрапляє.</p>
+<pre><code><span class="k">public override void</span> Initialize()
+{
+    AvaloniaXamlLoader.Load(<span class="k">this</span>);
+<span class="c">#if DEBUG</span>
+    <span class="k">this</span>.AttachAvaDevTools();   <span class="c">// F12 у будь-якому вікні</span>
+<span class="c">#endif</span>
+}</code></pre>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© 2026 Pavel Zheltiakov · Ліцензія MIT</span>
+  <span><a href="docs.html">Документація</a> · <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a> · <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a></span>
+</div></footer>
+</body>
+</html>

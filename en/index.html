@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AvaDevTools — free DevTools for Avalonia 12</title>
+<meta name="description" content="Free in-process developer tools for Avalonia 12: tree inspector, live property editing, styles, 3D view, events, logs and go-to-source. Press F12.">
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/site.js" defer></script>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="./"><span class="dot"></span>AvaDevTools</a>
+  <div class="links">
+    <a href="#features">Features</a>
+    <a href="docs.html">Documentation</a>
+    <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a>
+    <span class="langs"><a class="on" href="../en/">EN</a><a href="../uk/">УК</a><a href="../zh/">中文</a></span>
+  </div>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <h1>DevTools for <em>Avalonia 12</em>.<br>Free. In-process. One key away.</h1>
+  <p class="tag">The built-in F12 tools are gone in Avalonia 12. AvaDevTools brings them back — inspector,
+  live editors, styles, 3D view, events and logs — as a single open-source NuGet package.</p>
+  <div class="install"><span>dotnet add package AvaDevTools</span><button onclick="copyInstall(this)">copy</button></div>
+  <div class="cta">
+    <a class="btn primary" href="docs.html">Get started</a>
+    <a class="btn ghost" href="#features">See features</a>
+  </div>
+</div></div>
+
+<section id="features"><div class="wrap">
+  <h2 class="sec">Everything you expect from DevTools</h2>
+  <p class="sub">Attach once, press <span class="kbd">F12</span> in any window.</p>
+  <div class="grid">
+    <div class="card"><div class="ico">🌳</div><h3>Tree inspector</h3><p>Visual and logical tree with names and style classes, live highlight overlay with margin/padding bands, and a click-to-pick element mode.</p></div>
+    <div class="card"><div class="ico">✏️</div><h3>Live property editing</h3><p>Typed editors — checkboxes, enum dropdowns, flat segmented switches — grouped attached properties, and instant visual feedback without rebuilds.</p></div>
+    <div class="card"><div class="ico">🎨</div><h3>Color picker</h3><p>Every Color and brush gets a swatch with a full color picker flyout. Changes apply live as you drag.</p></div>
+    <div class="card"><div class="ico">📐</div><h3>Layout box model</h3><p>Interactive margin / border / padding bands with per-side editing, plus size, constraints and alignment at a glance.</p></div>
+    <div class="card"><div class="ico">🧩</div><h3>Styles &amp; value frames</h3><p>Every applied style, theme and local value with its setters, priority and active state. Edit setter values as live local overrides.</p></div>
+    <div class="card"><div class="ico">🧊</div><h3>3D exploded view</h3><p>Your window as textured layers in 3D — orbit, zoom, click to select. Visual, merged or logical tree granularity.</p></div>
+    <div class="card"><div class="ico">🔗</div><h3>Go to source</h3><p>file:line for elements, styles, bindings and view models. Syntax-highlighted XAML/C# previews and one-click jump to your editor.</p></div>
+    <div class="card"><div class="ico">⚡</div><h3>Events inspector</h3><p>Pick routed events from the full registry and watch them finish routing: source, timestamp and final handled state.</p></div>
+    <div class="card"><div class="ico">📜</div><h3>Log viewer</h3><p>Binding errors, layout and property-system messages — even without LogToTrace(). Filtered, batched and feedback-loop safe.</p></div>
+    <div class="card"><div class="ico">📊</div><h3>Renderer overlays</h3><p>FPS meter, layout/render time graphs and dirty-rect flashing on the inspected window, one toggle away.</p></div>
+    <div class="card"><div class="ico">🕵️</div><h3>Source of every value</h3><p>See whether a value is default, set by hand, styled, templated or inherited — and jump to the ancestor or the exact XAML that set it.</p></div>
+    <div class="card"><div class="ico">🌒</div><h3>IDE-style dark UI</h3><p>Compact Rider/Unity-like controls, scoped strictly to the tool window. Your application's theme is never touched.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="sec">Quick start</h2>
+  <p class="sub">Two lines in your <code>App.axaml.cs</code> — Debug builds only, nothing ships in Release.</p>
+<pre><code><span class="k">public override void</span> Initialize()
+{
+    AvaloniaXamlLoader.Load(<span class="k">this</span>);
+<span class="c">#if DEBUG</span>
+    <span class="k">this</span>.AttachAvaDevTools();   <span class="c">// press F12 in any window</span>
+<span class="c">#endif</span>
+}</code></pre>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© 2026 Pavel Zheltiakov · MIT License</span>
+  <span><a href="docs.html">Docs</a> · <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a> · <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a></span>
+</div></footer>
+</body>
+</html>

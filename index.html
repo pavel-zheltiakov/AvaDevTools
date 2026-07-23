@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AvaDevTools</title>
+<meta http-equiv="refresh" content="1; url=en/">
+<script>
+  var lang = (navigator.language || 'en').toLowerCase();
+  var target = lang.startsWith('uk') ? 'uk/' : lang.startsWith('zh') ? 'zh/' : 'en/';
+  location.replace(target);
+</script>
+</head>
+<body>
+<p><a href="en/">English</a> · <a href="uk/">Українська</a> · <a href="zh/">中文</a></p>
+</body>
+</html>

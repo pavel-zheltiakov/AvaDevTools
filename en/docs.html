@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation — AvaDevTools</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/site.js" defer></script>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="./"><span class="dot"></span>AvaDevTools</a>
+  <div class="links">
+    <a href="./#features">Features</a>
+    <a href="docs.html">Documentation</a>
+    <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a>
+    <span class="langs"><a class="on" href="../en/docs.html">EN</a><a href="../uk/docs.html">УК</a><a href="../zh/docs.html">中文</a></span>
+  </div>
+</div></header>
+
+<div class="wrap docs">
+<h1>Documentation</h1>
+<p>Free in-process DevTools for Avalonia 12 — an open-source analog of the classic F12 tools.</p>
+
+<div class="toc">
+  <a href="#install">Installation</a><a href="#quickstart">Quick start</a><a href="#tabs">Tabs</a>
+  <a href="#source">Go to source</a><a href="#options">Options</a><a href="#env">Environment variables</a>
+  <a href="#limits">Limitations</a>
+</div>
+
+<h2 id="install">Installation</h2>
+<pre><code>dotnet add package AvaDevTools</code></pre>
+<p>The package targets <code>net8.0</code> and works with Avalonia <strong>12.x</strong>. Reference it Debug-only if you prefer:</p>
+<pre><code>&lt;PackageReference Include=<span class="s">"AvaDevTools"</span> Condition=<span class="s">"'$(Configuration)' == 'Debug'"</span> /&gt;</code></pre>
+
+<h2 id="quickstart">Quick start</h2>
+<pre><code><span class="k">using</span> AvaDevTools;
+
+<span class="k">public override void</span> Initialize()
+{
+    AvaloniaXamlLoader.Load(<span class="k">this</span>);
+<span class="c">#if DEBUG</span>
+    <span class="k">this</span>.AttachAvaDevTools();          <span class="c">// all windows, F12 opens the tools</span>
+<span class="c">#endif</span>
+}</code></pre>
+<p>Or attach to a single window: <code>myWindow.AttachAvaDevTools()</code>. Press <span class="kbd">F12</span> in the app window to open DevTools for it. The DevTools window stays on top by default (📌 toggle in the toolbar).</p>
+
+<h2 id="tabs">Tabs</h2>
+<h3>Properties</h3>
+<ul>
+  <li>Styled, direct, attached (grouped under 📎 owners) and plain CLR properties.</li>
+  <li>Typed editors: checkboxes, enum dropdowns, flat segmented switches, color swatches with a live picker, monospace text (Enter commits, Escape reverts).</li>
+  <li><strong>Source column</strong>: ∅ default · ✏️ set locally · 🎨 style · ⧉ template · ⇡ inherited. Click a badge to see <em>where and how</em> the value is set — including the style's setter, its file:line and a highlighted XAML snippet; for bindings, the binding markup and a jump to the view-model member.</li>
+  <li>Click a property name for metadata (declared by, default value, inherits), copy name/value, and the declaration in your code.</li>
+  <li>Columns are resizable — drag between the header cells.</li>
+</ul>
+<h3>Layout</h3>
+<ul><li>Interactive box model: margin / border / padding bands editable per side; size, min/max, desired, bounds and alignment below.</li></ul>
+<h3>Styles</h3>
+<ul><li>All applied value frames — control theme, styles with selectors, template and local values — with setters, priority and active state.</li>
+<li>Edits apply as live local overrides (browser-devtools semantics); local values have a ✕ clear button.</li>
+<li>file:line links for the element and each style; ⟨⟩/▤/{} chips open code previews.</li></ul>
+<h3>3D</h3>
+<ul><li>Exploded 3D view textured from a live snapshot. Drag to orbit, wheel to zoom, click a card to select in the tree.</li>
+<li>Granularity: <em>Visual · merged</em> (wrappers collapsed), <em>Visual · all</em>, or <em>Logical</em>. "Reset view" restores the camera.</li></ul>
+<h3>Events</h3>
+<ul><li>Enable routed events from the full registry ("Common" preset included) and watch source, time and final handled state. Pause/Clear included.</li></ul>
+<h3>Logs</h3>
+<ul><li>Live Avalonia logger output with Pause, level, area and text filters. Captures at Warning by default. Entries produced by the DevTools UI itself are dropped and appends are batched — verbose logging can't freeze the tool.</li></ul>
+
+<h2 id="source">Go to source</h2>
+<p>Source locations come from the XAML compiler's <code>AvaloniaXamlCreateSourceInfo</code>, which Avalonia 12 enables automatically in Debug builds. C# types (view models) are located by searching your solution tree. Clicking opens JetBrains Rider by default on macOS; override with:</p>
+<pre><code>AVA_DEVTOOLS_EDITOR=<span class="s">"code --goto {file}:{line}"</span></code></pre>
+<p>Compiled Fluent theme styles have no source on disk — the popover shows reflection details and a "View theme XAML on GitHub" link matched to your Avalonia version.</p>
+
+<h2 id="options">Options</h2>
+<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions
+{
+    Gesture    = <span class="k">new</span> KeyGesture(Key.F11),      <span class="c">// default: F12</span>
+    WindowSize = <span class="k">new</span> Size(1280, 760),
+    StayOnTop  = <span class="k">false</span>,                        <span class="c">// default: true</span>
+});</code></pre>
+
+<h2 id="env">Environment variables</h2>
+<table>
+<tr><th>Variable</th><th>Meaning</th></tr>
+<tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>Open DevTools automatically when a window loads.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_TAB=3D</code></td><td>Preselect a tab (any tab header) on open.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_EDITOR</code></td><td>Editor command template with <code>{file}</code> / <code>{line}</code>.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_SRC_ROOT</code></td><td>Source root for resolving files when auto-detection fails.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_LOG_LEVEL=Verbose</code></td><td>Initial log capture level.</td></tr>
+</table>
+
+<h2 id="limits">Limitations</h2>
+<ul>
+  <li>Desktop only — secondary windows are not supported on mobile/browser targets.</li>
+  <li>The tool window uses the host app's loaded theme (Fluent, Simple, …).</li>
+  <li>The tree is a snapshot — use ↻ Refresh after structural UI changes (property values update live).</li>
+</ul>
+</div>
+
+<footer><div class="wrap">
+  <span>© 2026 Pavel Zheltiakov · MIT License</span>
+  <span><a href="./">Home</a> · <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a> · <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a></span>
+</div></footer>
+</body>
+</html>
