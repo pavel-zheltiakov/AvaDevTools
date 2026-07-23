@@ -66,7 +66,6 @@ pre .c{color:#6a9955}pre .k{color:#6fa8ff}pre .s{color:#ce9178}pre .m{color:#9cd
 
 footer{border-top:1px solid var(--border);padding:28px 0;margin-top:40px;color:var(--muted);font-size:13px;display:block}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-@media(max-width:640px){.hero h1{font-size:32px}.nav .links{gap:12px}}
 
 /* --- demo video + feature tour (whatsnew-style) --- */
 .demo video{width:100%;border:1px solid var(--border);border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,.55);display:block;background:#000}
@@ -82,3 +81,34 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 /* telegram footer link */
 .tg svg{width:15px;height:15px;vertical-align:-2.5px;margin-right:5px;fill:currentColor}
 .tg{white-space:nowrap}
+
+/* --- responsive / mobile ----------------------------------------------- */
+@media(max-width:860px){
+  .wrap{padding:0 16px}
+  section{padding:34px 0}
+  .hero{padding:52px 0 38px}
+  .hero h1{font-size:34px}
+  .hero p.tag{font-size:15px}
+  .docs h1{font-size:26px}
+  .docs h2{font-size:19px}
+  .docs table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  pre{padding:14px;font-size:12.5px}
+}
+@media(max-width:720px){
+  .nav{flex-wrap:wrap;height:auto;padding:10px 0;row-gap:8px}
+  .nav .links{width:100%;margin-left:0;justify-content:space-between;gap:10px;flex-wrap:wrap;row-gap:8px}
+  .nav .links a{font-size:13px}
+  .tour-block{padding:26px 0;gap:16px}
+  .tour-block h3{font-size:18px}
+}
+@media(max-width:560px){
+  .hero h1{font-size:27px}
+  .hero .cta{flex-direction:column;align-items:stretch}
+  .hero .cta .btn{text-align:center}
+  .install{font-size:12.5px;padding:9px 12px;max-width:100%}
+  .grid{grid-template-columns:1fr}
+  h2.sec{font-size:21px}
+  .demo video{border-radius:8px}
+  .toc a{margin-right:10px}
+  footer .wrap{flex-direction:column;align-items:flex-start;gap:8px}
+}
