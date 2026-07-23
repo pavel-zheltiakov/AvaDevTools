@@ -2,15 +2,66 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>AvaDevTools</title>
-<meta http-equiv="refresh" content="1; url=en/">
-<script>
-  var lang = (navigator.language || 'en').toLowerCase();
-  var target = lang.startsWith('uk') ? 'uk/' : lang.startsWith('zh') ? 'zh/' : 'en/';
-  location.replace(target);
-</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AvaDevTools — free DevTools for Avalonia 12</title>
+<meta name="description" content="Free in-process developer tools for Avalonia 12.">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/i18n.js"></script>
+<script src="assets/site.js" defer></script>
 </head>
-<body>
-<p><a href="en/">English</a> · <a href="uk/">Українська</a> · <a href="zh/">中文</a></p>
+<body data-page="home">
+<header><div class="wrap nav">
+  <a class="brand" href="index.html"><span class="dot"></span>AvaDevTools</a>
+  <div class="links">
+    <a href="#features" data-i18n="nav.features">Features</a>
+    <a href="docs.html" data-i18n="nav.docs">Documentation</a>
+    <a href="releases.html" data-i18n="nav.releases">Releases</a>
+    <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a>
+    <span class="langs"><a href="#" data-setlang="en">EN</a><a href="#" data-setlang="uk">УК</a><a href="#" data-setlang="zh">中文</a></span>
+  </div>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <h1 data-i18n-html="hero.title"></h1>
+  <p class="tag" data-i18n="hero.tag"></p>
+  <div class="install"><span>dotnet add package AvaDevTools</span><button onclick="copyInstall(this)" data-i18n="hero.copy">copy</button></div>
+  <div class="cta">
+    <a class="btn primary" href="docs.html" data-i18n="hero.get">Get started</a>
+    <a class="btn ghost" href="#demo" data-i18n="hero.watch">▶ Watch the demo</a>
+  </div>
+</div></div>
+
+<section id="demo" class="demo"><div class="wrap">
+  <h2 class="sec" data-i18n="video.h"></h2>
+  <p class="sub" data-i18n="video.sub"></p>
+  <video controls playsinline preload="metadata" poster="assets/img/poster.jpg">
+    <source src="assets/demo.mp4" type="video/mp4">
+  </video>
+</div></section>
+
+<section id="tour"><div class="wrap" id="tour-blocks"></div></section>
+
+<section id="features"><div class="wrap">
+  <h2 class="sec" data-i18n="feat.h"></h2>
+  <p class="sub" data-i18n="feat.sub"></p>
+  <div class="grid" id="features-grid"></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2 class="sec" data-i18n="quick.h"></h2>
+  <p class="sub" data-i18n="quick.sub"></p>
+<pre><code><span class="k">public override void</span> Initialize()
+{
+    AvaloniaXamlLoader.Load(<span class="k">this</span>);
+<span class="c">#if DEBUG</span>
+    <span class="k">this</span>.AttachAvaDevTools();   <span class="c">// press F12 in any window</span>
+<span class="c">#endif</span>
+}</code></pre>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© 2026 Pavel Zheltiakov · MIT License</span>
+  <span><a href="docs.html" data-i18n="footer.docs">Docs</a> · <a href="https://github.com/pavel-zheltiakov/AvaDevTools">GitHub</a> · <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a></span>
+</div></footer>
 </body>
 </html>
