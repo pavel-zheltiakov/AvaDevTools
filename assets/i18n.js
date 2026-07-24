@@ -11,7 +11,14 @@ en: {
     get: 'Get started', watch: '▶ Watch the demo', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
+  video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   tour: [
+    { img: 'tab-tree.png', t: 'A tree that reads like XAML',
+      lead: 'The smart tree inspector: syntax-colored elements, code-style folding and a live size column that flashes on change.',
+      pts: ['Pick an element — the tree compacts to your window, your views and the target; wrappers fold into "⋯ N levels" chips',
+            'Step hidden levels one at a time (Alt+↑/↓) or click a fold and choose exactly which element to reveal',
+            'Hide any element with Delete — it folds back into the chip it came from',
+            'Focus, Scope with breadcrumbs, search with F3 cycling, and a symmetric menu that shows every shortcut'] },
     { img: 'tab-properties.png', t: 'Inspect and edit everything — live',
       lead: 'Every property of the selected element with typed editors and full provenance.',
       pts: ['Grouped attached properties, resizable columns, instant filter',
@@ -40,7 +47,7 @@ en: {
   feat: {
     h: 'Everything you expect from DevTools', sub: 'Attach once, press F12 in any window.',
     cards: [
-      { i: '🌳', t: 'Tree inspector', d: 'Visual and logical tree with names and style classes, live highlight overlay with margin/padding bands, and a click-to-pick element mode.' },
+      { i: '🌳', t: 'Smart tree inspector', d: 'A tree that reads like XAML: syntax colors, code-style folding, a compact pick view, one-level stepping, hide, focus, scope and search — with live sizes.' },
       { i: '✏️', t: 'Live property editing', d: 'Typed editors — checkboxes, enum dropdowns, flat segmented switches — grouped attached properties, and instant visual feedback without rebuilds.' },
       { i: '🎨', t: 'Color picker', d: 'Every Color and brush gets a swatch with a full color picker flyout. Changes apply live as you drag.' },
       { i: '📐', t: 'Layout box model', d: 'Interactive margin / border / padding bands with per-side editing, plus size, constraints and alignment at a glance.' },
@@ -74,6 +81,17 @@ en: {
 }</code></pre>
 <p>Or attach to a single window: <code>myWindow.AttachAvaDevTools()</code>. Press <span class="kbd">F12</span> in the app window to open DevTools for it. The DevTools window stays on top by default (📌 toggle in the toolbar).</p>
 <p>Hold <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> over the running app to inspect the element under the pointer — exactly like the classic DevTools.</p>` },
+      { id: 'tree', t: 'Smart tree inspector', html: `<p>The tree panel is a read-only, code-editor-style view of your UI: elements render as syntax-colored pseudo-XAML lines (<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>) with fold chevrons, indent guides and a live <b>Size</b> column that flashes when an element changes. Two modes match Avalonia exactly: <b>Visual tree</b> (<code>GetVisualChildren</code>, default) and <b>Logical tree</b> (<code>GetLogicalChildren</code>).</p>
+<h3>Compact pick</h3>
+<p>Picking an element (the ⌖ button or Ctrl+Shift over the app) rebuilds the tree into a compact view: the window, your user controls on the path, the control owning the picked template part, and the element itself. Every run of wrappers in between folds into a <code>⋯ N levels</code> chip — a deep tree becomes a handful of lines.</p>
+<h3>Folds are first-class</h3>
+<p>A single click on a chip opens a picker listing the hidden elements in the same syntax-colored style — choose one and only it is revealed: <code>⋯ 7 levels</code> becomes <code>⋯ N</code> + element + <code>⋯ M</code>. A double click expands the whole chip. <b>Alt+↑/↓</b> steps to the visual parent or child, peeling exactly one hidden level (the selected line shows ▲▼ step buttons — an 👁 eye marks steps that reveal something hidden). <b>Delete</b> hides the selected element back into a chip; adjacent chips merge.</p>
+<h3>Shaping the tree</h3>
+<p>The context menu is symmetric — a Descendants group, an Ancestors group and an Element group, every action with its shortcut displayed: show one level / all levels, fold into ⋯, fold keeping views (only your user controls stay visible below), collapse ancestors keeping views or entirely, hide, focus, scope.</p>
+<h3>Focus &amp; Scope</h3>
+<p><b>Focus</b> (F) folds everything off the path to the selected element; Esc restores the previous state. <b>Scope</b> (S) re-roots the tree at any element, with clickable breadcrumbs, a scope-up button and Esc to leave. Picking an element outside the scope leaves it automatically.</p>
+<h3>Keyboard</h3>
+<table><tr><th>Keys</th><th>Action</th></tr><tr><td><code>↑ ↓</code></td><td>move selection</td></tr><tr><td><code>← →</code></td><td>fold / unfold, go to parent / first child</td></tr><tr><td><code>Space</code></td><td>toggle fold</td></tr><tr><td><code>Enter</code></td><td>expand a chip · open Properties</td></tr><tr><td><code>Alt+↑ / Alt+↓</code></td><td>step to parent / child, revealing one hidden level</td></tr><tr><td><code>Delete</code></td><td>hide the element into a ⋯ chip</td></tr><tr><td><code>Ctrl+↑ / Ctrl+↓</code></td><td>structural parent / child (chooser when several)</td></tr><tr><td><code>Ctrl+← / Ctrl+→</code></td><td>previous / next sibling</td></tr><tr><td><code>Shift+→</code></td><td>show all levels</td></tr><tr><td><code>Shift+←</code></td><td>fold descendants into ⋯</td></tr><tr><td><code>Shift+↓</code></td><td>fold descendants, keep views</td></tr><tr><td><code>Shift+↑</code></td><td>collapse ancestors, keep views</td></tr><tr><td><code>Ctrl+Shift+↑</code></td><td>collapse ancestors — all</td></tr><tr><td><code>Ctrl+Shift+↓</code></td><td>collapse descendants, keep one level</td></tr><tr><td><code>F / S / Esc</code></td><td>focus / scope / exit</td></tr><tr><td><code>Ctrl+F, F3</code></td><td>search, next match</td></tr><tr><td><code>Ctrl+C / Ctrl+Shift+C / Ctrl+E</code></td><td>copy path / copy as XAML / open in editor</td></tr></table>` },
       { id: 'tabs', t: 'Tabs', html: `<h3>Properties</h3>
 <ul><li>Styled, direct, attached (grouped under 📎 owners) and plain CLR properties.</li>
 <li>Typed editors: checkboxes, enum dropdowns, flat segmented switches, color swatches with a live picker, monospace text (Enter commits, Escape reverts).</li>
@@ -129,7 +147,14 @@ uk: {
     get: 'Почати', watch: '▶ Дивитися демо', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
+  video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   tour: [
+    { img: 'tab-tree.png', t: 'Дерево, що читається як XAML',
+      lead: 'Розумний інспектор дерева: підсвічені елементи, згортання як у редакторі коду та жива колонка розмірів.',
+      pts: ['Виберіть елемент — дерево стискається до вікна, ваших view та цілі; обгортки згортаються у чипи «⋯ N levels»',
+            'Розкривайте приховані рівні по одному (Alt+↑/↓) або клацніть згортку та оберіть, який саме елемент показати',
+            'Ховайте будь-який елемент клавішею Delete — він повертається у свій чип',
+            'Focus, Scope з хлібними крихтами, пошук із циклом F3 та симетричне меню з усіма шорткатами'] },
     { img: 'tab-properties.png', t: 'Інспектуйте та редагуйте все — наживо',
       lead: 'Кожна властивість вибраного елемента з типізованими редакторами та повним походженням значень.',
       pts: ['Згруповані attached-властивості, змінна ширина колонок, миттєвий фільтр',
@@ -158,7 +183,7 @@ uk: {
   feat: {
     h: 'Усе, що очікуєш від DevTools', sub: 'Підключіть один раз і натискайте F12 у будь-якому вікні.',
     cards: [
-      { i: '🌳', t: 'Інспектор дерева', d: 'Візуальне та логічне дерево з іменами і класами стилів, підсвічування з зонами margin/padding та режим вибору елемента кліком.' },
+      { i: '🌳', t: 'Розумне дерево', d: 'Дерево, що читається як XAML: підсвічування синтаксису, згортання як у редакторі, компактний вигляд після вибору, покрокове розкриття, hide, focus, scope і пошук.' },
       { i: '✏️', t: 'Живе редагування властивостей', d: 'Типізовані редактори — чекбокси, списки enum, плоскі сегментні перемикачі — згруповані attached-властивості та миттєвий результат без перезбирання.' },
       { i: '🎨', t: 'Палітра кольорів', d: 'Кожен Color і пензель має зразок кольору з повноцінним колірним пікером. Зміни застосовуються наживо.' },
       { i: '📐', t: 'Боксова модель', d: 'Інтерактивні зони margin / border / padding із редагуванням кожної сторони, а також розміри, обмеження та вирівнювання.' },
@@ -192,6 +217,17 @@ uk: {
 }</code></pre>
 <p>Або для одного вікна: <code>myWindow.AttachAvaDevTools()</code>. Натисніть <span class="kbd">F12</span> у вікні застосунку. Вікно DevTools за замовчуванням поверх інших (перемикач 📌 на панелі).</p>
 <p>Утримуйте <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> над застосунком, щоб інспектувати елемент під курсором — як у класичних DevTools.</p>` },
+      { id: 'tree', t: 'Розумний інспектор дерева', html: `<p>Панель дерева — це «редактор коду» лише для читання: елементи відображаються як підсвічені псевдо-XAML рядки (<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>) зі шевронами згортання, лініями відступів і живою колонкою <b>Size</b>, що спалахує при зміні. Два режими точно відповідають Avalonia: <b>Visual tree</b> (<code>GetVisualChildren</code>, за замовчуванням) і <b>Logical tree</b> (<code>GetLogicalChildren</code>).</p>
+<h3>Компактний вибір</h3>
+<p>Вибір елемента (кнопка ⌖ або Ctrl+Shift над застосунком) перебудовує дерево в компактний вигляд: вікно, ваші user controls на шляху, контрол-власник вибраної частини шаблону та сам елемент. Усі проміжні обгортки згортаються в чип <code>⋯ N levels</code> — глибоке дерево стає кількома рядками.</p>
+<h3>Згортки — повноцінні елементи</h3>
+<p>Один клік на чипі відкриває список прихованих елементів у тому ж стилі — оберіть один, і буде показано лише його: <code>⋯ 7 levels</code> перетворюється на <code>⋯ N</code> + елемент + <code>⋯ M</code>. Подвійний клік розкриває весь чип. <b>Alt+↑/↓</b> крокує до батька чи дитини, розкриваючи рівно один прихований рівень (на вибраному рядку є кнопки ▲▼; око 👁 позначає крок, що відкриє приховане). <b>Delete</b> ховає елемент назад у чип; сусідні чипи зливаються.</p>
+<h3>Формування дерева</h3>
+<p>Контекстне меню симетричне — групи Descendants, Ancestors і Element, кожна дія з шорткатом: показати один/усі рівні, згорнути в ⋯, згорнути лишивши view, згорнути предків (з view чи повністю), сховати, focus, scope.</p>
+<h3>Focus і Scope</h3>
+<p><b>Focus</b> (F) згортає все поза шляхом до вибраного елемента; Esc повертає попередній стан. <b>Scope</b> (S) робить будь-який елемент коренем дерева — з клікабельними хлібними крихтами, кнопкою «на рівень вище» та Esc для виходу. Вибір елемента поза scope виходить із нього автоматично.</p>
+<h3>Клавіатура</h3>
+<table><tr><th>Клавіші</th><th>Дія</th></tr><tr><td><code>↑ ↓</code></td><td>перемістити вибір</td></tr><tr><td><code>← →</code></td><td>згорнути / розгорнути, до батька / першої дитини</td></tr><tr><td><code>Space</code></td><td>перемкнути згортання</td></tr><tr><td><code>Enter</code></td><td>розкрити чип · відкрити Properties</td></tr><tr><td><code>Alt+↑ / Alt+↓</code></td><td>крок до батька / дитини з розкриттям одного рівня</td></tr><tr><td><code>Delete</code></td><td>сховати елемент у чип ⋯</td></tr><tr><td><code>Ctrl+↑ / Ctrl+↓</code></td><td>структурний батько / дитина (вибір, якщо кілька)</td></tr><tr><td><code>Ctrl+← / Ctrl+→</code></td><td>попередній / наступний сусід</td></tr><tr><td><code>Shift+→</code></td><td>показати всі рівні</td></tr><tr><td><code>Shift+←</code></td><td>згорнути нащадків у ⋯</td></tr><tr><td><code>Shift+↓</code></td><td>згорнути нащадків, лишити view</td></tr><tr><td><code>Shift+↑</code></td><td>згорнути предків, лишити view</td></tr><tr><td><code>Ctrl+Shift+↑</code></td><td>згорнути предків — усе</td></tr><tr><td><code>Ctrl+Shift+↓</code></td><td>згорнути нащадків, лишити один рівень</td></tr><tr><td><code>F / S / Esc</code></td><td>focus / scope / вийти</td></tr><tr><td><code>Ctrl+F, F3</code></td><td>пошук, наступний збіг</td></tr><tr><td><code>Ctrl+C / Ctrl+Shift+C / Ctrl+E</code></td><td>копіювати шлях / як XAML / відкрити в редакторі</td></tr></table>` },
       { id: 'tabs', t: 'Вкладки', html: `<h3>Properties</h3>
 <ul><li>Styled-, direct-, attached- (згруповані під 📎 власниками) та звичайні CLR-властивості.</li>
 <li>Типізовані редактори: чекбокси, списки enum, сегментні перемикачі, зразки кольору з пікером, моноширинний текст (Enter — застосувати, Escape — скасувати).</li>
@@ -247,7 +283,14 @@ zh: {
     get: '快速上手', watch: '▶ 观看演示', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
+  video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   tour: [
+    { img: 'tab-tree.png', t: '像 XAML 一样阅读的树',
+      lead: '智能树检查器：语法着色的元素、代码编辑器式折叠、实时闪烁的尺寸列。',
+      pts: ['拾取元素 —— 树压缩为窗口、你的视图和目标；中间的包装元素折叠成「⋯ N levels」芯片',
+            '逐层展开隐藏级别（Alt+↑/↓），或点击折叠芯片精确选择要显示的元素',
+            '按 Delete 隐藏任何元素 —— 它会折回原来的芯片',
+            'Focus、带面包屑的 Scope、F3 循环搜索，以及显示全部快捷键的对称菜单'] },
     { img: 'tab-properties.png', t: '实时检查与编辑一切',
       lead: '所选元素的每个属性都有类型化编辑器和完整的取值来源。',
       pts: ['附加属性分组、列宽可调、即时过滤',
@@ -276,7 +319,7 @@ zh: {
   feat: {
     h: 'DevTools 应有的一切', sub: '接入一次，在任意窗口按 F12。',
     cards: [
-      { i: '🌳', t: '树检查器', d: '可视化树与逻辑树，显示名称与样式类；高亮覆盖层带 margin/padding 色带；支持点击拾取元素。' },
+      { i: '🌳', t: '智能树检查器', d: '像 XAML 一样的树：语法着色、代码式折叠、拾取后的紧凑视图、逐层展开、隐藏、Focus、Scope 与搜索，并有实时尺寸列。' },
       { i: '✏️', t: '实时属性编辑', d: '类型化编辑器 —— 复选框、枚举下拉、扁平分段开关 —— 附加属性分组显示，无需重新编译即刻生效。' },
       { i: '🎨', t: '取色器', d: '每个 Color 和画刷都有色板，并附带完整取色器。拖动即实时应用。' },
       { i: '📐', t: '布局盒模型', d: '可交互的 margin / border / padding 色带，支持逐边编辑；尺寸、约束与对齐一目了然。' },
@@ -310,6 +353,17 @@ zh: {
 }</code></pre>
 <p>也可以只附加到单个窗口：<code>myWindow.AttachAvaDevTools()</code>。在应用窗口中按 <span class="kbd">F12</span> 即可打开。工具窗口默认置顶（工具栏上的 📌 可切换）。</p>
 <p>在运行中的应用上按住 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>，即可检查指针下的元素 —— 与经典 DevTools 完全一致。</p>` },
+      { id: 'tree', t: '智能树检查器', html: `<p>树面板是只读的「代码编辑器」视图：元素渲染为语法着色的伪 XAML 行（<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>），带折叠箭头、缩进参考线和实时 <b>Size</b> 列（元素变化时闪烁）。两种模式与 Avalonia 完全一致：<b>Visual tree</b>（<code>GetVisualChildren</code>，默认）和 <b>Logical tree</b>（<code>GetLogicalChildren</code>）。</p>
+<h3>紧凑拾取</h3>
+<p>拾取元素（⌖ 按钮或在应用上按 Ctrl+Shift）会把树重建为紧凑视图：窗口、路径上的用户控件、拥有所选模板部件的控件，以及元素本身。中间所有包装元素折叠成 <code>⋯ N levels</code> 芯片 —— 深树只剩几行。</p>
+<h3>折叠是一等公民</h3>
+<p>单击芯片会弹出隐藏元素列表（同样语法着色）—— 选择一个就只显示它：<code>⋯ 7 levels</code> 变为 <code>⋯ N</code> + 元素 + <code>⋯ M</code>。双击展开整个芯片。<b>Alt+↑/↓</b> 逐级跳到父/子元素，每次只展开一个隐藏级别（选中行显示 ▲▼ 按钮，👁 眼睛表示该步会展开隐藏内容）。<b>Delete</b> 把选中元素折回芯片，相邻芯片自动合并。</p>
+<h3>塑形树</h3>
+<p>右键菜单完全对称 —— Descendants、Ancestors、Element 三组，每个动作都显示快捷键：显示一级/全部、折叠成 ⋯、折叠但保留视图、折叠祖先（保留视图或全部）、隐藏、Focus、Scope。</p>
+<h3>Focus 与 Scope</h3>
+<p><b>Focus</b>（F）折叠所选元素路径之外的一切；Esc 恢复。<b>Scope</b>（S）把任意元素设为树根 —— 带可点击面包屑、上一级按钮，Esc 退出。拾取 scope 之外的元素会自动退出。</p>
+<h3>键盘</h3>
+<table><tr><th>按键</th><th>动作</th></tr><tr><td><code>↑ ↓</code></td><td>移动选择</td></tr><tr><td><code>← →</code></td><td>折叠 / 展开，跳到父级 / 第一个子级</td></tr><tr><td><code>Space</code></td><td>切换折叠</td></tr><tr><td><code>Enter</code></td><td>展开芯片 · 打开属性</td></tr><tr><td><code>Alt+↑ / Alt+↓</code></td><td>逐级跳到父/子元素，只展开一个隐藏级别</td></tr><tr><td><code>Delete</code></td><td>把元素隐藏进 ⋯ 芯片</td></tr><tr><td><code>Ctrl+↑ / Ctrl+↓</code></td><td>结构父级 / 子级（多个时弹出选择）</td></tr><tr><td><code>Ctrl+← / Ctrl+→</code></td><td>上一个 / 下一个兄弟元素</td></tr><tr><td><code>Shift+→</code></td><td>显示所有级别</td></tr><tr><td><code>Shift+←</code></td><td>把后代折叠成 ⋯</td></tr><tr><td><code>Shift+↓</code></td><td>折叠后代，保留视图</td></tr><tr><td><code>Shift+↑</code></td><td>折叠祖先，保留视图</td></tr><tr><td><code>Ctrl+Shift+↑</code></td><td>折叠祖先 —— 全部</td></tr><tr><td><code>Ctrl+Shift+↓</code></td><td>折叠后代，保留一级</td></tr><tr><td><code>F / S / Esc</code></td><td>Focus / Scope / 退出</td></tr><tr><td><code>Ctrl+F, F3</code></td><td>搜索，下一个匹配</td></tr><tr><td><code>Ctrl+C / Ctrl+Shift+C / Ctrl+E</code></td><td>复制路径 / 复制为 XAML / 在编辑器打开</td></tr></table>` },
       { id: 'tabs', t: '选项卡', html: `<h3>Properties（属性）</h3>
 <ul><li>Styled、direct、attached（按 📎 所有者分组）以及普通 CLR 属性。</li>
 <li>类型化编辑器：复选框、枚举下拉、分段开关、带取色器的色板、等宽文本框（Enter 提交，Escape 还原）。</li>
