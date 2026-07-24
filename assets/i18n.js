@@ -4,13 +4,14 @@ window.I18N = {
 en: {
   title: 'AvaDevTools — free DevTools for Avalonia 12',
   descr: 'Free in-process developer tools for Avalonia 12: tree inspector, live property editing, styles, 3D view, events, logs and go-to-source. Press F12.',
-  nav: { features: 'Features', docs: 'Documentation', releases: 'Releases' },
+  nav: { features: 'Features', docs: 'Documentation', videos: 'Videos', releases: 'Releases' },
   hero: {
     title: 'DevTools for <em>Avalonia 12</em>.<br>Free. In-process. One key away.',
     tag: 'The built-in F12 tools are gone in Avalonia 12. AvaDevTools brings them back — inspector, live editors, styles, 3D view, events and logs — as a single open-source NuGet package.',
     get: 'Get started', watch: '▶ Watch the demo', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
+  wn: { h: "What's New in 12.0.2 — the smart tree", videos: 'All videos →', notes: 'Previous versions →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   tour: [
     { img: 'tab-tree.png', t: 'A tree that reads like XAML',
@@ -140,13 +141,14 @@ en: {
 uk: {
   title: 'AvaDevTools — безкоштовні DevTools для Avalonia 12',
   descr: 'Безкоштовні інструменти розробника для Avalonia 12: інспектор дерева, живе редагування властивостей, стилі, 3D-вигляд, події, логи та перехід до коду. Натисніть F12.',
-  nav: { features: 'Можливості', docs: 'Документація', releases: 'Релізи' },
+  nav: { features: 'Можливості', docs: 'Документація', videos: 'Відео', releases: 'Релізи' },
   hero: {
     title: 'DevTools для <em>Avalonia 12</em>.<br>Безкоштовно. In-process. Одна клавіша.',
     tag: 'Вбудованих інструментів F12 в Avalonia 12 більше немає. AvaDevTools повертає їх — інспектор, живі редактори, стилі, 3D-вигляд, події та логи — одним open-source NuGet-пакетом.',
     get: 'Почати', watch: '▶ Дивитися демо', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
+  wn: { h: 'Що нового у 12.0.2 — розумне дерево', videos: 'Усі відео →', notes: 'Попередні версії →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   tour: [
     { img: 'tab-tree.png', t: 'Дерево, що читається як XAML',
@@ -276,13 +278,14 @@ uk: {
 zh: {
   title: 'AvaDevTools — Avalonia 12 免费开发者工具',
   descr: 'Avalonia 12 的免费进程内开发者工具：树检查器、实时属性编辑、样式、3D 视图、事件、日志与源码跳转。按 F12 即可打开。',
-  nav: { features: '功能', docs: '文档', releases: '版本' },
+  nav: { features: '功能', docs: '文档', videos: '视频', releases: '版本' },
   hero: {
     title: '<em>Avalonia 12</em> 的 DevTools。<br>免费、进程内、一键打开。',
     tag: 'Avalonia 12 移除了内置的 F12 工具。AvaDevTools 把它们带了回来 —— 检查器、实时编辑器、样式、3D 视图、事件和日志 —— 全部打包在一个开源 NuGet 包里。',
     get: '快速上手', watch: '▶ 观看演示', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
+  wn: { h: '12.0.2 新特性 — 智能树', videos: '全部视频 →', notes: '历史版本 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   tour: [
     { img: 'tab-tree.png', t: '像 XAML 一样阅读的树',
