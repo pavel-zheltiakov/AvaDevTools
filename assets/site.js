@@ -59,7 +59,7 @@ function applyLang(lang) {
   if (page === 'docs') buildDocs(R);
   if (page === 'releases') {
     const el = document.getElementById('rel');
-    if (el) { el.innerHTML = '<p style="color:var(--muted)">' + esc(R.rel.loading) + '</p>'; loadReleases(el, R.rel); }
+    if (el) { el.innerHTML = '<p style="color:var(--muted)">' + esc(R.rel.loading) + '</p>'; loadReleases(el, Object.assign({ docsLabel: R.nav.docs }, R.rel)); }
   }
 }
 
@@ -149,6 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- release history (fed live from the public repo's GitHub API) -------------
+var GH_ICON = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="vertical-align:-2px;margin-right:5px"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>';
+
 function md(src) {
   let h = esc(src);
   h = h.replace(/^### (.*)$/gm, '<h4>$1</h4>')
@@ -178,6 +180,8 @@ async function loadReleases(el, L) {
       const body = (r.body || '')
         .replace(/^---+\s*$/gm, '')
         .replace(/^Install:.*$/gm, '')
+        .replace(/^Docs:.*$/gm, '')
+        .replace(/^NuGet:.*$/gm, '')
         .replace(/\n{3,}/g, '\n\n')
         .trim();
       return '<div class="card" style="margin-bottom:14px">' +
@@ -186,7 +190,8 @@ async function loadReleases(el, L) {
         (body ? '<div class="relbody">' + md(body) + '</div>' : '') +
         '<div class="install rel-install"><span>dotnet add package AvaDevTools --version ' + esc(version) + '</span>' +
         '<button onclick="copyInstall(this)">copy</button></div>' +
-        '<p style="margin-top:10px;font-size:13px"><a href="' + esc(r.html_url) + '">' + esc(L.view) + '</a></p></div>';
+        '<p class="rel-links"><a href="docs.html">' + esc(L.docsLabel || 'Documentation') + '</a> · ' +
+        '<a href="' + esc(r.html_url) + '">' + GH_ICON + 'GitHub</a></p></div>';
     }).join('');
   } catch (e) {
     el.innerHTML = '<p style="color:var(--muted)">' + esc(L.fail) +
