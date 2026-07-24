@@ -160,8 +160,18 @@ function md(src) {
        .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
        .replace(/`([^`]+)`/g, '<code>$1</code>')
        .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1">$1</a>');
-  h = h.replace(/(^|\n)((?:- .*(?:\n|$))+)/g, (m, pre, block) =>
-    pre + '<ul>' + block.trim().split('\n').map(l => '<li>' + l.replace(/^- /, '') + '</li>').join('') + '</ul>');
+  h = h.replace(/(^|\n)((?:[ \t]*- .*(?:\n|$))+)/g, (m, pre, block) => {
+    let out = '<ul>', depth = 0;
+    block.replace(/\s+$/, '').split('\n').forEach(line => {
+      const sub = /^\s+-/.test(line);
+      const txt = line.replace(/^\s*- /, '');
+      if (sub && depth === 0) { out += '<ul>'; depth = 1; }
+      if (!sub && depth === 1) { out += '</ul>'; depth = 0; }
+      out += '<li>' + txt + '</li>';
+    });
+    if (depth === 1) out += '</ul>';
+    return pre + out + '</ul>';
+  });
   return h.split(/\n{2,}/).map(p => /^<(h\d|ul|hr)/.test(p.trim()) ? p : '<p>' + p.replace(/\n/g, '<br>') + '</p>').join('');
 }
 

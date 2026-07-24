@@ -119,8 +119,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .relbody h4{margin:12px 0 4px;font-size:13px}
 .relbody ul{margin:6px 0 10px 20px;padding:0}
 .relbody li{margin:3px 0;color:var(--muted)}
-.relbody li b{color:var(--fg)}
+.relbody li b{color:var(--text)}
 .relbody p{margin:6px 0;color:var(--muted)}
+.relbody p b{color:var(--text)}
+.relbody ul ul{margin:6px 0 8px 22px}
 .relbody hr{border:none;border-top:1px solid var(--border);margin:12px 0}
 
 /* scrollytelling feature tour */
