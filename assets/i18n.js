@@ -7,7 +7,7 @@ en: {
   nav: { features: 'Features', docs: 'Documentation', videos: 'Videos', releases: 'Releases' },
   hero: {
     title: 'DevTools for <em>Avalonia 12</em>.<br>Free. In-process. One key away.',
-    tag: 'The built-in F12 tools are gone in Avalonia 12. AvaDevTools brings them back — inspector, live editors, styles, 3D view, events and logs — as a single open-source NuGet package.',
+    tag: 'The built-in F12 tools are gone in Avalonia 12. AvaDevTools brings them back — inspector, live editors, styles, 3D view, events and logs — as a single free NuGet package.',
     get: 'Get started', watch: '▶ Watch the demo', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
@@ -66,7 +66,7 @@ en: {
   footer: { home: 'Home', docs: 'Docs' },
   docs: {
     title: 'Documentation — AvaDevTools', h: 'Documentation',
-    lead: 'Free in-process DevTools for Avalonia 12 — an open-source analog of the classic F12 tools.',
+    lead: 'Free in-process DevTools for Avalonia 12 — a free analog of the classic F12 tools.',
     sections: [
       { id: 'install', t: 'Installation', html: `<pre><code>dotnet add package AvaDevTools</code></pre>
 <p>The package targets <code>net8.0</code> and works with Avalonia <strong>12.x</strong>. Reference it Debug-only if you prefer:</p>
@@ -144,7 +144,7 @@ uk: {
   nav: { features: 'Можливості', docs: 'Документація', videos: 'Відео', releases: 'Релізи' },
   hero: {
     title: 'DevTools для <em>Avalonia 12</em>.<br>Безкоштовно. In-process. Одна клавіша.',
-    tag: 'Вбудованих інструментів F12 в Avalonia 12 більше немає. AvaDevTools повертає їх — інспектор, живі редактори, стилі, 3D-вигляд, події та логи — одним open-source NuGet-пакетом.',
+    tag: 'Вбудованих інструментів F12 в Avalonia 12 більше немає. AvaDevTools повертає їх — інспектор, живі редактори, стилі, 3D-вигляд, події та логи — одним безкоштовним NuGet-пакетом.',
     get: 'Почати', watch: '▶ Дивитися демо', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
@@ -203,7 +203,7 @@ uk: {
   footer: { home: 'Головна', docs: 'Документація' },
   docs: {
     title: 'Документація — AvaDevTools', h: 'Документація',
-    lead: 'Безкоштовні in-process DevTools для Avalonia 12 — open-source аналог класичних інструментів F12.',
+    lead: 'Безкоштовні in-process DevTools для Avalonia 12 — безкоштовний аналог класичних інструментів F12.',
     sections: [
       { id: 'install', t: 'Встановлення', html: `<pre><code>dotnet add package AvaDevTools</code></pre>
 <p>Пакет націлений на <code>net8.0</code> і працює з Avalonia <strong>12.x</strong>. За бажанням підключайте лише в Debug:</p>
@@ -281,7 +281,7 @@ zh: {
   nav: { features: '功能', docs: '文档', videos: '视频', releases: '版本' },
   hero: {
     title: '<em>Avalonia 12</em> 的 DevTools。<br>免费、进程内、一键打开。',
-    tag: 'Avalonia 12 移除了内置的 F12 工具。AvaDevTools 把它们带了回来 —— 检查器、实时编辑器、样式、3D 视图、事件和日志 —— 全部打包在一个开源 NuGet 包里。',
+    tag: 'Avalonia 12 移除了内置的 F12 工具。AvaDevTools 把它们带了回来 —— 检查器、实时编辑器、样式、3D 视图、事件和日志 —— 全部打包在一个免费 NuGet 包里。',
     get: '快速上手', watch: '▶ 观看演示', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
@@ -340,7 +340,7 @@ zh: {
   footer: { home: '首页', docs: '文档' },
   docs: {
     title: '文档 — AvaDevTools', h: '文档',
-    lead: 'Avalonia 12 的免费进程内 DevTools —— 经典 F12 工具的开源替代品。',
+    lead: 'Avalonia 12 的免费进程内 DevTools —— 经典 F12 工具的免费替代品。',
     sections: [
       { id: 'install', t: '安装', html: `<pre><code>dotnet add package AvaDevTools</code></pre>
 <p>包面向 <code>net8.0</code>，适用于 Avalonia <strong>12.x</strong>。也可以只在 Debug 下引用：</p>
