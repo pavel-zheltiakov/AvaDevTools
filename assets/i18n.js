@@ -11,7 +11,7 @@ en: {
     get: 'Get started', watch: '▶ Watch the demo', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.0.2 — the smart tree", videos: 'All videos →', notes: 'Previous versions →' },
+  wn: { h: "What's New in 12.0.2 — the smart tree", videos: 'All videos →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   tour: [
     { img: 'tab-tree.png', t: 'A tree that reads like XAML',
@@ -148,7 +148,7 @@ uk: {
     get: 'Почати', watch: '▶ Дивитися демо', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.0.2 — розумне дерево', videos: 'Усі відео →', notes: 'Попередні версії →' },
+  wn: { h: 'Що нового у 12.0.2 — розумне дерево', videos: 'Усі відео →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   tour: [
     { img: 'tab-tree.png', t: 'Дерево, що читається як XAML',
@@ -285,7 +285,7 @@ zh: {
     get: '快速上手', watch: '▶ 观看演示', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.0.2 新特性 — 智能树', videos: '全部视频 →', notes: '历史版本 →' },
+  wn: { h: '12.0.2 新特性 — 智能树', videos: '全部视频 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   tour: [
     { img: 'tab-tree.png', t: '像 XAML 一样阅读的树',
