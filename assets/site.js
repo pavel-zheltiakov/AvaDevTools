@@ -55,7 +55,7 @@ function applyLang(lang) {
   document.querySelectorAll('[data-setlang]').forEach(a =>
     a.classList.toggle('on', a.dataset.setlang === lang));
 
-  if (page === 'home') { buildTour(R); try { buildStory(R); } catch (e) {} buildFeatures(R); }
+  if (page === 'home') { let st = false; try { st = buildStory(R); } catch (e) {} buildTour(R, st); buildFeatures(R); }
   if (page === 'docs') buildDocs(R);
   if (page === 'releases') {
     const el = document.getElementById('rel');
@@ -63,10 +63,11 @@ function applyLang(lang) {
   }
 }
 
-function buildTour(R) {
+function buildTour(R, skipFirst) {
   const host = document.getElementById('tour-blocks');
   if (!host) return;
-  host.innerHTML = R.tour.map((b, i) =>
+  const blocks = skipFirst ? R.tour.slice(1) : R.tour;
+  host.innerHTML = blocks.map((b, i) =>
     '<div class="tour-block' + (i % 2 ? ' rev' : '') + (i === 0 ? ' first' : '') + '">' +
     '<div class="shot"><img src="assets/img/' + b.img + '" alt="' + esc(b.t) + '" loading="lazy"></div>' +
     '<div><h3>' + esc(b.t) + '</h3><p>' + esc(b.lead) + '</p><ul>' +
@@ -87,16 +88,16 @@ function buildStory(R) {
     track.innerHTML = '';
     track.style.height = '';
     if (tour) tour.style.display = '';
-    return;
+    return false;
   }
-  if (tour) tour.style.display = 'none';
-  const steps = R.tour;
+  if (tour) tour.style.display = '';
+  const steps = R.story || R.tour;
   track.style.height = (steps.length * 85 + 15) + 'vh';
   track.innerHTML =
     '<div class="story-sticky"><div class="story-bar"><span id="story-fill"></span></div><div class="story-grid">' +
     '<div class="story-text">' + steps.map((b, i) =>
-      '<div class="story-step" data-i="' + i + '"><h3>' + esc(b.t) + '</h3><p>' + esc(b.lead) + '</p><ul>' +
-      b.pts.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul></div>').join('') + '</div>' +
+      '<div class="story-step" data-i="' + i + '"><h3>' + esc(b.t) + '</h3><p>' + esc(b.d || b.lead) + '</p>' +
+      (b.pts ? '<ul>' + b.pts.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>' : '') + '</div>').join('') + '</div>' +
     '<div class="story-shot">' + steps.map((b, i) =>
       '<img data-i="' + i + '" src="assets/img/' + b.img + '" alt="' + esc(b.t) + '" loading="lazy">').join('') + '</div>' +
     '</div></div>';
@@ -125,6 +126,7 @@ function buildStory(R) {
     });
   }
   onScroll();
+  return true;
 }
 
 function buildFeatures(R) {
