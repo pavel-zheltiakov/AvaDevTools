@@ -175,12 +175,18 @@ async function loadReleases(el, L) {
     el.innerHTML = releases.map(r => {
       const version = (r.tag_name || '').replace(/^v/, '');
       const date = r.published_at ? new Date(r.published_at).toLocaleDateString(L.locale) : '';
+      const body = (r.body || '')
+        .replace(/^---+\s*$/gm, '')
+        .replace(/^Install:.*$/gm, '')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
       return '<div class="card" style="margin-bottom:14px">' +
         '<h3 style="margin-top:0">' + esc(r.name || r.tag_name) +
         ' <span style="color:var(--muted);font-weight:400;font-size:12px">· ' + date + '</span></h3>' +
-        (r.body ? '<div class="relbody">' + md(r.body) + '</div>' : '') +
-        '<p style="margin-top:8px"><code>dotnet add package AvaDevTools --version ' + esc(version) + '</code>' +
-        ' · <a href="' + esc(r.html_url) + '">' + esc(L.view) + '</a></p></div>';
+        (body ? '<div class="relbody">' + md(body) + '</div>' : '') +
+        '<div class="install rel-install"><span>dotnet add package AvaDevTools --version ' + esc(version) + '</span>' +
+        '<button onclick="copyInstall(this)">copy</button></div>' +
+        '<p style="margin-top:10px;font-size:13px"><a href="' + esc(r.html_url) + '">' + esc(L.view) + '</a></p></div>';
     }).join('');
   } catch (e) {
     el.innerHTML = '<p style="color:var(--muted)">' + esc(L.fail) +
