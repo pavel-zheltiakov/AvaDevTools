@@ -55,7 +55,7 @@ function applyLang(lang) {
   document.querySelectorAll('[data-setlang]').forEach(a =>
     a.classList.toggle('on', a.dataset.setlang === lang));
 
-  if (page === 'home') { buildTour(R); buildFeatures(R); }
+  if (page === 'home') { buildTour(R); try { buildStory(R); } catch (e) {} buildFeatures(R); }
   if (page === 'docs') buildDocs(R);
   if (page === 'releases') {
     const el = document.getElementById('rel');
@@ -71,6 +71,60 @@ function buildTour(R) {
     '<div class="shot"><img src="assets/img/' + b.img + '" alt="' + esc(b.t) + '" loading="lazy"></div>' +
     '<div><h3>' + esc(b.t) + '</h3><p>' + esc(b.lead) + '</p><ul>' +
     b.pts.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul></div></div>').join('');
+}
+
+// JetBrains-style scrollytelling: sticky panel, text fades per scroll step,
+// screenshots crossfade in sync, vertical timeline fills. Falls back to the
+// classic stacked tour on narrow screens / reduced motion.
+function buildStory(R) {
+  const track = document.getElementById('story-track');
+  if (!track) return;
+  window.__storyR = R;
+  const tour = document.getElementById('tour');
+  const wide = window.matchMedia('(min-width: 960px)').matches
+            && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!wide) {
+    track.innerHTML = '';
+    track.style.height = '';
+    if (tour) tour.style.display = '';
+    return;
+  }
+  if (tour) tour.style.display = 'none';
+  const steps = R.tour;
+  track.style.height = (steps.length * 85 + 15) + 'vh';
+  track.innerHTML =
+    '<div class="story-sticky"><div class="story-bar"><span id="story-fill"></span></div><div class="story-grid">' +
+    '<div class="story-text">' + steps.map((b, i) =>
+      '<div class="story-step" data-i="' + i + '"><h3>' + esc(b.t) + '</h3><p>' + esc(b.lead) + '</p><ul>' +
+      b.pts.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul></div>').join('') + '</div>' +
+    '<div class="story-shot">' + steps.map((b, i) =>
+      '<img data-i="' + i + '" src="assets/img/' + b.img + '" alt="' + esc(b.t) + '" loading="lazy">').join('') + '</div>' +
+    '</div></div>';
+  const stepEls = [].slice.call(track.querySelectorAll('.story-step'));
+  const imgEls = [].slice.call(track.querySelectorAll('.story-shot img'));
+  const fill = document.getElementById('story-fill');
+  function onScroll() {
+    const r = track.getBoundingClientRect();
+    const total = track.offsetHeight - window.innerHeight;
+    if (total <= 0) return;
+    const p = Math.min(1, Math.max(0, -r.top / total));
+    const idx = Math.min(steps.length - 1, Math.floor(p * steps.length));
+    stepEls.forEach(el => el.classList.toggle('on', +el.dataset.i === idx));
+    imgEls.forEach(el => el.classList.toggle('on', +el.dataset.i === idx));
+    if (fill) fill.style.height = (p * 100) + '%';
+  }
+  if (window.__storyScroll) window.removeEventListener('scroll', window.__storyScroll);
+  window.__storyScroll = onScroll;
+  window.addEventListener('scroll', onScroll, { passive: true });
+  if (!window.__storyResize) {
+    window.__storyResize = true;
+    let tmr;
+    window.addEventListener('resize', () => {
+      clearTimeout(tmr);
+      tmr = setTimeout(() => window.__storyR && buildStory(window.__storyR), 150);
+    });
+  }
+  onScroll();
 }
 
 function buildFeatures(R) {
@@ -103,7 +157,7 @@ function md(src) {
        .replace(/^\s*---+\s*$/gm, '<hr>')
        .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
        .replace(/`([^`]+)`/g, '<code>$1</code>')
-       .replace(/(^|[^"&gt;=])(https?:\/\/[^\s&lt;]+)/g, '$1<a href="$2">$2</a>');
+       .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1">$1</a>');
   h = h.replace(/(^|\n)((?:- .*(?:\n|$))+)/g, (m, pre, block) =>
     pre + '<ul>' + block.trim().split('\n').map(l => '<li>' + l.replace(/^- /, '') + '</li>').join('') + '</ul>');
   return h.split(/\n{2,}/).map(p => /^<(h\d|ul|hr)/.test(p.trim()) ? p : '<p>' + p.replace(/\n/g, '<br>') + '</p>').join('');
