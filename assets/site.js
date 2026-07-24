@@ -95,6 +95,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- release history (fed live from the public repo's GitHub API) -------------
+function md(src) {
+  let h = esc(src);
+  h = h.replace(/^### (.*)$/gm, '<h4>$1</h4>')
+       .replace(/^## (.*)$/gm, '<h3 class="relh">$1</h3>')
+       .replace(/^# (.*)$/gm, '<h3 class="relh">$1</h3>')
+       .replace(/^\s*---+\s*$/gm, '<hr>')
+       .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+       .replace(/`([^`]+)`/g, '<code>$1</code>')
+       .replace(/(^|[^"&gt;=])(https?:\/\/[^\s&lt;]+)/g, '$1<a href="$2">$2</a>');
+  h = h.replace(/(^|\n)((?:- .*(?:\n|$))+)/g, (m, pre, block) =>
+    pre + '<ul>' + block.trim().split('\n').map(l => '<li>' + l.replace(/^- /, '') + '</li>').join('') + '</ul>');
+  return h.split(/\n{2,}/).map(p => /^<(h\d|ul|hr)/.test(p.trim()) ? p : '<p>' + p.replace(/\n/g, '<br>') + '</p>').join('');
+}
+
 async function loadReleases(el, L) {
   try {
     const res = await fetch('https://api.github.com/repos/pavel-zheltiakov/AvaDevTools/releases');
@@ -110,7 +124,7 @@ async function loadReleases(el, L) {
       return '<div class="card" style="margin-bottom:14px">' +
         '<h3 style="margin-top:0">' + esc(r.name || r.tag_name) +
         ' <span style="color:var(--muted);font-weight:400;font-size:12px">· ' + date + '</span></h3>' +
-        (r.body ? '<p style="white-space:pre-wrap">' + esc(r.body) + '</p>' : '') +
+        (r.body ? '<div class="relbody">' + md(r.body) + '</div>' : '') +
         '<p style="margin-top:8px"><code>dotnet add package AvaDevTools --version ' + esc(version) + '</code>' +
         ' · <a href="' + esc(r.html_url) + '">' + esc(L.view) + '</a></p></div>';
     }).join('');

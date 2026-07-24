@@ -112,3 +112,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   .toc a{margin-right:10px}
   footer .wrap{flex-direction:column;align-items:flex-start;gap:8px}
 }
+
+/* rendered release notes */
+.relbody h3.relh{margin:14px 0 6px;font-size:15px}
+.relbody h4{margin:12px 0 4px;font-size:13px}
+.relbody ul{margin:6px 0 10px 20px;padding:0}
+.relbody li{margin:3px 0;color:var(--muted)}
+.relbody li b{color:var(--fg)}
+.relbody p{margin:6px 0;color:var(--muted)}
+.relbody hr{border:none;border-top:1px solid var(--border);margin:12px 0}
