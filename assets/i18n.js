@@ -11,21 +11,24 @@ en: {
     get: 'Get started', watch: '▶ Watch the demo', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.0.2 — the smart tree", videos: 'All videos →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.0.3 — value tracking", videos: 'All videos →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
+  video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   story: [
-    { img: 'story/s01.png', t: 'Pick — the tree compacts', d: 'Click ⌖ Pick element, then click anything in the running app. The tree collapses to your window, your views and the target — every wrapper run folds into a "⋯ N levels" chip.' },
-    { img: 'story/s02.png', t: 'Step through hidden levels', d: 'Press Alt+↑ — exactly one hidden level opens per step. No tree explosions.' },
-    { img: 'story/s03.png', t: 'Click a fold…', d: 'A picker lists the hidden elements, rendered like the tree itself.' },
-    { img: 'story/s04.png', t: '…and only that element appears', d: 'The chip splits around your choice: "⋯ N levels" + element + "⋯ M levels".' },
-    { img: 'story/s05.png', t: 'Hide the noise', d: 'Press Delete — the element folds back into the chip it came from.' },
-    { img: 'story/s06.png', t: 'One symmetric menu', d: 'Descendants · Ancestors · Element — the same actions in both directions, every one with its shortcut.' },
-    { img: 'story/s07.png', t: 'Collapse ancestors', d: 'Shift+↑ keeps your views visible and folds the wrappers away.' },
-    { img: 'story/s08.png', t: 'Scope', d: 'Any element becomes the root, with clickable breadcrumbs. Esc leads back.' },
-    { img: 'story/s09.png', t: 'Search', d: 'Find by type, name or style class — F3 cycles through the matches.' },
-    { img: 'story/s10.png', t: 'Live sizes', d: 'The size column flashes as the app changes — resize and watch.' },
+    { img: 'story/t01.png', t: 'Two hidden buttons on every row', d: 'Hover any Properties row: ⊙ track follows the value across the tree, 📌 pin keeps the row on top.' },
+    { img: 'story/t02.png', t: 'One click — the tree, colored by value', d: 'Track DataContext: the MainViewModel everywhere it inherits, an OrbitViewModel island, null in its own bucket.' },
+    { img: 'story/t03.png', t: 'A legend that counts everything', d: 'Every value in the tree with a live count — and instances get ordinals: "OrbitViewModel #1".' },
+    { img: 'story/t04.png', t: 'Values change — colors follow', d: 'A second OrbitViewModel assigned in the running app: same type, its own color — #2. Re-classified within 250 ms, even inside folded chips.' },
+    { img: 'story/t05.png', t: 'Fold to changes', d: 'One click keeps only the elements where the value differs from its parent — every DataContext boundary on one screen.' },
+    { img: 'story/t06.png', t: 'Pin what you watch', d: '📌 floats your properties to the top of the list; the rest waits behind "Show more".' },
   ],
   tour: [
+    { img: 'tab-track.png', t: 'Track any value across the tree',
+      lead: 'The classic MVVM question — "where did my DataContext break?" — answered in one click.',
+      pts: ['⊙ track on any Properties row colors the whole tree: same value = same color, null and "no such property" get their own buckets',
+            'A legend under the tree counts every value bucket, live; folded ⋯ chips stack the colors they hide',
+            'Values changed in the running app re-classify within 250 ms — even off-screen or inside folds',
+            '"Fold to changes" keeps only the elements where the value changes; 📌 pins your properties to the top of the list'] },
     { img: 'tab-tree.png', t: 'A tree that reads like XAML',
       lead: 'The smart tree inspector: syntax-colored elements, code-style folding and a live size column that flashes on change.',
       pts: ['Pick an element — the tree compacts to your window, your views and the target; wrappers fold into "⋯ N levels" chips',
@@ -61,7 +64,9 @@ en: {
     h: 'Everything you expect from DevTools', sub: 'Attach once, press F12 in any window.',
     cards: [
       { i: '🌳', t: 'Smart tree inspector', d: 'A tree that reads like XAML: syntax colors, code-style folding, a compact pick view, one-level stepping, hide, focus, scope and search — with live sizes.' },
+      { i: '🎯', t: 'Value tracking', d: 'Track any property across the whole tree: same value = same color, null in its own bucket, a live legend with counts — and "Fold to changes" shows every boundary at once.' },
       { i: '✏️', t: 'Live property editing', d: 'Typed editors — checkboxes, enum dropdowns, flat segmented switches — grouped attached properties, and instant visual feedback without rebuilds.' },
+      { i: '📌', t: 'Pinned properties', d: 'Pin the properties you actually watch — they float to a group at the top of the list; everything else waits behind "Show more". Persisted per user.' },
       { i: '🎨', t: 'Color picker', d: 'Every Color and brush gets a swatch with a full color picker flyout. Changes apply live as you drag.' },
       { i: '📐', t: 'Layout box model', d: 'Interactive margin / border / padding bands with per-side editing, plus size, constraints and alignment at a glance.' },
       { i: '🧩', t: 'Styles & value frames', d: 'Every applied style, theme and local value with its setters, priority and active state. Edit setter values as live local overrides.' },
@@ -105,8 +110,16 @@ en: {
 <p><b>Focus</b> (F) folds everything off the path to the selected element; Esc restores the previous state. <b>Scope</b> (S) re-roots the tree at any element, with clickable breadcrumbs, a scope-up button and Esc to leave. Picking an element outside the scope leaves it automatically.</p>
 <h3>Keyboard</h3>
 <table><tr><th>Keys</th><th>Action</th></tr><tr><td><code>↑ ↓</code></td><td>move selection</td></tr><tr><td><code>← →</code></td><td>fold / unfold, go to parent / first child</td></tr><tr><td><code>Space</code></td><td>toggle fold</td></tr><tr><td><code>Enter</code></td><td>expand a chip · open Properties</td></tr><tr><td><code>Alt+↑ / Alt+↓</code></td><td>step to parent / child, revealing one hidden level</td></tr><tr><td><code>Delete</code></td><td>hide the element into a ⋯ chip</td></tr><tr><td><code>Ctrl+↑ / Ctrl+↓</code></td><td>structural parent / child (chooser when several)</td></tr><tr><td><code>Ctrl+← / Ctrl+→</code></td><td>previous / next sibling</td></tr><tr><td><code>Shift+→</code></td><td>show all levels</td></tr><tr><td><code>Shift+←</code></td><td>fold descendants into ⋯</td></tr><tr><td><code>Shift+↓</code></td><td>fold descendants, keep views</td></tr><tr><td><code>Shift+↑</code></td><td>collapse ancestors, keep views</td></tr><tr><td><code>Ctrl+Shift+↑</code></td><td>collapse ancestors — all</td></tr><tr><td><code>Ctrl+Shift+↓</code></td><td>collapse descendants, keep one level</td></tr><tr><td><code>F / S / Esc</code></td><td>focus / scope / exit</td></tr><tr><td><code>Ctrl+F, F3</code></td><td>search, next match</td></tr><tr><td><code>Ctrl+C / Ctrl+Shift+C / Ctrl+E</code></td><td>copy path / copy as XAML / open in editor</td></tr></table>` },
+      { id: 'tracking', t: 'Value tracking & pinned properties', html: `<p>Hover any row in the Properties tab and two buttons appear: <b>⊙ track</b> and <b>📌 pin</b>.</p>
+<h3>Track a value across the tree</h3>
+<p><b>⊙ track</b> colors the whole tree by that property's value: every element gets a gutter bar and an underline — <em>same value = same color</em>. Strings and value types compare by equality; reference values (view models!) by instance, labeled like <code>OrbitViewModel #1</code>. <code>null</code> and "no such property" get their own buckets. Folded <code>⋯</code> chips stack up to three colors of the values hidden inside them, so nothing can hide.</p>
+<p>A legend under the tree counts every bucket live. Values changed in the running app — even off-screen or inside folded chips — re-classify within 250&nbsp;ms. (Plain CLR properties have no change notifications; they re-classify on ↻ Refresh.)</p>
+<p><b>Fold to changes</b> (button in the legend) folds the tree to exactly the elements where the tracked value differs from its parent — the classic "where did my DataContext break?" answered on one screen. ✕ stops tracking.</p>
+<h3>Pin the properties you watch</h3>
+<p><b>📌 pin</b> keeps a property in a <b>Pinned</b> group at the top of the list; the rest collapses behind "Show more". Pins are per name (pin <code>Text</code> once — pinned for every element type), shared by all DevTools windows and persisted per user.</p>` },
       { id: 'tabs', t: 'Tabs', html: `<h3>Properties</h3>
 <ul><li>Styled, direct, attached (grouped under 📎 owners) and plain CLR properties.</li>
+<li>Hover a row for <b>⊙ track</b> and <b>📌 pin</b> — see <a href="#tracking">Value tracking &amp; pinned properties</a>.</li>
 <li>Typed editors: checkboxes, enum dropdowns, flat segmented switches, color swatches with a live picker, monospace text (Enter commits, Escape reverts).</li>
 <li><strong>Source column</strong>: ∅ default · ✏️ set locally · 🎨 style · ⧉ template · ⇡ inherited. Click a badge to see <em>where and how</em> the value is set — including the style's setter, its file:line and a highlighted XAML snippet; for bindings, the binding markup and a jump to the view-model member.</li>
 <li>Click a property name for metadata (declared by, default value, inherits), copy name/value, and the declaration in your code.</li>
@@ -160,21 +173,24 @@ uk: {
     get: 'Почати', watch: '▶ Дивитися демо', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.0.2 — розумне дерево', videos: 'Усі відео →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.0.3 — трекінг значень', videos: 'Усі відео →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
+  video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   story: [
-    { img: 'story/s01.png', t: 'Вибір — дерево стискається', d: 'Натисніть ⌖ Pick element і клацніть будь-що в застосунку. Дерево згортається до вікна, ваших view та цілі — обгортки складаються в чипи «⋯ N levels».' },
-    { img: 'story/s02.png', t: 'Крок за кроком', d: 'Alt+↑ відкриває рівно один прихований рівень за раз.' },
-    { img: 'story/s03.png', t: 'Клацніть згортку…', d: 'Зʼявляється список прихованих елементів — у стилі самого дерева.' },
-    { img: 'story/s04.png', t: '…і зʼявляється лише він', d: 'Чип розділяється: «⋯ N levels» + елемент + «⋯ M levels».' },
-    { img: 'story/s05.png', t: 'Ховайте зайве', d: 'Delete — елемент повертається у свій чип.' },
-    { img: 'story/s06.png', t: 'Симетричне меню', d: 'Descendants · Ancestors · Element — кожна дія зі своїм шорткатом.' },
-    { img: 'story/s07.png', t: 'Згорнути предків', d: 'Shift+↑ лишає ваші view, ховає обгортки.' },
-    { img: 'story/s08.png', t: 'Scope', d: 'Будь-який елемент стає коренем, хлібні крихти ведуть назад. Esc — вихід.' },
-    { img: 'story/s09.png', t: 'Пошук', d: 'За типом, іменем або класом стилю — F3 циклює збіги.' },
-    { img: 'story/s10.png', t: 'Живі розміри', d: 'Колонка розмірів спалахує, щойно застосунок змінюється.' },
+    { img: 'story/t01.png', t: 'Дві приховані кнопки на кожному рядку', d: 'Наведіть курсор на будь-який рядок Properties: ⊙ track відстежує значення по дереву, 📌 pin тримає рядок згори.' },
+    { img: 'story/t02.png', t: 'Один клік — дерево у кольорах значень', d: 'Відстежуйте DataContext: MainViewModel скрізь, де він успадковується, острівець OrbitViewModel, null у власній групі.' },
+    { img: 'story/t03.png', t: 'Легенда, що рахує все', d: 'Кожне значення в дереві з живим лічильником — а інстанси отримують номери: «OrbitViewModel #1».' },
+    { img: 'story/t04.png', t: 'Значення змінюються — кольори слідують', d: 'Другий OrbitViewModel, призначений у запущеному застосунку: той самий тип, власний колір — #2. Перекласифікація за 250 мс, навіть у згорнутих чипах.' },
+    { img: 'story/t05.png', t: 'Згорнути до змін', d: 'Один клік лишає тільки елементи, де значення відрізняється від батьківського — кожна межа DataContext на одному екрані.' },
+    { img: 'story/t06.png', t: 'Закріпіть те, що пильнуєте', d: '📌 піднімає ваші властивості на початок списку; решта чекає за «Show more».' },
   ],
   tour: [
+    { img: 'tab-track.png', t: 'Відстежуйте будь-яке значення по дереву',
+      lead: 'Класичне питання MVVM — «де зламався мій DataContext?» — відповідь одним кліком.',
+      pts: ['⊙ track на будь-якому рядку Properties розфарбовує все дерево: однакове значення = однаковий колір; null і «немає такої властивості» мають власні групи',
+            'Легенда під деревом рахує кожну групу наживо; згорнуті чипи ⋯ складають кольори того, що ховають',
+            'Значення, змінені в запущеному застосунку, перекласифікуються за 250 мс — навіть поза екраном чи у згортках',
+            '«Fold to changes» лишає тільки елементи, де значення змінюється; 📌 закріплює властивості вгорі списку'] },
     { img: 'tab-tree.png', t: 'Дерево, що читається як XAML',
       lead: 'Розумний інспектор дерева: підсвічені елементи, згортання як у редакторі коду та жива колонка розмірів.',
       pts: ['Виберіть елемент — дерево стискається до вікна, ваших view та цілі; обгортки згортаються у чипи «⋯ N levels»',
@@ -210,7 +226,9 @@ uk: {
     h: 'Усе, що очікуєш від DevTools', sub: 'Підключіть один раз і натискайте F12 у будь-якому вікні.',
     cards: [
       { i: '🌳', t: 'Розумне дерево', d: 'Дерево, що читається як XAML: підсвічування синтаксису, згортання як у редакторі, компактний вигляд після вибору, покрокове розкриття, hide, focus, scope і пошук.' },
+      { i: '🎯', t: 'Трекінг значень', d: 'Відстежуйте будь-яку властивість по всьому дереву: однакове значення = однаковий колір, null у власній групі, жива легенда з лічильниками — а «Fold to changes» показує всі межі одразу.' },
       { i: '✏️', t: 'Живе редагування властивостей', d: 'Типізовані редактори — чекбокси, списки enum, плоскі сегментні перемикачі — згруповані attached-властивості та миттєвий результат без перезбирання.' },
+      { i: '📌', t: 'Закріплені властивості', d: 'Закріпіть властивості, які справді пильнуєте — вони підіймаються у групу вгорі списку; решта чекає за «Show more». Зберігається для користувача.' },
       { i: '🎨', t: 'Палітра кольорів', d: 'Кожен Color і пензель має зразок кольору з повноцінним колірним пікером. Зміни застосовуються наживо.' },
       { i: '📐', t: 'Боксова модель', d: 'Інтерактивні зони margin / border / padding із редагуванням кожної сторони, а також розміри, обмеження та вирівнювання.' },
       { i: '🧩', t: 'Стилі та фрейми значень', d: 'Усі застосовані стилі, тема і локальні значення з сеттерами, пріоритетом та станом активності. Редагування — як живі локальні перевизначення.' },
@@ -254,8 +272,16 @@ uk: {
 <p><b>Focus</b> (F) згортає все поза шляхом до вибраного елемента; Esc повертає попередній стан. <b>Scope</b> (S) робить будь-який елемент коренем дерева — з клікабельними хлібними крихтами, кнопкою «на рівень вище» та Esc для виходу. Вибір елемента поза scope виходить із нього автоматично.</p>
 <h3>Клавіатура</h3>
 <table><tr><th>Клавіші</th><th>Дія</th></tr><tr><td><code>↑ ↓</code></td><td>перемістити вибір</td></tr><tr><td><code>← →</code></td><td>згорнути / розгорнути, до батька / першої дитини</td></tr><tr><td><code>Space</code></td><td>перемкнути згортання</td></tr><tr><td><code>Enter</code></td><td>розкрити чип · відкрити Properties</td></tr><tr><td><code>Alt+↑ / Alt+↓</code></td><td>крок до батька / дитини з розкриттям одного рівня</td></tr><tr><td><code>Delete</code></td><td>сховати елемент у чип ⋯</td></tr><tr><td><code>Ctrl+↑ / Ctrl+↓</code></td><td>структурний батько / дитина (вибір, якщо кілька)</td></tr><tr><td><code>Ctrl+← / Ctrl+→</code></td><td>попередній / наступний сусід</td></tr><tr><td><code>Shift+→</code></td><td>показати всі рівні</td></tr><tr><td><code>Shift+←</code></td><td>згорнути нащадків у ⋯</td></tr><tr><td><code>Shift+↓</code></td><td>згорнути нащадків, лишити view</td></tr><tr><td><code>Shift+↑</code></td><td>згорнути предків, лишити view</td></tr><tr><td><code>Ctrl+Shift+↑</code></td><td>згорнути предків — усе</td></tr><tr><td><code>Ctrl+Shift+↓</code></td><td>згорнути нащадків, лишити один рівень</td></tr><tr><td><code>F / S / Esc</code></td><td>focus / scope / вийти</td></tr><tr><td><code>Ctrl+F, F3</code></td><td>пошук, наступний збіг</td></tr><tr><td><code>Ctrl+C / Ctrl+Shift+C / Ctrl+E</code></td><td>копіювати шлях / як XAML / відкрити в редакторі</td></tr></table>` },
+      { id: 'tracking', t: 'Трекінг значень і закріплені властивості', html: `<p>Наведіть курсор на будь-який рядок вкладки Properties — з'являться дві кнопки: <b>⊙ track</b> і <b>📌 pin</b>.</p>
+<h3>Відстежуйте значення по дереву</h3>
+<p><b>⊙ track</b> розфарбовує все дерево за значенням цієї властивості: кожен елемент отримує смужку в гаттері та підкреслення — <em>однакове значення = однаковий колір</em>. Рядки та value-типи порівнюються за рівністю; посилальні значення (в'ю-моделі!) — за інстансом, з підписом на кшталт <code>OrbitViewModel #1</code>. <code>null</code> і «немає такої властивості» мають власні групи. Згорнуті чипи <code>⋯</code> складають до трьох кольорів прихованих значень — сховатися неможливо.</p>
+<p>Легенда під деревом рахує кожну групу наживо. Значення, змінені в запущеному застосунку — навіть поза екраном чи всередині згорток — перекласифікуються за 250&nbsp;мс. (Звичайні CLR-властивості не мають сповіщень про зміни; вони перекласифікуються після ↻ Refresh.)</p>
+<p><b>Fold to changes</b> (кнопка в легенді) згортає дерево до елементів, де відстежуване значення відрізняється від батьківського — класичне «де зламався мій DataContext?» на одному екрані. ✕ вимикає трекінг.</p>
+<h3>Закріпіть властивості, які пильнуєте</h3>
+<p><b>📌 pin</b> тримає властивість у групі <b>Pinned</b> угорі списку; решта згортається за «Show more». Закріплення діє за іменем (закріпіть <code>Text</code> один раз — і для всіх типів елементів), спільне для всіх вікон DevTools і зберігається для користувача.</p>` },
       { id: 'tabs', t: 'Вкладки', html: `<h3>Properties</h3>
 <ul><li>Styled-, direct-, attached- (згруповані під 📎 власниками) та звичайні CLR-властивості.</li>
+<li>Наведіть курсор на рядок — <b>⊙ track</b> і <b>📌 pin</b>: див. <a href="#tracking">Трекінг значень і закріплені властивості</a>.</li>
 <li>Типізовані редактори: чекбокси, списки enum, сегментні перемикачі, зразки кольору з пікером, моноширинний текст (Enter — застосувати, Escape — скасувати).</li>
 <li><strong>Колонка Source</strong>: ∅ типове · ✏️ задано вручну · 🎨 стиль · ⧉ шаблон · ⇡ успадковане. Клік по значку показує, <em>де і як</em> задано значення — сеттер стилю, file:line і підсвічений фрагмент XAML; для біндінгів — розмітку та перехід до члена в’ю-моделі.</li>
 <li>Клік по імені властивості — метадані (де оголошено, типове значення, успадкування), копіювання імені/значення, оголошення у вашому коді.</li>
@@ -309,21 +335,24 @@ zh: {
     get: '快速上手', watch: '▶ 观看演示', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.0.2 新特性 — 智能树', videos: '全部视频 →', notes: '版本历史 →' },
+  wn: { h: '12.0.3 新特性 — 值追踪', videos: '全部视频 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
+  video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   story: [
-    { img: 'story/s01.png', t: '拾取 —— 树自动压缩', d: '点击 ⌖ Pick element，再点击应用中的任意元素。树压缩为窗口、你的视图和目标 —— 中间的包装元素折叠成「⋯ N levels」芯片。' },
-    { img: 'story/s02.png', t: '逐级展开', d: '按 Alt+↑，每次只展开一个隐藏级别。' },
-    { img: 'story/s03.png', t: '点击折叠芯片…', d: '弹出隐藏元素列表，样式与树一致。' },
-    { img: 'story/s04.png', t: '…只显示所选元素', d: '芯片围绕所选项拆分：「⋯ N」+ 元素 +「⋯ M」。' },
-    { img: 'story/s05.png', t: '隐藏噪音', d: '按 Delete —— 元素折回原来的芯片。' },
-    { img: 'story/s06.png', t: '对称菜单', d: 'Descendants · Ancestors · Element —— 每个动作都有快捷键。' },
-    { img: 'story/s07.png', t: '折叠祖先', d: 'Shift+↑ 保留视图，收起包装元素。' },
-    { img: 'story/s08.png', t: 'Scope', d: '任意元素成为根，面包屑随时带你回去。Esc 退出。' },
-    { img: 'story/s09.png', t: '搜索', d: '按类型、名称或样式类查找 —— F3 循环匹配。' },
-    { img: 'story/s10.png', t: '实时尺寸', d: '应用一变化，尺寸列立即闪烁提示。' },
+    { img: 'story/t01.png', t: '每一行都藏着两个按钮', d: '悬停任意 Properties 行：⊙ track 在整棵树上追踪该值，📌 pin 把该行固定在顶部。' },
+    { img: 'story/t02.png', t: '一次点击 —— 整棵树按值着色', d: '追踪 DataContext：MainViewModel 覆盖它所继承到的一切，一座 OrbitViewModel 小岛，null 自成一组。' },
+    { img: 'story/t03.png', t: '图例统计一切', d: '树中的每个值都有实时计数 —— 实例还有序号：「OrbitViewModel #1」。' },
+    { img: 'story/t04.png', t: '值一变，颜色即变', d: '在运行中的应用里赋第二个 OrbitViewModel：同一类型，独立颜色 —— #2。250 毫秒内重新分类，折叠芯片内也不例外。' },
+    { img: 'story/t05.png', t: '折叠到变化处', d: '一次点击，只保留值与父级不同的元素 —— 每一处 DataContext 边界尽在一屏。' },
+    { img: 'story/t06.png', t: '置顶你关注的属性', d: '📌 把你的属性浮到列表顶部；其余的收在「Show more」后面。' },
   ],
   tour: [
+    { img: 'tab-track.png', t: '在整棵树上追踪任意值',
+      lead: '经典的 MVVM 之问 ——「我的 DataContext 在哪里断了？」—— 一次点击给出答案。',
+      pts: ['在任意 Properties 行点击 ⊙ track，整棵树按值着色：相同值 = 相同颜色；null 和「无此属性」各有分组',
+            '树下方的图例实时统计每个分组；折叠的 ⋯ 芯片叠放其隐藏内容的颜色',
+            '运行中的应用改变了值 —— 即使在屏幕外或折叠内 —— 250 毫秒内重新分类',
+            '「Fold to changes」只保留值发生变化的元素；📌 把属性固定在列表顶部'] },
     { img: 'tab-tree.png', t: '像 XAML 一样阅读的树',
       lead: '智能树检查器：语法着色的元素、代码编辑器式折叠、实时闪烁的尺寸列。',
       pts: ['拾取元素 —— 树压缩为窗口、你的视图和目标；中间的包装元素折叠成「⋯ N levels」芯片',
@@ -359,7 +388,9 @@ zh: {
     h: 'DevTools 应有的一切', sub: '接入一次，在任意窗口按 F12。',
     cards: [
       { i: '🌳', t: '智能树检查器', d: '像 XAML 一样的树：语法着色、代码式折叠、拾取后的紧凑视图、逐层展开、隐藏、Focus、Scope 与搜索，并有实时尺寸列。' },
+      { i: '🎯', t: '值追踪', d: '在整棵树上追踪任意属性：相同值 = 相同颜色，null 独立分组，实时图例带计数 ——「Fold to changes」一次显示所有边界。' },
       { i: '✏️', t: '实时属性编辑', d: '类型化编辑器 —— 复选框、枚举下拉、扁平分段开关 —— 附加属性分组显示，无需重新编译即刻生效。' },
+      { i: '📌', t: '置顶属性', d: '把真正关注的属性固定住 —— 它们浮到列表顶部的分组；其余的收在「Show more」后面。按用户持久保存。' },
       { i: '🎨', t: '取色器', d: '每个 Color 和画刷都有色板，并附带完整取色器。拖动即实时应用。' },
       { i: '📐', t: '布局盒模型', d: '可交互的 margin / border / padding 色带，支持逐边编辑；尺寸、约束与对齐一目了然。' },
       { i: '🧩', t: '样式与值帧', d: '所有生效的样式、主题与本地值，含 setter、优先级和激活状态。编辑即作为实时本地覆盖生效。' },
@@ -403,8 +434,16 @@ zh: {
 <p><b>Focus</b>（F）折叠所选元素路径之外的一切；Esc 恢复。<b>Scope</b>（S）把任意元素设为树根 —— 带可点击面包屑、上一级按钮，Esc 退出。拾取 scope 之外的元素会自动退出。</p>
 <h3>键盘</h3>
 <table><tr><th>按键</th><th>动作</th></tr><tr><td><code>↑ ↓</code></td><td>移动选择</td></tr><tr><td><code>← →</code></td><td>折叠 / 展开，跳到父级 / 第一个子级</td></tr><tr><td><code>Space</code></td><td>切换折叠</td></tr><tr><td><code>Enter</code></td><td>展开芯片 · 打开属性</td></tr><tr><td><code>Alt+↑ / Alt+↓</code></td><td>逐级跳到父/子元素，只展开一个隐藏级别</td></tr><tr><td><code>Delete</code></td><td>把元素隐藏进 ⋯ 芯片</td></tr><tr><td><code>Ctrl+↑ / Ctrl+↓</code></td><td>结构父级 / 子级（多个时弹出选择）</td></tr><tr><td><code>Ctrl+← / Ctrl+→</code></td><td>上一个 / 下一个兄弟元素</td></tr><tr><td><code>Shift+→</code></td><td>显示所有级别</td></tr><tr><td><code>Shift+←</code></td><td>把后代折叠成 ⋯</td></tr><tr><td><code>Shift+↓</code></td><td>折叠后代，保留视图</td></tr><tr><td><code>Shift+↑</code></td><td>折叠祖先，保留视图</td></tr><tr><td><code>Ctrl+Shift+↑</code></td><td>折叠祖先 —— 全部</td></tr><tr><td><code>Ctrl+Shift+↓</code></td><td>折叠后代，保留一级</td></tr><tr><td><code>F / S / Esc</code></td><td>Focus / Scope / 退出</td></tr><tr><td><code>Ctrl+F, F3</code></td><td>搜索，下一个匹配</td></tr><tr><td><code>Ctrl+C / Ctrl+Shift+C / Ctrl+E</code></td><td>复制路径 / 复制为 XAML / 在编辑器打开</td></tr></table>` },
+      { id: 'tracking', t: '值追踪与置顶属性', html: `<p>悬停 Properties 选项卡中的任意行，会出现两个按钮：<b>⊙ track</b> 和 <b>📌 pin</b>。</p>
+<h3>在整棵树上追踪一个值</h3>
+<p><b>⊙ track</b> 按该属性的值给整棵树着色：每个元素获得一条边栏色带和下划线 —— <em>相同值 = 相同颜色</em>。字符串和值类型按相等性比较；引用值（ViewModel！）按实例比较，标注为 <code>OrbitViewModel #1</code> 这样的名字。<code>null</code> 和「无此属性」各有独立分组。折叠的 <code>⋯</code> 芯片最多叠放三种其隐藏内容的颜色 —— 什么都藏不住。</p>
+<p>树下方的图例实时统计每个分组。运行中的应用改变了值 —— 即使在屏幕外或折叠芯片内 —— 也会在 250&nbsp;毫秒内重新分类。（普通 CLR 属性没有变更通知，需 ↻ Refresh 后重新分类。）</p>
+<p><b>Fold to changes</b>（图例中的按钮）把树折叠到追踪值与父级不同的那些元素 —— 经典的「我的 DataContext 在哪里断了？」一屏作答。✕ 停止追踪。</p>
+<h3>置顶你关注的属性</h3>
+<p><b>📌 pin</b> 把属性放进列表顶部的 <b>Pinned</b> 分组；其余属性收在「Show more」后面。按名称生效（把 <code>Text</code> 固定一次，对所有元素类型都固定），所有 DevTools 窗口共享，并按用户持久保存。</p>` },
       { id: 'tabs', t: '选项卡', html: `<h3>Properties（属性）</h3>
 <ul><li>Styled、direct、attached（按 📎 所有者分组）以及普通 CLR 属性。</li>
+<li>悬停属性行可见 <b>⊙ track</b> 与 <b>📌 pin</b> —— 见<a href="#tracking">值追踪与置顶属性</a>。</li>
 <li>类型化编辑器：复选框、枚举下拉、分段开关、带取色器的色板、等宽文本框（Enter 提交，Escape 还原）。</li>
 <li><strong>Source 列</strong>：∅ 默认 · ✏️ 手动设置 · 🎨 样式 · ⧉ 模板 · ⇡ 继承。点击徽标可查看该值<em>在哪里、如何</em>被设置 —— 包括样式的 setter、file:line 和高亮 XAML 片段；对绑定则显示绑定标记并可跳到 ViewModel 成员。</li>
 <li>点击属性名可查看元数据（声明者、默认值、是否继承）、复制名称/值、以及它在你代码中的声明位置。</li>
