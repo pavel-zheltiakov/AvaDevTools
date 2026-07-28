@@ -3,24 +3,24 @@ window.I18N = {
 
 en: {
   title: 'AvaDevTools — free DevTools for Avalonia 12',
-  descr: 'Free in-process developer tools for Avalonia 12: tree inspector, live property editing, styles, 3D view, events, logs and go-to-source. Press F12.',
+  descr: 'Free in-process developer tools for Avalonia 12: tree inspector, live property editing, styles, 3D view, event timeline, logs and go-to-source. Press F12.',
   nav: { features: 'Features', docs: 'Documentation', videos: 'Videos', releases: 'Releases' },
   hero: {
     title: 'DevTools for <em>Avalonia 12</em>.<br>Free. In-process. One key away.',
-    tag: 'The built-in F12 tools are gone in Avalonia 12. AvaDevTools brings them back — inspector, live editors, styles, 3D view, events and logs — as a single free NuGet package.',
+    tag: 'The built-in F12 tools are gone in Avalonia 12. AvaDevTools brings them back — inspector, live editors, styles, 3D view, event timeline and logs — as a single free NuGet package.',
     get: 'Get started', watch: '▶ Watch the demo', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.0.3 — value tracking", videos: 'All videos →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.0.4 — the Timeline", sub: 'Routed events, property changes, view-model notifies and binding errors in one chronological feed — scoped to a watchlist you control, with cause links and full binding inspection.', docs: 'Timeline docs →', videos: 'All videos →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   story: [
-    { img: 'story/t01.png', t: 'Two hidden buttons on every row', d: 'Hover any Properties row: ⊙ track follows the value across the tree, 📌 pin keeps the row on top.' },
-    { img: 'story/t02.png', t: 'One click — the tree, colored by value', d: 'Track DataContext: the MainViewModel everywhere it inherits, an OrbitViewModel island, null in its own bucket.' },
-    { img: 'story/t03.png', t: 'A legend that counts everything', d: 'Every value in the tree with a live count — and instances get ordinals: "OrbitViewModel #1".' },
-    { img: 'story/t04.png', t: 'Values change — colors follow', d: 'A second OrbitViewModel assigned in the running app: same type, its own color — #2. Re-classified within 250 ms, even inside folded chips.' },
-    { img: 'story/t05.png', t: 'Fold to changes', d: 'One click keeps only the elements where the value differs from its parent — every DataContext boundary on one screen.' },
-    { img: 'story/t06.png', t: 'Pin what you watch', d: '📌 floats your properties to the top of the list; the rest waits behind "Show more".' },
+    { img: 'story/u01.png', t: 'Nothing is recorded until you say so', d: 'Mark a slider, a button and a view model — the watchlist chips show exactly what the timeline is allowed to see.' },
+    { img: 'story/u02.png', t: 'Four lanes, one chronological feed', d: '⚡ routed events, ◆ property changes, ↻ view-model notifies and ⚠ binding errors interleave — quiet stretches become "⋯ +1.2 s" markers.' },
+    { img: 'story/u03.png', t: 'A bound change opens its whole binding', d: 'Old → new, priority, the metadata default — and the expression walk: every path step with its live source and value. The ↞ cause link names the notify that produced it.' },
+    { img: 'story/u04.png', t: 'Any instance, inspected', d: '🔍 opens a reflection card — properties and fields read live. 👁 adds a view model to the watchlist from anywhere.' },
+    { img: 'story/u05.png', t: 'Events carry their route', d: 'Direction, source, args — and the visual chain the event bubbled through, every element clickable.' },
+    { img: 'story/u06.png', t: 'You choose the events', d: 'The full routed-event registry with a filter and a Common preset — captured only inside observed subtrees.' },
   ],
   tour: [
     { img: 'tab-track.png', t: 'Track any value across the tree',
@@ -29,6 +29,12 @@ en: {
             'A legend under the tree counts every value bucket, live; folded ⋯ chips stack the colors they hide',
             'Values changed in the running app re-classify within 250 ms — even off-screen or inside folds',
             '"Fold to changes" keeps only the elements where the value changes; 📌 pins your properties to the top of the list'] },
+    { img: 'tab-timeline.png', t: 'One timeline: events, properties, view models',
+      lead: 'Mark what you care about — everything it does lands in one chronological feed, cause and effect side by side.',
+      pts: ['Observe elements, routed events and view-model instances — nothing is recorded until you ask',
+            'Property changes carry old → new, priority and provenance; a binding-driven update is stamped with the VM notify that caused it (↞)',
+            'Click a bound change to walk the binding: every path step with its live source and value, converter, fallback',
+            '🔍 opens a reflection inspector for any instance — event args, values, converters, view models; 👁 adds a VM to the watchlist'] },
     { img: 'tab-tree.png', t: 'A tree that reads like XAML',
       lead: 'The smart tree inspector: syntax-colored elements, code-style folding and a live size column that flashes on change.',
       pts: ['Pick an element — the tree compacts to your window, your views and the target; wrappers fold into "⋯ N levels" chips',
@@ -55,10 +61,6 @@ en: {
       lead: 'Margin, border and padding as interactive bands — edit any side in place.',
       pts: ['Size, min/max, desired, bounds and alignment at a glance',
             'Changes apply to the running app immediately'] },
-    { img: 'tab-events.png', t: 'Events and logs, tamed',
-      lead: 'Watch routed events finish routing and read Avalonia’s own logs.',
-      pts: ['Full event registry with a Common preset, source + handled state',
-            'Log viewer with level/area/text filters — feedback-loop safe'] },
   ],
   feat: {
     h: 'Everything you expect from DevTools', sub: 'Attach once, press F12 in any window.',
@@ -72,7 +74,7 @@ en: {
       { i: '🧩', t: 'Styles & value frames', d: 'Every applied style, theme and local value with its setters, priority and active state. Edit setter values as live local overrides.' },
       { i: '🧊', t: '3D exploded view', d: 'Your window as textured layers in 3D — orbit, zoom, click to select. Visual, merged or logical tree granularity.' },
       { i: '🔗', t: 'Go to source', d: 'file:line for elements, styles, bindings and view models. Syntax-highlighted XAML/C# previews and one-click jump to your editor.' },
-      { i: '⚡', t: 'Events inspector', d: 'Pick routed events from the full registry and watch them finish routing: source, timestamp and final handled state.' },
+      { i: '⏱', t: 'Timeline', d: 'Routed events, property changes and VM notifies in one chronological feed, scoped to a watchlist you control. Cause links connect a notify to the bound update it produced; every entry opens full details.' },
       { i: '📜', t: 'Log viewer', d: 'Binding errors, layout and property-system messages — even without LogToTrace(). Filtered, batched and feedback-loop safe.' },
       { i: '📊', t: 'Renderer overlays', d: 'FPS meter, layout/render time graphs and dirty-rect flashing on the inspected window, one toggle away.' },
       { i: '🕵️', t: 'Source of every value', d: 'See whether a value is default, set by hand, styled, templated or inherited — and jump to the ancestor or the exact XAML that set it.' },
@@ -117,6 +119,17 @@ en: {
 <p><b>Fold to changes</b> (button in the legend) folds the tree to exactly the elements where the tracked value differs from its parent — the classic "where did my DataContext break?" answered on one screen. ✕ stops tracking.</p>
 <h3>Pin the properties you watch</h3>
 <p><b>📌 pin</b> keeps a property in a <b>Pinned</b> group at the top of the list; the rest collapses behind "Show more". Pins are per name (pin <code>Text</code> once — pinned for every element type), shared by all DevTools windows and persisted per user.</p>` },
+      { id: 'timeline', t: 'Timeline', html: `<p>The <b>Timeline</b> tab interleaves routed events, property changes, view-model notifies and binding errors in one chronological feed. Nothing is recorded until something is on the <b>watchlist</b>: right-click a tree element → <b>Observe in Timeline</b> (or <b>Observe DataContext</b>), press <b>＋ whole window</b>, or 👁 a view model from any inspector popup.</p>
+<h3>The four lanes</h3>
+<ul><li><b>⚡ Events</b> — routed events chosen from the registry (the Common preset enables automatically) whose source lies inside an observed element's subtree.</li>
+<li><b>◆ Property changes</b> — styled, attached and direct property changes of the observed elements: old → new, priority, and a <em>⇠ binding</em> mark when a binding produced the value. Noisy properties (Bounds, IsPointerOver, …) stay hidden unless "Noisy" is on.</li>
+<li><b>↻ Notifies</b> — <code>INotifyPropertyChanged</code> from observed view models, with the fresh value.</li>
+<li><b>⚠ Binding errors</b> — straight from Avalonia's logger.</li></ul>
+<p>When a VM notify produces a bound update, the property row is stamped with its cause: <em>↞ TelemetryViewModel.Throttle</em>.</p>
+<h3>Details on click</h3>
+<p>Events show the route direction, the source and the visual chain the event routed through — every element clickable. Property changes show kind, priority, the metadata default and, for bound properties, the <b>full binding</b>: every path step with its live source and value, converter with parameter, fallback and string format — re-read live each time the pane opens; MultiBindings unfold recursively.</p>
+<p><b>🔍 opens a reflection inspector</b> for any instance on the timeline — event args, old/new values, step sources, converters, view models. It lists properties and fields (evaluated lazily; throwing getters show as ⚠), drills into nested objects, and 👁 puts a view model on the watchlist. Mentioned objects are held weakly — the timeline never keeps your objects alive.</p>
+<p>Pause stops capture, lanes and text filter the feed, entries are capped and batch-rendered, and quiet stretches show as <code>⋯ +N s</code> markers.</p>` },
       { id: 'tabs', t: 'Tabs', html: `<h3>Properties</h3>
 <ul><li>Styled, direct, attached (grouped under 📎 owners) and plain CLR properties.</li>
 <li>Hover a row for <b>⊙ track</b> and <b>📌 pin</b> — see <a href="#tracking">Value tracking &amp; pinned properties</a>.</li>
@@ -130,7 +143,7 @@ en: {
 <li>file:line links for the element and each style; ⟨⟩/▤/{} chips open code previews.</li></ul>
 <h3>3D</h3><ul><li>Exploded 3D view textured from a live snapshot. Drag to orbit, wheel to zoom, click a card to select in the tree.</li>
 <li>Granularity: <em>Visual · merged</em> (wrappers collapsed), <em>Visual · all</em>, or <em>Logical</em>. "Reset view" restores the camera.</li></ul>
-<h3>Events</h3><ul><li>Enable routed events from the full registry ("Common" preset included) and watch source, time and final handled state. Pause/Clear included.</li></ul>
+<h3>Timeline</h3><ul><li>Events, property changes, VM notifies and binding errors in one feed, scoped to a watchlist — with cause links, a binding walk-through and a reflection inspector. See <a href="#timeline">Timeline</a>.</li></ul>
 <h3>Logs</h3><ul><li>Live Avalonia logger output with Pause, level, area and text filters. Captures at Warning by default. Entries produced by the DevTools UI itself are dropped and appends are batched — verbose logging can't freeze the tool.</li></ul>` },
       { id: 'source', t: 'Go to source', html: `<p>Source locations come from the XAML compiler's <code>AvaloniaXamlCreateSourceInfo</code>, which Avalonia 12 enables automatically in Debug builds. C# types (view models) are located by searching your solution tree. Clicking opens JetBrains Rider by default on macOS; override with:</p>
 <pre><code>AVA_DEVTOOLS_EDITOR=<span class="s">"code --goto {file}:{line}"</span></code></pre>
@@ -165,24 +178,24 @@ en: {
 
 uk: {
   title: 'AvaDevTools — безкоштовні DevTools для Avalonia 12',
-  descr: 'Безкоштовні інструменти розробника для Avalonia 12: інспектор дерева, живе редагування властивостей, стилі, 3D-вигляд, події, логи та перехід до коду. Натисніть F12.',
+  descr: 'Безкоштовні інструменти розробника для Avalonia 12: інспектор дерева, живе редагування властивостей, стилі, 3D-вигляд, таймлайн подій, логи та перехід до коду. Натисніть F12.',
   nav: { features: 'Можливості', docs: 'Документація', videos: 'Відео', releases: 'Релізи' },
   hero: {
     title: 'DevTools для <em>Avalonia 12</em>.<br>Безкоштовно. In-process. Одна клавіша.',
-    tag: 'Вбудованих інструментів F12 в Avalonia 12 більше немає. AvaDevTools повертає їх — інспектор, живі редактори, стилі, 3D-вигляд, події та логи — одним безкоштовним NuGet-пакетом.',
+    tag: 'Вбудованих інструментів F12 в Avalonia 12 більше немає. AvaDevTools повертає їх — інспектор, живі редактори, стилі, 3D-вигляд, таймлайн подій і логи — одним безкоштовним NuGet-пакетом.',
     get: 'Почати', watch: '▶ Дивитися демо', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.0.3 — трекінг значень', videos: 'Усі відео →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.0.4 — Таймлайн', sub: 'Routed-події, зміни властивостей, сповіщення в’ю-моделей і помилки біндінгів в одній хронологічній стрічці — в межах вашого списку спостереження, з причинними посиланнями та повним оглядом біндінгів.', docs: 'Документація таймлайна →', videos: 'Усі відео →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   story: [
-    { img: 'story/t01.png', t: 'Дві приховані кнопки на кожному рядку', d: 'Наведіть курсор на будь-який рядок Properties: ⊙ track відстежує значення по дереву, 📌 pin тримає рядок згори.' },
-    { img: 'story/t02.png', t: 'Один клік — дерево у кольорах значень', d: 'Відстежуйте DataContext: MainViewModel скрізь, де він успадковується, острівець OrbitViewModel, null у власній групі.' },
-    { img: 'story/t03.png', t: 'Легенда, що рахує все', d: 'Кожне значення в дереві з живим лічильником — а інстанси отримують номери: «OrbitViewModel #1».' },
-    { img: 'story/t04.png', t: 'Значення змінюються — кольори слідують', d: 'Другий OrbitViewModel, призначений у запущеному застосунку: той самий тип, власний колір — #2. Перекласифікація за 250 мс, навіть у згорнутих чипах.' },
-    { img: 'story/t05.png', t: 'Згорнути до змін', d: 'Один клік лишає тільки елементи, де значення відрізняється від батьківського — кожна межа DataContext на одному екрані.' },
-    { img: 'story/t06.png', t: 'Закріпіть те, що пильнуєте', d: '📌 піднімає ваші властивості на початок списку; решта чекає за «Show more».' },
+    { img: 'story/u01.png', t: 'Нічого не записується без вашої згоди', d: 'Позначте слайдер, кнопку та в’ю-модель — чипи списку спостереження показують, що саме бачить таймлайн.' },
+    { img: 'story/u02.png', t: 'Чотири доріжки, одна хронологічна стрічка', d: '⚡ routed-події, ◆ зміни властивостей, ↻ сповіщення в’ю-моделей і ⚠ помилки біндінгів впереміш — тихі проміжки стають маркерами «⋯ +1.2 s».' },
+    { img: 'story/u03.png', t: 'Зміна з біндінгу відкриває весь біндінг', d: 'Старе → нове, пріоритет, дефолт із метаданих — і прохід виразу: кожен крок шляху з живим джерелом і значенням. Посилання ↞ називає сповіщення-причину.' },
+    { img: 'story/u04.png', t: 'Будь-який інстанс — під лупою', d: '🔍 відкриває рефлексійну картку: властивості й поля читаються наживо. 👁 додає в’ю-модель до списку спостереження звідусіль.' },
+    { img: 'story/u05.png', t: 'Події несуть свій маршрут', d: 'Напрямок, джерело, аргументи — і візуальний ланцюжок, яким подія спливала; кожен елемент клікабельний.' },
+    { img: 'story/u06.png', t: 'Події обираєте ви', d: 'Повний реєстр routed-подій із фільтром і пресетом Common — запис лише в піддеревах позначених елементів.' },
   ],
   tour: [
     { img: 'tab-track.png', t: 'Відстежуйте будь-яке значення по дереву',
@@ -191,6 +204,12 @@ uk: {
             'Легенда під деревом рахує кожну групу наживо; згорнуті чипи ⋯ складають кольори того, що ховають',
             'Значення, змінені в запущеному застосунку, перекласифікуються за 250 мс — навіть поза екраном чи у згортках',
             '«Fold to changes» лишає тільки елементи, де значення змінюється; 📌 закріплює властивості вгорі списку'] },
+    { img: 'tab-timeline.png', t: 'Один таймлайн: події, властивості, в’ю-моделі',
+      lead: 'Позначте те, що вас цікавить — усе, що з ним відбувається, лягає в одну хронологічну стрічку: причина і наслідок поруч.',
+      pts: ['Спостерігайте елементи, routed-події та інстанси в’ю-моделей — нічого не записується, поки ви не попросите',
+            'Зміни властивостей несуть old → new, пріоритет і походження; оновлення від біндінга позначається сповіщенням VM, що його спричинило (↞)',
+            'Клік по зміні від біндінга розкриває сам біндінг: кожен крок шляху з живим джерелом і значенням, конвертер, fallback',
+            '🔍 відкриває рефлексійний інспектор будь-якого інстансу — аргументи подій, значення, конвертери, в’ю-моделі; 👁 додає VM до списку спостереження'] },
     { img: 'tab-tree.png', t: 'Дерево, що читається як XAML',
       lead: 'Розумний інспектор дерева: підсвічені елементи, згортання як у редакторі коду та жива колонка розмірів.',
       pts: ['Виберіть елемент — дерево стискається до вікна, ваших view та цілі; обгортки згортаються у чипи «⋯ N levels»',
@@ -217,10 +236,6 @@ uk: {
       lead: 'Margin, border і padding як інтерактивні зони — редагуйте будь-яку сторону на місці.',
       pts: ['Розміри, min/max, desired, bounds та вирівнювання перед очима',
             'Зміни застосовуються до запущеного застосунку одразу'] },
-    { img: 'tab-events.png', t: 'Події та логи під контролем',
-      lead: 'Спостерігайте routed-події та читайте власні логи Avalonia.',
-      pts: ['Повний реєстр подій із пресетом Common, джерело + стан handled',
-            'Лог-в’ювер із фільтрами за рівнем/областю/текстом — без зациклень'] },
   ],
   feat: {
     h: 'Усе, що очікуєш від DevTools', sub: 'Підключіть один раз і натискайте F12 у будь-якому вікні.',
@@ -234,7 +249,7 @@ uk: {
       { i: '🧩', t: 'Стилі та фрейми значень', d: 'Усі застосовані стилі, тема і локальні значення з сеттерами, пріоритетом та станом активності. Редагування — як живі локальні перевизначення.' },
       { i: '🧊', t: '3D-вигляд шарами', d: 'Ваше вікно як текстуровані шари у 3D — обертайте, масштабуйте, клікайте для вибору. Візуальне, згорнуте або логічне дерево.' },
       { i: '🔗', t: 'Перехід до коду', d: 'file:line для елементів, стилів, біндінгів і в’ю-моделей. Підсвічені фрагменти XAML/C# та перехід у редактор одним кліком.' },
-      { i: '⚡', t: 'Інспектор подій', d: 'Обирайте routed-події з повного реєстру та спостерігайте: джерело, час і фінальний стан handled.' },
+      { i: '⏱', t: 'Таймлайн', d: 'Routed-події, зміни властивостей і сповіщення VM в одній хронологічній стрічці за вашим списком спостереження. Причинні зв’язки з’єднують сповіщення з оновленням від біндінга; кожен запис відкриває повні деталі.' },
       { i: '📜', t: 'Перегляд логів', d: 'Помилки біндінгів, layout і система властивостей — навіть без LogToTrace(). З фільтрами, батчингом і захистом від зациклення.' },
       { i: '📊', t: 'Оверлеї рендерера', d: 'Лічильник FPS, графіки часу layout/render та підсвічування dirty-rect — одним перемикачем.' },
       { i: '🕵️', t: 'Джерело кожного значення', d: 'Одразу видно: значення типове, задане вручну, зі стилю, шаблону чи успадковане — з переходом до предка або точного місця в XAML.' },
@@ -279,6 +294,17 @@ uk: {
 <p><b>Fold to changes</b> (кнопка в легенді) згортає дерево до елементів, де відстежуване значення відрізняється від батьківського — класичне «де зламався мій DataContext?» на одному екрані. ✕ вимикає трекінг.</p>
 <h3>Закріпіть властивості, які пильнуєте</h3>
 <p><b>📌 pin</b> тримає властивість у групі <b>Pinned</b> угорі списку; решта згортається за «Show more». Закріплення діє за іменем (закріпіть <code>Text</code> один раз — і для всіх типів елементів), спільне для всіх вікон DevTools і зберігається для користувача.</p>` },
+      { id: 'timeline', t: 'Таймлайн', html: `<p>Вкладка <b>Timeline</b> зводить routed-події, зміни властивостей, сповіщення в’ю-моделей і помилки біндінгів в одну хронологічну стрічку. Нічого не записується, поки щось не потрапить до <b>списку спостереження</b>: правий клік по елементу дерева → <b>Observe in Timeline</b> (або <b>Observe DataContext</b>), кнопка <b>＋ whole window</b>, або 👁 на в’ю-моделі в будь-якому інспекторі.</p>
+<h3>Чотири смуги</h3>
+<ul><li><b>⚡ Події</b> — routed-події з реєстру (пресет Common вмикається автоматично), джерело яких лежить у піддереві спостережуваного елемента.</li>
+<li><b>◆ Зміни властивостей</b> — styled-, attached- і direct-властивості спостережуваних елементів: old → new, пріоритет і позначка <em>⇠ binding</em>, якщо значення дав біндінг. «Шумні» властивості (Bounds, IsPointerOver, …) приховані, поки не ввімкнено "Noisy".</li>
+<li><b>↻ Сповіщення</b> — <code>INotifyPropertyChanged</code> від спостережуваних в’ю-моделей, зі свіжим значенням.</li>
+<li><b>⚠ Помилки біндінгів</b> — просто з логера Avalonia.</li></ul>
+<p>Коли сповіщення VM спричиняє оновлення через біндінг, рядок властивості отримує позначку причини: <em>↞ TelemetryViewModel.Throttle</em>.</p>
+<h3>Деталі по кліку</h3>
+<p>Події показують напрям маршруту, джерело та візуальний ланцюжок, яким пройшла подія — кожен елемент клікабельний. Зміни властивостей показують вид, пріоритет, типове значення з метаданих і, для біндінгів, <b>увесь біндінг</b>: кожен крок шляху з живим джерелом і значенням, конвертер із параметром, fallback і формат рядка — перечитуються наживо при кожному відкритті; MultiBinding розгортається рекурсивно.</p>
+<p><b>🔍 відкриває рефлексійний інспектор</b> будь-якого інстансу на таймлайні — аргументи подій, старі/нові значення, джерела кроків, конвертери, в’ю-моделі. Він показує властивості й поля (обчислюються ліниво; геттери з винятками показані як ⚠), заглиблюється у вкладені об’єкти, а 👁 додає в’ю-модель до списку спостереження. Об’єкти утримуються слабкими посиланнями — таймлайн не подовжує їхнє життя.</p>
+<p>Pause зупиняє захоплення, смуги й текст фільтрують стрічку, записи обмежені та батчаться, а тихі проміжки позначаються як <code>⋯ +N s</code>.</p>` },
       { id: 'tabs', t: 'Вкладки', html: `<h3>Properties</h3>
 <ul><li>Styled-, direct-, attached- (згруповані під 📎 власниками) та звичайні CLR-властивості.</li>
 <li>Наведіть курсор на рядок — <b>⊙ track</b> і <b>📌 pin</b>: див. <a href="#tracking">Трекінг значень і закріплені властивості</a>.</li>
@@ -292,7 +318,7 @@ uk: {
 <li>Посилання file:line для елемента і кожного стилю; чипи ⟨⟩/▤/{} відкривають прев'ю коду.</li></ul>
 <h3>3D</h3><ul><li>3D-вигляд шарами з текстурами з живого знімка. Тягніть для обертання, колесо — масштаб, клік — вибір у дереві.</li>
 <li>Деталізація: <em>Visual · merged</em> (обгортки згорнуто), <em>Visual · all</em> або <em>Logical</em>. «Reset view» повертає камеру.</li></ul>
-<h3>Events</h3><ul><li>Вмикайте routed-події з повного реєстру (є пресет «Common») і спостерігайте джерело, час і фінальний handled. Є Pause/Clear.</li></ul>
+<h3>Timeline</h3><ul><li>Події, зміни властивостей, сповіщення VM і помилки біндінгів в одній стрічці за вашим списком спостереження — з причинними зв’язками, розбором біндінгів і рефлексійним інспектором. Див. <a href="#timeline">Таймлайн</a>.</li></ul>
 <h3>Logs</h3><ul><li>Живі логи Avalonia з Pause та фільтрами за рівнем, областю і текстом. За замовчуванням — Warning. Записи від самого DevTools відкидаються, оновлення батчаться — «зациклення» неможливе.</li></ul>` },
       { id: 'source', t: 'Перехід до коду', html: `<p>Локації беруться з <code>AvaloniaXamlCreateSourceInfo</code> компілятора XAML (в Avalonia 12 увімкнено в Debug автоматично). C#-типи (в'ю-моделі) знаходяться пошуком по дереву рішення. Клік відкриває JetBrains Rider (macOS) за замовчуванням; можна змінити:</p>
 <pre><code>AVA_DEVTOOLS_EDITOR=<span class="s">"code --goto {file}:{line}"</span></code></pre>
@@ -327,24 +353,24 @@ uk: {
 
 zh: {
   title: 'AvaDevTools — Avalonia 12 免费开发者工具',
-  descr: 'Avalonia 12 的免费进程内开发者工具：树检查器、实时属性编辑、样式、3D 视图、事件、日志与源码跳转。按 F12 即可打开。',
+  descr: 'Avalonia 12 的免费进程内开发者工具：树检查器、实时属性编辑、样式、3D 视图、事件时间线、日志与源码跳转。按 F12 即可打开。',
   nav: { features: '功能', docs: '文档', videos: '视频', releases: '版本' },
   hero: {
     title: '<em>Avalonia 12</em> 的 DevTools。<br>免费、进程内、一键打开。',
-    tag: 'Avalonia 12 移除了内置的 F12 工具。AvaDevTools 把它们带了回来 —— 检查器、实时编辑器、样式、3D 视图、事件和日志 —— 全部打包在一个免费 NuGet 包里。',
+    tag: 'Avalonia 12 移除了内置的 F12 工具。AvaDevTools 把它们带了回来 —— 检查器、实时编辑器、样式、3D 视图、事件时间线和日志 —— 全部打包在一个免费 NuGet 包里。',
     get: '快速上手', watch: '▶ 观看演示', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.0.3 新特性 — 值追踪', videos: '全部视频 →', notes: '版本历史 →' },
+  wn: { h: '12.0.4 新特性 — 时间线', sub: '路由事件、属性变化、ViewModel 通知与绑定错误汇成一条时间流 —— 范围由你的观察列表控制，带因果链接与完整的绑定检查。', docs: '时间线文档 →', videos: '全部视频 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   story: [
-    { img: 'story/t01.png', t: '每一行都藏着两个按钮', d: '悬停任意 Properties 行：⊙ track 在整棵树上追踪该值，📌 pin 把该行固定在顶部。' },
-    { img: 'story/t02.png', t: '一次点击 —— 整棵树按值着色', d: '追踪 DataContext：MainViewModel 覆盖它所继承到的一切，一座 OrbitViewModel 小岛，null 自成一组。' },
-    { img: 'story/t03.png', t: '图例统计一切', d: '树中的每个值都有实时计数 —— 实例还有序号：「OrbitViewModel #1」。' },
-    { img: 'story/t04.png', t: '值一变，颜色即变', d: '在运行中的应用里赋第二个 OrbitViewModel：同一类型，独立颜色 —— #2。250 毫秒内重新分类，折叠芯片内也不例外。' },
-    { img: 'story/t05.png', t: '折叠到变化处', d: '一次点击，只保留值与父级不同的元素 —— 每一处 DataContext 边界尽在一屏。' },
-    { img: 'story/t06.png', t: '置顶你关注的属性', d: '📌 把你的属性浮到列表顶部；其余的收在「Show more」后面。' },
+    { img: 'story/u01.png', t: '未经允许，不记录任何内容', d: '标记一个滑块、一个按钮和一个 ViewModel —— 观察列表徽章清楚显示时间线能看到什么。' },
+    { img: 'story/u02.png', t: '四条泳道，一条时间流', d: '⚡ 路由事件、◆ 属性变化、↻ ViewModel 通知与 ⚠ 绑定错误交织排列 —— 安静时段化作「⋯ +1.2 s」标记。' },
+    { img: 'story/u03.png', t: '绑定引发的变化，展开整个绑定', d: '旧值 → 新值、优先级、元数据默认值 —— 还有表达式路径：每一步的实时来源与值。↞ 因果链接指明触发它的通知。' },
+    { img: 'story/u04.png', t: '任何实例，即点即查', d: '🔍 打开反射卡片：实时读取属性与字段。👁 随处可把 ViewModel 加入观察列表。' },
+    { img: 'story/u05.png', t: '事件自带路由链', d: '路由方向、来源、参数 —— 以及事件冒泡经过的可视链，每个元素都可点击。' },
+    { img: 'story/u06.png', t: '事件由你挑选', d: '完整路由事件注册表，带过滤与 Common 预设 —— 只在被观察元素的子树内捕获。' },
   ],
   tour: [
     { img: 'tab-track.png', t: '在整棵树上追踪任意值',
@@ -353,6 +379,12 @@ zh: {
             '树下方的图例实时统计每个分组；折叠的 ⋯ 芯片叠放其隐藏内容的颜色',
             '运行中的应用改变了值 —— 即使在屏幕外或折叠内 —— 250 毫秒内重新分类',
             '「Fold to changes」只保留值发生变化的元素；📌 把属性固定在列表顶部'] },
+    { img: 'tab-timeline.png', t: '一条时间线：事件、属性、ViewModel',
+      lead: '标记你关心的对象 —— 它的一切都按时间顺序汇入同一条流，因果并排可见。',
+      pts: ['观察元素、路由事件与 ViewModel 实例 —— 不标记就不记录',
+            '属性变化带有 old → new、优先级与来源；由绑定驱动的更新会标注引发它的 VM 通知（↞）',
+            '点击绑定驱动的变化即可展开绑定本身：路径上每一步的实时来源与值、转换器、fallback',
+            '🔍 为任意实例打开反射检查器 —— 事件参数、值、转换器、ViewModel；👁 把 VM 加入观察列表'] },
     { img: 'tab-tree.png', t: '像 XAML 一样阅读的树',
       lead: '智能树检查器：语法着色的元素、代码编辑器式折叠、实时闪烁的尺寸列。',
       pts: ['拾取元素 —— 树压缩为窗口、你的视图和目标；中间的包装元素折叠成「⋯ N levels」芯片',
@@ -379,10 +411,6 @@ zh: {
       lead: 'margin、border、padding 化为可交互色带 —— 任意一边就地编辑。',
       pts: ['尺寸、min/max、desired、bounds 与对齐一目了然',
             '修改立即作用于正在运行的应用'] },
-    { img: 'tab-events.png', t: '事件与日志，尽在掌握',
-      lead: '观察路由事件完成路由，并阅读 Avalonia 自身的日志。',
-      pts: ['完整事件注册表 + Common 预设，来源与 handled 状态',
-            '日志查看器带级别/区域/文本过滤 —— 无反馈循环'] },
   ],
   feat: {
     h: 'DevTools 应有的一切', sub: '接入一次，在任意窗口按 F12。',
@@ -396,7 +424,7 @@ zh: {
       { i: '🧩', t: '样式与值帧', d: '所有生效的样式、主题与本地值，含 setter、优先级和激活状态。编辑即作为实时本地覆盖生效。' },
       { i: '🧊', t: '3D 分层视图', d: '把窗口展开为带纹理的 3D 图层 —— 旋转、缩放、点击选中。支持可视化、合并或逻辑树粒度。' },
       { i: '🔗', t: '跳转到源码', d: '元素、样式、绑定与 ViewModel 的 file:line。语法高亮的 XAML/C# 预览，一键跳转到编辑器。' },
-      { i: '⚡', t: '事件检查器', d: '从完整注册表中挑选路由事件，观察其路由完成时的来源、时间与最终 handled 状态。' },
+      { i: '⏱', t: '时间线', d: '路由事件、属性变化与 VM 通知汇入一条按时间排序的流，范围由你的观察列表决定。因果链接把通知与它产生的绑定更新连在一起；每条记录都可展开完整细节。' },
       { i: '📜', t: '日志查看器', d: '绑定错误、布局与属性系统消息 —— 无需 LogToTrace()。带过滤、批量刷新，杜绝反馈循环。' },
       { i: '📊', t: '渲染器叠加层', d: 'FPS 计数、布局/渲染耗时曲线与脏矩形闪烁，一个开关即可打开。' },
       { i: '🕵️', t: '每个值的来源', d: '一眼看出取值来自默认、手动设置、样式、模板还是继承 —— 并可跳到祖先元素或设置它的那行 XAML。' },
@@ -441,6 +469,17 @@ zh: {
 <p><b>Fold to changes</b>（图例中的按钮）把树折叠到追踪值与父级不同的那些元素 —— 经典的「我的 DataContext 在哪里断了？」一屏作答。✕ 停止追踪。</p>
 <h3>置顶你关注的属性</h3>
 <p><b>📌 pin</b> 把属性放进列表顶部的 <b>Pinned</b> 分组；其余属性收在「Show more」后面。按名称生效（把 <code>Text</code> 固定一次，对所有元素类型都固定），所有 DevTools 窗口共享，并按用户持久保存。</p>` },
+      { id: 'timeline', t: '时间线', html: `<p><b>Timeline</b> 选项卡把路由事件、属性变化、ViewModel 通知与绑定错误交织成一条按时间排序的流。只有把目标放进<b>观察列表</b>才会开始记录：在树中右键元素 → <b>Observe in Timeline</b>（或 <b>Observe DataContext</b>），点 <b>＋ whole window</b>，或在任意检查器弹窗中点 👁。</p>
+<h3>四条泳道</h3>
+<ul><li><b>⚡ 事件</b> —— 从注册表中挑选的路由事件（Common 预设自动启用），来源位于被观察元素的子树内。</li>
+<li><b>◆ 属性变化</b> —— 被观察元素的 styled / attached / direct 属性：old → new、优先级，值来自绑定时标注 <em>⇠ binding</em>。高频属性（Bounds、IsPointerOver 等）默认隐藏，除非勾选 "Noisy"。</li>
+<li><b>↻ 通知</b> —— 被观察 ViewModel 的 <code>INotifyPropertyChanged</code>，附带最新值。</li>
+<li><b>⚠ 绑定错误</b> —— 直接来自 Avalonia 日志。</li></ul>
+<p>当 VM 通知引发绑定更新时，属性行会标注其原因：<em>↞ TelemetryViewModel.Throttle</em>。</p>
+<h3>点击查看细节</h3>
+<p>事件显示路由方向、来源以及事件经过的可视链 —— 每个元素都可点击。属性变化显示种类、优先级、元数据默认值；对绑定属性还有<b>完整的绑定</b>：路径上每一步的实时来源与值、转换器及参数、fallback 与字符串格式 —— 每次打开面板都实时重读；MultiBinding 递归展开。</p>
+<p><b>🔍 打开反射检查器</b>：时间线上任何实例 —— 事件参数、新旧值、路径来源、转换器、ViewModel —— 列出属性与字段（惰性求值，抛异常的 getter 显示为 ⚠），可深入嵌套对象，👁 把 ViewModel 加入观察列表。所有对象以弱引用持有 —— 时间线不会延长你对象的生命周期。</p>
+<p>Pause 暂停捕获，泳道与文本过滤流内容，记录有上限并批量渲染，安静时段显示为 <code>⋯ +N s</code> 标记。</p>` },
       { id: 'tabs', t: '选项卡', html: `<h3>Properties（属性）</h3>
 <ul><li>Styled、direct、attached（按 📎 所有者分组）以及普通 CLR 属性。</li>
 <li>悬停属性行可见 <b>⊙ track</b> 与 <b>📌 pin</b> —— 见<a href="#tracking">值追踪与置顶属性</a>。</li>
@@ -454,7 +493,7 @@ zh: {
 <li>元素与每个样式都有 file:line 链接；⟨⟩/▤/{} 徽章可打开代码预览。</li></ul>
 <h3>3D</h3><ul><li>基于实时快照纹理的 3D 分层视图。拖动旋转、滚轮缩放、点击图层即在树中选中。</li>
 <li>粒度：<em>Visual · merged</em>（折叠包装层）、<em>Visual · all</em> 或 <em>Logical</em>。"Reset view" 复位相机。</li></ul>
-<h3>Events（事件）</h3><ul><li>从完整注册表启用路由事件（内置 "Common" 预设），观察来源、时间与最终 handled 状态。支持暂停/清空。</li></ul>
+<h3>Timeline（时间线）</h3><ul><li>事件、属性变化、VM 通知与绑定错误汇入一条流，范围由观察列表决定 —— 带因果链接、绑定逐步展开与反射检查器。见<a href="#timeline">时间线</a>。</li></ul>
 <h3>Logs（日志）</h3><ul><li>实时 Avalonia 日志，支持暂停、级别、区域与文本过滤。默认捕获 Warning 及以上。工具自身产生的日志会被丢弃、UI 批量刷新 —— 不会出现反馈循环卡死。</li></ul>` },
       { id: 'source', t: '跳转到源码', html: `<p>源码位置来自 XAML 编译器的 <code>AvaloniaXamlCreateSourceInfo</code>（Avalonia 12 在 Debug 构建中默认开启）。C# 类型（ViewModel）通过在解决方案目录中搜索定位。macOS 下默认用 JetBrains Rider 打开，可自定义：</p>
 <pre><code>AVA_DEVTOOLS_EDITOR=<span class="s">"code --goto {file}:{line}"</span></code></pre>
