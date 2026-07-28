@@ -1,0 +1,37 @@
+AvaDevTools License Terms
+=========================
+
+Copyright (c) 2026 Pavel Zheltiakov. All rights reserved.
+
+This software is freeware. It is licensed, not sold, and may be used
+free of charge for any purpose, commercial or non-commercial.
+
+1. GRANT OF LICENSE
+   You may install and use any number of copies of the software on any
+   number of devices. You may distribute the software, unmodified, as
+   an integral part of your own applications, and you may redistribute
+   the unmodified package free of charge (for example, through private
+   package feeds).
+
+2. RESTRICTIONS
+   You may not:
+   a) modify, decompile, disassemble, or reverse engineer the software,
+      except and only to the extent that applicable law expressly
+      permits despite this limitation;
+   b) sell, rent, lease, or sublicense the software, or charge a fee
+      for it as a standalone product;
+   c) remove or alter any copyright or other proprietary notices.
+
+3. OWNERSHIP
+   The software is protected by copyright law and international
+   treaties. The copyright holder retains all rights not expressly
+   granted in these terms.
+
+4. NO WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+   NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE
+   FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+   CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
