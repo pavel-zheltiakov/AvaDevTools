@@ -40,7 +40,8 @@ function applyLang(lang) {
   document.documentElement.lang = lang;
 
   const page = document.body.dataset.page || 'home';
-  document.title = page === 'docs' ? R.docs.title : page === 'releases' ? R.rel.title : R.title;
+  document.title = page === 'docs' ? R.docs.title
+    : page === 'releases' ? R.rel.title : R.title;
   const meta = document.querySelector('meta[name="description"]');
   if (meta) meta.setAttribute('content', R.descr);
 
@@ -54,8 +55,10 @@ function applyLang(lang) {
   });
   document.querySelectorAll('[data-setlang]').forEach(a =>
     a.classList.toggle('on', a.dataset.setlang === lang));
+  const lb = document.querySelector('.langs-btn');
+  if (lb) lb.textContent = ({ en: 'EN', uk: 'УК', zh: '中文' })[lang] || lang.toUpperCase();
 
-  if (page === 'home') { let st = false; try { st = buildStory(R); } catch (e) {} buildTour(R, st); buildFeatures(R); }
+  if (page === 'home') { try { buildHomeStories(R); } catch (e) {} buildTour(R); buildFeatures(R); }
   if (page === 'docs') buildDocs(R);
   if (page === 'releases') {
     const el = document.getElementById('rel');
@@ -63,11 +66,12 @@ function applyLang(lang) {
   }
 }
 
-function buildTour(R, skipFirst) {
+// The stacked tour covers the tabs that have no story of their own —
+// stories carry the features that do.
+function buildTour(R) {
   const host = document.getElementById('tour-blocks');
   if (!host) return;
-  const blocks = skipFirst ? R.tour.slice(1) : R.tour;
-  host.innerHTML = blocks.map((b, i) =>
+  host.innerHTML = R.tour.map((b, i) =>
     '<div class="tour-block' + (i % 2 ? ' rev' : '') + (i === 0 ? ' first' : '') + '">' +
     '<div class="shot"><img src="assets/img/' + b.img + '" alt="' + esc(b.t) + '" loading="lazy"></div>' +
     '<div><h3>' + esc(b.t) + '</h3><p>' + esc(b.lead) + '</p><ul>' +
@@ -75,58 +79,114 @@ function buildTour(R, skipFirst) {
 }
 
 // JetBrains-style scrollytelling: sticky panel, text fades per scroll step,
-// screenshots crossfade in sync, vertical timeline fills. Falls back to the
-// classic stacked tour on narrow screens / reduced motion.
-function buildStory(R) {
-  const track = document.getElementById('story-track');
-  if (!track) return;
-  window.__storyR = R;
-  const tour = document.getElementById('tour');
-  const wide = window.matchMedia('(min-width: 960px)').matches
-            && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!wide) {
-    track.innerHTML = '';
+// screenshots crossfade in sync, a vertical timeline fills. Any number of
+// tracks per page; narrow screens / reduced motion get a flat stacked list
+// instead (the home page hides its track and lets the tour cover the content).
+function storyWide() {
+  return window.matchMedia('(min-width: 960px)').matches
+      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function initStoryEngine(rebuild) {
+  window.__storyTracks = [];
+  window.__storyRebuild = rebuild;
+  if (window.__storyBound) return;
+  window.__storyBound = true;
+  window.addEventListener('scroll', updateStoryTracks, { passive: true });
+  let tmr;
+  window.addEventListener('resize', () => {
+    clearTimeout(tmr);
+    tmr = setTimeout(() => window.__storyRebuild && window.__storyRebuild(), 150);
+  });
+}
+
+// A step's visual: its screenshot, or — for steps that state the problem
+// instead of showing the tool (b.pains) — a pain-points card.
+function storyVisual(b, i) {
+  const di = i >= 0 ? ' data-i="' + i + '"' : '';
+  if (b.pains) return '<div class="story-pains"' + di + '>' +
+    (b.painsTitle ? '<div class="story-pains-h">' + esc(b.painsTitle) + '</div>' : '') +
+    b.pains.map(p => '<div class="story-pain"><span>✕</span><p><b>' + esc(p.k) + '</b> ' + esc(p.d) + '</p></div>').join('') +
+    (b.hook ? '<div class="story-pain hook"><span>❄</span><p>' + esc(b.hook) + '</p></div>' : '') +
+    '</div>';
+  return '<img' + di + ' src="assets/img/' + b.img + '" alt="' + esc(b.t) + '" loading="lazy">';
+}
+
+// Optional `head`/`foot` HTML (the What's-New caption and its doc links) is
+// pinned inside the sticky panel, so both ride with the slides instead of
+// scrolling away.
+function renderStoryTrack(track, steps, flat, head, foot) {
+  if (flat) {
+    track.classList.add('flat');
     track.style.height = '';
-    if (tour) tour.style.display = '';
-    return false;
+    track.innerHTML = (head || '') + steps.map(b =>
+      '<div class="story-flat-step">' + storyVisual(b, -1) +
+      '<h3>' + esc(b.t) + '</h3><p>' + esc(b.d || b.lead) + '</p>' +
+      (b.d2 ? '<p>' + esc(b.d2) + '</p>' : '') + '</div>').join('') + (foot || '');
+    return;
   }
-  if (tour) tour.style.display = '';
-  const steps = R.story || R.tour;
+  track.classList.remove('flat');
   track.style.height = (steps.length * 85 + 15) + 'vh';
   track.innerHTML =
-    '<div class="story-sticky"><div class="story-bar"><span id="story-fill"></span></div><div class="story-grid">' +
+    '<div class="story-sticky' + (head ? ' with-head' : '') + '">' + (head || '') +
+    '<div class="story-bar"><span class="story-fill"></span></div><div class="story-grid">' +
     '<div class="story-text">' + steps.map((b, i) =>
       '<div class="story-step" data-i="' + i + '"><h3>' + esc(b.t) + '</h3><p>' + esc(b.d || b.lead) + '</p>' +
+      (b.d2 ? '<p>' + esc(b.d2) + '</p>' : '') +
       (b.pts ? '<ul>' + b.pts.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>' : '') + '</div>').join('') + '</div>' +
-    '<div class="story-shot">' + steps.map((b, i) =>
-      '<img data-i="' + i + '" src="assets/img/' + b.img + '" alt="' + esc(b.t) + '" loading="lazy">').join('') + '</div>' +
-    '</div></div>';
-  const stepEls = [].slice.call(track.querySelectorAll('.story-step'));
-  const imgEls = [].slice.call(track.querySelectorAll('.story-shot img'));
-  const fill = document.getElementById('story-fill');
-  function onScroll() {
-    const r = track.getBoundingClientRect();
-    const total = track.offsetHeight - window.innerHeight;
+    '<div class="story-shot">' + steps.map((b, i) => storyVisual(b, i)).join('') + '</div>' +
+    '</div>' + (foot || '') + '</div>';
+  window.__storyTracks.push({
+    track: track, steps: steps,
+    stepEls: [].slice.call(track.querySelectorAll('.story-step')),
+    imgEls: [].slice.call(track.querySelectorAll('.story-shot > [data-i]')),
+    fill: track.querySelector('.story-fill'),
+  });
+}
+
+function updateStoryTracks() {
+  (window.__storyTracks || []).forEach(t => {
+    const r = t.track.getBoundingClientRect();
+    const total = t.track.offsetHeight - window.innerHeight;
     if (total <= 0) return;
     const p = Math.min(1, Math.max(0, -r.top / total));
-    const idx = Math.min(steps.length - 1, Math.floor(p * steps.length));
-    stepEls.forEach(el => el.classList.toggle('on', +el.dataset.i === idx));
-    imgEls.forEach(el => el.classList.toggle('on', +el.dataset.i === idx));
-    if (fill) fill.style.height = (p * 100) + '%';
+    const idx = Math.min(t.steps.length - 1, Math.floor(p * t.steps.length));
+    t.stepEls.forEach(el => el.classList.toggle('on', +el.dataset.i === idx));
+    t.imgEls.forEach(el => el.classList.toggle('on', +el.dataset.i === idx));
+    if (t.fill) t.fill.style.height = (p * 100) + '%';
+  });
+}
+
+// Home page: the What's-New story (stories.wn) plays inside the release
+// section; every other story becomes a chapter under #stories. Narrow
+// screens / reduced motion get the flat stacked variant of each track.
+function buildHomeStories(R) {
+  const wnTrack = document.getElementById('wn-story');
+  const host = document.getElementById('stories-body');
+  if (!R.stories || (!wnTrack && !host)) return;
+  window.__storyR = R;
+  initStoryEngine(() => buildHomeStories(window.__storyR));
+  const wide = storyWide();
+  if (wnTrack) {
+    const wn = R.stories.list.filter(s => s.key === R.stories.wn)[0];
+    const head = '<div class="story-track-head"><div class="wrap">' +
+      '<h2 class="sec">' + esc(R.wn.h) + '</h2>' +
+      '</div></div>';
+    const foot = '<div class="story-track-foot"><div class="wrap">' +
+      '<a href="docs.html#hold">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
+      '<a href="releases.html">' + esc(R.wn.notes) + '</a></div></div>';
+    if (wn) renderStoryTrack(wnTrack, wn.steps, !wide, head, foot);
   }
-  if (window.__storyScroll) window.removeEventListener('scroll', window.__storyScroll);
-  window.__storyScroll = onScroll;
-  window.addEventListener('scroll', onScroll, { passive: true });
-  if (!window.__storyResize) {
-    window.__storyResize = true;
-    let tmr;
-    window.addEventListener('resize', () => {
-      clearTimeout(tmr);
-      tmr = setTimeout(() => window.__storyR && buildStory(window.__storyR), 150);
-    });
+  if (host) {
+    const rest = R.stories.list.filter(s => s.key !== R.stories.wn);
+    host.innerHTML = rest.map((s, i) =>
+      '<section class="story-chapter"><div class="wrap"><h2 class="sec">' + esc(s.h) + '</h2>' +
+      '<p class="sub">' + esc(s.sub) + '</p></div>' +
+      '<div class="story-track" data-story="' + i + '"></div></section>').join('');
+    [].slice.call(host.querySelectorAll('.story-track')).forEach((tr, i) =>
+      renderStoryTrack(tr, rest[i].steps, !wide));
   }
-  onScroll();
-  return true;
+  updateStoryTracks();
 }
 
 function buildFeatures(R) {
@@ -136,15 +196,132 @@ function buildFeatures(R) {
     '<div class="card"><div class="ico">' + c.i + '</div><h3>' + esc(c.t) + '</h3><p>' + esc(c.d) + '</p></div>').join('');
 }
 
+// Docs: grouped left-sidebar navigation. Sections are the items; their <h3>
+// headings become subtopics with language-stable ids (<section>-s<N> by
+// position, so anchors survive a language switch). A scroll-spy highlights
+// and expands the section being read.
 function buildDocs(R) {
-  const toc = document.getElementById('docs-toc');
+  const nav = document.getElementById('docs-nav');
   const body = document.getElementById('docs-body');
-  if (!toc || !body) return;
-  toc.innerHTML = R.docs.sections.map(s => '<a href="#' + s.id + '">' + esc(s.t) + '</a>').join('');
-  body.innerHTML = R.docs.sections.map(s => '<h2 id="' + s.id + '">' + esc(s.t) + '</h2>' + s.html).join('');
+  if (!nav || !body) return;
+
+  const subs = {};
+  body.innerHTML = R.docs.sections.map(s => {
+    let n = 0;
+    subs[s.id] = [];
+    const html = s.html.replace(/<h3>(.*?)<\/h3>/g, (m, t) => {
+      n++;
+      const sid = s.id + '-s' + n;
+      subs[s.id].push({ id: sid, t: t.replace(/<[^>]+>/g, '') });
+      return '<h3 id="' + sid + '">' + t + '</h3>';
+    });
+    return '<h2 id="' + s.id + '">' + esc(s.t) + '</h2>' + html;
+  }).join('');
+
+  const byId = {};
+  R.docs.sections.forEach(s => { byId[s.id] = s; });
+  const tw = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg>';
+  nav.innerHTML = R.docs.groups.map(g =>
+    '<div class="dn-group"><div class="dn-cap">' + esc(g.t) + tw + '</div>' +
+    g.ids.map(id => {
+      const s = byId[id];
+      if (!s) return '';
+      const kids = subs[id] || [];
+      return '<div class="dn-item" data-sec="' + id + '">' +
+        '<a class="dn-link" href="#' + id + '">' + esc(s.t) + '</a>' +
+        (kids.length ? '<button class="dn-tw" type="button" aria-label="' + esc(s.t) + '">' + tw + '</button>' +
+          '<div class="dn-subs">' + kids.map(k => '<a href="#' + k.id + '">' + esc(k.t) + '</a>').join('') + '</div>' : '') +
+        '</div>';
+    }).join('') + '</div>').join('');
+
+  nav.querySelectorAll('.dn-cap').forEach(cap =>
+    cap.addEventListener('click', () => cap.parentElement.classList.toggle('closed')));
+  nav.querySelectorAll('.dn-tw').forEach(btn =>
+    btn.addEventListener('click', () => btn.parentElement.classList.toggle('open')));
+
+  const side = document.querySelector('.docs-side');
+  const tgl = document.getElementById('docs-nav-toggle');
+  if (tgl && !tgl.__wired) {
+    tgl.__wired = true;
+    tgl.addEventListener('click', () => side.classList.toggle('open'));
+  }
+  nav.addEventListener('click', e => { if (e.target.closest('a')) side.classList.remove('open'); });
+
+  const headings = [].slice.call(body.querySelectorAll('h2[id],h3[id]'));
+  function spy() {
+    let cur = headings[0];
+    for (const h of headings) {
+      if (h.getBoundingClientRect().top <= 90) cur = h; else break;
+    }
+    if (!cur) return;
+    const subId = cur.tagName === 'H3' ? cur.id : null;
+    const secId = subId ? subId.replace(/-s\d+$/, '') : cur.id;
+    nav.querySelectorAll('.dn-item').forEach(it => {
+      const on = it.dataset.sec === secId;
+      it.classList.toggle('on', on);
+      if (on) {
+        it.classList.add('open');
+        it.parentElement.classList.remove('closed');
+      }
+    });
+    nav.querySelectorAll('.dn-subs a').forEach(a =>
+      a.classList.toggle('on', !!subId && a.getAttribute('href') === '#' + subId));
+  }
+  if (window.__docsSpy) window.removeEventListener('scroll', window.__docsSpy);
+  window.__docsSpy = spy;
+  window.addEventListener('scroll', spy, { passive: true });
+  spy();
+}
+
+// Feedback button + popup, injected into the shared header on every page.
+function buildFeedback() {
+  const links = document.querySelector('.nav .tools');
+  if (!links || links.querySelector('.fb')) return;
+  const gh = '<svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7 0-.7 0-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>';
+  const tg = '<svg viewBox="0 0 24 24"><path d="M21.9 4.6c.3-1.2-.9-2.2-2-1.7L2.7 9.7c-1.2.5-1.1 2.2.1 2.6l4.4 1.4 1.7 5.5c.3 1 1.6 1.3 2.3.5l2.4-2.5 4.5 3.3c.9.6 2.1.2 2.4-.9l3.4-14.9zM8.2 12.9l9.4-5.8c.4-.2.7.3.4.6l-7.7 7.2c-.3.3-.5.6-.5 1l-.3 2.3c0 .3-.5.4-.6.1l-1.1-3.7c-.2-.6.1-1.3.4-1.7z"/></svg>';
+  const fb = document.createElement('span');
+  fb.className = 'fb';
+  fb.innerHTML =
+    '<button class="fb-btn" type="button" aria-haspopup="true" aria-expanded="false" data-i18n="nav.feedback">Feedback</button>' +
+    '<div class="fb-pop" hidden>' +
+    '<a href="https://github.com/pavel-zheltiakov/AvaDevTools/issues">' + gh +
+    '<span><b>GitHub Issues</b><small data-i18n="fb.issues"></small></span></a>' +
+    '<a href="https://t.me/avadevtools">' + tg +
+    '<span><b>Telegram</b><small data-i18n="fb.tg"></small></span></a></div>';
+  links.insertBefore(fb, links.querySelector('.langs'));
+  const btn = fb.querySelector('.fb-btn');
+  const pop = fb.querySelector('.fb-pop');
+  const close = () => { pop.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    pop.hidden = !pop.hidden;
+    btn.setAttribute('aria-expanded', String(!pop.hidden));
+  });
+  document.addEventListener('click', e => { if (!fb.contains(e.target)) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+}
+
+// Language dropdown: the button shows only the current language; the popup
+// lists all of them, so the switcher scales past three languages.
+function buildLangs() {
+  const box = document.querySelector('.langs');
+  const btn = box && box.querySelector('.langs-btn');
+  const pop = box && box.querySelector('.langs-pop');
+  if (!btn || !pop) return;
+  const close = () => { pop.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    pop.hidden = !pop.hidden;
+    btn.setAttribute('aria-expanded', String(!pop.hidden));
+  });
+  pop.addEventListener('click', close);
+  document.addEventListener('click', e => { if (!box.contains(e.target)) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  buildFeedback();
+  buildLangs();
   document.querySelectorAll('[data-setlang]').forEach(a =>
     a.addEventListener('click', e => { e.preventDefault(); setLang(a.dataset.setlang); }));
   applyLang(detectLang());

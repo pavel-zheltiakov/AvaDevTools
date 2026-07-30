@@ -4,43 +4,74 @@ window.I18N = {
 en: {
   title: 'AvaDevTools — free DevTools for Avalonia 12',
   descr: 'Free in-process developer tools for Avalonia 12: tree inspector, live property editing, styles, 3D view, event timeline, logs and go-to-source. Press F12.',
-  nav: { features: 'Features', docs: 'Documentation', videos: 'Videos', releases: 'Releases' },
+  nav: { docs: 'Documentation', releases: 'Releases', feedback: 'Feedback' },
+  fb: { issues: 'Report a bug or request a feature', tg: 'News, questions, quick help' },
   hero: {
     title: 'DevTools for <em>Avalonia 12</em>.<br>Free. In-process. One key away.',
     tag: 'The built-in F12 tools are gone in Avalonia 12. AvaDevTools brings them back — inspector, live editors, styles, 3D view, event timeline and logs — as a single free NuGet package.',
-    get: 'Get started', watch: '▶ Watch the demo', copy: 'copy',
+    get: 'Get started', stories: 'See it in action', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.0.4 — the Timeline", sub: 'Routed events, property changes, view-model notifies and binding errors in one chronological feed — scoped to a watchlist you control, with cause links and full binding inspection.', docs: 'Timeline docs →', videos: 'All videos →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.1.0", docs: 'Documentation →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
-  story: [
-    { img: 'story/u01.png', t: 'Nothing is recorded until you say so', d: 'Mark a slider, a button and a view model — the watchlist chips show exactly what the timeline is allowed to see.' },
-    { img: 'story/u02.png', t: 'Four lanes, one chronological feed', d: '⚡ routed events, ◆ property changes, ↻ view-model notifies and ⚠ binding errors interleave — quiet stretches become "⋯ +1.2 s" markers.' },
-    { img: 'story/u03.png', t: 'A bound change opens its whole binding', d: 'Old → new, priority, the metadata default — and the expression walk: every path step with its live source and value. The ↞ cause link names the notify that produced it.' },
-    { img: 'story/u04.png', t: 'Any instance, inspected', d: '🔍 opens a reflection card — properties and fields read live. 👁 adds a view model to the watchlist from anywhere.' },
-    { img: 'story/u05.png', t: 'Events carry their route', d: 'Direction, source, args — and the visual chain the event bubbled through, every element clickable.' },
-    { img: 'story/u06.png', t: 'You choose the events', d: 'The full routed-event registry with a filter and a Common preset — captured only inside observed subtrees.' },
-  ],
+  stories: {
+    h: 'Stories', wn: 'hold',
+    lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
+    list: [
+      { key: 'hold', h: '❄ Hold the moment', sub: 'Popups, flyouts, tooltips and hover styling — frozen mid-flight with one gesture, then inspected like ordinary UI.',
+        steps: [
+          { t: '❄ Hold the moment',
+            d: 'Tooltips, flyouts and hover styling live only while the pointer keeps them alive — the moment you reach for an inspector, the thing you were chasing dismisses itself.',
+            d2: 'Freeze popups, flyouts, tooltips and hover styling with one gesture — press Shift+F12 while your app shows the moment — then walk into the frozen scene and inspect it like anything else. Plus a pin-states panel, copy-as-bug-report and Office-style menus.',
+            painsTitle: 'Without Hold',
+            pains: [
+              { k: 'A flyout', d: 'closes on the first click outside it' },
+              { k: 'A tooltip', d: 'vanishes as soon as the pointer leaves' },
+              { k: ':pointerover styling', d: 'is gone before any inspector opens' },
+              { k: 'A drag-over highlight', d: 'lives only while the button is held' },
+            ],
+            hook: 'Hold freezes all of it — one gesture, mid-flight.' },
+          { img: 'story/h02.png', t: 'Freeze it mid-flight', d: 'Arm the countdown from the ❄ button — or press Shift+F12 right in the app — and stage the moment while the pill floats above. At zero the open flyout stops obeying focus: it stays exactly as it was, and everything the hold keeps alive wears a ❄ badge in the tree.' },
+          { img: 'story/h03.png', t: 'Walk into the frozen scene', d: 'The popup is ordinary UI now: select a menu item, read its properties, bounds and styles — nothing dismisses while the hold is on.' },
+          { img: 'story/h04.png', t: 'Pin the states you need', d: 'The Styles tab grows a pin-states panel: force :pointerover, :pressed, :focus or any custom pseudo-class — the app renders it as if the mouse were still there.' },
+          { img: 'story/h05.png', t: 'Copy as bug report', d: '📷 puts a DPI-correct screenshot on the clipboard — or a full report: pseudo-XAML path, bounds and every non-default property, ready to paste into an issue.' },
+          { img: 'story/h06.png', t: 'Release when done', d: 'Esc in the app — or Unfreeze in the ❄ chooser — restores everything exactly as it was. Custom countdowns are remembered for next time.' },
+        ] },
+      { key: 'tree', h: 'The smart tree', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.',
+        steps: [
+          { img: 'story/s01.png', t: 'Pick — the tree compacts', d: 'Click ⌖ Pick element, then click anything in the running app. The tree collapses to your window, your views and the target — every wrapper run folds into a "⋯ N levels" chip.' },
+          { img: 'story/s02.png', t: 'Step through hidden levels', d: 'Press Alt+↑ — exactly one hidden level opens per step. No tree explosions.' },
+          { img: 'story/s03.png', t: 'Click a fold…', d: 'A picker lists the hidden elements, rendered like the tree itself.' },
+          { img: 'story/s04.png', t: '…and only that element appears', d: 'The chip splits around your choice: "⋯ N levels" + element + "⋯ M levels".' },
+          { img: 'story/s05.png', t: 'Hide the noise', d: 'Press Delete — the element folds back into the chip it came from.' },
+          { img: 'story/s06.png', t: 'An Office-style menu', d: 'Ancestors, Descendants, Element and Copy submenus — an icon and a shortcut for every action, ancestors first, matching the tree’s up-then-down reading order.' },
+          { img: 'story/s07.png', t: 'Collapse ancestors', d: 'Shift+↑ keeps your views visible and folds the wrappers away.' },
+          { img: 'story/s08.png', t: 'Scope', d: 'Any element becomes the root, with clickable breadcrumbs. Esc leads back.' },
+          { img: 'story/s09.png', t: 'Search', d: 'Find by type, name or style class — F3 cycles through the matches.' },
+          { img: 'story/s10.png', t: 'Live sizes', d: 'The size column flashes as the app changes — resize and watch.' },
+        ] },
+      { key: 'track', h: 'Value tracking', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.',
+        steps: [
+          { img: 'story/t01.png', t: 'Two hidden buttons on every row', d: 'Hover any Properties row: ⊙ track follows the value across the tree, 📌 pin keeps the row on top.' },
+          { img: 'story/t02.png', t: 'One click — the tree, colored by value', d: 'Track DataContext: the MainViewModel everywhere it inherits, an OrbitViewModel island, null in its own bucket.' },
+          { img: 'story/t03.png', t: 'A legend that counts everything', d: 'Every value in the tree with a live count — and instances get ordinals: "OrbitViewModel #1".' },
+          { img: 'story/t04.png', t: 'Values change — colors follow', d: 'A second OrbitViewModel assigned in the running app: same type, its own color — #2. Re-classified within 250 ms, even inside folded chips.' },
+          { img: 'story/t05.png', t: 'Fold to changes', d: 'One click keeps only the elements where the value differs from its parent — every DataContext boundary on one screen.' },
+          { img: 'story/t06.png', t: 'Pin what you watch', d: '📌 floats your properties to the top of the list; the rest waits behind "Show more".' },
+        ] },
+      { key: 'timeline', h: 'One timeline: events, properties, view models', sub: 'Mark what you care about — everything it does lands in one chronological feed, cause and effect side by side.',
+        steps: [
+          { img: 'story/u01.png', t: 'Nothing is recorded until you say so', d: 'Mark a slider, a button and a view model — the watchlist chips show exactly what the timeline is allowed to see.' },
+          { img: 'story/u02.png', t: 'Four lanes, one chronological feed', d: '⚡ routed events, ◆ property changes, ↻ view-model notifies and ⚠ binding errors interleave — quiet stretches become "⋯ +1.2 s" markers.' },
+          { img: 'story/u03.png', t: 'A bound change opens its whole binding', d: 'Old → new, priority, the metadata default — and the expression walk: every path step with its live source and value. The ↞ cause link names the notify that produced it.' },
+          { img: 'story/u04.png', t: 'Any instance, inspected', d: '🔍 opens a reflection card — properties and fields read live. 👁 adds a view model to the watchlist from anywhere.' },
+          { img: 'story/u05.png', t: 'Events carry their route', d: 'Direction, source, args — and the visual chain the event bubbled through, every element clickable.' },
+          { img: 'story/u06.png', t: 'You choose the events', d: 'The full routed-event registry with a filter and a Common preset — captured only inside observed subtrees.' },
+        ] },
+    ],
+  },
   tour: [
-    { img: 'tab-track.png', t: 'Track any value across the tree',
-      lead: 'The classic MVVM question — "where did my DataContext break?" — answered in one click.',
-      pts: ['⊙ track on any Properties row colors the whole tree: same value = same color, null and "no such property" get their own buckets',
-            'A legend under the tree counts every value bucket, live; folded ⋯ chips stack the colors they hide',
-            'Values changed in the running app re-classify within 250 ms — even off-screen or inside folds',
-            '"Fold to changes" keeps only the elements where the value changes; 📌 pins your properties to the top of the list'] },
-    { img: 'tab-timeline.png', t: 'One timeline: events, properties, view models',
-      lead: 'Mark what you care about — everything it does lands in one chronological feed, cause and effect side by side.',
-      pts: ['Observe elements, routed events and view-model instances — nothing is recorded until you ask',
-            'Property changes carry old → new, priority and provenance; a binding-driven update is stamped with the VM notify that caused it (↞)',
-            'Click a bound change to walk the binding: every path step with its live source and value, converter, fallback',
-            '🔍 opens a reflection inspector for any instance — event args, values, converters, view models; 👁 adds a VM to the watchlist'] },
-    { img: 'tab-tree.png', t: 'A tree that reads like XAML',
-      lead: 'The smart tree inspector: syntax-colored elements, code-style folding and a live size column that flashes on change.',
-      pts: ['Pick an element — the tree compacts to your window, your views and the target; wrappers fold into "⋯ N levels" chips',
-            'Step hidden levels one at a time (Alt+↑/↓) or click a fold and choose exactly which element to reveal',
-            'Hide any element with Delete — it folds back into the chip it came from',
-            'Focus, Scope with breadcrumbs, search with F3 cycling, and a symmetric menu that shows every shortcut'] },
     { img: 'tab-properties.png', t: 'Inspect and edit everything — live',
       lead: 'Every property of the selected element with typed editors and full provenance.',
       pts: ['Grouped attached properties, resizable columns, instant filter',
@@ -67,6 +98,8 @@ en: {
     cards: [
       { i: '🌳', t: 'Smart tree inspector', d: 'A tree that reads like XAML: syntax colors, code-style folding, a compact pick view, one-level stepping, hide, focus, scope and search — with live sizes.' },
       { i: '🎯', t: 'Value tracking', d: 'Track any property across the whole tree: same value = same color, null in its own bucket, a live legend with counts — and "Fold to changes" shows every boundary at once.' },
+      { i: '❄', t: 'Hold the moment', d: 'Shift+F12 freezes what your app shows right now — open popups, flyouts, tooltips, hover styling. Inspect the frozen scene like ordinary UI; Esc restores everything exactly as it was. A pin-states panel forces :focus, :disabled or any custom pseudo-class on demand.' },
+      { i: '📷', t: 'Copy as bug report', d: 'One click puts a DPI-correct screenshot plus a readable report — pseudo-XAML path, bounds, non-default properties — on the clipboard. Rich targets paste both, image targets the PNG, text targets the markdown.' },
       { i: '✏️', t: 'Live property editing', d: 'Typed editors — checkboxes, enum dropdowns, flat segmented switches — grouped attached properties, and instant visual feedback without rebuilds.' },
       { i: '📌', t: 'Pinned properties', d: 'Pin the properties you actually watch — they float to a group at the top of the list; everything else waits behind "Show more". Persisted per user.' },
       { i: '🎨', t: 'Color picker', d: 'Every Color and brush gets a swatch with a full color picker flyout. Changes apply live as you drag.' },
@@ -86,6 +119,12 @@ en: {
   docs: {
     title: 'Documentation — AvaDevTools', h: 'Documentation',
     lead: 'Free in-process DevTools for Avalonia 12 — a free analog of the classic F12 tools.',
+    contents: 'Contents',
+    groups: [
+      { t: 'Getting started', ids: ['install', 'quickstart'] },
+      { t: 'Features', ids: ['hold', 'tree', 'tracking', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: 'Reference', ids: ['options', 'env', 'limits'] },
+    ],
     sections: [
       { id: 'install', t: 'Installation', html: `<pre><code>dotnet add package AvaDevTools</code></pre>
 <p>The package targets <code>net8.0</code> and works with Avalonia <strong>12.x</strong>. Reference it Debug-only if you prefer:</p>
@@ -100,14 +139,25 @@ en: {
 <span class="c">#endif</span>
 }</code></pre>
 <p>Or attach to a single window: <code>myWindow.AttachAvaDevTools()</code>. Press <span class="kbd">F12</span> in the app window to open DevTools for it. The DevTools window stays on top by default (📌 toggle in the toolbar).</p>
-<p>Hold <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> over the running app to inspect the element under the pointer — exactly like the classic DevTools.</p>` },
+<p>Hold <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> over the running app to inspect the element under the pointer — exactly like the classic DevTools.</p>
+<p>Press <span class="kbd">Shift</span>+<span class="kbd">F12</span> while the app shows a transient state — an open flyout, a tooltip, hover styling — to freeze it and inspect at leisure: see <a href="#hold">❄ Hold the moment</a>.</p>` },
+      { id: 'hold', t: '❄ Hold the moment', html: `<p>Transient UI is the hardest thing to inspect: a flyout closes the instant DevTools takes focus, hover styling vanishes when the pointer leaves. <b>Hold the moment</b> freezes all of it. Press <span class="kbd">Shift</span>+<span class="kbd">F12</span> in your app <em>while it shows the interesting state</em> — an open menu, a dropdown, a tooltip, a <code>:pointerover</code> style — and the moment stays put:</p>
+<ul><li><b>Popups stay alive</b> — light dismiss is suppressed on every open popup; when app logic closes one anyway (focus loss, a dropdown collapsing), the hold re-opens it.</li>
+<li><b>Hover styling stays pinned</b> — the pseudo-classes of the chain under the pointer (<code>:pointerover</code>, <code>:pressed</code>, <code>:focus</code>, …) are re-asserted if the framework clears them, so the styling survives DevTools stealing window activation.</li>
+<li><b>The tree folds to the frozen scene</b> — popup hosts, tooltip hosts and their owners, each marked with an icy ❄ badge and a dotted underline. Held popups are ordinary tree content: press ↻, walk in, pick inside them, highlight and inspect.</li>
+<li><b>A hover-only hold selects for you</b> — the styled element under the pointer is selected in the tree and the Styles tab opens on it.</li></ul>
+<p>A banner in the app says <em>"❄ Moment held — Esc releases"</em>, so nothing feels haunted. Everything releases atomically — Esc in the app, the ❄ toolbar toggle, or closing DevTools — and every forced value is restored from a ledger; a self-test asserts full restoration. Opens DevTools for you if it isn't open yet.</p>
+<h3>The ❄ button and the countdown</h3>
+<p>Clicking into DevTools already closed your app's popups — so the ❄ toolbar button can't freeze on the spot. Instead it opens a chooser: <b>5 s / 10 s / 30 s / custom</b>. Pick one, focus returns to the app and a banner counts down ("❄ Freezing in 5…") while you set the scene — re-open the menu, hover the control — and the hold engages by itself. Custom times are remembered as one-click presets across sessions. The gesture in the app stays the instant path.</p>
+<h3>Pin states</h3>
+<p>The Styles tab's <b>📌 Pin states</b> panel forces pseudo-classes without flipping app logic: it scans the element's applied styles and offers exactly the states they react to — <code>:disabled</code>, <code>:focus</code>, plus whatever custom states the theme defines. Pinned elements get a 📌 on their tree line; pins share the ❄ restore ledger, so releasing restores everything.</p>` },
       { id: 'tree', t: 'Smart tree inspector', html: `<p>The tree panel is a read-only, code-editor-style view of your UI: elements render as syntax-colored pseudo-XAML lines (<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>) with fold chevrons, indent guides and a live <b>Size</b> column that flashes when an element changes. Two modes match Avalonia exactly: <b>Visual tree</b> (<code>GetVisualChildren</code>, default) and <b>Logical tree</b> (<code>GetLogicalChildren</code>).</p>
 <h3>Compact pick</h3>
 <p>Picking an element (the ⌖ button or Ctrl+Shift over the app) rebuilds the tree into a compact view: the window, your user controls on the path, the control owning the picked template part, and the element itself. Every run of wrappers in between folds into a <code>⋯ N levels</code> chip — a deep tree becomes a handful of lines.</p>
 <h3>Folds are first-class</h3>
 <p>A single click on a chip opens a picker listing the hidden elements in the same syntax-colored style — choose one and only it is revealed: <code>⋯ 7 levels</code> becomes <code>⋯ N</code> + element + <code>⋯ M</code>. A double click expands the whole chip. <b>Alt+↑/↓</b> steps to the visual parent or child, peeling exactly one hidden level (the selected line shows ▲▼ step buttons — an 👁 eye marks steps that reveal something hidden). <b>Delete</b> hides the selected element back into a chip; adjacent chips merge.</p>
 <h3>Shaping the tree</h3>
-<p>The context menu is symmetric — a Descendants group, an Ancestors group and an Element group, every action with its shortcut displayed: show one level / all levels, fold into ⋯, fold keeping views (only your user controls stay visible below), collapse ancestors keeping views or entirely, hide, focus, scope.</p>
+<p>The context menu reads like a Word menu: a monochrome icon for every action, labels aligned by the icon gutter, shortcuts in a gesture column, and the bulky groups tucked into <b>Ancestors</b>, <b>Descendants</b>, <b>Element</b> and <b>Copy</b> submenus — ancestors first, matching the tree's up-then-down reading order. Everything is there: show one level / all levels, fold into ⋯, fold keeping views (only your user controls stay visible below), collapse ancestors keeping views or entirely, hide, focus, scope, and the copy actions.</p>
 <h3>Focus &amp; Scope</h3>
 <p><b>Focus</b> (F) folds everything off the path to the selected element; Esc restores the previous state. <b>Scope</b> (S) re-roots the tree at any element, with clickable breadcrumbs, a scope-up button and Esc to leave. Picking an element outside the scope leaves it automatically.</p>
 <h3>Keyboard</h3>
@@ -140,19 +190,25 @@ en: {
 <h3>Layout</h3><ul><li>Interactive box model: margin / border / padding bands editable per side; size, min/max, desired, bounds and alignment below.</li></ul>
 <h3>Styles</h3><ul><li>All applied value frames — control theme, styles with selectors, template and local values — with setters, priority and active state.</li>
 <li>Edits apply as live local overrides (browser-devtools semantics); local values have a ✕ clear button.</li>
+<li><b>📌 Pin states</b> — force <code>:disabled</code>, <code>:focus</code> or any custom pseudo-class the element's styles react to, without flipping app logic. See <a href="#hold">❄ Hold the moment</a>.</li>
 <li>file:line links for the element and each style; ⟨⟩/▤/{} chips open code previews.</li></ul>
 <h3>3D</h3><ul><li>Exploded 3D view textured from a live snapshot. Drag to orbit, wheel to zoom, click a card to select in the tree.</li>
 <li>Granularity: <em>Visual · merged</em> (wrappers collapsed), <em>Visual · all</em>, or <em>Logical</em>. "Reset view" restores the camera.</li></ul>
 <h3>Timeline</h3><ul><li>Events, property changes, VM notifies and binding errors in one feed, scoped to a watchlist — with cause links, a binding walk-through and a reflection inspector. See <a href="#timeline">Timeline</a>.</li></ul>
 <h3>Logs</h3><ul><li>Live Avalonia logger output with Pause, level, area and text filters. Captures at Warning by default. Entries produced by the DevTools UI itself are dropped and appends are batched — verbose logging can't freeze the tool.</li></ul>` },
+      { id: 'capture', t: 'Screenshots & bug reports', html: `<p>The tree context menu groups the clipboard actions under <b>Copy ▸</b>: <b>Path</b> (<span class="kbd">Ctrl+C</span>), <b>As XAML</b> (<span class="kbd">Ctrl+Shift+C</span>), <b>Screenshot</b> and <b>As bug report</b>.</p>
+<p><b>Copy as bug report</b> puts a DPI-correct PNG of the element <em>plus</em> a readable report — the pseudo-XAML path, bounds, and the properties that differ from their defaults — on the clipboard in three flavors at once: rich targets like an email compose window paste the screenshot <em>with</em> the details under it, image-only targets get the PNG, plain-text targets the markdown. Paste into an issue and it reads like a report, not a riddle.</p>
+<p>The <b>📷 toolbar button</b> is a two-click chooser — <em>Copy screenshot</em> or <em>Copy report (screenshot + XAML)</em> — capturing the selected element or the whole window. Combined with <a href="#hold">❄ Hold</a>, popup and hover states are capturable too.</p>` },
       { id: 'source', t: 'Go to source', html: `<p>Source locations come from the XAML compiler's <code>AvaloniaXamlCreateSourceInfo</code>, which Avalonia 12 enables automatically in Debug builds. C# types (view models) are located by searching your solution tree. Clicking opens JetBrains Rider by default on macOS; override with:</p>
 <pre><code>AVA_DEVTOOLS_EDITOR=<span class="s">"code --goto {file}:{line}"</span></code></pre>
 <p>Compiled Fluent theme styles have no source on disk — the popover shows reflection details and a "View theme XAML on GitHub" link matched to your Avalonia version.</p>` },
       { id: 'options', t: 'Options', html: `<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions
 {
-    Gesture    = <span class="k">new</span> KeyGesture(Key.F11),      <span class="c">// default: F12</span>
-    WindowSize = <span class="k">new</span> Size(1280, 760),
-    StayOnTop  = <span class="k">false</span>,                        <span class="c">// default: true</span>
+    Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// default: F12</span>
+    HoldGesture          = <span class="k">new</span> KeyGesture(Key.F11, KeyModifiers.Shift), <span class="c">// ❄ hold — default: Shift+F12</span>
+    HoldCountdownSeconds = 5,                                  <span class="c">// ❄ button countdown — default: 3</span>
+    WindowSize           = <span class="k">new</span> Size(1280, 760),
+    StayOnTop            = <span class="k">false</span>,                              <span class="c">// default: true</span>
 });</code></pre>` },
       { id: 'env', t: 'Environment variables', html: `<table>
 <tr><th>Variable</th><th>Meaning</th></tr>
@@ -179,43 +235,74 @@ en: {
 uk: {
   title: 'AvaDevTools — безкоштовні DevTools для Avalonia 12',
   descr: 'Безкоштовні інструменти розробника для Avalonia 12: інспектор дерева, живе редагування властивостей, стилі, 3D-вигляд, таймлайн подій, логи та перехід до коду. Натисніть F12.',
-  nav: { features: 'Можливості', docs: 'Документація', videos: 'Відео', releases: 'Релізи' },
+  nav: { docs: 'Документація', releases: 'Релізи', feedback: 'Фідбек' },
+  fb: { issues: 'Повідомити про ваду або запропонувати функцію', tg: 'Новини, запитання, швидка допомога' },
   hero: {
     title: 'DevTools для <em>Avalonia 12</em>.<br>Безкоштовно. In-process. Одна клавіша.',
     tag: 'Вбудованих інструментів F12 в Avalonia 12 більше немає. AvaDevTools повертає їх — інспектор, живі редактори, стилі, 3D-вигляд, таймлайн подій і логи — одним безкоштовним NuGet-пакетом.',
-    get: 'Почати', watch: '▶ Дивитися демо', copy: 'копіювати',
+    get: 'Почати', stories: 'Подивитися в дії', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.0.4 — Таймлайн', sub: 'Routed-події, зміни властивостей, сповіщення в’ю-моделей і помилки біндінгів в одній хронологічній стрічці — в межах вашого списку спостереження, з причинними посиланнями та повним оглядом біндінгів.', docs: 'Документація таймлайна →', videos: 'Усі відео →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.1.0', docs: 'Документація →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
-  story: [
-    { img: 'story/u01.png', t: 'Нічого не записується без вашої згоди', d: 'Позначте слайдер, кнопку та в’ю-модель — чипи списку спостереження показують, що саме бачить таймлайн.' },
-    { img: 'story/u02.png', t: 'Чотири доріжки, одна хронологічна стрічка', d: '⚡ routed-події, ◆ зміни властивостей, ↻ сповіщення в’ю-моделей і ⚠ помилки біндінгів впереміш — тихі проміжки стають маркерами «⋯ +1.2 s».' },
-    { img: 'story/u03.png', t: 'Зміна з біндінгу відкриває весь біндінг', d: 'Старе → нове, пріоритет, дефолт із метаданих — і прохід виразу: кожен крок шляху з живим джерелом і значенням. Посилання ↞ називає сповіщення-причину.' },
-    { img: 'story/u04.png', t: 'Будь-який інстанс — під лупою', d: '🔍 відкриває рефлексійну картку: властивості й поля читаються наживо. 👁 додає в’ю-модель до списку спостереження звідусіль.' },
-    { img: 'story/u05.png', t: 'Події несуть свій маршрут', d: 'Напрямок, джерело, аргументи — і візуальний ланцюжок, яким подія спливала; кожен елемент клікабельний.' },
-    { img: 'story/u06.png', t: 'Події обираєте ви', d: 'Повний реєстр routed-подій із фільтром і пресетом Common — запис лише в піддеревах позначених елементів.' },
-  ],
+  stories: {
+    h: 'Історії', wn: 'hold',
+    lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
+    list: [
+      { key: 'hold', h: '❄ Hold the moment', sub: 'Попапи, флаяути, тултіпи та hover-стилі — заморожені на льоту одним жестом і досліджувані як звичайний UI.',
+        steps: [
+          { t: '❄ Hold the moment',
+            d: 'Тултіпи, флаяути та hover-стилі живуть, лише поки їх тримає курсор — щойно ви тягнетеся до інспектора, те, за чим ви полювали, закривається саме.',
+            d2: 'Заморозьте попапи, флаяути, тултіпи та hover-стилі одним жестом — натисніть Shift+F12, поки застосунок показує потрібний момент — і досліджуйте заморожену сцену як будь-що інше. Плюс панель закріплення станів, копіювання баг-репорту та меню в стилі Office.',
+            painsTitle: 'Без Hold',
+            pains: [
+              { k: 'Флаяут', d: 'закривається від першого кліку повз нього' },
+              { k: 'Тултіп', d: 'зникає, щойно курсор відходить' },
+              { k: ':pointerover-стиль', d: 'пропадає ще до відкриття інспектора' },
+              { k: 'Підсвітка перетягування', d: 'живе, лише поки затиснута кнопка' },
+            ],
+            hook: 'Hold заморожує все це — одним жестом, на льоту.' },
+          { img: 'story/h02.png', t: 'Заморозьте на льоту', d: 'Озбройте відлік кнопкою ❄ — або натисніть Shift+F12 просто в застосунку — і підготуйте сцену, поки таймер спливає над вікном. На нулі відкритий флаяут перестає слухатись фокуса: він залишається точно як був, а все, що утримує заморозка, отримує в дереві значок ❄.' },
+          { img: 'story/h03.png', t: 'Увійдіть у заморожену сцену', d: 'Попап тепер — звичайний UI: виберіть пункт меню, читайте його властивості, межі та стилі — ніщо не закривається, поки діє hold.' },
+          { img: 'story/h04.png', t: 'Закріпіть потрібні стани', d: 'У вкладці Styles з’являється панель закріплення станів: увімкніть :pointerover, :pressed, :focus чи будь-який власний псевдоклас — застосунок рендерить його, ніби миша досі там.' },
+          { img: 'story/h05.png', t: 'Скопіюйте баг-репорт', d: '📷 кладе в буфер DPI-коректний скриншот — або повний звіт: псевдо-XAML шлях, межі та всі змінені властивості, готові до вставки в issue.' },
+          { img: 'story/h06.png', t: 'Відпустіть, коли готово', d: 'Esc у застосунку — або Unfreeze у меню ❄ — повертає все точно як було. Власні інтервали відліку запам’ятовуються.' },
+        ] },
+      { key: 'tree', h: 'Розумне дерево', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.',
+        steps: [
+          { img: 'story/s01.png', t: 'Вибір — дерево стискається', d: 'Натисніть ⌖ Pick element і клацніть будь-що в застосунку. Дерево згортається до вікна, ваших view та цілі — обгортки складаються в чипи «⋯ N levels».' },
+          { img: 'story/s02.png', t: 'Крок за кроком', d: 'Alt+↑ відкриває рівно один прихований рівень за раз.' },
+          { img: 'story/s03.png', t: 'Клацніть згортку…', d: 'Зʼявляється список прихованих елементів — у стилі самого дерева.' },
+          { img: 'story/s04.png', t: '…і зʼявляється лише він', d: 'Чип розділяється: «⋯ N levels» + елемент + «⋯ M levels».' },
+          { img: 'story/s05.png', t: 'Ховайте зайве', d: 'Delete — елемент повертається у свій чип.' },
+          { img: 'story/s06.png', t: 'Меню у стилі Office', d: 'Підменю Ancestors, Descendants, Element і Copy — іконка та шорткат для кожної дії; предки першими, як і читається дерево.' },
+          { img: 'story/s07.png', t: 'Згорнути предків', d: 'Shift+↑ лишає ваші view, ховає обгортки.' },
+          { img: 'story/s08.png', t: 'Scope', d: 'Будь-який елемент стає коренем, хлібні крихти ведуть назад. Esc — вихід.' },
+          { img: 'story/s09.png', t: 'Пошук', d: 'За типом, іменем або класом стилю — F3 циклює збіги.' },
+          { img: 'story/s10.png', t: 'Живі розміри', d: 'Колонка розмірів спалахує, щойно застосунок змінюється.' },
+        ] },
+      { key: 'track', h: 'Трекінг значень', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.',
+        steps: [
+          { img: 'story/t01.png', t: 'Дві приховані кнопки на кожному рядку', d: 'Наведіть курсор на будь-який рядок Properties: ⊙ track відстежує значення по дереву, 📌 pin тримає рядок згори.' },
+          { img: 'story/t02.png', t: 'Один клік — дерево у кольорах значень', d: 'Відстежуйте DataContext: MainViewModel скрізь, де він успадковується, острівець OrbitViewModel, null у власній групі.' },
+          { img: 'story/t03.png', t: 'Легенда, що рахує все', d: 'Кожне значення в дереві з живим лічильником — а інстанси отримують номери: «OrbitViewModel #1».' },
+          { img: 'story/t04.png', t: 'Значення змінюються — кольори слідують', d: 'Другий OrbitViewModel, призначений у запущеному застосунку: той самий тип, власний колір — #2. Перекласифікація за 250 мс, навіть у згорнутих чипах.' },
+          { img: 'story/t05.png', t: 'Згорнути до змін', d: 'Один клік лишає тільки елементи, де значення відрізняється від батьківського — кожна межа DataContext на одному екрані.' },
+          { img: 'story/t06.png', t: 'Закріпіть те, що пильнуєте', d: '📌 піднімає ваші властивості на початок списку; решта чекає за «Show more».' },
+        ] },
+      { key: 'timeline', h: 'Один таймлайн: події, властивості, в’ю-моделі', sub: 'Позначте те, що вас цікавить — усе, що з ним відбувається, лягає в одну хронологічну стрічку: причина і наслідок поруч.',
+        steps: [
+          { img: 'story/u01.png', t: 'Нічого не записується без вашої згоди', d: 'Позначте слайдер, кнопку та в’ю-модель — чипи списку спостереження показують, що саме бачить таймлайн.' },
+          { img: 'story/u02.png', t: 'Чотири доріжки, одна хронологічна стрічка', d: '⚡ routed-події, ◆ зміни властивостей, ↻ сповіщення в’ю-моделей і ⚠ помилки біндінгів впереміш — тихі проміжки стають маркерами «⋯ +1.2 s».' },
+          { img: 'story/u03.png', t: 'Зміна з біндінгу відкриває весь біндінг', d: 'Старе → нове, пріоритет, дефолт із метаданих — і прохід виразу: кожен крок шляху з живим джерелом і значенням. Посилання ↞ називає сповіщення-причину.' },
+          { img: 'story/u04.png', t: 'Будь-який інстанс — під лупою', d: '🔍 відкриває рефлексійну картку: властивості й поля читаються наживо. 👁 додає в’ю-модель до списку спостереження звідусіль.' },
+          { img: 'story/u05.png', t: 'Події несуть свій маршрут', d: 'Напрямок, джерело, аргументи — і візуальний ланцюжок, яким подія спливала; кожен елемент клікабельний.' },
+          { img: 'story/u06.png', t: 'Події обираєте ви', d: 'Повний реєстр routed-подій із фільтром і пресетом Common — запис лише в піддеревах позначених елементів.' },
+        ] },
+    ],
+  },
   tour: [
-    { img: 'tab-track.png', t: 'Відстежуйте будь-яке значення по дереву',
-      lead: 'Класичне питання MVVM — «де зламався мій DataContext?» — відповідь одним кліком.',
-      pts: ['⊙ track на будь-якому рядку Properties розфарбовує все дерево: однакове значення = однаковий колір; null і «немає такої властивості» мають власні групи',
-            'Легенда під деревом рахує кожну групу наживо; згорнуті чипи ⋯ складають кольори того, що ховають',
-            'Значення, змінені в запущеному застосунку, перекласифікуються за 250 мс — навіть поза екраном чи у згортках',
-            '«Fold to changes» лишає тільки елементи, де значення змінюється; 📌 закріплює властивості вгорі списку'] },
-    { img: 'tab-timeline.png', t: 'Один таймлайн: події, властивості, в’ю-моделі',
-      lead: 'Позначте те, що вас цікавить — усе, що з ним відбувається, лягає в одну хронологічну стрічку: причина і наслідок поруч.',
-      pts: ['Спостерігайте елементи, routed-події та інстанси в’ю-моделей — нічого не записується, поки ви не попросите',
-            'Зміни властивостей несуть old → new, пріоритет і походження; оновлення від біндінга позначається сповіщенням VM, що його спричинило (↞)',
-            'Клік по зміні від біндінга розкриває сам біндінг: кожен крок шляху з живим джерелом і значенням, конвертер, fallback',
-            '🔍 відкриває рефлексійний інспектор будь-якого інстансу — аргументи подій, значення, конвертери, в’ю-моделі; 👁 додає VM до списку спостереження'] },
-    { img: 'tab-tree.png', t: 'Дерево, що читається як XAML',
-      lead: 'Розумний інспектор дерева: підсвічені елементи, згортання як у редакторі коду та жива колонка розмірів.',
-      pts: ['Виберіть елемент — дерево стискається до вікна, ваших view та цілі; обгортки згортаються у чипи «⋯ N levels»',
-            'Розкривайте приховані рівні по одному (Alt+↑/↓) або клацніть згортку та оберіть, який саме елемент показати',
-            'Ховайте будь-який елемент клавішею Delete — він повертається у свій чип',
-            'Focus, Scope з хлібними крихтами, пошук із циклом F3 та симетричне меню з усіма шорткатами'] },
     { img: 'tab-properties.png', t: 'Інспектуйте та редагуйте все — наживо',
       lead: 'Кожна властивість вибраного елемента з типізованими редакторами та повним походженням значень.',
       pts: ['Згруповані attached-властивості, змінна ширина колонок, миттєвий фільтр',
@@ -242,6 +329,8 @@ uk: {
     cards: [
       { i: '🌳', t: 'Розумне дерево', d: 'Дерево, що читається як XAML: підсвічування синтаксису, згортання як у редакторі, компактний вигляд після вибору, покрокове розкриття, hide, focus, scope і пошук.' },
       { i: '🎯', t: 'Трекінг значень', d: 'Відстежуйте будь-яку властивість по всьому дереву: однакове значення = однаковий колір, null у власній групі, жива легенда з лічильниками — а «Fold to changes» показує всі межі одразу.' },
+      { i: '❄', t: 'Hold the moment', d: 'Shift+F12 заморожує те, що застосунок показує просто зараз — відкриті попапи, флаяути, тултіпи, hover-стилі. Досліджуйте заморожену сцену як звичайний UI; Esc відновлює все точно як було. Панель pin states вмикає :focus, :disabled чи будь-який кастомний псевдоклас на вимогу.' },
+      { i: '📷', t: 'Копія як баг-репорт', d: 'Один клік кладе в буфер DPI-коректний скриншот плюс читабельний звіт — псевдо-XAML шлях, bounds, властивості з нетиповими значеннями. Rich-цілі вставляють обидва, графічні — PNG, текстові — markdown.' },
       { i: '✏️', t: 'Живе редагування властивостей', d: 'Типізовані редактори — чекбокси, списки enum, плоскі сегментні перемикачі — згруповані attached-властивості та миттєвий результат без перезбирання.' },
       { i: '📌', t: 'Закріплені властивості', d: 'Закріпіть властивості, які справді пильнуєте — вони підіймаються у групу вгорі списку; решта чекає за «Show more». Зберігається для користувача.' },
       { i: '🎨', t: 'Палітра кольорів', d: 'Кожен Color і пензель має зразок кольору з повноцінним колірним пікером. Зміни застосовуються наживо.' },
@@ -261,6 +350,12 @@ uk: {
   docs: {
     title: 'Документація — AvaDevTools', h: 'Документація',
     lead: 'Безкоштовні in-process DevTools для Avalonia 12 — безкоштовний аналог класичних інструментів F12.',
+    contents: 'Зміст',
+    groups: [
+      { t: 'Початок роботи', ids: ['install', 'quickstart'] },
+      { t: 'Можливості', ids: ['hold', 'tree', 'tracking', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: 'Довідник', ids: ['options', 'env', 'limits'] },
+    ],
     sections: [
       { id: 'install', t: 'Встановлення', html: `<pre><code>dotnet add package AvaDevTools</code></pre>
 <p>Пакет націлений на <code>net8.0</code> і працює з Avalonia <strong>12.x</strong>. За бажанням підключайте лише в Debug:</p>
@@ -275,14 +370,25 @@ uk: {
 <span class="c">#endif</span>
 }</code></pre>
 <p>Або для одного вікна: <code>myWindow.AttachAvaDevTools()</code>. Натисніть <span class="kbd">F12</span> у вікні застосунку. Вікно DevTools за замовчуванням поверх інших (перемикач 📌 на панелі).</p>
-<p>Утримуйте <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> над застосунком, щоб інспектувати елемент під курсором — як у класичних DevTools.</p>` },
+<p>Утримуйте <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> над застосунком, щоб інспектувати елемент під курсором — як у класичних DevTools.</p>
+<p>Натисніть <span class="kbd">Shift</span>+<span class="kbd">F12</span>, поки застосунок показує перехідний стан — відкритий флаяут, тултіп, hover-стиль — щоб заморозити його й дослідити без поспіху: див. <a href="#hold">❄ Hold the moment</a>.</p>` },
+      { id: 'hold', t: '❄ Hold the moment', html: `<p>Перехідний UI — найважче для інспекції: флаяут закривається, щойно DevTools забирає фокус, hover-стиль зникає, коли курсор іде геть. <b>Hold the moment</b> заморожує все це. Натисніть <span class="kbd">Shift</span>+<span class="kbd">F12</span> у застосунку, <em>поки він показує цікавий стан</em> — відкрите меню, дропдаун, тултіп, стиль <code>:pointerover</code> — і момент лишається на місці:</p>
+<ul><li><b>Попапи живуть далі</b> — light dismiss придушено для кожного відкритого попапа; якщо логіка застосунку все ж закриє якийсь (втрата фокуса, згортання дропдауна), hold відкриє його знову.</li>
+<li><b>Hover-стилі закріплено</b> — псевдокласи ланцюжка під курсором (<code>:pointerover</code>, <code>:pressed</code>, <code>:focus</code>, …) виставляються повторно, якщо фреймворк їх скидає, тож стилі переживають перехоплення активації вікном DevTools.</li>
+<li><b>Дерево згортається до замороженої сцени</b> — хости попапів, тултіпів та їхні власники, кожен із крижаним значком ❄ і пунктирним підкресленням. Заморожені попапи — звичайний вміст дерева: натисніть ↻, заходьте всередину, вибирайте, підсвічуйте та інспектуйте.</li>
+<li><b>Hover-only hold вибирає за вас</b> — стилізований елемент під курсором вибирається в дереві, і одразу відкривається вкладка Styles.</li></ul>
+<p>Банер у застосунку каже <em>«❄ Moment held — Esc releases»</em>. Усе відпускається атомарно — Esc у застосунку, перемикач ❄ на панелі або закриття DevTools — і кожне форсоване значення відновлюється з реєстру. Якщо DevTools ще не відкрито, hold відкриє його сам.</p>
+<h3>Кнопка ❄ і зворотний відлік</h3>
+<p>Клік у DevTools уже закрив попапи вашого застосунку — тому кнопка ❄ не може заморозити «на місці». Натомість вона відкриває вибір: <b>5 с / 10 с / 30 с / свій час</b>. Оберіть — фокус повертається до застосунку, банер веде відлік («❄ Freezing in 5…»), поки ви відтворюєте сцену — знову відкриваєте меню, наводите курсор — і hold вмикається сам. Власні часи запам’ятовуються як пресети в один клік. Жест у застосунку лишається миттєвим шляхом.</p>
+<h3>Pin states</h3>
+<p>Панель <b>📌 Pin states</b> у вкладці Styles форсує псевдокласи без жодної логіки застосунку: вона сканує застосовані стилі елемента й пропонує саме ті стани, на які вони реагують — <code>:disabled</code>, <code>:focus</code>, плюс кастомні стани теми. Закріплені елементи отримують 📌 на рядку дерева; піни ділять реєстр відновлення з ❄ — відпускання повертає все.</p>` },
       { id: 'tree', t: 'Розумний інспектор дерева', html: `<p>Панель дерева — це «редактор коду» лише для читання: елементи відображаються як підсвічені псевдо-XAML рядки (<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>) зі шевронами згортання, лініями відступів і живою колонкою <b>Size</b>, що спалахує при зміні. Два режими точно відповідають Avalonia: <b>Visual tree</b> (<code>GetVisualChildren</code>, за замовчуванням) і <b>Logical tree</b> (<code>GetLogicalChildren</code>).</p>
 <h3>Компактний вибір</h3>
 <p>Вибір елемента (кнопка ⌖ або Ctrl+Shift над застосунком) перебудовує дерево в компактний вигляд: вікно, ваші user controls на шляху, контрол-власник вибраної частини шаблону та сам елемент. Усі проміжні обгортки згортаються в чип <code>⋯ N levels</code> — глибоке дерево стає кількома рядками.</p>
 <h3>Згортки — повноцінні елементи</h3>
 <p>Один клік на чипі відкриває список прихованих елементів у тому ж стилі — оберіть один, і буде показано лише його: <code>⋯ 7 levels</code> перетворюється на <code>⋯ N</code> + елемент + <code>⋯ M</code>. Подвійний клік розкриває весь чип. <b>Alt+↑/↓</b> крокує до батька чи дитини, розкриваючи рівно один прихований рівень (на вибраному рядку є кнопки ▲▼; око 👁 позначає крок, що відкриє приховане). <b>Delete</b> ховає елемент назад у чип; сусідні чипи зливаються.</p>
 <h3>Формування дерева</h3>
-<p>Контекстне меню симетричне — групи Descendants, Ancestors і Element, кожна дія з шорткатом: показати один/усі рівні, згорнути в ⋯, згорнути лишивши view, згорнути предків (з view чи повністю), сховати, focus, scope.</p>
+<p>Контекстне меню читається як меню Word: монохромна іконка для кожної дії, підписи вирівняні по колонці іконок, шорткати в колонці жестів, а великі групи сховано в підменю <b>Ancestors</b>, <b>Descendants</b>, <b>Element</b> і <b>Copy</b> — предки першими, як і читається дерево: спершу вгору, потім униз. Усе на місці: показати один/усі рівні, згорнути в ⋯, згорнути лишивши view, згорнути предків (з view чи повністю), сховати, focus, scope і дії копіювання.</p>
 <h3>Focus і Scope</h3>
 <p><b>Focus</b> (F) згортає все поза шляхом до вибраного елемента; Esc повертає попередній стан. <b>Scope</b> (S) робить будь-який елемент коренем дерева — з клікабельними хлібними крихтами, кнопкою «на рівень вище» та Esc для виходу. Вибір елемента поза scope виходить із нього автоматично.</p>
 <h3>Клавіатура</h3>
@@ -315,19 +421,25 @@ uk: {
 <h3>Layout</h3><ul><li>Інтерактивна боксова модель: margin / border / padding з редагуванням кожної сторони; нижче — розміри, min/max, desired, bounds та вирівнювання.</li></ul>
 <h3>Styles</h3><ul><li>Усі застосовані фрейми значень — тема контролу, стилі з селекторами, шаблон і локальні значення — із сеттерами, пріоритетом і станом.</li>
 <li>Редагування застосовується як живі локальні перевизначення; локальні значення мають кнопку ✕ для очищення.</li>
+<li><b>📌 Pin states</b> — форсуйте <code>:disabled</code>, <code>:focus</code> чи будь-який кастомний псевдоклас, на який реагують стилі елемента, без зміни логіки застосунку. Див. <a href="#hold">❄ Hold the moment</a>.</li>
 <li>Посилання file:line для елемента і кожного стилю; чипи ⟨⟩/▤/{} відкривають прев'ю коду.</li></ul>
 <h3>3D</h3><ul><li>3D-вигляд шарами з текстурами з живого знімка. Тягніть для обертання, колесо — масштаб, клік — вибір у дереві.</li>
 <li>Деталізація: <em>Visual · merged</em> (обгортки згорнуто), <em>Visual · all</em> або <em>Logical</em>. «Reset view» повертає камеру.</li></ul>
 <h3>Timeline</h3><ul><li>Події, зміни властивостей, сповіщення VM і помилки біндінгів в одній стрічці за вашим списком спостереження — з причинними зв’язками, розбором біндінгів і рефлексійним інспектором. Див. <a href="#timeline">Таймлайн</a>.</li></ul>
 <h3>Logs</h3><ul><li>Живі логи Avalonia з Pause та фільтрами за рівнем, областю і текстом. За замовчуванням — Warning. Записи від самого DevTools відкидаються, оновлення батчаться — «зациклення» неможливе.</li></ul>` },
+      { id: 'capture', t: 'Скриншоти та баг-репорти', html: `<p>Контекстне меню дерева групує дії з буфером обміну в <b>Copy ▸</b>: <b>Path</b> (<span class="kbd">Ctrl+C</span>), <b>As XAML</b> (<span class="kbd">Ctrl+Shift+C</span>), <b>Screenshot</b> і <b>As bug report</b>.</p>
+<p><b>Copy as bug report</b> кладе в буфер DPI-коректний PNG елемента <em>плюс</em> читабельний звіт — псевдо-XAML шлях, bounds і властивості, що відрізняються від типових — одразу у трьох форматах: rich-цілі (вікно листа) вставляють скриншот <em>разом</em> із деталями під ним, графічні цілі отримують PNG, текстові — markdown. Вставте в issue — і це читається як звіт, а не загадка.</p>
+<p><b>Кнопка 📷 на панелі</b> — вибір у два кліки: <em>Copy screenshot</em> або <em>Copy report (screenshot + XAML)</em> — для вибраного елемента чи всього вікна. Разом із <a href="#hold">❄ Hold</a> можна захопити й попапи та hover-стани.</p>` },
       { id: 'source', t: 'Перехід до коду', html: `<p>Локації беруться з <code>AvaloniaXamlCreateSourceInfo</code> компілятора XAML (в Avalonia 12 увімкнено в Debug автоматично). C#-типи (в'ю-моделі) знаходяться пошуком по дереву рішення. Клік відкриває JetBrains Rider (macOS) за замовчуванням; можна змінити:</p>
 <pre><code>AVA_DEVTOOLS_EDITOR=<span class="s">"code --goto {file}:{line}"</span></code></pre>
 <p>Скомпільовані стилі Fluent не мають коду на диску — поповер показує дані з рефлексії та посилання «View theme XAML on GitHub» для вашої версії Avalonia.</p>` },
       { id: 'options', t: 'Налаштування', html: `<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions
 {
-    Gesture    = <span class="k">new</span> KeyGesture(Key.F11),
-    WindowSize = <span class="k">new</span> Size(1280, 760),
-    StayOnTop  = <span class="k">false</span>,
+    Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// типово: F12</span>
+    HoldGesture          = <span class="k">new</span> KeyGesture(Key.F11, KeyModifiers.Shift), <span class="c">// ❄ hold — типово: Shift+F12</span>
+    HoldCountdownSeconds = 5,                                  <span class="c">// відлік кнопки ❄ — типово: 3</span>
+    WindowSize           = <span class="k">new</span> Size(1280, 760),
+    StayOnTop            = <span class="k">false</span>,                              <span class="c">// типово: true</span>
 });</code></pre>` },
       { id: 'env', t: 'Змінні середовища', html: `<table>
 <tr><th>Змінна</th><th>Значення</th></tr>
@@ -354,43 +466,74 @@ uk: {
 zh: {
   title: 'AvaDevTools — Avalonia 12 免费开发者工具',
   descr: 'Avalonia 12 的免费进程内开发者工具：树检查器、实时属性编辑、样式、3D 视图、事件时间线、日志与源码跳转。按 F12 即可打开。',
-  nav: { features: '功能', docs: '文档', videos: '视频', releases: '版本' },
+  nav: { docs: '文档', releases: '版本', feedback: '反馈' },
+  fb: { issues: '报告问题或提出功能建议', tg: '新闻、提问与快速交流' },
   hero: {
     title: '<em>Avalonia 12</em> 的 DevTools。<br>免费、进程内、一键打开。',
     tag: 'Avalonia 12 移除了内置的 F12 工具。AvaDevTools 把它们带了回来 —— 检查器、实时编辑器、样式、3D 视图、事件时间线和日志 —— 全部打包在一个免费 NuGet 包里。',
-    get: '快速上手', watch: '▶ 观看演示', copy: '复制',
+    get: '快速上手', stories: '看实际效果', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.0.4 新特性 — 时间线', sub: '路由事件、属性变化、ViewModel 通知与绑定错误汇成一条时间流 —— 范围由你的观察列表控制，带因果链接与完整的绑定检查。', docs: '时间线文档 →', videos: '全部视频 →', notes: '版本历史 →' },
+  wn: { h: '12.1.0 新特性', docs: '文档 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
-  story: [
-    { img: 'story/u01.png', t: '未经允许，不记录任何内容', d: '标记一个滑块、一个按钮和一个 ViewModel —— 观察列表徽章清楚显示时间线能看到什么。' },
-    { img: 'story/u02.png', t: '四条泳道，一条时间流', d: '⚡ 路由事件、◆ 属性变化、↻ ViewModel 通知与 ⚠ 绑定错误交织排列 —— 安静时段化作「⋯ +1.2 s」标记。' },
-    { img: 'story/u03.png', t: '绑定引发的变化，展开整个绑定', d: '旧值 → 新值、优先级、元数据默认值 —— 还有表达式路径：每一步的实时来源与值。↞ 因果链接指明触发它的通知。' },
-    { img: 'story/u04.png', t: '任何实例，即点即查', d: '🔍 打开反射卡片：实时读取属性与字段。👁 随处可把 ViewModel 加入观察列表。' },
-    { img: 'story/u05.png', t: '事件自带路由链', d: '路由方向、来源、参数 —— 以及事件冒泡经过的可视链，每个元素都可点击。' },
-    { img: 'story/u06.png', t: '事件由你挑选', d: '完整路由事件注册表，带过滤与 Common 预设 —— 只在被观察元素的子树内捕获。' },
-  ],
+  stories: {
+    h: '功能演示', wn: 'hold',
+    lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
+    list: [
+      { key: 'hold', h: '❄ 定格瞬间', sub: '弹出层、浮出菜单、工具提示与悬停样式 —— 一个手势原地冻结，然后像普通 UI 一样检查。',
+        steps: [
+          { t: '❄ 定格瞬间',
+            d: '工具提示、浮出菜单和悬停样式只在指针托着它们时存在 —— 你一伸手去开检查器，追踪的目标就自己消失了。',
+            d2: '一个手势冻结弹出层、浮出菜单、工具提示与悬停样式 —— 在应用呈现关键状态时按 Shift+F12 —— 然后像检查其他元素一样检查被冻结的场景。还有伪类固定面板、一键复制缺陷报告与 Office 风格菜单。',
+            painsTitle: '没有 Hold 时',
+            pains: [
+              { k: '浮出菜单', d: '在第一次点到别处时就关闭' },
+              { k: '工具提示', d: '指针一离开立即消失' },
+              { k: ':pointerover 样式', d: '等不到检查器打开就没了' },
+              { k: '拖拽高亮', d: '只在按住鼠标时存在' },
+            ],
+            hook: 'Hold 一个手势，把这一切原地冻结。' },
+          { img: 'story/h02.png', t: '原地冻结', d: '用 ❄ 按钮设定倒计时 —— 或直接在应用里按 Shift+F12 —— 趁药丸悬浮在窗口上方布置场景。归零那一刻，打开的浮出菜单不再响应焦点：保持原样，冻结保留的每个元素都在树中带上 ❄ 徽章。' },
+          { img: 'story/h03.png', t: '走进冻结的场景', d: '弹出层现在就是普通 UI：选中菜单项，查看它的属性、边界和样式 —— 只要冻结还在，什么都不会消失。' },
+          { img: 'story/h04.png', t: '固定需要的伪类状态', d: 'Styles 标签页多出一个伪类固定面板：强制 :pointerover、:pressed、:focus 或任何自定义伪类 —— 应用会像鼠标还停在那里一样渲染。' },
+          { img: 'story/h05.png', t: '一键复制缺陷报告', d: '📷 把 DPI 正确的截图放入剪贴板 —— 或复制完整报告：伪 XAML 路径、边界和所有非默认属性，直接粘进 issue。' },
+          { img: 'story/h06.png', t: '完成后释放', d: '在应用里按 Esc —— 或在 ❄ 菜单选 Unfreeze —— 一切精确恢复原状。自定义倒计时会被记住。' },
+        ] },
+      { key: 'tree', h: '智能树', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。',
+        steps: [
+          { img: 'story/s01.png', t: '拾取 —— 树自动压缩', d: '点击 ⌖ Pick element，再点击应用中的任意元素。树压缩为窗口、你的视图和目标 —— 中间的包装元素折叠成「⋯ N levels」芯片。' },
+          { img: 'story/s02.png', t: '逐级展开', d: '按 Alt+↑，每次只展开一个隐藏级别。' },
+          { img: 'story/s03.png', t: '点击折叠芯片…', d: '弹出隐藏元素列表，样式与树一致。' },
+          { img: 'story/s04.png', t: '…只显示所选元素', d: '芯片围绕所选项拆分：「⋯ N」+ 元素 +「⋯ M」。' },
+          { img: 'story/s05.png', t: '隐藏噪音', d: '按 Delete —— 元素折回原来的芯片。' },
+          { img: 'story/s06.png', t: 'Office 风格菜单', d: 'Ancestors、Descendants、Element 与 Copy 子菜单 —— 每个动作都有图标和快捷键；祖先在前，与树的阅读顺序一致。' },
+          { img: 'story/s07.png', t: '折叠祖先', d: 'Shift+↑ 保留视图，收起包装元素。' },
+          { img: 'story/s08.png', t: 'Scope', d: '任意元素成为根，面包屑随时带你回去。Esc 退出。' },
+          { img: 'story/s09.png', t: '搜索', d: '按类型、名称或样式类查找 —— F3 循环匹配。' },
+          { img: 'story/s10.png', t: '实时尺寸', d: '应用一变化，尺寸列立即闪烁提示。' },
+        ] },
+      { key: 'track', h: '值追踪', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。',
+        steps: [
+          { img: 'story/t01.png', t: '每一行都藏着两个按钮', d: '悬停任意 Properties 行：⊙ track 在整棵树上追踪该值，📌 pin 把该行固定在顶部。' },
+          { img: 'story/t02.png', t: '一次点击 —— 整棵树按值着色', d: '追踪 DataContext：MainViewModel 覆盖它所继承到的一切，一座 OrbitViewModel 小岛，null 自成一组。' },
+          { img: 'story/t03.png', t: '图例统计一切', d: '树中的每个值都有实时计数 —— 实例还有序号：「OrbitViewModel #1」。' },
+          { img: 'story/t04.png', t: '值一变，颜色即变', d: '在运行中的应用里赋第二个 OrbitViewModel：同一类型，独立颜色 —— #2。250 毫秒内重新分类，折叠芯片内也不例外。' },
+          { img: 'story/t05.png', t: '折叠到变化处', d: '一次点击，只保留值与父级不同的元素 —— 每一处 DataContext 边界尽在一屏。' },
+          { img: 'story/t06.png', t: '置顶你关注的属性', d: '📌 把你的属性浮到列表顶部；其余的收在「Show more」后面。' },
+        ] },
+      { key: 'timeline', h: '一条时间线：事件、属性、ViewModel', sub: '标记你关心的对象 —— 它的一切都按时间顺序汇入同一条流，因果并排可见。',
+        steps: [
+          { img: 'story/u01.png', t: '未经允许，不记录任何内容', d: '标记一个滑块、一个按钮和一个 ViewModel —— 观察列表徽章清楚显示时间线能看到什么。' },
+          { img: 'story/u02.png', t: '四条泳道，一条时间流', d: '⚡ 路由事件、◆ 属性变化、↻ ViewModel 通知与 ⚠ 绑定错误交织排列 —— 安静时段化作「⋯ +1.2 s」标记。' },
+          { img: 'story/u03.png', t: '绑定引发的变化，展开整个绑定', d: '旧值 → 新值、优先级、元数据默认值 —— 还有表达式路径：每一步的实时来源与值。↞ 因果链接指明触发它的通知。' },
+          { img: 'story/u04.png', t: '任何实例，即点即查', d: '🔍 打开反射卡片：实时读取属性与字段。👁 随处可把 ViewModel 加入观察列表。' },
+          { img: 'story/u05.png', t: '事件自带路由链', d: '路由方向、来源、参数 —— 以及事件冒泡经过的可视链，每个元素都可点击。' },
+          { img: 'story/u06.png', t: '事件由你挑选', d: '完整路由事件注册表，带过滤与 Common 预设 —— 只在被观察元素的子树内捕获。' },
+        ] },
+    ],
+  },
   tour: [
-    { img: 'tab-track.png', t: '在整棵树上追踪任意值',
-      lead: '经典的 MVVM 之问 ——「我的 DataContext 在哪里断了？」—— 一次点击给出答案。',
-      pts: ['在任意 Properties 行点击 ⊙ track，整棵树按值着色：相同值 = 相同颜色；null 和「无此属性」各有分组',
-            '树下方的图例实时统计每个分组；折叠的 ⋯ 芯片叠放其隐藏内容的颜色',
-            '运行中的应用改变了值 —— 即使在屏幕外或折叠内 —— 250 毫秒内重新分类',
-            '「Fold to changes」只保留值发生变化的元素；📌 把属性固定在列表顶部'] },
-    { img: 'tab-timeline.png', t: '一条时间线：事件、属性、ViewModel',
-      lead: '标记你关心的对象 —— 它的一切都按时间顺序汇入同一条流，因果并排可见。',
-      pts: ['观察元素、路由事件与 ViewModel 实例 —— 不标记就不记录',
-            '属性变化带有 old → new、优先级与来源；由绑定驱动的更新会标注引发它的 VM 通知（↞）',
-            '点击绑定驱动的变化即可展开绑定本身：路径上每一步的实时来源与值、转换器、fallback',
-            '🔍 为任意实例打开反射检查器 —— 事件参数、值、转换器、ViewModel；👁 把 VM 加入观察列表'] },
-    { img: 'tab-tree.png', t: '像 XAML 一样阅读的树',
-      lead: '智能树检查器：语法着色的元素、代码编辑器式折叠、实时闪烁的尺寸列。',
-      pts: ['拾取元素 —— 树压缩为窗口、你的视图和目标；中间的包装元素折叠成「⋯ N levels」芯片',
-            '逐层展开隐藏级别（Alt+↑/↓），或点击折叠芯片精确选择要显示的元素',
-            '按 Delete 隐藏任何元素 —— 它会折回原来的芯片',
-            'Focus、带面包屑的 Scope、F3 循环搜索，以及显示全部快捷键的对称菜单'] },
     { img: 'tab-properties.png', t: '实时检查与编辑一切',
       lead: '所选元素的每个属性都有类型化编辑器和完整的取值来源。',
       pts: ['附加属性分组、列宽可调、即时过滤',
@@ -417,6 +560,8 @@ zh: {
     cards: [
       { i: '🌳', t: '智能树检查器', d: '像 XAML 一样的树：语法着色、代码式折叠、拾取后的紧凑视图、逐层展开、隐藏、Focus、Scope 与搜索，并有实时尺寸列。' },
       { i: '🎯', t: '值追踪', d: '在整棵树上追踪任意属性：相同值 = 相同颜色，null 独立分组，实时图例带计数 ——「Fold to changes」一次显示所有边界。' },
+      { i: '❄', t: '定格瞬间（Hold）', d: 'Shift+F12 冻结应用此刻呈现的一切 —— 打开的弹出层、浮出菜单、工具提示、悬停样式。像普通 UI 一样检查被冻结的场景；Esc 把一切精确还原。Pin states 面板可随时强制 :focus、:disabled 或任意自定义伪类。' },
+      { i: '📷', t: '复制为缺陷报告', d: '一次点击把 DPI 精确的截图加上可读的报告 —— 伪 XAML 路径、bounds、非默认属性 —— 放进剪贴板。富文本目标同时粘贴两者，图像目标得到 PNG，纯文本目标得到 markdown。' },
       { i: '✏️', t: '实时属性编辑', d: '类型化编辑器 —— 复选框、枚举下拉、扁平分段开关 —— 附加属性分组显示，无需重新编译即刻生效。' },
       { i: '📌', t: '置顶属性', d: '把真正关注的属性固定住 —— 它们浮到列表顶部的分组；其余的收在「Show more」后面。按用户持久保存。' },
       { i: '🎨', t: '取色器', d: '每个 Color 和画刷都有色板，并附带完整取色器。拖动即实时应用。' },
@@ -436,6 +581,12 @@ zh: {
   docs: {
     title: '文档 — AvaDevTools', h: '文档',
     lead: 'Avalonia 12 的免费进程内 DevTools —— 经典 F12 工具的免费替代品。',
+    contents: '目录',
+    groups: [
+      { t: '入门', ids: ['install', 'quickstart'] },
+      { t: '功能', ids: ['hold', 'tree', 'tracking', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: '参考', ids: ['options', 'env', 'limits'] },
+    ],
     sections: [
       { id: 'install', t: '安装', html: `<pre><code>dotnet add package AvaDevTools</code></pre>
 <p>包面向 <code>net8.0</code>，适用于 Avalonia <strong>12.x</strong>。也可以只在 Debug 下引用：</p>
@@ -450,14 +601,25 @@ zh: {
 <span class="c">#endif</span>
 }</code></pre>
 <p>也可以只附加到单个窗口：<code>myWindow.AttachAvaDevTools()</code>。在应用窗口中按 <span class="kbd">F12</span> 即可打开。工具窗口默认置顶（工具栏上的 📌 可切换）。</p>
-<p>在运行中的应用上按住 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>，即可检查指针下的元素 —— 与经典 DevTools 完全一致。</p>` },
+<p>在运行中的应用上按住 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>，即可检查指针下的元素 —— 与经典 DevTools 完全一致。</p>
+<p>当应用正呈现瞬态状态 —— 打开的浮出菜单、工具提示、悬停样式 —— 按 <span class="kbd">Shift</span>+<span class="kbd">F12</span> 把它冻结后从容检查：见 <a href="#hold">❄ 定格瞬间</a>。</p>` },
+      { id: 'hold', t: '❄ 定格瞬间（Hold）', html: `<p>瞬态 UI 最难检查：DevTools 一夺焦点浮出菜单就关闭，指针一离开悬停样式就消失。<b>Hold</b> 把这一切冻结。在应用<em>正呈现有趣状态</em>时按 <span class="kbd">Shift</span>+<span class="kbd">F12</span> —— 打开的菜单、下拉框、工具提示、<code>:pointerover</code> 样式 —— 瞬间就此定格：</p>
+<ul><li><b>弹出层保持存活</b> —— 所有打开的弹出层都禁用 light dismiss；即使应用逻辑把某个关掉（失焦、下拉收起），hold 也会把它重新打开。</li>
+<li><b>悬停样式被钉住</b> —— 指针下元素链的伪类（<code>:pointerover</code>、<code>:pressed</code>、<code>:focus</code> 等）在框架清除时会被重新断言，样式经得起 DevTools 抢走窗口激活。</li>
+<li><b>树折叠到被冻结的场景</b> —— 弹出层宿主、工具提示宿主及其所有者，每个都带冰蓝 ❄ 徽标和点状下划线。被冻结的弹出层就是普通树内容：按 ↻ 走进去、拾取、高亮、检查。</li>
+<li><b>纯悬停的 hold 替你选中</b> —— 指针下的样式化元素在树中被选中，Styles 选项卡直接打开。</li></ul>
+<p>应用里的横幅提示 <em>"❄ Moment held — Esc releases"</em>。一切原子释放 —— 在应用中按 Esc、工具栏 ❄ 开关或关闭 DevTools —— 每个被强制的值都从台账中恢复。DevTools 未打开时会自动为你打开。</p>
+<h3>❄ 按钮与倒计时</h3>
+<p>点进 DevTools 的那一刻，应用的弹出层已经关掉了 —— 所以 ❄ 工具栏按钮无法当场冻结。它改为弹出选择：<b>5 秒 / 10 秒 / 30 秒 / 自定义</b>。选定后焦点交还应用，横幅开始倒计时（"❄ Freezing in 5…"），你重新布置场景 —— 再次打开菜单、悬停控件 —— hold 自行启动。自定义时长会被记住，成为一键预设。应用内的手势仍是即时通道。</p>
+<h3>Pin states（固定伪类）</h3>
+<p>Styles 选项卡的 <b>📌 Pin states</b> 面板无需改动应用逻辑即可强制伪类：它扫描元素应用的样式，只列出它们真正响应的状态 —— <code>:disabled</code>、<code>:focus</code>，以及主题定义的任意自定义状态。被固定的元素在树行上有 📌；固定与 ❄ 共用恢复台账，释放即全部还原。</p>` },
       { id: 'tree', t: '智能树检查器', html: `<p>树面板是只读的「代码编辑器」视图：元素渲染为语法着色的伪 XAML 行（<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>），带折叠箭头、缩进参考线和实时 <b>Size</b> 列（元素变化时闪烁）。两种模式与 Avalonia 完全一致：<b>Visual tree</b>（<code>GetVisualChildren</code>，默认）和 <b>Logical tree</b>（<code>GetLogicalChildren</code>）。</p>
 <h3>紧凑拾取</h3>
 <p>拾取元素（⌖ 按钮或在应用上按 Ctrl+Shift）会把树重建为紧凑视图：窗口、路径上的用户控件、拥有所选模板部件的控件，以及元素本身。中间所有包装元素折叠成 <code>⋯ N levels</code> 芯片 —— 深树只剩几行。</p>
 <h3>折叠是一等公民</h3>
 <p>单击芯片会弹出隐藏元素列表（同样语法着色）—— 选择一个就只显示它：<code>⋯ 7 levels</code> 变为 <code>⋯ N</code> + 元素 + <code>⋯ M</code>。双击展开整个芯片。<b>Alt+↑/↓</b> 逐级跳到父/子元素，每次只展开一个隐藏级别（选中行显示 ▲▼ 按钮，👁 眼睛表示该步会展开隐藏内容）。<b>Delete</b> 把选中元素折回芯片，相邻芯片自动合并。</p>
 <h3>塑形树</h3>
-<p>右键菜单完全对称 —— Descendants、Ancestors、Element 三组，每个动作都显示快捷键：显示一级/全部、折叠成 ⋯、折叠但保留视图、折叠祖先（保留视图或全部）、隐藏、Focus、Scope。</p>
+<p>右键菜单读起来像 Word 的菜单：每个动作一枚单色图标、标签按图标列对齐、快捷键排在手势列，大块的组收进 <b>Ancestors</b>、<b>Descendants</b>、<b>Element</b> 与 <b>Copy</b> 子菜单 —— 祖先在前，符合树先上后下的阅读顺序。所有动作俱全：显示一级/全部、折叠成 ⋯、折叠但保留视图、折叠祖先（保留视图或全部）、隐藏、Focus、Scope，以及复制操作。</p>
 <h3>Focus 与 Scope</h3>
 <p><b>Focus</b>（F）折叠所选元素路径之外的一切；Esc 恢复。<b>Scope</b>（S）把任意元素设为树根 —— 带可点击面包屑、上一级按钮，Esc 退出。拾取 scope 之外的元素会自动退出。</p>
 <h3>键盘</h3>
@@ -490,19 +652,25 @@ zh: {
 <h3>Layout（布局）</h3><ul><li>可交互盒模型：margin / border / padding 逐边编辑；下方显示尺寸、min/max、desired、bounds 与对齐。</li></ul>
 <h3>Styles（样式）</h3><ul><li>所有生效的值帧 —— 控件主题、带选择器的样式、模板与本地值 —— 含 setter、优先级与激活状态。</li>
 <li>编辑以实时本地覆盖生效（浏览器 DevTools 语义）；本地值带 ✕ 清除按钮。</li>
+<li><b>📌 Pin states</b> —— 无需改动应用逻辑即可强制 <code>:disabled</code>、<code>:focus</code> 或元素样式响应的任意自定义伪类。见 <a href="#hold">❄ 定格瞬间</a>。</li>
 <li>元素与每个样式都有 file:line 链接；⟨⟩/▤/{} 徽章可打开代码预览。</li></ul>
 <h3>3D</h3><ul><li>基于实时快照纹理的 3D 分层视图。拖动旋转、滚轮缩放、点击图层即在树中选中。</li>
 <li>粒度：<em>Visual · merged</em>（折叠包装层）、<em>Visual · all</em> 或 <em>Logical</em>。"Reset view" 复位相机。</li></ul>
 <h3>Timeline（时间线）</h3><ul><li>事件、属性变化、VM 通知与绑定错误汇入一条流，范围由观察列表决定 —— 带因果链接、绑定逐步展开与反射检查器。见<a href="#timeline">时间线</a>。</li></ul>
 <h3>Logs（日志）</h3><ul><li>实时 Avalonia 日志，支持暂停、级别、区域与文本过滤。默认捕获 Warning 及以上。工具自身产生的日志会被丢弃、UI 批量刷新 —— 不会出现反馈循环卡死。</li></ul>` },
+      { id: 'capture', t: '截图与缺陷报告', html: `<p>树右键菜单把剪贴板操作归进 <b>Copy ▸</b>：<b>Path</b>（<span class="kbd">Ctrl+C</span>）、<b>As XAML</b>（<span class="kbd">Ctrl+Shift+C</span>）、<b>Screenshot</b> 与 <b>As bug report</b>。</p>
+<p><b>Copy as bug report</b> 把元素的 DPI 精确 PNG <em>加上</em>可读报告 —— 伪 XAML 路径、bounds、与默认值不同的属性 —— 以三种格式同时放进剪贴板：富文本目标（如邮件撰写窗口）把截图和细节一起粘贴，仅图像目标得到 PNG，纯文本目标得到 markdown。贴进 issue，读起来是报告，不是谜语。</p>
+<p><b>📷 工具栏按钮</b>两次点击即可 —— <em>Copy screenshot</em> 或 <em>Copy report (screenshot + XAML)</em> —— 捕获选中元素或整个窗口。配合 <a href="#hold">❄ Hold</a>，弹出层和悬停状态也能捕获。</p>` },
       { id: 'source', t: '跳转到源码', html: `<p>源码位置来自 XAML 编译器的 <code>AvaloniaXamlCreateSourceInfo</code>（Avalonia 12 在 Debug 构建中默认开启）。C# 类型（ViewModel）通过在解决方案目录中搜索定位。macOS 下默认用 JetBrains Rider 打开，可自定义：</p>
 <pre><code>AVA_DEVTOOLS_EDITOR=<span class="s">"code --goto {file}:{line}"</span></code></pre>
 <p>编译进主题程序集的 Fluent 样式在磁盘上没有源码 —— 弹窗会显示反射信息，并给出与你的 Avalonia 版本匹配的 "View theme XAML on GitHub" 链接。</p>` },
       { id: 'options', t: '选项', html: `<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions
 {
-    Gesture    = <span class="k">new</span> KeyGesture(Key.F11),
-    WindowSize = <span class="k">new</span> Size(1280, 760),
-    StayOnTop  = <span class="k">false</span>,
+    Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// 默认：F12</span>
+    HoldGesture          = <span class="k">new</span> KeyGesture(Key.F11, KeyModifiers.Shift), <span class="c">// ❄ hold — 默认：Shift+F12</span>
+    HoldCountdownSeconds = 5,                                  <span class="c">// ❄ 按钮倒计时 — 默认：3</span>
+    WindowSize           = <span class="k">new</span> Size(1280, 760),
+    StayOnTop            = <span class="k">false</span>,                              <span class="c">// 默认：true</span>
 });</code></pre>` },
       { id: 'env', t: '环境变量', html: `<table>
 <tr><th>变量</th><th>含义</th></tr>
