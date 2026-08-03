@@ -107,7 +107,7 @@ function storyVisual(b, i) {
   if (b.pains) return '<div class="story-pains"' + di + '>' +
     (b.painsTitle ? '<div class="story-pains-h">' + esc(b.painsTitle) + '</div>' : '') +
     b.pains.map(p => '<div class="story-pain"><span>✕</span><p><b>' + esc(p.k) + '</b> ' + esc(p.d) + '</p></div>').join('') +
-    (b.hook ? '<div class="story-pain hook"><span>❄</span><p>' + esc(b.hook) + '</p></div>' : '') +
+    (b.hook ? '<div class="story-pain hook"><span>' + esc(b.hookIco || '❄') + '</span><p>' + esc(b.hook) + '</p></div>' : '') +
     '</div>';
   return '<img' + di + ' src="assets/img/' + b.img + '" alt="' + esc(b.t) + '" loading="lazy">';
 }
@@ -173,7 +173,7 @@ function buildHomeStories(R) {
       '<h2 class="sec">' + esc(R.wn.h) + '</h2>' +
       '</div></div>';
     const foot = '<div class="story-track-foot"><div class="wrap">' +
-      '<a href="docs.html#hold">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
+      '<a href="docs.html#layout">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
       '<a href="releases.html">' + esc(R.wn.notes) + '</a></div></div>';
     if (wn) renderStoryTrack(wnTrack, wn.steps, !wide, head, foot);
   }
@@ -355,35 +355,40 @@ function md(src) {
 }
 
 async function loadReleases(el, L) {
+  let fetched = [], fetchOk = false;
   try {
     const res = await fetch('https://api.github.com/repos/pavel-zheltiakov/AvaDevTools/releases');
-    if (!res.ok) throw new Error(res.status);
-    const releases = await res.json();
-    if (!releases.length) {
-      el.innerHTML = '<p style="color:var(--muted)">' + esc(L.none) + '</p>';
-      return;
-    }
-    el.innerHTML = releases.map(r => {
-      const version = (r.tag_name || '').replace(/^v/, '');
-      const date = r.published_at ? new Date(r.published_at).toLocaleDateString(L.locale) : '';
-      const body = (r.body || '')
-        .replace(/^---+\s*$/gm, '')
-        .replace(/^Install:.*$/gm, '')
-        .replace(/^Docs:.*$/gm, '')
-        .replace(/^NuGet:.*$/gm, '')
-        .replace(/\n{3,}/g, '\n\n')
-        .trim();
-      return '<div class="card" style="margin-bottom:14px">' +
-        '<h3 style="margin-top:0">' + esc(r.name || r.tag_name) +
-        ' <span style="color:var(--muted);font-weight:400;font-size:12px">· ' + date + '</span></h3>' +
-        (body ? '<div class="relbody">' + md(body) + '</div>' : '') +
-        '<div class="install rel-install"><span>dotnet add package AvaDevTools --version ' + esc(version) + '</span>' +
-        '<button onclick="copyInstall(this)">copy</button></div>' +
-        '<p class="rel-links"><a href="docs.html">' + esc(L.docsLabel || 'Documentation') + '</a> · ' +
-        '<a href="' + esc(r.html_url) + '">' + GH_ICON + 'GitHub</a></p></div>';
-    }).join('');
-  } catch (e) {
-    el.innerHTML = '<p style="color:var(--muted)">' + esc(L.fail) +
-      ' <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub</a>.</p>';
+    if (res.ok) { fetched = await res.json(); fetchOk = true; }
+  } catch (e) {}
+  if (!Array.isArray(fetched)) fetched = [];
+  // A release prepared but not yet tagged is listed locally; GitHub's entry
+  // replaces it once the tag is pushed.
+  const local = (window.LOCAL_RELEASES || []).filter(l => !fetched.some(r => r.tag_name === l.tag_name));
+  const releases = local.concat(fetched);
+  if (!releases.length) {
+    el.innerHTML = fetchOk
+      ? '<p style="color:var(--muted)">' + esc(L.none) + '</p>'
+      : '<p style="color:var(--muted)">' + esc(L.fail) +
+        ' <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub</a>.</p>';
+    return;
   }
+  el.innerHTML = releases.map(r => {
+    const version = (r.tag_name || '').replace(/^v/, '');
+    const date = r.published_at ? new Date(r.published_at).toLocaleDateString(L.locale) : '';
+    const body = (r.body || '')
+      .replace(/^---+\s*$/gm, '')
+      .replace(/^Install:.*$/gm, '')
+      .replace(/^Docs:.*$/gm, '')
+      .replace(/^NuGet:.*$/gm, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+    return '<div class="card" style="margin-bottom:14px">' +
+      '<h3 style="margin-top:0">' + esc(r.name || r.tag_name) +
+      ' <span style="color:var(--muted);font-weight:400;font-size:12px">· ' + date + '</span></h3>' +
+      (body ? '<div class="relbody">' + md(body) + '</div>' : '') +
+      '<div class="install rel-install"><span>dotnet add package AvaDevTools --version ' + esc(version) + '</span>' +
+      '<button onclick="copyInstall(this)">copy</button></div>' +
+      '<p class="rel-links"><a href="docs.html">' + esc(L.docsLabel || 'Documentation') + '</a> · ' +
+      '<a href="' + esc(r.html_url) + '">' + GH_ICON + 'GitHub</a></p></div>';
+  }).join('');
 }

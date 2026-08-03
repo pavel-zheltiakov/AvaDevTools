@@ -82,6 +82,15 @@ pre .c{color:#6a9955}pre .k{color:#6fa8ff}pre .s{color:#ce9178}pre .m{color:#9cd
 .docs td code{white-space:nowrap}
 .kbd{display:inline-block;border:1px solid var(--border);border-bottom-width:2px;border-radius:5px;background:var(--panel2);padding:1px 7px;font-family:var(--mono);font-size:12px}
 
+/* --- docs: step-by-step layout --- */
+.docs .shot{margin:14px 0 18px}
+.docs .shot img{display:block;max-width:100%;width:auto;max-height:520px;border:1px solid var(--border);border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.45);background:#000}
+.docs .shot .cap{display:block;margin-top:7px;color:var(--muted);font-size:12.5px}
+.docs ol.steps{padding-left:24px;margin:8px 0}
+.docs ol.steps li{margin:5px 0}
+.docs .tip{display:block;border-left:3px solid #7c5cff;background:var(--panel2);border-radius:0 8px 8px 0;padding:9px 13px;margin:12px 0;font-size:13.5px}
+.docs .tip b:first-child{color:#c9bcff}
+
 footer{border-top:1px solid var(--border);padding:28px 0;margin-top:40px;color:var(--muted);font-size:13px;display:block}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
