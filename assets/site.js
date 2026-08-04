@@ -173,7 +173,7 @@ function buildHomeStories(R) {
       '<h2 class="sec">' + esc(R.wn.h) + '</h2>' +
       '</div></div>';
     const foot = '<div class="story-track-foot"><div class="wrap">' +
-      '<a href="docs.html#layout">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
+      '<a href="docs.html#problems">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
       '<a href="releases.html">' + esc(R.wn.notes) + '</a></div></div>';
     if (wn) renderStoryTrack(wnTrack, wn.steps, !wide, head, foot);
   }
@@ -362,19 +362,24 @@ async function loadReleases(el, L) {
   } catch (e) {}
   if (!Array.isArray(fetched)) fetched = [];
   // A release prepared but not yet tagged is listed locally; GitHub's entry
-  // replaces it once the tag is pushed.
-  const local = (window.LOCAL_RELEASES || []).filter(l => !fetched.some(r => r.tag_name === l.tag_name));
+  // replaces it once the tag is pushed. Until then the package is not on NuGet,
+  // so pending entries must not render a copyable install command.
+  const local = (window.LOCAL_RELEASES || []).filter(l => !fetched.some(r => r.tag_name === l.tag_name))
+    .map(l => Object.assign({ pending: true }, l));
   const releases = local.concat(fetched);
+  const failNote = '<p style="color:var(--muted)">' + esc(L.fail) +
+    ' <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub</a>.</p>';
   if (!releases.length) {
-    el.innerHTML = fetchOk
-      ? '<p style="color:var(--muted)">' + esc(L.none) + '</p>'
-      : '<p style="color:var(--muted)">' + esc(L.fail) +
-        ' <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub</a>.</p>';
+    el.innerHTML = fetchOk ? '<p style="color:var(--muted)">' + esc(L.none) + '</p>' : failNote;
     return;
   }
-  el.innerHTML = releases.map(r => {
+  // A failed fetch with a local entry still needs the notice — otherwise the page
+  // silently presents the pending release as the only release ever.
+  el.innerHTML = (fetchOk ? '' : failNote) + releases.map(r => {
     const version = (r.tag_name || '').replace(/^v/, '');
-    const date = r.published_at ? new Date(r.published_at).toLocaleDateString(L.locale) : '';
+    // Release dates are date-only stamps at UTC midnight — format them in UTC or
+    // every timezone west of UTC shows the previous day.
+    const date = r.published_at ? new Date(r.published_at).toLocaleDateString(L.locale, { timeZone: 'UTC' }) : '';
     const body = (r.body || '')
       .replace(/^---+\s*$/gm, '')
       .replace(/^Install:.*$/gm, '')
@@ -386,8 +391,10 @@ async function loadReleases(el, L) {
       '<h3 style="margin-top:0">' + esc(r.name || r.tag_name) +
       ' <span style="color:var(--muted);font-weight:400;font-size:12px">· ' + date + '</span></h3>' +
       (body ? '<div class="relbody">' + md(body) + '</div>' : '') +
-      '<div class="install rel-install"><span>dotnet add package AvaDevTools --version ' + esc(version) + '</span>' +
-      '<button onclick="copyInstall(this)">copy</button></div>' +
+      (r.pending
+        ? '<p style="color:var(--muted)">' + esc(L.pending || 'Publishing is in progress — the package appears on NuGet once the release is tagged.') + '</p>'
+        : '<div class="install rel-install"><span>dotnet add package AvaDevTools --version ' + esc(version) + '</span>' +
+          '<button onclick="copyInstall(this)">copy</button></div>') +
       '<p class="rel-links"><a href="docs.html">' + esc(L.docsLabel || 'Documentation') + '</a> · ' +
       '<a href="' + esc(r.html_url) + '">' + GH_ICON + 'GitHub</a></p></div>';
   }).join('');

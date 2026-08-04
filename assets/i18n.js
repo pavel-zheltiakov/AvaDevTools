@@ -8,17 +8,37 @@ en: {
   fb: { issues: 'Report a bug or request a feature', tg: 'News, questions, quick help' },
   hero: {
     title: 'DevTools for <em>Avalonia 12</em>.<br>Free. In-process. One key away.',
-    tag: 'The built-in F12 tools are gone in Avalonia 12. AvaDevTools brings them back — inspector, live editors, styles, 3D view, event timeline and logs — as a single free NuGet package.',
+    tag: 'The built-in F12 tools are gone in Avalonia 12. AvaDevTools brings them back — inspector, live editors, styles, 3D view, timeline, logs, a Problems pane and Ctrl+K search — as a single free NuGet package.',
     get: 'Get started', stories: 'See it in action', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.1.1", docs: 'Documentation →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.1.2", docs: 'Documentation →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   stories: {
-    h: 'Stories', wn: 'explain',
+    h: 'Stories', wn: 'find',
     lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
     list: [
+      { key: 'find', h: '🔎 Find everything', sub: 'What broke, the thing showing those words, which resource won, who handled that event — found in one place.',
+        steps: [
+          { t: '🔎 Find everything',
+            d: 'Your app knows what is wrong — a failed binding, a shadowed resource, a handler that swallowed the click. The evidence was scattered across logs, dictionaries and code.',
+            d2: 'Find everything: a Problems pane collects what is broken, Ctrl+K finds anything by the words on screen, resource lookups explain themselves, events name the handler that ran, and file:line links open your own IDE.',
+            painsTitle: 'Before 12.1.2',
+            pains: [
+              { k: 'A binding fails', d: 'silently at startup — before any log capture is listening' },
+              { k: 'A resource edit', d: 'changes nothing, because another definition wins' },
+              { k: 'An event', d: 'is handled somewhere — the somewhere is yours to find' },
+              { k: 'A file:line link', d: 'opens the wrong editor, or a second copy of the right one' },
+            ],
+            hook: 'One release finds all of it — problems, elements, resources, handlers.',
+            hookIco: '🔎' },
+          { img: 'story/f02.png', t: 'Everything broken, one list', d: 'The Problems pane collects binding failures, app errors and duplicated resource keys — errors first, each with a plain-language reason. Scan now probes every live binding and catches what failed before DevTools opened.' },
+          { img: 'story/f03.png', t: 'Ctrl+K finds anything', d: 'One search over actions, elements, resources and properties — categorized as you type. Type the words you see on screen and find the thing showing them; an empty query lists every action.' },
+          { img: 'story/f04.png', t: 'Which resource won?', d: 'Every definition of a key in resolution order — the winner marked, the shadowed ones struck through, the defining XAML one click below. Edits apply live.' },
+          { img: 'story/f05.png', t: 'Who handled that event?', d: 'Event details replay the route as it ran: every element visited, the handlers named — MainWindow.OnDeployClick — each with a go-to-source link, and the hop that set Handled flagged.' },
+          { img: 'story/f06.png', t: 'Links open your IDE', d: 'Rider, VS Code and Visual Studio are detected on Windows, macOS and Linux; the IDE that launched the app opens without asking, running windows are reused, and a chooser remembers your pick — Shift+click brings it back.' },
+        ] },
       { key: 'explain', h: '🔍 Explain everything', sub: 'Why this size, what lives inside this value, who moved focus, how this gradient looks — answered in place.',
         steps: [
           { t: '🔍 Explain everything',
@@ -119,6 +139,9 @@ en: {
       { i: '🌳', t: 'Smart tree inspector', d: 'A tree that reads like XAML: syntax colors, code-style folding, a compact pick view, one-level stepping, hide, focus, scope and search — with live sizes.' },
       { i: '🎯', t: 'Value tracking', d: 'Track any property across the whole tree: same value = same color, null in its own bucket, a live legend with counts — and "Fold to changes" shows every boundary at once.' },
       { i: '❄', t: 'Hold the moment', d: 'Shift+F12 freezes what your app shows right now — open popups, flyouts, tooltips, hover styling. Inspect the frozen scene like ordinary UI; Esc restores everything exactly as it was. A pin-states panel forces :focus, :disabled or any custom pseudo-class on demand.' },
+      { i: '⚠️', t: 'Problems pane', d: 'Only what is broken — binding failures first — errors before warnings, each with a plain reason, a reveal link and the full binding walk. Scan now catches errors that fired before DevTools opened.' },
+      { i: '⌨️', t: 'Ctrl+K: find anything', d: 'One search over actions, elements, resources and properties — type the words you see on screen and find the thing showing them.' },
+      { i: '🏆', t: 'Which resource won?', d: 'Every definition of a key in resolution order — the winner marked, shadowed ones struck through, live edits and one-click source.' },
       { i: '📷', t: 'Copy as bug report', d: 'One click puts a DPI-correct screenshot plus a readable report — pseudo-XAML path, bounds, non-default properties — on the clipboard. Rich targets paste both, image targets the PNG, text targets the markdown.' },
       { i: '🔍', t: 'Inspect any value', d: 'Any object in the Properties panel opens in a live inspector card: drill into nested values, search members by name or value, pin members per type, 👁 observe on the Timeline, jump to the C# source.' },
       { i: '📏', t: 'Why this size?', d: 'The Layout tab reconstructs how the element got its size — what the parent offered, what it asked for, which constraint decided, what alignment did — and links to where the deciding value is set.' },
@@ -128,7 +151,7 @@ en: {
       { i: '📐', t: 'Layout box model', d: 'Interactive margin / border / padding bands with per-side editing, plus size, constraints and alignment at a glance.' },
       { i: '🧩', t: 'Styles & value frames', d: 'Every applied style, theme and local value with its setters, priority and active state. Edit setter values as live local overrides.' },
       { i: '🧊', t: '3D exploded view', d: 'Your window as textured layers in 3D — orbit, zoom, click to select. Visual, merged or logical tree granularity.' },
-      { i: '🔗', t: 'Go to source', d: 'file:line for elements, styles, bindings and view models. Syntax-highlighted XAML/C# previews and one-click jump to your editor.' },
+      { i: '🔗', t: 'Go to source', d: 'file:line for elements, styles, bindings and view models. Syntax-highlighted XAML/C# previews — and links open your own IDE: Rider, VS Code or Visual Studio, on any OS.' },
       { i: '⏱', t: 'Timeline', d: 'Routed events, property changes, VM notifies and focus changes in one chronological feed, scoped to a watchlist you control. Cause links connect a notify to the bound update it produced; every entry opens full details.' },
       { i: '📜', t: 'Log viewer', d: 'Binding errors, layout and property-system messages — even without LogToTrace(). Filtered, batched and feedback-loop safe.' },
       { i: '📊', t: 'Renderer overlays', d: 'FPS meter, layout/render time graphs and dirty-rect flashing on the inspected window, one toggle away.' },
@@ -144,8 +167,8 @@ en: {
     contents: 'Contents',
     groups: [
       { t: 'Getting started', ids: ['install', 'quickstart'] },
-      { t: 'Features', ids: ['hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
-      { t: 'Reference', ids: ['options', 'env', 'limits'] },
+      { t: 'Features', ids: ['problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: 'Reference', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
       { id: 'install', t: 'Installation', html: `<pre><code>dotnet add package AvaDevTools</code></pre>
@@ -162,7 +185,103 @@ en: {
 }</code></pre>
 <p>Or attach to a single window: <code>myWindow.AttachAvaDevTools()</code>. Press <span class="kbd">F12</span> in the app window to open DevTools for it. The DevTools window stays on top by default (📌 toggle in the toolbar).</p>
 <p>Hold <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> over the running app to inspect the element under the pointer — exactly like the classic DevTools.</p>
-<p>Press <span class="kbd">Shift</span>+<span class="kbd">F12</span> while the app shows a transient state — an open flyout, a tooltip, hover styling — to freeze it and inspect at leisure: see <a href="#hold">❄ Hold the moment</a>.</p>` },
+<p>Press <span class="kbd">Shift</span>+<span class="kbd">F12</span> while the app shows a transient state — an open flyout, a tooltip, hover styling — to freeze it and inspect at leisure: see <a href="#hold">❄ Hold the moment</a>.</p>
+<p>Inside DevTools, <span class="kbd">Ctrl</span>+<span class="kbd">K</span> searches everything at once — actions, elements by the text they show, resources, properties: see <a href="#palette">Ctrl+K: find anything</a>.</p>` },
+      { id: 'problems', t: 'Problems pane', html: `<p>A binding fails silently and the evidence is scattered: an empty control here, a log line there. The <b>Problems</b> tab collects what is broken in one list — binding failures first of all — errors before warnings, each with a plain-language reason.</p>
+<h3>Step 1. Problems arrive on their own</h3>
+<p>Binding errors and error-level app logs land in the list the moment they are logged; repeats collapse into one row with a ×N counter instead of flooding the list.</p>
+<h3>Step 2. Scan for what fired before DevTools opened</h3>
+<p>Apps bind at startup; DevTools opens later — the earliest failures are exactly the ones no live capture saw. Press <b>Scan now</b>: it probes every live binding in the tree (text runs included, so a broken binding authored on a <code>Run</code> is found like any other) and reports everything that is broken right now.</p>
+<div class="shot"><img src="assets/img/docs/problems-scan.png" alt="The Problems pane after a scan: two binding errors, an app error and two duplicated resource keys, errors first"><span class="cap">One scan: a broken binding on a Run, another on a TextBlock, an app-published error and two duplicated resource keys.</span></div>
+<p>The scan also flags <b>duplicated resource keys</b> — the same key defined again in an element, window or app dictionary. One definition silently shadows the other, so an edit to the loser changes nothing; the row names the scope whose definition wins.</p>
+<h3>Step 3. Open a problem</h3>
+<p>Click a row: the element (with a <b>reveal</b> link that selects it in the tree), the property, the reason, when it was seen, and the source object with inspect / observe / C# source. Binding problems unfold the <b>full binding walk</b> — every path step with its live source and value, the same view the Timeline shows for bound changes — so the step that breaks is visible, not guessed.</p>
+<div class="shot"><img src="assets/img/docs/problems-detail.png" alt="A binding problem opened: element with a reveal link, property, reason, and the binding walk with the failing step"><span class="cap">The walk shows each step live: DataContext resolved fine — the path name is what is wrong.</span></div>
+<p>A duplicated-resource problem lists every definition with its place — element scopes revealable in the tree — and links to the <a href="#resources">resolution explainer</a>.</p>
+<p class="tip"><b>Tip.</b> <span class="kbd">Ctrl</span>+<span class="kbd">K</span> → "Scan bindings for problems" runs the scan from anywhere.</p>` },
+      { id: 'palette', t: 'Ctrl+K: find anything', html: `<p>You rarely know the type or the name of the thing you are chasing — you know the words it shows on screen. Press <span class="kbd">Ctrl</span>+<span class="kbd">K</span> (or <span class="kbd">⌘</span>+<span class="kbd">K</span>) in DevTools: one search over everything, categorized as you type. Every row carries a colored type icon in the vocabulary the rest of DevTools already speaks — the tree's element glyphs, <code>◈</code> for resources, <code>◆</code> for properties, the menu icons for actions — so what a hit is reads before its text does.</p>
+<h3>An empty query is the actions menu</h3>
+<div class="shot"><img src="assets/img/docs/palette-actions.png" alt="Ctrl+K with an empty query: every DevTools action listed with its icon and a hint"><span class="cap">Every DevTools command in one list — the palette doubles as the discoverability menu.</span></div>
+<h3>A word finds the thing showing it</h3>
+<div class="shot"><img src="assets/img/docs/palette-find.png" alt="The query deploy finds the Deploy button itself, its label text and the other elements showing that word"><span class="cap">Type the words you see: "deploy" surfaces the Button itself, ahead of the label text deep in its template.</span></div>
+<ul><li><b>Actions</b> — every DevTools command, each with its hotkey shown next to it. An empty query lists them all.</li>
+<li><b>Elements</b> — the inspected tree searched by type, name, style class and <em>the text an element shows</em>. Text runs included, and a button is found by its label — the control itself, ahead of the text deep in its template. Enter selects the element in the tree.</li>
+<li><b>Resources</b> — resource keys and values, wherever the dictionary lives: app, window, styles or an element deep in the tree. A value like <code>#5b8cff</code> finds its key even when a redefinition currently wins with another value. Enter opens the <a href="#resources">resource explainer</a>.</li>
+<li><b>Properties of selection</b> — property names of the selected element, including rows collapsed behind "Show more". Enter jumps to the Properties tab with the filter set.</li></ul>
+<p>Arrows move the selection, <span class="kbd">Enter</span> executes, <span class="kbd">Esc</span> closes.</p>` },
+      { id: 'resources', t: 'Which resource won?', html: `<p>The same key defined in App.axaml, a window and a style means three candidates and one silent winner: you edit a resource and nothing changes, because another definition wins where you are looking. The resource explainer shows the whole chain for a key — shadowing made visible is the feature.</p>
+<h3>Step 1. Find the key</h3>
+<ol class="steps"><li>Press <span class="kbd">Ctrl</span>+<span class="kbd">K</span> and type the key — or the value: <code>#5b8cff</code> finds its key even when a redefinition currently wins with something else.</li>
+<li>Pick the Resources entry — its subtitle already names the winning scope and counts the definitions.</li></ol>
+<h3>Step 2. Read the chain</h3>
+<div class="shot"><img src="assets/img/docs/resource-explainer.png" alt="The resolution explainer for AccentBrush: the window definition wins, the app one is struck through, the defining XAML shown below"><span class="cap">The window's definition wins where its scope applies; the shadowed App one is struck through — and the defining XAML is one click below, with Open in editor.</span></div>
+<p>Every definition across app, windows, styles, theme variants and element dictionaries appears in resolution order — the winner marked <b>wins</b>, the shadowed ones struck through. A deeper scope wins for the elements inside it: the first definition shown wins where its scope applies; outer ones apply only where an inner scope does not reach. Each definition shows its scope, theme variant and formatted value; a definition living on a tree element carries a <b>show in tree</b> link. Click any definition and its own .axaml opens below — highlighted, with <b>Open in editor</b>.</p>
+<h3>Step 3. Edit it live</h3>
+<p>Edit the value box and it applies immediately: DynamicResource consumers update through Avalonia's own propagation; StaticResource references were resolved at load and keep the old value until restart — the card says so honestly. Duplicated keys are also flagged in <a href="#problems">Problems</a> after a Scan.</p>` },
+      { id: 'inlines', t: 'Text runs in the tree', html: `<p>The colored word inside a TextBlock is a <code>Run</code> — and a Run is not a Visual, so classic inspectors cannot select it: you could reach the TextBlock but never the piece of text whose color you were chasing. Here, inlines are tree citizens.</p>
+<div class="shot"><img src="assets/img/docs/inlines-tree.png" alt="Runs nested under their TextBlock in the element tree, one selected"><span class="cap">Runs are children of their TextBlock — authored in XAML or rebuilt from code — and select like any element.</span></div>
+<ul><li>Runs and Spans appear as children of their TextBlock in both tree modes, nested exactly as authored.</li>
+<li>Authored in XAML or built at runtime — <code>Inlines.Add(new Run(…))</code> lands in the same logical tree, so code-built and data-driven lines are listed too. The tree is a snapshot: press ↻ Refresh after rebuilding a line.</li>
+<li>Select a run: full Properties with the usual editors and source badges — including the attached <code>TextElement.*</code> family (Foreground, FontWeight, …), where the local-versus-inherited flip is visible the moment the app sets or clears a value.</li>
+<li><span class="kbd">Ctrl</span>+<span class="kbd">K</span> finds runs by their text — type the words you see.</li>
+<li>Highlighting and screenshots anchor to the nearest visual ancestor, and the <a href="#problems">Problems scan</a> walks inline bindings too — a broken binding authored on a Run is found and revealed like any other.</li></ul>
+<div class="shot"><img src="assets/img/docs/inlines-foreground.png" alt="The selected Run's TextElement.Foreground with a local-value badge"><span class="cap">The app set a local Foreground on this run — the ✏️ badge says local, not inherited from the TextBlock.</span></div>` },
+      { id: 'applogs', t: 'App log feed', html: `<p>The Logs pane captures Avalonia's logger on its own. One public API feeds it the application's own events too:</p>
+<pre><code>AvaDevTools.LogCapture.Publish(Avalonia.Logging.LogEventLevel.Error,
+    <span class="s">"Deploy"</span>, <span class="s">"search-index build failed — container OOM (exit 137)"</span>);</code></pre>
+<p>No logging framework required. Entries land in the Logs pane under the usual level / area / text filters, and errors also become <a href="#problems">Problems</a>. Optional arguments: a <code>source</code> object (gives the entry an inspect link) and an <code>exception</code> (appended readably). The buffer is global — events published before the DevTools window opens are waiting there when you press F12. Events below the capture level (Warning by default; <code>AVA_DEVTOOLS_LOG_LEVEL</code> lowers it) are dropped like any other log event.</p>
+<div class="shot"><img src="assets/img/docs/applogs-feed.png" alt="The Logs pane with the app's own events: an error and two warnings with their areas"><span class="cap">Published events under the usual level / area / text filters — the error also became a Problem.</span></div>
+<h3>Serilog</h3>
+<p>A sink of about twenty lines forwards a Serilog pipeline — two enums are named LogEventLevel, hence the full names:</p>
+<pre><code><span class="k">using</span> Serilog.Core;
+<span class="k">using</span> Serilog.Events;
+
+<span class="k">sealed class</span> AvaDevToolsSink : ILogEventSink
+{
+    <span class="k">public void</span> Emit(LogEvent e) =&gt;
+        AvaDevTools.LogCapture.Publish(
+            e.Level <span class="k">switch</span>
+            {
+                LogEventLevel.Verbose     =&gt; Avalonia.Logging.LogEventLevel.Verbose,
+                LogEventLevel.Debug       =&gt; Avalonia.Logging.LogEventLevel.Debug,
+                LogEventLevel.Information =&gt; Avalonia.Logging.LogEventLevel.Information,
+                LogEventLevel.Warning     =&gt; Avalonia.Logging.LogEventLevel.Warning,
+                _                         =&gt; Avalonia.Logging.LogEventLevel.Error,
+            },
+            area: e.Properties.TryGetValue(<span class="s">"SourceContext"</span>, <span class="k">out var</span> ctx)
+                ? ctx.ToString().Trim(<span class="s">'"'</span>) : <span class="s">"App"</span>,
+            message: e.RenderMessage(),
+            exception: e.Exception);
+}
+
+<span class="c">// Log.Logger = new LoggerConfiguration()
+//     .WriteTo.Sink(new AvaDevToolsSink()).CreateLogger();</span></code></pre>
+<h3>Microsoft.Extensions.Logging</h3>
+<p>A provider of about twenty lines does the same for <code>ILogger&lt;T&gt;</code>:</p>
+<pre><code><span class="k">using</span> Microsoft.Extensions.Logging;
+
+<span class="k">sealed class</span> AvaDevToolsLoggerProvider : ILoggerProvider
+{
+    <span class="k">public</span> ILogger CreateLogger(<span class="k">string</span> category) =&gt; <span class="k">new</span> DevToolsLogger(category);
+    <span class="k">public void</span> Dispose() { }
+
+    <span class="k">sealed class</span> DevToolsLogger(<span class="k">string</span> category) : ILogger
+    {
+        <span class="k">public</span> IDisposable? BeginScope&lt;TState&gt;(TState state) <span class="k">where</span> TState : <span class="k">notnull</span> =&gt; <span class="k">null</span>;
+        <span class="k">public bool</span> IsEnabled(LogLevel level) =&gt; level &gt;= LogLevel.Warning;
+
+        <span class="k">public void</span> Log&lt;TState&gt;(LogLevel level, EventId id, TState state,
+            Exception? exception, Func&lt;TState, Exception?, <span class="k">string</span>&gt; formatter) =&gt;
+            AvaDevTools.LogCapture.Publish(
+                level &gt;= LogLevel.Error ? Avalonia.Logging.LogEventLevel.Error
+                : level == LogLevel.Warning ? Avalonia.Logging.LogEventLevel.Warning
+                : Avalonia.Logging.LogEventLevel.Information,
+                category, formatter(state, exception), exception: exception);
+    }
+}
+
+<span class="c">// builder.Logging.AddProvider(new AvaDevToolsLoggerProvider());</span></code></pre>
+<p class="tip"><b>Tip.</b> Reference AvaDevTools Debug-only? Guard the adapter with <code>#if DEBUG</code> — the calls compile away in Release.</p>` },
       { id: 'hold', t: '❄ Hold the moment', html: `<p>Transient UI is the hardest thing to inspect: a flyout closes the instant DevTools takes focus, hover styling vanishes when the pointer leaves. <b>Hold the moment</b> freezes all of it, so you can explore an open menu or a hover state as calmly as any other UI.</p>
 <h3>Step 1. Freeze the moment</h3>
 <ol class="steps"><li>Put your app in the state you care about — open the menu, hover the control, let the tooltip show.</li>
@@ -256,6 +375,9 @@ en: {
 <p>Click any row. Events show the route direction, the source and the visual chain the event routed through — every element clickable. Property changes show kind, priority, the metadata default and, for bound properties, the <b>full binding</b>: every path step with its live source and value, converter with parameter, fallback and string format — re-read live each time the pane opens; MultiBindings unfold recursively.</p>
 <div class="shot"><img src="assets/img/docs/tl-binding.png" alt="The details pane of a bound property change: old and new values, the cause, and the binding walk-through"><span class="cap">A bound change carries its cause and the whole binding — every step with its live source and value.</span></div>
 <p><b>🔍 opens the instance inspector</b> for any instance on the timeline — event args, old/new values, step sources, converters, view models: see <a href="#inspector">Inspect any value</a>. Mentioned objects are held weakly — the timeline never keeps your objects alive.</p>
+<h3>Who handled it?</h3>
+<p>When the route was captured hop by hop, event details show it as it actually ran: every participating element in visit order, the handlers subscribed at each hop listed by name — <code>MainWindow.OnSave</code> — each with a go-to-source link to the declaring class. A plain <code>Click=</code> method that never sets <code>Handled</code> is named all the same; the hop that did set <code>Handled</code> is flagged with ⚑.</p>
+<div class="shot"><img src="assets/img/docs/route-handlers.png" alt="Event details for a click: the route with every element visited and the handler MainWindow.OnDeployClick named with its file and line"><span class="cap">The route as it ran: the Deploy button's hop runs MainWindow.OnDeployClick — the file:line link lands on the method.</span></div>
 <h3>The focus story</h3>
 <p>Focus changes are always captured — no watchlist needed. ◉ rows show what had focus and what got it, interleaved with the clicks and events that caused the move.</p>
 <div class="shot"><img src="assets/img/docs/tl-focus.png" alt="Focus rows on the timeline interleaved with GotFocus and LostFocus events and a Button.Click"><span class="cap">Focus (none) → Slider → Button — with the click that moved it right in between.</span></div>
@@ -281,7 +403,9 @@ en: {
 <li>Granularity: <em>Visual · merged</em> (wrappers collapsed), <em>Visual · all</em>, or <em>Logical</em>. "Reset view" restores the camera.</li></ul>
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="The exploded 3D view of the window's visual layers"><span class="cap">141 layers of the live window, orbitable — click any card to select it in the tree.</span></div>
 <h3>Timeline</h3><ul><li>Events, property changes, VM notifies, focus changes and binding errors in one feed, scoped to a watchlist — with cause links, a binding walk-through and the instance inspector. See <a href="#timeline">Timeline</a>.</li></ul>
-<h3>Logs</h3><ul><li>Live Avalonia logger output with Pause, level, area and text filters. Captures at Warning by default. Entries produced by the DevTools UI itself are dropped and appends are batched — verbose logging can't freeze the tool.</li></ul>` },
+<h3>Problems</h3><ul><li>Only what is broken — binding failures, error logs — errors before warnings, each with a plain reason, a reveal-in-tree link and the full binding walk. Scan now catches bindings that failed before DevTools opened. See <a href="#problems">Problems pane</a>.</li></ul>
+<h3>Logs</h3><ul><li>Live Avalonia logger output with Pause, level, area and text filters. Captures at Warning by default. Entries produced by the DevTools UI itself are dropped and appends are batched — verbose logging can't freeze the tool.</li>
+<li><code>LogCapture.Publish</code> feeds the pane the application's own events — see <a href="#applogs">App log feed</a>.</li></ul>` },
       { id: 'capture', t: 'Screenshots & bug reports', html: `<p>"Can you send me a screenshot and the XAML path?" is one click here — the element, its bounds and the properties that differ from defaults travel together with the picture.</p>
 <h3>Step 1. Choose what to copy</h3>
 <p>The <b>📷 toolbar button</b> is a two-click chooser — <em>Copy screenshot</em> or <em>Copy report (screenshot + XAML)</em> — capturing the selected element or the whole window. The same actions live in the tree context menu under <b>Copy ▸</b>: <b>Path</b> (<span class="kbd">Ctrl+C</span>), <b>As XAML</b> (<span class="kbd">Ctrl+Shift+C</span>), <b>Screenshot</b> and <b>As bug report</b>.</p>
@@ -289,9 +413,21 @@ en: {
 <h3>Step 2. Paste it anywhere</h3>
 <p><b>Copy as bug report</b> puts a DPI-correct PNG of the element <em>plus</em> a readable report — the pseudo-XAML path, bounds, and the properties that differ from their defaults — on the clipboard in three flavors at once: rich targets like an email compose window paste the screenshot <em>with</em> the details under it, image-only targets get the PNG, plain-text targets the markdown. Paste into an issue and it reads like a report, not a riddle.</p>
 <p class="tip"><b>Tip.</b> Combined with <a href="#hold">❄ Hold</a>, popup and hover states are capturable too.</p>` },
-      { id: 'source', t: 'Go to source', html: `<p>Source locations come from the XAML compiler's <code>AvaloniaXamlCreateSourceInfo</code>, which Avalonia 12 enables automatically in Debug builds. C# types (view models) are located by searching your solution tree. Clicking opens JetBrains Rider by default on macOS; override with:</p>
+      { id: 'source', t: 'Go to source in your IDE', html: `<p>Everything in DevTools that names code links to it: source badges in Properties, styles and their setters, binding paths, timeline handlers, problem rows. Click a file:line link and the file opens in your own IDE at that line — Rider, VS Code and Visual Studio are found automatically, on Windows, macOS and Linux.</p>
+<h3>How the IDE is picked</h3>
+<ol class="steps"><li>An <code>AVA_DEVTOOLS_EDITOR</code> command template, if set, always wins.</li>
+<li>Then a choice remembered from the chooser.</li>
+<li>Then the IDE that launched your app — run from Rider, click a link, and the file lands in that same Rider window without a single question.</li>
+<li>Then the IDE that is already running, or the only one installed.</li>
+<li>Only when it is genuinely ambiguous does the chooser appear.</li></ol>
 <pre><code>AVA_DEVTOOLS_EDITOR=<span class="s">"code --goto {file}:{line}"</span></code></pre>
-<p>Compiled Fluent theme styles have no source on disk — the popover shows reflection details and a "View theme XAML on GitHub" link matched to your Avalonia version.</p>` },
+<h3>Several IDEs? Choose once</h3>
+<div class="shot"><img src="assets/img/docs/editor-chooser.png" alt="The chooser at a clicked link: detected IDEs with versions, running ones marked, Remember my choice pre-checked"><span class="cap">Every detected IDE with its version, ◉ running marked — the choice is remembered, and Shift+click brings the chooser back.</span></div>
+<p>Each detected IDE is a row — version shown, <b>◉ running</b> marked — plus the system default. <b>Remember my choice</b> is pre-checked, so the next link opens with no questions. <span class="kbd">Shift</span>+click any editor link to reopen the chooser at any time, remembered choice or not.</p>
+<h3>Running IDEs are reused, never duplicated</h3>
+<p>An IDE that is already open receives the file in its window — a second instance is never started. Rider's and VS Code's own goto commands route the file to the window whose project contains it, so with project A and project B open side by side, a link from the app you are debugging lands in the right one. Visual Studio runs one process per solution — DevTools asks each running instance which solution contains the file and routes there, preferring the instance that is debugging your app. And a link clicked twice while an IDE is still starting opens one instance, not two.</p>
+<h3>Where locations come from</h3>
+<p>XAML locations come from the compiler's <code>AvaloniaXamlCreateSourceInfo</code>, which Avalonia 12 enables automatically in Debug builds. C# types — view models, event handlers — are located by searching your solution tree; set <code>AVA_DEVTOOLS_SRC_ROOT</code> when auto-detection needs help. Compiled Fluent theme styles have no source on disk — the popover shows reflection details and a "View theme XAML on GitHub" link matched to your Avalonia version.</p>` },
       { id: 'options', t: 'Options', html: `<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions
 {
     Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// default: F12</span>
@@ -304,14 +440,21 @@ en: {
 <tr><th>Variable</th><th>Meaning</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>Open DevTools automatically when a window loads.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_TAB=3D</code></td><td>Preselect a tab (any tab header) on open.</td></tr>
-<tr><td><code>AVA_DEVTOOLS_EDITOR</code></td><td>Editor command template with <code>{file}</code> / <code>{line}</code>.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_EDITOR</code></td><td>Editor command template with <code>{file}</code> / <code>{line}</code> — overrides IDE detection.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_SRC_ROOT</code></td><td>Source root for resolving files when auto-detection fails.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_LOG_LEVEL=Verbose</code></td><td>Initial log capture level.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_UPDATE_CHECK=0</code></td><td>Disable the once-a-day new-version check.</td></tr>
 </table>` },
       { id: 'limits', t: 'Limitations', html: `<ul>
 <li>Desktop only — secondary windows are not supported on mobile/browser targets.</li>
 <li>The tool window uses the host app's loaded theme (Fluent, Simple, …).</li>
 <li>The tree is a snapshot — use ↻ Refresh after structural UI changes (property values update live).</li></ul>` },
+      { id: 'feedback', t: 'Feedback', html: `<p>The <b>Feedback</b> button in the toolbar's top-right corner opens the AvaDevTools issue tracker — report a bug or ask for a feature in one click. The same action lives in <span class="kbd">Ctrl</span>+<span class="kbd">K</span> as "Send feedback".</p>
+<p>Prefer chat? The <a href="https://t.me/avadevtools">Telegram channel</a> takes questions and quick help.</p>` },
+      { id: 'updates', t: 'Update notifications', html: `<p>New AvaDevTools versions bring new panes and fixes, but a NuGet dependency never announces them on its own. When a newer version is published, an <b>Update</b> badge appears in the toolbar, next to <b>Feedback</b>.</p>
+<p>Hover the badge to see what to do: the version to update to, a copyable <code>dotnet add package</code> command, the release notes, and a link to the <a href="releases.html">releases page</a>.</p>
+<div class="shot"><img src="assets/img/docs/update-badge.png" alt="The Update badge with its hint card open"><span class="cap">The badge and its hint card — the release notes load together with the check, so reading them costs no extra click.</span></div>
+<p>The check asks the site for a small manifest at most once a day and remembers the answer between runs, so the badge can appear even when you start offline. If the site is unreachable or the answer does not parse, nothing happens — the badge simply stays hidden. Set <code>AVA_DEVTOOLS_UPDATE_CHECK=0</code> to turn the check off entirely.</p>` },
     ],
   },
   rel: {
@@ -319,6 +462,7 @@ en: {
     lead: 'Every version with notes and downloadable packages. Also on <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub Releases</a> and <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a>.',
     loading: 'Loading release history…', none: 'No releases yet — the first one is coming soon.',
     view: 'View on GitHub', fail: 'Could not load the release list — see', locale: 'en-US',
+    pending: 'Publishing is in progress — the package appears on NuGet once the release is tagged.',
   },
 },
 
@@ -329,17 +473,37 @@ uk: {
   fb: { issues: 'Повідомити про ваду або запропонувати функцію', tg: 'Новини, запитання, швидка допомога' },
   hero: {
     title: 'DevTools для <em>Avalonia 12</em>.<br>Безкоштовно. In-process. Одна клавіша.',
-    tag: 'Вбудованих інструментів F12 в Avalonia 12 більше немає. AvaDevTools повертає їх — інспектор, живі редактори, стилі, 3D-вигляд, таймлайн подій і логи — одним безкоштовним NuGet-пакетом.',
+    tag: 'Вбудованих інструментів F12 в Avalonia 12 більше немає. AvaDevTools повертає їх — інспектор, живі редактори, стилі, 3D-вигляд, таймлайн, логи, панель Problems і пошук Ctrl+K — одним безкоштовним NuGet-пакетом.',
     get: 'Почати', stories: 'Подивитися в дії', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.1.1', docs: 'Документація →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.1.2', docs: 'Документація →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   stories: {
-    h: 'Історії', wn: 'explain',
+    h: 'Історії', wn: 'find',
     lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
     list: [
+      { key: 'find', h: '🔎 Знайти все', sub: 'Що зламалося, елемент із цими словами, який ресурс переміг, хто обробив подію — знайдено в одному місці.',
+        steps: [
+          { t: '🔎 Знайти все',
+            d: 'Ваш застосунок знає, що не так — впалий біндінг, затінений ресурс, обробник, що проковтнув клік. Докази ж були розкидані по логах, словниках і коду.',
+            d2: 'Знайти все: панель Problems збирає зламане, Ctrl+K знаходить будь-що за словами на екрані, ресурси пояснюють себе, події називають обробник, а посилання file:line відкривають ваш власний IDE.',
+            painsTitle: 'До 12.1.2',
+            pains: [
+              { k: 'Біндінг падає', d: 'мовчки на старті — до того, як хоч щось слухає' },
+              { k: 'Редагування ресурсу', d: 'нічого не змінює, бо виграє інше визначення' },
+              { k: 'Подію', d: 'хтось обробив — але хто саме, шукати вам' },
+              { k: 'Посилання file:line', d: 'відкриває не той редактор або другу копію того самого' },
+            ],
+            hook: 'Один реліз знаходить усе — проблеми, елементи, ресурси, обробники.',
+            hookIco: '🔎' },
+          { img: 'story/f02.png', t: 'Усе зламане — одним списком', d: 'Панель Problems збирає помилки біндінгів, помилки застосунку та дубльовані ключі ресурсів — помилки першими, кожна зі зрозумілою причиною. Scan now перевіряє кожен живий біндінг і ловить те, що впало до відкриття DevTools.' },
+          { img: 'story/f03.png', t: 'Ctrl+K знаходить будь-що', d: 'Один пошук по діях, елементах, ресурсах і властивостях — з категоріями в міру набору. Наберіть слова з екрана й знайдіть те, що їх показує; порожній запит показує всі дії.' },
+          { img: 'story/f04.png', t: 'Який ресурс переміг?', d: 'Кожне визначення ключа в порядку резолюції — переможець позначений, затінені закреслено, означальний XAML на один клік нижче. Редагування застосовуються наживо.' },
+          { img: 'story/f05.png', t: 'Хто обробив подію?', d: 'Деталі події відтворюють маршрут таким, яким він пройшов: кожен відвіданий елемент, обробники на ім’я — MainWindow.OnDeployClick — кожен із посиланням на код, а хоп, що встановив Handled, позначено ⚑.' },
+          { img: 'story/f06.png', t: 'Посилання відкривають ваш IDE', d: 'Rider, VS Code і Visual Studio знаходяться на Windows, macOS і Linux; IDE, що запустив застосунок, відкривається без питань, працюючі вікна використовуються повторно, а вибір запам’ятовується — Shift+клік повертає його.' },
+        ] },
       { key: 'explain', h: '🔍 Explain everything', sub: 'Чому такий розмір, що всередині значення, хто перемістив фокус, як виглядає градієнт — відповіді на місці.',
         steps: [
           { t: '🔍 Explain everything',
@@ -440,6 +604,9 @@ uk: {
       { i: '🌳', t: 'Розумне дерево', d: 'Дерево, що читається як XAML: підсвічування синтаксису, згортання як у редакторі, компактний вигляд після вибору, покрокове розкриття, hide, focus, scope і пошук.' },
       { i: '🎯', t: 'Трекінг значень', d: 'Відстежуйте будь-яку властивість по всьому дереву: однакове значення = однаковий колір, null у власній групі, жива легенда з лічильниками — а «Fold to changes» показує всі межі одразу.' },
       { i: '❄', t: 'Hold the moment', d: 'Shift+F12 заморожує те, що застосунок показує просто зараз — відкриті попапи, флаяути, тултіпи, hover-стилі. Досліджуйте заморожену сцену як звичайний UI; Esc відновлює все точно як було. Панель pin states вмикає :focus, :disabled чи будь-який кастомний псевдоклас на вимогу.' },
+      { i: '⚠️', t: 'Панель Problems', d: 'Лише зламане — насамперед помилки біндінгів — помилки перед попередженнями, кожна зі зрозумілою причиною, посиланням reveal і повним розбором біндінгу. Scan now ловить помилки, що сталися до відкриття DevTools.' },
+      { i: '⌨️', t: 'Ctrl+K: знайти будь-що', d: 'Один пошук по діях, елементах, ресурсах і властивостях — наберіть слова з екрана й знайдіть те, що їх показує.' },
+      { i: '🏆', t: 'Який ресурс переміг?', d: 'Кожне визначення ключа в порядку резолюції — переможець позначений, затінені закреслено, живі редагування та код за один клік.' },
       { i: '📷', t: 'Копія як баг-репорт', d: 'Один клік кладе в буфер DPI-коректний скриншот плюс читабельний звіт — псевдо-XAML шлях, bounds, властивості з нетиповими значеннями. Rich-цілі вставляють обидва, графічні — PNG, текстові — markdown.' },
       { i: '🔍', t: 'Інспекція будь-якого значення', d: 'Будь-який об’єкт із панелі Properties відкривається в живій картці інспектора: вкладені значення розкриваються глибше, члени шукаються за іменем чи значенням, закріплення діють на тип, 👁 — на таймлайн, C# source — у редактор.' },
       { i: '📏', t: 'Чому такий розмір?', d: 'Вкладка Layout відновлює, як елемент отримав розмір — що запропонував батько, що він попросив, яке обмеження вирішило, що зробило вирівнювання — з переходом туди, де задано вирішальне значення.' },
@@ -449,7 +616,7 @@ uk: {
       { i: '📐', t: 'Боксова модель', d: 'Інтерактивні зони margin / border / padding із редагуванням кожної сторони, а також розміри, обмеження та вирівнювання.' },
       { i: '🧩', t: 'Стилі та фрейми значень', d: 'Усі застосовані стилі, тема і локальні значення з сеттерами, пріоритетом та станом активності. Редагування — як живі локальні перевизначення.' },
       { i: '🧊', t: '3D-вигляд шарами', d: 'Ваше вікно як текстуровані шари у 3D — обертайте, масштабуйте, клікайте для вибору. Візуальне, згорнуте або логічне дерево.' },
-      { i: '🔗', t: 'Перехід до коду', d: 'file:line для елементів, стилів, біндінгів і в’ю-моделей. Підсвічені фрагменти XAML/C# та перехід у редактор одним кліком.' },
+      { i: '🔗', t: 'Перехід до коду', d: 'file:line для елементів, стилів, біндінгів і в’ю-моделей. Підсвічені фрагменти XAML/C# — а посилання відкривають ваш власний IDE: Rider, VS Code чи Visual Studio, на будь-якій ОС.' },
       { i: '⏱', t: 'Таймлайн', d: 'Routed-події, зміни властивостей, сповіщення VM і зміни фокуса в одній хронологічній стрічці за вашим списком спостереження. Причинні зв’язки з’єднують сповіщення з оновленням від біндінга; кожен запис відкриває повні деталі.' },
       { i: '📜', t: 'Перегляд логів', d: 'Помилки біндінгів, layout і система властивостей — навіть без LogToTrace(). З фільтрами, батчингом і захистом від зациклення.' },
       { i: '📊', t: 'Оверлеї рендерера', d: 'Лічильник FPS, графіки часу layout/render та підсвічування dirty-rect — одним перемикачем.' },
@@ -465,8 +632,8 @@ uk: {
     contents: 'Зміст',
     groups: [
       { t: 'Початок роботи', ids: ['install', 'quickstart'] },
-      { t: 'Можливості', ids: ['hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
-      { t: 'Довідник', ids: ['options', 'env', 'limits'] },
+      { t: 'Можливості', ids: ['problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: 'Довідник', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
       { id: 'install', t: 'Встановлення', html: `<pre><code>dotnet add package AvaDevTools</code></pre>
@@ -483,7 +650,103 @@ uk: {
 }</code></pre>
 <p>Або для одного вікна: <code>myWindow.AttachAvaDevTools()</code>. Натисніть <span class="kbd">F12</span> у вікні застосунку. Вікно DevTools за замовчуванням поверх інших (перемикач 📌 на панелі).</p>
 <p>Утримуйте <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> над застосунком, щоб інспектувати елемент під курсором — як у класичних DevTools.</p>
-<p>Натисніть <span class="kbd">Shift</span>+<span class="kbd">F12</span>, поки застосунок показує перехідний стан — відкритий флаяут, тултіп, hover-стиль — щоб заморозити його й дослідити без поспіху: див. <a href="#hold">❄ Hold the moment</a>.</p>` },
+<p>Натисніть <span class="kbd">Shift</span>+<span class="kbd">F12</span>, поки застосунок показує перехідний стан — відкритий флаяут, тултіп, hover-стиль — щоб заморозити його й дослідити без поспіху: див. <a href="#hold">❄ Hold the moment</a>.</p>
+<p>Усередині DevTools <span class="kbd">Ctrl</span>+<span class="kbd">K</span> шукає по всьому одразу — дії, елементи за текстом на екрані, ресурси, властивості: див. <a href="#palette">Ctrl+K: знайти будь-що</a>.</p>` },
+      { id: 'problems', t: 'Панель Problems', html: `<p>Біндінг падає мовчки, а докази розкидані: тут порожній контрол, там рядок у логу. Вкладка <b>Problems</b> збирає все зламане в один список — насамперед помилки біндінгів — помилки перед попередженнями, кожна зі зрозумілою причиною.</p>
+<h3>Крок 1. Проблеми приходять самі</h3>
+<p>Помилки біндінгів і error-логи застосунку потрапляють до списку одразу, щойно їх залоговано; повтори згортаються в один рядок із лічильником ×N — список не затоплює.</p>
+<h3>Крок 2. Скануйте те, що сталося до відкриття DevTools</h3>
+<p>Застосунок біндиться на старті, DevTools відкривається пізніше — найперші збої якраз ті, яких не бачило жодне живе захоплення. Натисніть <b>Scan now</b>: він перевіряє кожен живий біндінг у дереві (включно з текстовими ранами — зламаний біндінг на <code>Run</code> знаходиться як будь-який інший) і показує все, що зламано просто зараз.</p>
+<div class="shot"><img src="assets/img/docs/problems-scan.png" alt="Панель Problems після скану: дві помилки біндінгів, помилка застосунку та два дубльовані ключі ресурсів, помилки першими"><span class="cap">Один скан: зламаний біндінг на Run, ще один на TextBlock, помилка застосунку та два дубльовані ключі ресурсів.</span></div>
+<p>Скан також позначає <b>дубльовані ключі ресурсів</b> — той самий ключ, визначений ще раз у словнику елемента, вікна чи застосунку. Одне визначення мовчки затінює інше, тож редагування переможеного нічого не змінює; рядок називає scope, чиє визначення виграє.</p>
+<h3>Крок 3. Відкрийте проблему</h3>
+<p>Клікніть рядок: елемент (посилання <b>reveal</b> вибирає його в дереві), властивість, причина, час появи та об'єкт-джерело з inspect / observe / C# source. Проблеми біндінгів розгортають <b>повний розбір біндінгу</b> — кожен крок шляху з живим джерелом і значенням, той самий вигляд, що й у Timeline для змін через біндінг — тож крок, який ламається, видно, а не вгадується.</p>
+<div class="shot"><img src="assets/img/docs/problems-detail.png" alt="Відкрита проблема біндінгу: елемент із посиланням reveal, властивість, причина та розбір біндінгу з кроком, що ламається"><span class="cap">Розбір показує кожен крок наживо: DataContext знайшовся — зламане саме ім'я шляху.</span></div>
+<p>Проблема дубльованого ресурсу перелічує кожне визначення з його місцем — scope-елементи відкриваються в дереві через reveal — і веде до <a href="#resources">пояснювача резолюції</a>.</p>
+<p class="tip"><b>Порада.</b> <span class="kbd">Ctrl</span>+<span class="kbd">K</span> → «Scan bindings for problems» запускає скан звідусіль.</p>` },
+      { id: 'palette', t: 'Ctrl+K: знайти будь-що', html: `<p>Тип чи ім'я того, що ви шукаєте, рідко відомі — відомі слова, які воно показує на екрані. Натисніть <span class="kbd">Ctrl</span>+<span class="kbd">K</span> (або <span class="kbd">⌘</span>+<span class="kbd">K</span>) у DevTools: один пошук по всьому, з категоріями в міру набору. Кожен рядок несе кольорову іконку типу в словнику, яким уже говорить решта DevTools — гліфи елементів із дерева, <code>◈</code> для ресурсів, <code>◆</code> для властивостей, іконки меню для дій — тож що це за знахідка, видно раніше, ніж прочитано текст.</p>
+<h3>Порожній запит — меню дій</h3>
+<div class="shot"><img src="assets/img/docs/palette-actions.png" alt="Ctrl+K з порожнім запитом: кожна дія DevTools з іконкою та підказкою"><span class="cap">Кожна команда DevTools в одному списку — палітра водночас є меню знайомства з можливостями.</span></div>
+<h3>Слово знаходить те, що його показує</h3>
+<div class="shot"><img src="assets/img/docs/palette-find.png" alt="Запит deploy знаходить саму кнопку Deploy, текст її напису та інші елементи з цим словом"><span class="cap">Наберіть слова з екрана: «deploy» підіймає саму Button — попереду тексту напису в глибині її шаблону.</span></div>
+<ul><li><b>Actions</b> — кожна команда DevTools, поруч її хоткей. Порожній запит показує всі.</li>
+<li><b>Elements</b> — пошук по дереву за типом, іменем, класом стилю та <em>текстом, який елемент показує</em>. Текстові рани включно, а кнопка знаходиться за своїм написом — сам контрол, попереду тексту в глибині її шаблону. Enter вибирає елемент у дереві.</li>
+<li><b>Resources</b> — ключі та значення ресурсів, хай де живе словник: застосунок, вікно, стилі чи елемент у глибині дерева. Значення на кшталт <code>#5b8cff</code> знаходить свій ключ, навіть коли зараз перемагає перевизначення з іншим значенням. Enter відкриває <a href="#resources">пояснювач ресурсів</a>.</li>
+<li><b>Properties of selection</b> — імена властивостей вибраного елемента, включно з рядками за «Show more». Enter переходить до вкладки Properties з установленим фільтром.</li></ul>
+<p>Стрілки рухають вибір, <span class="kbd">Enter</span> виконує, <span class="kbd">Esc</span> закриває.</p>` },
+      { id: 'resources', t: 'Який ресурс переміг?', html: `<p>Той самий ключ, визначений у App.axaml, у вікні та в стилі — це три кандидати й один мовчазний переможець: ви редагуєте ресурс, а нічого не змінюється, бо там, куди ви дивитеся, виграє інше визначення. Пояснювач ресурсів показує весь ланцюжок для ключа — видиме затінення і є фічею.</p>
+<h3>Крок 1. Знайдіть ключ</h3>
+<ol class="steps"><li>Натисніть <span class="kbd">Ctrl</span>+<span class="kbd">K</span> і наберіть ключ — або значення: <code>#5b8cff</code> знаходить свій ключ, навіть коли зараз перемагає перевизначення з чимось іншим.</li>
+<li>Виберіть запис Resources — його підзаголовок уже називає переможний scope і рахує визначення.</li></ol>
+<h3>Крок 2. Прочитайте ланцюжок</h3>
+<div class="shot"><img src="assets/img/docs/resource-explainer.png" alt="Пояснювач резолюції для AccentBrush: визначення вікна виграє, App-визначення закреслено, нижче — означальний XAML"><span class="cap">Визначення вікна виграє там, де діє його scope; затінене App-визначення закреслено — а означальний XAML на один клік нижче, з Open in editor.</span></div>
+<p>Кожне визначення — в застосунку, вікнах, стилях, варіантах теми та словниках елементів — стоїть у порядку резолюції: переможець позначений <b>wins</b>, затінені закреслено. Глибший scope перемагає для елементів усередині нього: перше показане визначення виграє там, де діє його scope; зовнішні діють лише там, куди внутрішній не сягає. Кожне визначення показує свій scope, варіант теми та відформатоване значення; визначення на елементі дерева має посилання <b>show in tree</b>. Клікніть будь-яке визначення — його власний .axaml відкриється нижче, підсвічений, з <b>Open in editor</b>.</p>
+<h3>Крок 3. Редагуйте наживо</h3>
+<p>Змініть значення в полі — воно застосується одразу: споживачі DynamicResource оновлюються власним механізмом Avalonia; посилання StaticResource було розв'язано під час завантаження, і воно тримає старе значення до перезапуску — картка чесно про це каже. Дубльовані ключі також позначаються в <a href="#problems">Problems</a> після Scan.</p>` },
+      { id: 'inlines', t: 'Текстові рани в дереві', html: `<p>Кольорове слово всередині TextBlock — це <code>Run</code>, а Run не є Visual, тож класичні інспектори не можуть його вибрати: до TextBlock дістатися можна, а до шматка тексту, чий колір ви шукали, — ні. Тут інлайни — повноправні мешканці дерева.</p>
+<div class="shot"><img src="assets/img/docs/inlines-tree.png" alt="Рани, вкладені у свій TextBlock у дереві елементів; один вибрано"><span class="cap">Рани — діти свого TextBlock, написані в XAML чи перебудовані з коду, — і вибираються як будь-який елемент.</span></div>
+<ul><li>Run і Span з'являються як діти свого TextBlock в обох режимах дерева, вкладені точно як у розмітці.</li>
+<li>Авторство не має значення — XAML чи код: <code>Inlines.Add(new Run(…))</code> потрапляє в те саме логічне дерево, тож рядки, зібрані в коді з даних, теж у списку. Дерево — знімок: після перебудови рядка натисніть ↻ Refresh.</li>
+<li>Виберіть ран: повні Properties зі звичними редакторами та значками джерела — включно з attached-сімейством <code>TextElement.*</code> (Foreground, FontWeight, …), де перемикання локальне↔успадковане видно в момент, коли застосунок задає чи скидає значення.</li>
+<li><span class="kbd">Ctrl</span>+<span class="kbd">K</span> знаходить рани за текстом — наберіть слова, які бачите.</li>
+<li>Підсвічування та скриншоти прив'язуються до найближчого візуального предка, а <a href="#problems">скан Problems</a> проходить і біндінги інлайнів — зламаний біндінг на Run знаходиться й розкривається як будь-який інший.</li></ul>
+<div class="shot"><img src="assets/img/docs/inlines-foreground.png" alt="TextElement.Foreground вибраного рана зі значком локального значення"><span class="cap">Застосунок задав рану локальний Foreground — значок ✏️ каже: локальне, не успадковане від TextBlock.</span></div>` },
+      { id: 'applogs', t: 'Логи застосунку', html: `<p>Панель Logs сама захоплює логер Avalonia. Один публічний API додає туди й події вашого застосунку:</p>
+<pre><code>AvaDevTools.LogCapture.Publish(Avalonia.Logging.LogEventLevel.Error,
+    <span class="s">"Deploy"</span>, <span class="s">"search-index build failed — container OOM (exit 137)"</span>);</code></pre>
+<p>Жодного фреймворку логування не потрібно. Записи потрапляють у панель Logs зі звичними фільтрами рівня / області / тексту, а помилки стають ще й <a href="#problems">Problems</a>. Необов'язкові аргументи: об'єкт <code>source</code> (дає запису посилання inspect) і <code>exception</code> (додається читабельно). Буфер глобальний — опубліковане до відкриття вікна DevTools чекає там, коли ви натиснете F12. Події нижче рівня захоплення (типово Warning; <code>AVA_DEVTOOLS_LOG_LEVEL</code> знижує) відкидаються, як і будь-які інші.</p>
+<div class="shot"><img src="assets/img/docs/applogs-feed.png" alt="Панель Logs із подіями самого застосунку: помилка та два попередження зі своїми областями"><span class="cap">Опубліковані події під звичними фільтрами рівня / області / тексту — помилка стала ще й Problem.</span></div>
+<h3>Serilog</h3>
+<p>Sink приблизно на двадцять рядків пересилає конвеєр Serilog — енумів LogEventLevel два, звідси повні імена:</p>
+<pre><code><span class="k">using</span> Serilog.Core;
+<span class="k">using</span> Serilog.Events;
+
+<span class="k">sealed class</span> AvaDevToolsSink : ILogEventSink
+{
+    <span class="k">public void</span> Emit(LogEvent e) =&gt;
+        AvaDevTools.LogCapture.Publish(
+            e.Level <span class="k">switch</span>
+            {
+                LogEventLevel.Verbose     =&gt; Avalonia.Logging.LogEventLevel.Verbose,
+                LogEventLevel.Debug       =&gt; Avalonia.Logging.LogEventLevel.Debug,
+                LogEventLevel.Information =&gt; Avalonia.Logging.LogEventLevel.Information,
+                LogEventLevel.Warning     =&gt; Avalonia.Logging.LogEventLevel.Warning,
+                _                         =&gt; Avalonia.Logging.LogEventLevel.Error,
+            },
+            area: e.Properties.TryGetValue(<span class="s">"SourceContext"</span>, <span class="k">out var</span> ctx)
+                ? ctx.ToString().Trim(<span class="s">'"'</span>) : <span class="s">"App"</span>,
+            message: e.RenderMessage(),
+            exception: e.Exception);
+}
+
+<span class="c">// Log.Logger = new LoggerConfiguration()
+//     .WriteTo.Sink(new AvaDevToolsSink()).CreateLogger();</span></code></pre>
+<h3>Microsoft.Extensions.Logging</h3>
+<p>Провайдер приблизно на двадцять рядків робить те саме для <code>ILogger&lt;T&gt;</code>:</p>
+<pre><code><span class="k">using</span> Microsoft.Extensions.Logging;
+
+<span class="k">sealed class</span> AvaDevToolsLoggerProvider : ILoggerProvider
+{
+    <span class="k">public</span> ILogger CreateLogger(<span class="k">string</span> category) =&gt; <span class="k">new</span> DevToolsLogger(category);
+    <span class="k">public void</span> Dispose() { }
+
+    <span class="k">sealed class</span> DevToolsLogger(<span class="k">string</span> category) : ILogger
+    {
+        <span class="k">public</span> IDisposable? BeginScope&lt;TState&gt;(TState state) <span class="k">where</span> TState : <span class="k">notnull</span> =&gt; <span class="k">null</span>;
+        <span class="k">public bool</span> IsEnabled(LogLevel level) =&gt; level &gt;= LogLevel.Warning;
+
+        <span class="k">public void</span> Log&lt;TState&gt;(LogLevel level, EventId id, TState state,
+            Exception? exception, Func&lt;TState, Exception?, <span class="k">string</span>&gt; formatter) =&gt;
+            AvaDevTools.LogCapture.Publish(
+                level &gt;= LogLevel.Error ? Avalonia.Logging.LogEventLevel.Error
+                : level == LogLevel.Warning ? Avalonia.Logging.LogEventLevel.Warning
+                : Avalonia.Logging.LogEventLevel.Information,
+                category, formatter(state, exception), exception: exception);
+    }
+}
+
+<span class="c">// builder.Logging.AddProvider(new AvaDevToolsLoggerProvider());</span></code></pre>
+<p class="tip"><b>Порада.</b> AvaDevTools підключено лише в Debug? Огорніть адаптер в <code>#if DEBUG</code> — у Release виклики зникають.</p>` },
       { id: 'hold', t: '❄ Hold the moment', html: `<p>Перехідний UI — найважче для інспекції: флаяут закривається, щойно DevTools забирає фокус, hover-стиль зникає, коли курсор іде геть. <b>Hold the moment</b> заморожує все це — і відкрите меню чи hover-стан досліджується так само спокійно, як будь-який інший UI.</p>
 <h3>Крок 1. Заморозьте момент</h3>
 <ol class="steps"><li>Приведіть застосунок у потрібний стан — відкрийте меню, наведіть курсор, дочекайтеся тултіпа.</li>
@@ -577,6 +840,9 @@ uk: {
 <p>Клікніть будь-який рядок. Події показують напрям маршруту, джерело та візуальний ланцюжок, яким пройшла подія — кожен елемент клікабельний. Зміни властивостей показують вид, пріоритет, типове значення з метаданих і, для біндінгів, <b>увесь біндінг</b>: кожен крок шляху з живим джерелом і значенням, конвертер із параметром, fallback і формат рядка — перечитуються наживо при кожному відкритті; MultiBinding розгортається рекурсивно.</p>
 <div class="shot"><img src="assets/img/docs/tl-binding.png" alt="Панель деталей зміни зв’язаної властивості: старе й нове значення, причина та розбір біндінгу"><span class="cap">Зміна через біндінг несе свою причину й увесь біндінг — кожен крок із живим джерелом і значенням.</span></div>
 <p><b>🔍 відкриває інспектор інстансів</b> для будь-якого об’єкта на таймлайні — аргументи подій, старі/нові значення, джерела кроків, конвертери, в’ю-моделі: див. <a href="#inspector">Інспекція будь-якого значення</a>. Об’єкти утримуються слабкими посиланнями — таймлайн не подовжує їхнє життя.</p>
+<h3>Хто обробив?</h3>
+<p>Коли маршрут захоплено покроково, деталі події показують його таким, яким він справді пройшов: кожен елемент-учасник у порядку відвідування, обробники, підписані на кожному хопі, названі — <code>MainWindow.OnSave</code> — кожен із посиланням go-to-source на клас, що їх оголосив. Звичайний метод <code>Click=</code>, який ніколи не встановлює <code>Handled</code>, названий так само; хоп, що таки встановив <code>Handled</code>, позначений ⚑.</p>
+<div class="shot"><img src="assets/img/docs/route-handlers.png" alt="Деталі події кліку: маршрут з усіма відвіданими елементами й обробником MainWindow.OnDeployClick з file:line"><span class="cap">Маршрут таким, яким він пройшов: хоп кнопки Deploy виконує MainWindow.OnDeployClick — посилання file:line веде на метод.</span></div>
 <h3>Історія фокуса</h3>
 <p>Зміни фокуса записуються завжди — без списку спостереження. Рядки ◉ показують, що втратило фокус і що отримало, упереміш із кліками та подіями, які цей рух спричинили.</p>
 <div class="shot"><img src="assets/img/docs/tl-focus.png" alt="Рядки фокуса на таймлайні впереміш із подіями GotFocus, LostFocus і Button.Click"><span class="cap">Focus (none) → Slider → Button — і клік, що це спричинив, просто між ними.</span></div>
@@ -602,7 +868,9 @@ uk: {
 <li>Деталізація: <em>Visual · merged</em> (обгортки згорнуто), <em>Visual · all</em> або <em>Logical</em>. «Reset view» повертає камеру.</li></ul>
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="Пошаровий 3D-вигляд візуальних шарів вікна"><span class="cap">141 шар живого вікна, з обертанням — клік по будь-якій картці вибирає її в дереві.</span></div>
 <h3>Timeline</h3><ul><li>Події, зміни властивостей, сповіщення VM, зміни фокуса й помилки біндінгів в одній стрічці за вашим списком спостереження — з причинними зв’язками, розбором біндінгів та інспектором інстансів. Див. <a href="#timeline">Таймлайн</a>.</li></ul>
-<h3>Logs</h3><ul><li>Живі логи Avalonia з Pause та фільтрами за рівнем, областю і текстом. За замовчуванням — Warning. Записи від самого DevTools відкидаються, оновлення батчаться — «зациклення» неможливе.</li></ul>` },
+<h3>Problems</h3><ul><li>Лише зламане — помилки біндінгів, error-логи — помилки перед попередженнями, кожна з причиною, посиланням reveal у дерево та повним розбором біндінгу. Scan now ловить біндінги, що впали до відкриття DevTools. Див. <a href="#problems">Панель Problems</a>.</li></ul>
+<h3>Logs</h3><ul><li>Живі логи Avalonia з Pause та фільтрами за рівнем, областю і текстом. За замовчуванням — Warning. Записи від самого DevTools відкидаються, оновлення батчаться — «зациклення» неможливе.</li>
+<li><code>LogCapture.Publish</code> додає в панель події вашого застосунку — див. <a href="#applogs">Логи застосунку</a>.</li></ul>` },
       { id: 'capture', t: 'Скриншоти та баг-репорти', html: `<p>«Надішли скриншот і XAML-шлях» — тут це один клік: елемент, його bounds і властивості, що відрізняються від типових, їдуть разом із картинкою.</p>
 <h3>Крок 1. Оберіть, що копіювати</h3>
 <p><b>Кнопка 📷 на панелі</b> — вибір у два кліки: <em>Copy screenshot</em> або <em>Copy report (screenshot + XAML)</em> — для вибраного елемента чи всього вікна. Ті самі дії живуть у контекстному меню дерева під <b>Copy ▸</b>: <b>Path</b> (<span class="kbd">Ctrl+C</span>), <b>As XAML</b> (<span class="kbd">Ctrl+Shift+C</span>), <b>Screenshot</b> і <b>As bug report</b>.</p>
@@ -610,9 +878,21 @@ uk: {
 <h3>Крок 2. Вставте будь-куди</h3>
 <p><b>Copy as bug report</b> кладе в буфер DPI-коректний PNG елемента <em>плюс</em> читабельний звіт — псевдо-XAML шлях, bounds і властивості, що відрізняються від типових — одразу у трьох форматах: rich-цілі (вікно листа) вставляють скриншот <em>разом</em> із деталями під ним, графічні цілі отримують PNG, текстові — markdown. Вставте в issue — і це читається як звіт, а не загадка.</p>
 <p class="tip"><b>Порада.</b> Разом із <a href="#hold">❄ Hold</a> можна захопити й попапи та hover-стани.</p>` },
-      { id: 'source', t: 'Перехід до коду', html: `<p>Локації беруться з <code>AvaloniaXamlCreateSourceInfo</code> компілятора XAML (в Avalonia 12 увімкнено в Debug автоматично). C#-типи (в'ю-моделі) знаходяться пошуком по дереву рішення. Клік відкриває JetBrains Rider (macOS) за замовчуванням; можна змінити:</p>
+      { id: 'source', t: 'Перехід до коду у вашому IDE', html: `<p>Усе, що в DevTools називає код, посилається на нього: значки джерела в Properties, стилі та їхні сеттери, шляхи біндінгів, обробники на таймлайні, рядки проблем. Клік по посиланню file:line відкриває файл у вашому власному IDE на цьому рядку — Rider, VS Code і Visual Studio знаходяться автоматично, на Windows, macOS і Linux.</p>
+<h3>Як обирається IDE</h3>
+<ol class="steps"><li>Шаблон команди <code>AVA_DEVTOOLS_EDITOR</code>, якщо задано, виграє завжди.</li>
+<li>Далі — вибір, запам'ятований у виборі редактора.</li>
+<li>Далі — IDE, що запустив ваш застосунок: запустіть із Rider, клікніть посилання — файл ляже в те саме вікно Rider без жодного питання.</li>
+<li>Далі — IDE, що вже працює, або єдиний встановлений.</li>
+<li>Лише коли справді неоднозначно — з'являється вибір.</li></ol>
 <pre><code>AVA_DEVTOOLS_EDITOR=<span class="s">"code --goto {file}:{line}"</span></code></pre>
-<p>Скомпільовані стилі Fluent не мають коду на диску — поповер показує дані з рефлексії та посилання «View theme XAML on GitHub» для вашої версії Avalonia.</p>` },
+<h3>Кілька IDE? Виберіть один раз</h3>
+<div class="shot"><img src="assets/img/docs/editor-chooser.png" alt="Вибір біля клікнутого посилання: знайдені IDE з версіями, працюючі позначено, Remember my choice увімкнено"><span class="cap">Кожен знайдений IDE зі своєю версією, ◉ running позначено — вибір запам'ятовується, а Shift+клік повертає його.</span></div>
+<p>Кожен знайдений IDE — рядок із версією, працюючі позначено <b>◉ running</b>, плюс системний типовий. <b>Remember my choice</b> увімкнено заздалегідь — наступне посилання відкриється без питань. <span class="kbd">Shift</span>+клік по будь-якому посиланню редактора повертає вибір будь-коли, попри запам'ятований вибір.</p>
+<h3>Працюючі IDE використовуються повторно — ніколи не дублюються</h3>
+<p>IDE, що вже відкритий, отримує файл у своє вікно — другий екземпляр не запускається ніколи. Власні goto-команди Rider і VS Code ведуть файл у вікно, чий проєкт його містить, тож із проєктами A і B поруч посилання з застосунку, який ви налагоджуєте, ляже в правильне. Visual Studio тримає окремий процес на кожне рішення — DevTools питає кожен запущений екземпляр, чиє рішення містить файл, і веде туди, віддаючи перевагу тому, що налагоджує ваш застосунок. А подвійний клік по посиланню, поки IDE ще стартує, відкриє один екземпляр, не два.</p>
+<h3>Звідки беруться локації</h3>
+<p>XAML-локації дає <code>AvaloniaXamlCreateSourceInfo</code> компілятора (в Avalonia 12 увімкнено в Debug автоматично). C#-типи — в'ю-моделі, обробники подій — знаходяться пошуком по дереву рішення; задайте <code>AVA_DEVTOOLS_SRC_ROOT</code>, якщо автовизначенню потрібна допомога. Скомпільовані стилі Fluent не мають коду на диску — поповер показує дані з рефлексії та посилання «View theme XAML on GitHub» для вашої версії Avalonia.</p>` },
       { id: 'options', t: 'Налаштування', html: `<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions
 {
     Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// типово: F12</span>
@@ -625,14 +905,21 @@ uk: {
 <tr><th>Змінна</th><th>Значення</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>Відкривати DevTools автоматично при завантаженні вікна.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_TAB=3D</code></td><td>Попередньо вибрати вкладку (будь-який заголовок).</td></tr>
-<tr><td><code>AVA_DEVTOOLS_EDITOR</code></td><td>Шаблон команди редактора з <code>{file}</code> / <code>{line}</code>.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_EDITOR</code></td><td>Шаблон команди редактора з <code>{file}</code> / <code>{line}</code> — має пріоритет над автовизначенням IDE.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_SRC_ROOT</code></td><td>Корінь сорсів, якщо автопошук не спрацював.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_LOG_LEVEL=Verbose</code></td><td>Початковий рівень захоплення логів.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_UPDATE_CHECK=0</code></td><td>Вимкнути щоденну перевірку нової версії.</td></tr>
 </table>` },
       { id: 'limits', t: 'Обмеження', html: `<ul>
 <li>Лише десктоп — додаткові вікна не підтримуються на мобільних/браузерних платформах.</li>
 <li>Вікно інструментів використовує тему застосунку (Fluent, Simple, …).</li>
 <li>Дерево — знімок: після структурних змін UI натисніть ↻ Refresh (значення властивостей оновлюються наживо).</li></ul>` },
+      { id: 'feedback', t: 'Фідбек', html: `<p>Кнопка <b>Feedback</b> у правому верхньому куті панелі відкриває трекер задач AvaDevTools — повідомте про баг чи попросіть фічу одним кліком. Та сама дія живе у <span class="kbd">Ctrl</span>+<span class="kbd">K</span> як «Send feedback».</p>
+<p>Зручніше в чаті? <a href="https://t.me/avadevtools">Telegram-канал</a> приймає запитання та швидку допомогу.</p>` },
+      { id: 'updates', t: 'Сповіщення про оновлення', html: `<p>Нові версії AvaDevTools приносять нові вкладки й виправлення, але NuGet-залежність сама про них не оголошує. Коли виходить новіша версія, у панелі поруч із <b>Feedback</b> з'являється значок <b>Update</b>.</p>
+<p>Наведіть на значок, щоб побачити, що робити: версію, до якої оновитись, команду <code>dotnet add package</code> для копіювання, нотатки релізу та посилання на <a href="releases.html">сторінку релізів</a>.</p>
+<div class="shot"><img src="assets/img/docs/update-badge.png" alt="Значок Update з відкритою карткою-підказкою"><span class="cap">Значок і його картка — нотатки релізу завантажуються разом із перевіркою, тож читання не коштує жодного зайвого кліку.</span></div>
+<p>Перевірка запитує в сайту невеликий маніфест щонайбільше раз на день і пам'ятає відповідь між запусками, тож значок може з'явитися навіть після старту офлайн. Якщо сайт недоступний або відповідь не розбирається, нічого не станеться — значок просто залишиться прихованим. Змінна <code>AVA_DEVTOOLS_UPDATE_CHECK=0</code> вимикає перевірку повністю.</p>` },
     ],
   },
   rel: {
@@ -640,6 +927,7 @@ uk: {
     lead: 'Усі версії з нотатками та пакетами. Також на <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub Releases</a> і <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a>.',
     loading: 'Завантаження історії релізів…', none: 'Релізів ще немає — перший незабаром.',
     view: 'Переглянути на GitHub', fail: 'Не вдалося завантажити список релізів — див.', locale: 'uk-UA',
+    pending: 'Публікація триває — пакет з’явиться на NuGet після створення тега релізу.',
   },
 },
 
@@ -650,17 +938,37 @@ zh: {
   fb: { issues: '报告问题或提出功能建议', tg: '新闻、提问与快速交流' },
   hero: {
     title: '<em>Avalonia 12</em> 的 DevTools。<br>免费、进程内、一键打开。',
-    tag: 'Avalonia 12 移除了内置的 F12 工具。AvaDevTools 把它们带了回来 —— 检查器、实时编辑器、样式、3D 视图、事件时间线和日志 —— 全部打包在一个免费 NuGet 包里。',
+    tag: 'Avalonia 12 移除了内置的 F12 工具。AvaDevTools 把它们带了回来 —— 检查器、实时编辑器、样式、3D 视图、时间线、日志、Problems 面板和 Ctrl+K 搜索 —— 全部打包在一个免费 NuGet 包里。',
     get: '快速上手', stories: '看实际效果', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.1.1 新特性', docs: '文档 →', notes: '版本历史 →' },
+  wn: { h: '12.1.2 新特性', docs: '文档 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   stories: {
-    h: '功能演示', wn: 'explain',
+    h: '功能演示', wn: 'find',
     lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
     list: [
+      { key: 'find', h: '🔎 找到一切', sub: '哪里坏了、显示这些字的元素、哪个资源赢了、谁处理了事件 —— 都在一处找到。',
+        steps: [
+          { t: '🔎 找到一切',
+            d: '应用自己知道哪里不对 —— 失败的绑定、被遮蔽的资源、吞掉点击的处理器。证据却散落在日志、字典和代码之间。',
+            d2: '找到一切：Problems 面板收集坏掉的东西，Ctrl+K 凭屏幕上的字找到任何东西，资源自己解释自己，事件点名运行过的处理器，file:line 链接打开你自己的 IDE。',
+            painsTitle: '12.1.2 之前',
+            pains: [
+              { k: '绑定失败', d: '在启动时悄无声息 —— 那时还没有任何捕获在听' },
+              { k: '改了资源', d: '什么也不变，因为赢的是另一个定义' },
+              { k: '事件被处理了', d: '在某个地方 —— 哪个地方要你自己找' },
+              { k: 'file:line 链接', d: '打开错误的编辑器，或对的那个的第二份' },
+            ],
+            hook: '一个版本找到全部 —— 问题、元素、资源、处理器。',
+            hookIco: '🔎' },
+          { img: 'story/f02.png', t: '坏掉的东西，一个列表', d: 'Problems 面板收集绑定失败、应用错误和重复定义的资源键 —— 错误在前，每条都有一句白话原因。Scan now 探测每个存活的绑定，抓住 DevTools 打开之前的失败。' },
+          { img: 'story/f03.png', t: 'Ctrl+K 找到任何东西', d: '一个搜索覆盖动作、元素、资源和属性 —— 边输入边分类。输入屏幕上看到的字，找到显示它们的东西；空查询列出全部动作。' },
+          { img: 'story/f04.png', t: '哪个资源赢了？', d: '一个键的每个定义按解析顺序排列 —— 赢家有标记，被遮蔽的画删除线，定义它的 XAML 就在下面一步。编辑实时生效。' },
+          { img: 'story/f05.png', t: '谁处理了事件？', d: '事件细节按实际运行重放路由：走过的每个元素、点名的处理器 —— MainWindow.OnDeployClick —— 每个都带源码链接，设置 Handled 的那一跳用 ⚑ 标记。' },
+          { img: 'story/f06.png', t: '链接打开你的 IDE', d: 'Rider、VS Code 和 Visual Studio 在 Windows、macOS 和 Linux 上被自动检测；启动应用的 IDE 直接打开，运行中的窗口被复用，选择会被记住 —— Shift+点击随时唤回。' },
+        ] },
       { key: 'explain', h: '🔍 全部讲清楚', sub: '为什么是这个尺寸、值的内部是什么、谁移动了焦点、渐变长什么样 —— 就地作答。',
         steps: [
           { t: '🔍 全部讲清楚',
@@ -761,6 +1069,9 @@ zh: {
       { i: '🌳', t: '智能树检查器', d: '像 XAML 一样的树：语法着色、代码式折叠、拾取后的紧凑视图、逐层展开、隐藏、Focus、Scope 与搜索，并有实时尺寸列。' },
       { i: '🎯', t: '值追踪', d: '在整棵树上追踪任意属性：相同值 = 相同颜色，null 独立分组，实时图例带计数 ——「Fold to changes」一次显示所有边界。' },
       { i: '❄', t: '定格瞬间（Hold）', d: 'Shift+F12 冻结应用此刻呈现的一切 —— 打开的弹出层、浮出菜单、工具提示、悬停样式。像普通 UI 一样检查被冻结的场景；Esc 把一切精确还原。Pin states 面板可随时强制 :focus、:disabled 或任意自定义伪类。' },
+      { i: '⚠️', t: 'Problems 面板', d: '只列坏掉的 —— 绑定失败最先 —— 错误在警告之前，每条有白话原因、reveal 链接和完整绑定链。Scan now 抓住 DevTools 打开之前的错误。' },
+      { i: '⌨️', t: 'Ctrl+K：找到任何东西', d: '一个搜索覆盖动作、元素、资源和属性 —— 输入屏幕上看到的字，找到显示它们的东西。' },
+      { i: '🏆', t: '哪个资源赢了？', d: '一个键的每个定义按解析顺序排列 —— 赢家有标记，被遮蔽的画删除线，实时编辑，一键到源码。' },
       { i: '📷', t: '复制为缺陷报告', d: '一次点击把 DPI 精确的截图加上可读的报告 —— 伪 XAML 路径、bounds、非默认属性 —— 放进剪贴板。富文本目标同时粘贴两者，图像目标得到 PNG，纯文本目标得到 markdown。' },
       { i: '🔍', t: '检查任何值', d: 'Properties 面板中的任何对象都能在实时检查器卡片中打开：嵌套值可继续深入，成员可按名称或值搜索，按类型固定成员，👁 加入时间线观察，一键跳转 C# 源码。' },
       { i: '📏', t: '为什么是这个尺寸？', d: 'Layout 标签页还原元素尺寸的由来 —— 父级给了什么、元素要了什么、哪个约束说了算、对齐做了什么 —— 并可跳到起决定作用的值被设置的地方。' },
@@ -770,7 +1081,7 @@ zh: {
       { i: '📐', t: '布局盒模型', d: '可交互的 margin / border / padding 色带，支持逐边编辑；尺寸、约束与对齐一目了然。' },
       { i: '🧩', t: '样式与值帧', d: '所有生效的样式、主题与本地值，含 setter、优先级和激活状态。编辑即作为实时本地覆盖生效。' },
       { i: '🧊', t: '3D 分层视图', d: '把窗口展开为带纹理的 3D 图层 —— 旋转、缩放、点击选中。支持可视化、合并或逻辑树粒度。' },
-      { i: '🔗', t: '跳转到源码', d: '元素、样式、绑定与 ViewModel 的 file:line。语法高亮的 XAML/C# 预览，一键跳转到编辑器。' },
+      { i: '🔗', t: '跳转到源码', d: '元素、样式、绑定与 ViewModel 的 file:line。语法高亮的 XAML/C# 预览 —— 链接在你自己的 IDE 里打开：Rider、VS Code 或 Visual Studio，任何操作系统。' },
       { i: '⏱', t: '时间线', d: '路由事件、属性变化、VM 通知与焦点变化汇入一条按时间排序的流，范围由你的观察列表决定。因果链接把通知与它产生的绑定更新连在一起；每条记录都可展开完整细节。' },
       { i: '📜', t: '日志查看器', d: '绑定错误、布局与属性系统消息 —— 无需 LogToTrace()。带过滤、批量刷新，杜绝反馈循环。' },
       { i: '📊', t: '渲染器叠加层', d: 'FPS 计数、布局/渲染耗时曲线与脏矩形闪烁，一个开关即可打开。' },
@@ -786,8 +1097,8 @@ zh: {
     contents: '目录',
     groups: [
       { t: '入门', ids: ['install', 'quickstart'] },
-      { t: '功能', ids: ['hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
-      { t: '参考', ids: ['options', 'env', 'limits'] },
+      { t: '功能', ids: ['problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: '参考', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
       { id: 'install', t: '安装', html: `<pre><code>dotnet add package AvaDevTools</code></pre>
@@ -804,7 +1115,103 @@ zh: {
 }</code></pre>
 <p>也可以只附加到单个窗口：<code>myWindow.AttachAvaDevTools()</code>。在应用窗口中按 <span class="kbd">F12</span> 即可打开。工具窗口默认置顶（工具栏上的 📌 可切换）。</p>
 <p>在运行中的应用上按住 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>，即可检查指针下的元素 —— 与经典 DevTools 完全一致。</p>
-<p>当应用正呈现瞬态状态 —— 打开的浮出菜单、工具提示、悬停样式 —— 按 <span class="kbd">Shift</span>+<span class="kbd">F12</span> 把它冻结后从容检查：见 <a href="#hold">❄ 定格瞬间</a>。</p>` },
+<p>当应用正呈现瞬态状态 —— 打开的浮出菜单、工具提示、悬停样式 —— 按 <span class="kbd">Shift</span>+<span class="kbd">F12</span> 把它冻结后从容检查：见 <a href="#hold">❄ 定格瞬间</a>。</p>
+<p>在 DevTools 里按 <span class="kbd">Ctrl</span>+<span class="kbd">K</span> 一次搜索所有内容 —— 命令、按屏幕文本找元素、资源、属性：见 <a href="#palette">Ctrl+K：找到任何东西</a>。</p>` },
+      { id: 'problems', t: 'Problems 面板', html: `<p>绑定悄无声息地失败，证据却散落各处：这里一个空白控件，那里一行日志。<b>Problems</b> 选项卡把坏掉的东西收进一个列表 —— 绑定失败排在最前 —— 错误在警告之前，每一条都有一句白话原因。</p>
+<h3>第 1 步：问题自己到来</h3>
+<p>绑定错误和应用的 error 级日志在被记录的那一刻进入列表；重复项折叠成一行，带 ×N 计数，不会刷屏。</p>
+<h3>第 2 步：扫描 DevTools 打开之前的失败</h3>
+<p>应用在启动时绑定，DevTools 之后才打开 —— 最早的失败恰恰是任何实时捕获都没见过的。按 <b>Scan now</b>：它探测树中每一个存活的绑定（包括文本 Run —— 写在 <code>Run</code> 上的坏绑定与其他绑定一样被找到），并报告此刻一切坏掉的东西。</p>
+<div class="shot"><img src="assets/img/docs/problems-scan.png" alt="扫描后的 Problems 面板：两个绑定错误、一个应用错误和两个重复定义的资源键，错误排在前面"><span class="cap">一次扫描：一个坏绑定在 Run 上，另一个在 TextBlock 上，一条应用发布的错误，还有两个重复定义的资源键。</span></div>
+<p>扫描还会标出<b>重复定义的资源键</b> —— 同一个键在元素、窗口或应用的字典里再次定义。一个定义悄悄遮蔽另一个，改了输家什么也不会变；这一行会点名获胜定义所在的作用域。</p>
+<h3>第 3 步：打开一个问题</h3>
+<p>点击一行：元素（<b>reveal</b> 链接在树中选中它）、属性、原因、出现时间，以及来源对象的 inspect / observe / C# source。绑定问题还会展开<b>完整的绑定链</b> —— 路径上每一步的实时来源与值，与 Timeline 为绑定变化显示的完全相同 —— 坏掉的那一步看得见，不用猜。</p>
+<div class="shot"><img src="assets/img/docs/problems-detail.png" alt="打开的绑定问题：带 reveal 链接的元素、属性、原因，以及标出失败一步的绑定链"><span class="cap">绑定链逐步实时展示：DataContext 解析正常 —— 坏的是路径名本身。</span></div>
+<p>重复资源问题列出每个定义及其所在之处 —— 元素作用域可用 reveal 在树中打开 —— 并链接到<a href="#resources">资源解释器</a>。</p>
+<p class="tip"><b>提示：</b><span class="kbd">Ctrl</span>+<span class="kbd">K</span> → “Scan bindings for problems” 随处可运行扫描。</p>` },
+      { id: 'palette', t: 'Ctrl+K：找到任何东西', html: `<p>你很少知道要找的东西叫什么类型、什么名字 —— 你知道的是它在屏幕上显示的字。在 DevTools 中按 <span class="kbd">Ctrl</span>+<span class="kbd">K</span>（或 <span class="kbd">⌘</span>+<span class="kbd">K</span>）：一个搜索框覆盖一切，边输入边分类。每一行都带一个彩色类型图标，词汇与 DevTools 其他面板一致 —— 树的元素字形、资源的 <code>◈</code>、属性的 <code>◆</code>、动作用菜单图标 —— 还没读文字就先看出这条结果是什么。</p>
+<h3>空查询就是动作菜单</h3>
+<div class="shot"><img src="assets/img/docs/palette-actions.png" alt="空查询的 Ctrl+K：每个 DevTools 动作带图标和提示"><span class="cap">所有 DevTools 命令在一个列表里 —— 面板同时是功能发现菜单。</span></div>
+<h3>一个词找到显示它的东西</h3>
+<div class="shot"><img src="assets/img/docs/palette-find.png" alt="查询 deploy 找到 Deploy 按钮本身、它的标签文本以及其他显示这个词的元素"><span class="cap">输入你看到的字：“deploy” 让 Button 本身浮出 —— 排在模板深处的标签文本之前。</span></div>
+<ul><li><b>Actions</b> —— 每个 DevTools 命令，旁边是它的快捷键。空查询列出全部。</li>
+<li><b>Elements</b> —— 按类型、名称、样式类以及<em>元素显示的文本</em>搜索被检查的树。包括文本 Run，按钮凭它的标签被找到 —— 控件本身，排在模板深处的文本之前。Enter 在树中选中该元素。</li>
+<li><b>Resources</b> —— 资源键与值，无论字典住在哪里：应用、窗口、样式或树深处的元素。像 <code>#5b8cff</code> 这样的值也能找到定义它的键，即使此刻是另一个值的重定义在赢。Enter 打开<a href="#resources">资源解释器</a>。</li>
+<li><b>Properties of selection</b> —— 选中元素的属性名，包括折叠在 “Show more” 后面的行。Enter 跳到 Properties 选项卡并设好过滤器。</li></ul>
+<p>方向键移动选择，<span class="kbd">Enter</span> 执行，<span class="kbd">Esc</span> 关闭。</p>` },
+      { id: 'resources', t: '哪个资源赢了？', html: `<p>同一个键在 App.axaml、窗口和样式里各定义一次，就是三个候选和一个沉默的赢家：你改了资源却什么也没变，因为在你看的地方是另一个定义在赢。资源解释器展示一个键的完整链条 —— 让遮蔽可见，正是这个功能的意义。</p>
+<h3>第 1 步：找到键</h3>
+<ol class="steps"><li>按 <span class="kbd">Ctrl</span>+<span class="kbd">K</span>，输入键名 —— 或者值：<code>#5b8cff</code> 也能找到定义它的键，即使此刻赢的是别的重定义。</li>
+<li>选中 Resources 条目 —— 副标题已经写明获胜作用域并统计定义个数。</li></ol>
+<h3>第 2 步：读懂链条</h3>
+<div class="shot"><img src="assets/img/docs/resource-explainer.png" alt="AccentBrush 的解析链：窗口定义获胜，App 定义画删除线，下方是定义它的 XAML"><span class="cap">窗口定义在其作用域内获胜；被遮蔽的 App 定义画删除线 —— 定义它的 XAML 就在下面一步，可 Open in editor。</span></div>
+<p>应用、窗口、样式、主题变体以及元素字典中的每个定义按解析顺序排列 —— 赢家标为 <b>wins</b>，被遮蔽的画删除线。更深的作用域在其内部胜出：第一个定义在其作用域覆盖之处获胜；外层定义只在内层作用域够不到的地方生效。每个定义显示它的作用域、主题变体和格式化后的值；住在树中元素上的定义带 <b>show in tree</b> 链接。点击任何定义，它自己的 .axaml 在下方打开 —— 高亮显示，带 <b>Open in editor</b>。</p>
+<h3>第 3 步：实时编辑</h3>
+<p>改动值输入框即刻生效：DynamicResource 的使用者经由 Avalonia 自身的传播机制更新；StaticResource 引用在加载时已解析，重启前保持旧值 —— 卡片会如实说明。重复定义的键在 Scan 之后也会出现在 <a href="#problems">Problems</a> 里。</p>` },
+      { id: 'inlines', t: '树中的文本 Run', html: `<p>TextBlock 里那个带颜色的词是一个 <code>Run</code> —— 而 Run 不是 Visual，经典检查器选不中它：你能选到 TextBlock，却永远够不到你在追查颜色的那段文字。在这里，内联元素是树的正式公民。</p>
+<div class="shot"><img src="assets/img/docs/inlines-tree.png" alt="元素树中嵌套在 TextBlock 下的 Run，其中一个被选中"><span class="cap">Run 是 TextBlock 的子节点 —— 无论写在 XAML 里还是代码里重建 —— 像任何元素一样可以选中。</span></div>
+<ul><li>Run 与 Span 在两种树模式下都作为 TextBlock 的子节点出现，嵌套与标记完全一致。</li>
+<li>XAML 写的还是运行时建的都一样 —— <code>Inlines.Add(new Run(…))</code> 进入同一棵逻辑树，代码从数据拼出的行同样会被列出。树是快照：重建后按 ↻ Refresh。</li>
+<li>选中一个 Run：完整的 Properties，配常规编辑器与来源徽标 —— 包括附加的 <code>TextElement.*</code> 家族（Foreground、FontWeight 等），应用设置或清除值的那一刻，本地↔继承的翻转清晰可见。</li>
+<li><span class="kbd">Ctrl</span>+<span class="kbd">K</span> 按文本找 Run —— 输入你看到的字。</li>
+<li>高亮与截图锚定到最近的可视祖先；<a href="#problems">Problems 扫描</a>也会走进内联绑定 —— 写在 Run 上的坏绑定同样被找到并揭示。</li></ul>
+<div class="shot"><img src="assets/img/docs/inlines-foreground.png" alt="选中 Run 的 TextElement.Foreground，带本地值徽标"><span class="cap">应用给这个 Run 设了本地 Foreground —— ✏️ 徽标说明是本地值，不是从 TextBlock 继承的。</span></div>` },
+      { id: 'applogs', t: '应用日志接入', html: `<p>Logs 面板自动捕获 Avalonia 的日志。一个公开 API 让你的应用把自己的事件也送进来：</p>
+<pre><code>AvaDevTools.LogCapture.Publish(Avalonia.Logging.LogEventLevel.Error,
+    <span class="s">"Deploy"</span>, <span class="s">"search-index build failed — container OOM (exit 137)"</span>);</code></pre>
+<p>无需任何日志框架。条目进入 Logs 面板，可用级别 / 区域 / 文本过滤；错误还会成为 <a href="#problems">Problems</a>。可选参数：<code>source</code> 对象（让条目带上 inspect 链接）和 <code>exception</code>（以可读方式附加）。缓冲区是全局的 —— 在 DevTools 窗口打开之前发布的事件会在那里等你按 F12。低于捕获级别的事件（默认 Warning；<code>AVA_DEVTOOLS_LOG_LEVEL</code> 可调低）与其他日志一样被丢弃。</p>
+<div class="shot"><img src="assets/img/docs/applogs-feed.png" alt="Logs 面板里应用自己的事件：一条错误和两条带区域的警告"><span class="cap">发布的事件在常规的级别 / 区域 / 文本过滤器下 —— 那条错误同时成了 Problem。</span></div>
+<h3>Serilog</h3>
+<p>约二十行的 sink 即可转发 Serilog 管道 —— 有两个同名的 LogEventLevel 枚举，因此要写全名：</p>
+<pre><code><span class="k">using</span> Serilog.Core;
+<span class="k">using</span> Serilog.Events;
+
+<span class="k">sealed class</span> AvaDevToolsSink : ILogEventSink
+{
+    <span class="k">public void</span> Emit(LogEvent e) =&gt;
+        AvaDevTools.LogCapture.Publish(
+            e.Level <span class="k">switch</span>
+            {
+                LogEventLevel.Verbose     =&gt; Avalonia.Logging.LogEventLevel.Verbose,
+                LogEventLevel.Debug       =&gt; Avalonia.Logging.LogEventLevel.Debug,
+                LogEventLevel.Information =&gt; Avalonia.Logging.LogEventLevel.Information,
+                LogEventLevel.Warning     =&gt; Avalonia.Logging.LogEventLevel.Warning,
+                _                         =&gt; Avalonia.Logging.LogEventLevel.Error,
+            },
+            area: e.Properties.TryGetValue(<span class="s">"SourceContext"</span>, <span class="k">out var</span> ctx)
+                ? ctx.ToString().Trim(<span class="s">'"'</span>) : <span class="s">"App"</span>,
+            message: e.RenderMessage(),
+            exception: e.Exception);
+}
+
+<span class="c">// Log.Logger = new LoggerConfiguration()
+//     .WriteTo.Sink(new AvaDevToolsSink()).CreateLogger();</span></code></pre>
+<h3>Microsoft.Extensions.Logging</h3>
+<p>约二十行的 provider 为 <code>ILogger&lt;T&gt;</code> 做同样的事：</p>
+<pre><code><span class="k">using</span> Microsoft.Extensions.Logging;
+
+<span class="k">sealed class</span> AvaDevToolsLoggerProvider : ILoggerProvider
+{
+    <span class="k">public</span> ILogger CreateLogger(<span class="k">string</span> category) =&gt; <span class="k">new</span> DevToolsLogger(category);
+    <span class="k">public void</span> Dispose() { }
+
+    <span class="k">sealed class</span> DevToolsLogger(<span class="k">string</span> category) : ILogger
+    {
+        <span class="k">public</span> IDisposable? BeginScope&lt;TState&gt;(TState state) <span class="k">where</span> TState : <span class="k">notnull</span> =&gt; <span class="k">null</span>;
+        <span class="k">public bool</span> IsEnabled(LogLevel level) =&gt; level &gt;= LogLevel.Warning;
+
+        <span class="k">public void</span> Log&lt;TState&gt;(LogLevel level, EventId id, TState state,
+            Exception? exception, Func&lt;TState, Exception?, <span class="k">string</span>&gt; formatter) =&gt;
+            AvaDevTools.LogCapture.Publish(
+                level &gt;= LogLevel.Error ? Avalonia.Logging.LogEventLevel.Error
+                : level == LogLevel.Warning ? Avalonia.Logging.LogEventLevel.Warning
+                : Avalonia.Logging.LogEventLevel.Information,
+                category, formatter(state, exception), exception: exception);
+    }
+}
+
+<span class="c">// builder.Logging.AddProvider(new AvaDevToolsLoggerProvider());</span></code></pre>
+<p class="tip"><b>提示：</b>若 AvaDevTools 仅在 Debug 引用，请用 <code>#if DEBUG</code> 包住适配器 —— Release 下这些调用随之消失。</p>` },
       { id: 'hold', t: '❄ 定格瞬间（Hold）', html: `<p>瞬态 UI 最难检查：DevTools 一夺焦点浮出菜单就关闭，指针一离开悬停样式就消失。<b>Hold</b> 把这一切冻结 —— 打开的菜单、悬停状态，都能像普通 UI 一样从容检查。</p>
 <h3>第 1 步：冻结瞬间</h3>
 <ol class="steps"><li>让应用进入你关心的状态 —— 打开菜单、悬停控件、等工具提示出现。</li>
@@ -898,6 +1305,9 @@ zh: {
 <p>点击任意行。事件显示路由方向、来源以及事件经过的可视链 —— 每个元素都可点击。属性变化显示种类、优先级、元数据默认值；对绑定属性还有<b>完整的绑定</b>：路径上每一步的实时来源与值、转换器及参数、fallback 与字符串格式 —— 每次打开面板都实时重读；MultiBinding 递归展开。</p>
 <div class="shot"><img src="assets/img/docs/tl-binding.png" alt="绑定属性变化的细节面板：新旧值、原因与绑定逐步展开"><span class="cap">来自绑定的变化带着它的原因和完整的绑定 —— 每一步都有实时来源与值。</span></div>
 <p><b>🔍 打开实例检查器</b>：时间线上任何实例 —— 事件参数、新旧值、路径来源、转换器、ViewModel：见<a href="#inspector">检查任何值</a>。所有对象以弱引用持有 —— 时间线不会延长你对象的生命周期。</p>
+<h3>谁处理了它？</h3>
+<p>当路由被逐跳捕获时，事件细节会按实际运行展示：每个参与元素按访问顺序排列，每一跳上订阅的处理器逐一点名 —— <code>MainWindow.OnSave</code> —— 每个都带跳到声明类源码的链接。从不设置 <code>Handled</code> 的普通 <code>Click=</code> 方法同样会被点名；真正设置了 <code>Handled</code> 的那一跳用 ⚑ 标记。</p>
+<div class="shot"><img src="assets/img/docs/route-handlers.png" alt="点击事件的细节：走过每个元素的路由，处理器 MainWindow.OnDeployClick 带文件与行号"><span class="cap">路由按实际运行展示：Deploy 按钮那一跳运行 MainWindow.OnDeployClick —— file:line 链接直达方法。</span></div>
 <h3>焦点的故事</h3>
 <p>焦点变化始终被捕获 —— 无需观察列表。◉ 行显示谁失去焦点、谁得到焦点，与引发这次移动的点击和事件交织在一起。</p>
 <div class="shot"><img src="assets/img/docs/tl-focus.png" alt="时间线上的焦点行与 GotFocus、LostFocus 事件及 Button.Click 交织"><span class="cap">Focus (none) → Slider → Button —— 引发它的点击就夹在中间。</span></div>
@@ -923,7 +1333,9 @@ zh: {
 <li>粒度：<em>Visual · merged</em>（折叠包装层）、<em>Visual · all</em> 或 <em>Logical</em>。"Reset view" 复位相机。</li></ul>
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="窗口可视图层的 3D 分层视图"><span class="cap">实时窗口的 141 个图层，可旋转 —— 点击任意图层即在树中选中。</span></div>
 <h3>Timeline（时间线）</h3><ul><li>事件、属性变化、VM 通知、焦点变化与绑定错误汇入一条流，范围由观察列表决定 —— 带因果链接、绑定逐步展开与实例检查器。见<a href="#timeline">时间线</a>。</li></ul>
-<h3>Logs（日志）</h3><ul><li>实时 Avalonia 日志，支持暂停、级别、区域与文本过滤。默认捕获 Warning 及以上。工具自身产生的日志会被丢弃、UI 批量刷新 —— 不会出现反馈循环卡死。</li></ul>` },
+<h3>Problems（问题）</h3><ul><li>只列坏掉的 —— 绑定失败、error 日志 —— 错误在警告之前，每条带原因、树内 reveal 链接与完整绑定链。Scan now 抓住在 DevTools 打开前就失败的绑定。见 <a href="#problems">Problems 面板</a>。</li></ul>
+<h3>Logs（日志）</h3><ul><li>实时 Avalonia 日志，支持暂停、级别、区域与文本过滤。默认捕获 Warning 及以上。工具自身产生的日志会被丢弃、UI 批量刷新 —— 不会出现反馈循环卡死。</li>
+<li><code>LogCapture.Publish</code> 把应用自己的事件送进此面板 —— 见<a href="#applogs">应用日志接入</a>。</li></ul>` },
       { id: 'capture', t: '截图与缺陷报告', html: `<p>「发我一张截图和 XAML 路径」在这里是一次点击 —— 元素、它的 bounds 和与默认值不同的属性，随图片一起上路。</p>
 <h3>第 1 步：选择要复制的内容</h3>
 <p><b>📷 工具栏按钮</b>两次点击即可 —— <em>Copy screenshot</em> 或 <em>Copy report (screenshot + XAML)</em> —— 捕获选中元素或整个窗口。同样的操作也在树右键菜单的 <b>Copy ▸</b> 下：<b>Path</b>（<span class="kbd">Ctrl+C</span>）、<b>As XAML</b>（<span class="kbd">Ctrl+Shift+C</span>）、<b>Screenshot</b> 与 <b>As bug report</b>。</p>
@@ -931,9 +1343,21 @@ zh: {
 <h3>第 2 步：随处粘贴</h3>
 <p><b>Copy as bug report</b> 把元素的 DPI 精确 PNG <em>加上</em>可读报告 —— 伪 XAML 路径、bounds、与默认值不同的属性 —— 以三种格式同时放进剪贴板：富文本目标（如邮件撰写窗口）把截图和细节一起粘贴，仅图像目标得到 PNG，纯文本目标得到 markdown。贴进 issue，读起来是报告，不是谜语。</p>
 <p class="tip"><b>提示：</b>配合 <a href="#hold">❄ Hold</a>，弹出层和悬停状态也能捕获。</p>` },
-      { id: 'source', t: '跳转到源码', html: `<p>源码位置来自 XAML 编译器的 <code>AvaloniaXamlCreateSourceInfo</code>（Avalonia 12 在 Debug 构建中默认开启）。C# 类型（ViewModel）通过在解决方案目录中搜索定位。macOS 下默认用 JetBrains Rider 打开，可自定义：</p>
+      { id: 'source', t: '在你的 IDE 中打开源码', html: `<p>DevTools 里凡是点名代码的地方都链接到它：Properties 的来源徽标、样式及其 setter、绑定路径、时间线上的处理器、问题行。点击 file:line 链接，文件就在你自己的 IDE 里、停在那一行打开 —— Rider、VS Code 和 Visual Studio 在 Windows、macOS 和 Linux 上都会被自动找到。</p>
+<h3>IDE 怎么选</h3>
+<ol class="steps"><li>设置了 <code>AVA_DEVTOOLS_EDITOR</code> 命令模板？它永远优先。</li>
+<li>其次是选择器里记住的选择。</li>
+<li>再次是启动你应用的那个 IDE：从 Rider 运行，点一个链接，文件就落回同一个 Rider 窗口，一个问题都不问。</li>
+<li>然后是已经在运行的 IDE，或唯一安装的那个。</li>
+<li>只有真正含糊不清时，选择器才会出现。</li></ol>
 <pre><code>AVA_DEVTOOLS_EDITOR=<span class="s">"code --goto {file}:{line}"</span></code></pre>
-<p>编译进主题程序集的 Fluent 样式在磁盘上没有源码 —— 弹窗会显示反射信息，并给出与你的 Avalonia 版本匹配的 "View theme XAML on GitHub" 链接。</p>` },
+<h3>装了好几个 IDE？选一次就够</h3>
+<div class="shot"><img src="assets/img/docs/editor-chooser.png" alt="点击链接处的选择器：检测到的 IDE 带版本号，正在运行的有标记，Remember my choice 预先勾选"><span class="cap">每个检测到的 IDE 带版本号，◉ running 标出正在运行的 —— 选择会被记住，Shift+点击随时唤回。</span></div>
+<p>每个检测到的 IDE 一行 —— 显示版本，<b>◉ running</b> 标记运行中的 —— 外加系统默认。<b>Remember my choice</b> 预先勾选，下一次点击不再发问。<span class="kbd">Shift</span>+点击任何编辑器链接可随时唤回选择器，记没记住都行。</p>
+<h3>复用运行中的 IDE，绝不开第二份</h3>
+<p>已经打开的 IDE 会在自己的窗口里收到文件 —— 永远不会启动第二个实例。Rider 和 VS Code 自带的 goto 命令把文件送进包含它的项目所在的窗口：项目 A 和项目 B 并排开着时，来自被调试应用的链接会落进正确的那个。Visual Studio 每个解决方案一个进程 —— DevTools 会询问每个运行中的实例谁的解决方案包含该文件并送到那里，优先选正在调试你应用的那个。IDE 还在启动时连点两次链接，也只会开一个实例，不是两个。</p>
+<h3>位置从哪里来</h3>
+<p>XAML 位置来自编译器的 <code>AvaloniaXamlCreateSourceInfo</code>（Avalonia 12 在 Debug 构建中默认开启）。C# 类型 —— ViewModel、事件处理器 —— 通过在解决方案目录中搜索定位；自动探测不够时设置 <code>AVA_DEVTOOLS_SRC_ROOT</code>。编译进主题程序集的 Fluent 样式在磁盘上没有源码 —— 弹窗会显示反射信息，并给出与你的 Avalonia 版本匹配的 “View theme XAML on GitHub” 链接。</p>` },
       { id: 'options', t: '选项', html: `<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions
 {
     Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// 默认：F12</span>
@@ -946,14 +1370,21 @@ zh: {
 <tr><th>变量</th><th>含义</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>窗口加载时自动打开 DevTools。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_TAB=3D</code></td><td>打开时预选某个选项卡（任意标签名）。</td></tr>
-<tr><td><code>AVA_DEVTOOLS_EDITOR</code></td><td>编辑器命令模板，支持 <code>{file}</code> / <code>{line}</code>。</td></tr>
+<tr><td><code>AVA_DEVTOOLS_EDITOR</code></td><td>编辑器命令模板，支持 <code>{file}</code> / <code>{line}</code> —— 优先于 IDE 自动检测。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_SRC_ROOT</code></td><td>自动探测失败时的源码根目录。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_LOG_LEVEL=Verbose</code></td><td>日志捕获的初始级别。</td></tr>
+<tr><td><code>AVA_DEVTOOLS_UPDATE_CHECK=0</code></td><td>关闭每日一次的新版本检查。</td></tr>
 </table>` },
       { id: 'limits', t: '限制', html: `<ul>
 <li>仅桌面端 —— 移动/浏览器平台不支持辅助窗口。</li>
 <li>工具窗口使用宿主应用已加载的主题（Fluent、Simple 等）。</li>
 <li>树是快照 —— UI 结构变化后请点 ↻ Refresh（属性值本身是实时更新的）。</li></ul>` },
+      { id: 'feedback', t: '反馈', html: `<p>工具栏右上角的 <b>Feedback</b> 按钮打开 AvaDevTools 的问题跟踪器 —— 一键报告缺陷或请求功能。同一动作也在 <span class="kbd">Ctrl</span>+<span class="kbd">K</span> 里，叫 “Send feedback”。</p>
+<p>更喜欢聊天？<a href="https://t.me/avadevtools">Telegram 频道</a>接受提问和快速帮助。</p>` },
+      { id: 'updates', t: '更新通知', html: `<p>AvaDevTools 的新版本带来新的面板和修复，但 NuGet 依赖不会自己宣布它们。有更新的版本发布时，工具栏上 <b>Feedback</b> 旁边会出现 <b>Update</b> 徽标。</p>
+<p>把指针悬停在徽标上就能看到该做什么：要更新到的版本、可复制的 <code>dotnet add package</code> 命令、发布说明，以及指向<a href="releases.html">发布页</a>的链接。</p>
+<div class="shot"><img src="assets/img/docs/update-badge.png" alt="Update 徽标及展开的提示卡片"><span class="cap">徽标和它的提示卡片 —— 发布说明随检查一起加载，阅读无需额外点击。</span></div>
+<p>检查每天最多向站点请求一次小清单，并在两次运行之间记住结果，因此即使离线启动徽标也能出现。站点不可达或返回无法解析的内容时，什么也不会发生 —— 徽标只是保持隐藏。设置 <code>AVA_DEVTOOLS_UPDATE_CHECK=0</code> 可完全关闭检查。</p>` },
     ],
   },
   rel: {
@@ -961,6 +1392,7 @@ zh: {
     lead: '所有版本及其说明和可下载的包。另见 <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub Releases</a> 和 <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a>。',
     loading: '正在加载版本历史…', none: '暂无版本 —— 首个版本即将发布。',
     view: '在 GitHub 上查看', fail: '无法加载版本列表 —— 请见', locale: 'zh-CN',
+    pending: '发布进行中 —— 版本标签推送后，包即会出现在 NuGet 上。',
   },
 },
 };
