@@ -462,7 +462,6 @@ en: {
     lead: 'Every version with notes and downloadable packages. Also on <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub Releases</a> and <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a>.',
     loading: 'Loading release history…', none: 'No releases yet — the first one is coming soon.',
     view: 'View on GitHub', fail: 'Could not load the release list — see', locale: 'en-US',
-    pending: 'Publishing is in progress — the package appears on NuGet once the release is tagged.',
   },
 },
 
@@ -927,7 +926,6 @@ uk: {
     lead: 'Усі версії з нотатками та пакетами. Також на <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub Releases</a> і <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a>.',
     loading: 'Завантаження історії релізів…', none: 'Релізів ще немає — перший незабаром.',
     view: 'Переглянути на GitHub', fail: 'Не вдалося завантажити список релізів — див.', locale: 'uk-UA',
-    pending: 'Публікація триває — пакет з’явиться на NuGet після створення тега релізу.',
   },
 },
 
@@ -1392,7 +1390,6 @@ zh: {
     lead: '所有版本及其说明和可下载的包。另见 <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub Releases</a> 和 <a href="https://www.nuget.org/packages/AvaDevTools">NuGet</a>。',
     loading: '正在加载版本历史…', none: '暂无版本 —— 首个版本即将发布。',
     view: '在 GitHub 上查看', fail: '无法加载版本列表 —— 请见', locale: 'zh-CN',
-    pending: '发布进行中 —— 版本标签推送后，包即会出现在 NuGet 上。',
   },
 },
 };

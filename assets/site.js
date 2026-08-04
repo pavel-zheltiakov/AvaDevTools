@@ -362,10 +362,8 @@ async function loadReleases(el, L) {
   } catch (e) {}
   if (!Array.isArray(fetched)) fetched = [];
   // A release prepared but not yet tagged is listed locally; GitHub's entry
-  // replaces it once the tag is pushed. Until then the package is not on NuGet,
-  // so pending entries must not render a copyable install command.
-  const local = (window.LOCAL_RELEASES || []).filter(l => !fetched.some(r => r.tag_name === l.tag_name))
-    .map(l => Object.assign({ pending: true }, l));
+  // replaces it once the tag is pushed.
+  const local = (window.LOCAL_RELEASES || []).filter(l => !fetched.some(r => r.tag_name === l.tag_name));
   const releases = local.concat(fetched);
   const failNote = '<p style="color:var(--muted)">' + esc(L.fail) +
     ' <a href="https://github.com/pavel-zheltiakov/AvaDevTools/releases">GitHub</a>.</p>';
@@ -391,10 +389,8 @@ async function loadReleases(el, L) {
       '<h3 style="margin-top:0">' + esc(r.name || r.tag_name) +
       ' <span style="color:var(--muted);font-weight:400;font-size:12px">· ' + date + '</span></h3>' +
       (body ? '<div class="relbody">' + md(body) + '</div>' : '') +
-      (r.pending
-        ? '<p style="color:var(--muted)">' + esc(L.pending || 'Publishing is in progress — the package appears on NuGet once the release is tagged.') + '</p>'
-        : '<div class="install rel-install"><span>dotnet add package AvaDevTools --version ' + esc(version) + '</span>' +
-          '<button onclick="copyInstall(this)">copy</button></div>') +
+      '<div class="install rel-install"><span>dotnet add package AvaDevTools --version ' + esc(version) + '</span>' +
+      '<button onclick="copyInstall(this)">copy</button></div>' +
       '<p class="rel-links"><a href="docs.html">' + esc(L.docsLabel || 'Documentation') + '</a> · ' +
       '<a href="' + esc(r.html_url) + '">' + GH_ICON + 'GitHub</a></p></div>';
   }).join('');
