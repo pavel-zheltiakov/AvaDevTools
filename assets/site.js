@@ -100,14 +100,13 @@ function initStoryEngine(rebuild) {
   });
 }
 
-// A step's visual: its screenshot, or — for steps that state the problem
-// instead of showing the tool (b.pains) — a pain-points card.
+// A step's visual: its screenshot, or — for the opening step of a release
+// story (b.news) — a card listing what that release added.
 function storyVisual(b, i) {
   const di = i >= 0 ? ' data-i="' + i + '"' : '';
-  if (b.pains) return '<div class="story-pains"' + di + '>' +
-    (b.painsTitle ? '<div class="story-pains-h">' + esc(b.painsTitle) + '</div>' : '') +
-    b.pains.map(p => '<div class="story-pain"><span>✕</span><p><b>' + esc(p.k) + '</b> ' + esc(p.d) + '</p></div>').join('') +
-    (b.hook ? '<div class="story-pain hook"><span>' + esc(b.hookIco || '❄') + '</span><p>' + esc(b.hook) + '</p></div>' : '') +
+  if (b.news) return '<div class="story-news"' + di + '>' +
+    (b.newsTitle ? '<div class="story-news-h">' + esc(b.newsTitle) + '</div>' : '') +
+    b.news.map(p => '<div class="story-new"><span>+</span><p><b>' + esc(p.k) + '</b> ' + esc(p.d) + '</p></div>').join('') +
     '</div>';
   return '<img' + di + ' src="assets/img/' + b.img + '" alt="' + esc(b.t) + '" loading="lazy">';
 }

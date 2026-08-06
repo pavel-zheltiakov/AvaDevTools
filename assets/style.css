@@ -189,21 +189,19 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .story-track.flat .story-track-head{padding:26px 0 0}
 .story-track.flat .story-track-foot{padding:14px 0 0}
 
-/* pain-points card: the problem-statement slide that opens a story */
-.story-pains{width:min(620px,96%);background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:10px 26px;box-shadow:0 24px 70px rgba(0,0,0,.5)}
-.story-pains-h{padding:14px 2px 12px;border-bottom:1px solid var(--border);font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
-.story-pain{display:flex;align-items:flex-start;gap:14px;padding:14px 2px;border-bottom:1px solid var(--border)}
-.story-pain:last-child{border-bottom:0}
-.story-pain span{flex:none;color:#e0697a;font-size:15px;line-height:1.6}
-.story-pain p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
-.story-pain p b{color:var(--text);font-weight:600}
-.story-pain.hook span{color:var(--accent-soft)}
-.story-pain.hook p{color:var(--text);font-weight:600}
-.story-shot .story-pains{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.965);opacity:0;transition:opacity .5s ease,transform .5s ease}
-.story-shot .story-pains.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
-.story-sticky.with-head .story-shot .story-pains{top:18px;transform:translateX(-50%) scale(.965)}
-.story-sticky.with-head .story-shot .story-pains.on{transform:translateX(-50%) scale(1)}
-.story-flat-step .story-pains{margin:0 auto}
+/* what's-added card: the slide that opens a release story */
+.story-news{width:min(620px,96%);background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:10px 26px;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.story-news-h{padding:14px 2px 12px;border-bottom:1px solid var(--border);font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.story-new{display:flex;align-items:flex-start;gap:14px;padding:14px 2px;border-bottom:1px solid var(--border)}
+.story-new:last-child{border-bottom:0}
+.story-new span{flex:none;color:#5fc98c;font-size:17px;font-weight:700;line-height:1.45}
+.story-new p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+.story-new p b{color:var(--text);font-weight:600}
+.story-shot .story-news{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.965);opacity:0;transition:opacity .5s ease,transform .5s ease}
+.story-shot .story-news.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.story-sticky.with-head .story-shot .story-news{top:18px;transform:translateX(-50%) scale(.965)}
+.story-sticky.with-head .story-shot .story-news.on{transform:translateX(-50%) scale(1)}
+.story-flat-step .story-news{margin:0 auto}
 
 /* stories section: a chapter (heading + track) per story */
 .stories-head{padding:8px 0 0}

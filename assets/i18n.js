@@ -12,27 +12,46 @@ en: {
     get: 'Get started', stories: 'See it in action', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.1.2", docs: 'Documentation →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.1.3", docs: 'Documentation →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   stories: {
-    h: 'Stories', wn: 'find',
+    h: 'Stories', wn: 'live',
     lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
     list: [
+      { key: 'live', h: '⚡ The tree shows now', sub: 'A live tree of every window in the application — changes appear as they happen, the tool brings its own theme, and gestures remap in a settings card.',
+        steps: [
+          { t: '⚡ The tree shows now',
+            d: 'The tree was a snapshot: open a dialog, expand a flyout, add a row — and it kept showing the world as it was at the last Refresh.',
+            d2: 'The tree shows now: it follows the application live, every window lives in one DevTools rooted at the application, the tool brings its own theme, and gestures remap in a settings card.',
+            newsTitle: 'New in 12.1.3',
+            news: [
+              { k: 'A live tree', d: 'that follows the application — dialogs, flyouts and new rows appear as they happen' },
+              { k: 'A pause button', d: 'that queues changes behind a dot instead of moving the tree under your pointer' },
+              { k: 'One DevTools for every window', d: 'rooted at the application, dialogs included' },
+              { k: 'Its own theme', d: 'so the tool looks right whatever theme your application uses, or none' },
+              { k: 'Remappable gestures', d: 'in a settings card — press the new keys for open, hold and hover-inspect' },
+              { k: 'The version on the toolbar', d: 'turning blue with an ↑ when a newer one is out — click it for the notes' },
+            ] },
+          { img: 'story/l02.png', t: 'Changes appear as they happen', d: 'Add a row, open a flyout, remove a control — the tree splices the change in within a quarter of a second and the new line flashes, the way live sizes always did. Expansion, folds, scope and selection survive every update.' },
+          { img: 'story/l03.png', t: 'Pause when you need to read', d: 'The pulse button next to Refresh pauses live updates; changes queue behind a dot instead of moving the tree under your pointer. Resume applies the queue at once — and Refresh keeps working in either state.' },
+          { img: 'story/l04.png', t: 'Every window, one DevTools', d: 'The tree is rooted at the application: every window is a top-level node, dialogs included, appearing and disappearing live. F12 in any window focuses the same DevTools and selects that window.' },
+          { img: 'story/l05.png', t: 'Scope to one window', d: 'Scoping to a window gives it the whole tree, with breadcrumbs leading back to the application. Timeline, Problems and search span all windows either way.' },
+          { img: 'story/l06.png', t: 'Make the tool yours', d: 'The settings card remaps the open and hold gestures by pressing the new keys, switches the hover-inspect chord when Ctrl+Shift clashes with your app, and tunes countdown, stay-on-top, live tree and update checks. And DevTools now brings its own theme — it looks right whatever theme your application uses, or none.' },
+        ] },
       { key: 'find', h: '🔎 Find everything', sub: 'What broke, the thing showing those words, which resource won, who handled that event — found in one place.',
         steps: [
           { t: '🔎 Find everything',
             d: 'Your app knows what is wrong — a failed binding, a shadowed resource, a handler that swallowed the click. The evidence was scattered across logs, dictionaries and code.',
             d2: 'Find everything: a Problems pane collects what is broken, Ctrl+K finds anything by the words on screen, resource lookups explain themselves, events name the handler that ran, and file:line links open your own IDE.',
-            painsTitle: 'Before 12.1.2',
-            pains: [
-              { k: 'A binding fails', d: 'silently at startup — before any log capture is listening' },
-              { k: 'A resource edit', d: 'changes nothing, because another definition wins' },
-              { k: 'An event', d: 'is handled somewhere — the somewhere is yours to find' },
-              { k: 'A file:line link', d: 'opens the wrong editor, or a second copy of the right one' },
-            ],
-            hook: 'One release finds all of it — problems, elements, resources, handlers.',
-            hookIco: '🔎' },
+            newsTitle: 'New in 12.1.2',
+            news: [
+              { k: 'A Problems pane', d: 'collecting binding failures, app errors and duplicated resource keys, each with a plain-language reason' },
+              { k: 'Ctrl+K search', d: 'over actions, elements, resources and properties — type the words you see on screen' },
+              { k: 'Resource lookups', d: 'that show every definition of a key in resolution order, the winner marked' },
+              { k: 'Handlers by name', d: 'on the event route — MainWindow.OnDeployClick, with a go-to-source link' },
+              { k: 'file:line links', d: 'that open your own IDE — detected per platform, running windows reused' },
+            ] },
           { img: 'story/f02.png', t: 'Everything broken, one list', d: 'The Problems pane collects binding failures, app errors and duplicated resource keys — errors first, each with a plain-language reason. Scan now probes every live binding and catches what failed before DevTools opened.' },
           { img: 'story/f03.png', t: 'Ctrl+K finds anything', d: 'One search over actions, elements, resources and properties — categorized as you type. Type the words you see on screen and find the thing showing them; an empty query lists every action.' },
           { img: 'story/f04.png', t: 'Which resource won?', d: 'Every definition of a key in resolution order — the winner marked, the shadowed ones struck through, the defining XAML one click below. Edits apply live.' },
@@ -44,15 +63,14 @@ en: {
           { t: '🔍 Explain everything',
             d: 'DevTools show you every value. Why the value is what it is — a width, a focus jump, the inside of a DataContext — stayed your job to reconstruct.',
             d2: 'Explain everything: the Layout tab explains how an element got its size, any value opens in the inspector, focus changes land on the Timeline, and gradient brushes get a visual editor.',
-            painsTitle: 'Before 12.1.1',
-            pains: [
-              { k: 'A width of 349', d: 'appears — and nothing says who decided it' },
-              { k: 'A view model', d: 'is a type name with no way to look inside' },
-              { k: 'Focus', d: 'jumps somewhere and nothing records why' },
-              { k: 'A gradient', d: 'reads LinearGradientBrush and edits blind' },
-            ],
-            hook: 'One release explains all of it — sizes, values, focus, gradients.',
-            hookIco: '🔍' },
+            newsTitle: 'New in 12.1.1',
+            news: [
+              { k: 'A Layout tab', d: 'that reconstructs how an element got its size, down to the property that decided it' },
+              { k: 'A value inspector', d: 'on every reference value — properties and fields, read live, nested objects included' },
+              { k: 'Search and pin', d: 'inside big objects, so a type reopens showing just the members you care about' },
+              { k: 'Focus on the Timeline', d: 'next to the events that caused it, with the focused element always named' },
+              { k: 'A gradient editor', d: 'with color stops, offsets, geometry and spread mode — previewed live' },
+            ] },
           { img: 'story/e02.png', t: 'Why this size?', d: 'The Layout tab reconstructs the decision: what the parent offered, what the element asked for, which constraint decided, and what alignment did with the remainder. The deciding property links straight to where it is set — and a 3×3 pad edits alignment in one click.' },
           { img: 'story/e03.png', t: 'Inspect any value', d: 'Every reference value in the Properties panel gets a 🔍 — the DataContext opens as a live card: properties and fields, nested objects that drill deeper, 👁 observe on the Timeline, a jump to the C# source.' },
           { img: 'story/e04.png', t: 'Search and pin what matters', d: 'Big objects stay manageable: search members by name or value, pin the ones you care about — the type reopens showing just those, the rest behind "show all".' },
@@ -64,14 +82,14 @@ en: {
           { t: '❄ Hold the moment',
             d: 'Tooltips, flyouts and hover styling live only while the pointer keeps them alive — the moment you reach for an inspector, the thing you were chasing dismisses itself.',
             d2: 'Freeze popups, flyouts, tooltips and hover styling with one gesture — press Shift+F12 while your app shows the moment — then walk into the frozen scene and inspect it like anything else. Plus a pin-states panel, copy-as-bug-report and Office-style menus.',
-            painsTitle: 'Without Hold',
-            pains: [
-              { k: 'A flyout', d: 'closes on the first click outside it' },
-              { k: 'A tooltip', d: 'vanishes as soon as the pointer leaves' },
-              { k: ':pointerover styling', d: 'is gone before any inspector opens' },
-              { k: 'A drag-over highlight', d: 'lives only while the button is held' },
-            ],
-            hook: 'Hold freezes all of it — one gesture, mid-flight.' },
+            newsTitle: 'New with Hold',
+            news: [
+              { k: 'One freezing gesture', d: 'Shift+F12 holds popups, flyouts, tooltips and hover styling exactly as they are' },
+              { k: 'A walkable frozen scene', d: 'where the popup is ordinary UI — select it, read properties, bounds and styles' },
+              { k: 'A pin-states panel', d: 'that forces :pointerover, :pressed, :focus or any custom pseudo-class' },
+              { k: 'Copy as bug report', d: 'a DPI-correct screenshot, or the pseudo-XAML path, bounds and every non-default property' },
+              { k: 'A clean release', d: 'Esc restores everything exactly as it was, and custom countdowns are remembered' },
+            ] },
           { img: 'story/h02.png', t: 'Freeze it mid-flight', d: 'Arm the countdown from the ❄ button — or press Shift+F12 right in the app — and stage the moment while the pill floats above. At zero the open flyout stops obeying focus: it stays exactly as it was, and everything the hold keeps alive wears a ❄ badge in the tree.' },
           { img: 'story/h03.png', t: 'Walk into the frozen scene', d: 'The popup is ordinary UI now: select a menu item, read its properties, bounds and styles — nothing dismisses while the hold is on.' },
           { img: 'story/h04.png', t: 'Pin the states you need', d: 'The Styles tab grows a pin-states panel: force :pointerover, :pressed, :focus or any custom pseudo-class — the app renders it as if the mouse were still there.' },
@@ -136,7 +154,8 @@ en: {
   feat: {
     h: 'Everything you expect from DevTools', sub: 'Attach once, press F12 in any window.',
     cards: [
-      { i: '🌳', t: 'Smart tree inspector', d: 'A tree that reads like XAML: syntax colors, code-style folding, a compact pick view, one-level stepping, hide, focus, scope and search — with live sizes.' },
+      { i: '🌳', t: 'Live smart tree', d: 'A tree that reads like XAML and follows the application live: structural changes splice in as they happen and flash, with a pause button for reading. Syntax colors, code-style folding, a compact pick view, hide, focus, scope and search.' },
+      { i: '🪟', t: 'All windows, one DevTools', d: 'The tree is rooted at the application — every window is a top-level node, appearing and disappearing live. F12 anywhere focuses the same DevTools; scope gives one window the whole tree.' },
       { i: '🎯', t: 'Value tracking', d: 'Track any property across the whole tree: same value = same color, null in its own bucket, a live legend with counts — and "Fold to changes" shows every boundary at once.' },
       { i: '❄', t: 'Hold the moment', d: 'Shift+F12 freezes what your app shows right now — open popups, flyouts, tooltips, hover styling. Inspect the frozen scene like ordinary UI; Esc restores everything exactly as it was. A pin-states panel forces :focus, :disabled or any custom pseudo-class on demand.' },
       { i: '⚠️', t: 'Problems pane', d: 'Only what is broken — binding failures first — errors before warnings, each with a plain reason, a reveal link and the full binding walk. Scan now catches errors that fired before DevTools opened.' },
@@ -156,7 +175,8 @@ en: {
       { i: '📜', t: 'Log viewer', d: 'Binding errors, layout and property-system messages — even without LogToTrace(). Filtered, batched and feedback-loop safe.' },
       { i: '📊', t: 'Renderer overlays', d: 'FPS meter, layout/render time graphs and dirty-rect flashing on the inspected window, one toggle away.' },
       { i: '🕵️', t: 'Source of every value', d: 'See whether a value is default, set by hand, styled, templated or inherited — and jump to the ancestor or the exact XAML that set it.' },
-      { i: '🌒', t: 'IDE-style dark UI', d: 'Compact Rider/Unity-like controls, scoped strictly to the tool window. Your application’s theme is never touched.' },
+      { i: '🌒', t: 'IDE-style dark UI', d: 'Compact Rider/Unity-like controls, scoped strictly to the tool window — with its own bundled theme, so DevTools renders right under Fluent, Simple, a third-party theme or none. Your application’s theme is never touched.' },
+      { i: '⚙️', t: 'Settings & remappable gestures', d: 'Remap the open and hold gestures by pressing the new keys, switch the hover-inspect chord to Alt or off, tune the hold countdown, stay-on-top, live tree and update check — saved per machine.' },
     ],
   },
   quick: { h: 'Quick start', sub: 'Two lines in your App.axaml.cs — Debug builds only, nothing ships in Release.' },
@@ -167,7 +187,7 @@ en: {
     contents: 'Contents',
     groups: [
       { t: 'Getting started', ids: ['install', 'quickstart'] },
-      { t: 'Features', ids: ['problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
       { t: 'Reference', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -183,10 +203,37 @@ en: {
     <span class="k">this</span>.AttachAvaDevTools();          <span class="c">// all windows, F12 opens the tools</span>
 <span class="c">#endif</span>
 }</code></pre>
-<p>Or attach to a single window: <code>myWindow.AttachAvaDevTools()</code>. Press <span class="kbd">F12</span> in the app window to open DevTools for it. The DevTools window stays on top by default (📌 toggle in the toolbar).</p>
+<p>Or attach to a single window: <code>myWindow.AttachAvaDevTools()</code>. Press <span class="kbd">F12</span> in any window — on desktop, every window shares one DevTools rooted at the application (see <a href="#windows">All windows, one DevTools</a>). The DevTools window stays on top by default (📌 toggle in the toolbar).</p>
 <p>Hold <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> over the running app to inspect the element under the pointer — exactly like the classic DevTools.</p>
 <p>Press <span class="kbd">Shift</span>+<span class="kbd">F12</span> while the app shows a transient state — an open flyout, a tooltip, hover styling — to freeze it and inspect at leisure: see <a href="#hold">❄ Hold the moment</a>.</p>
 <p>Inside DevTools, <span class="kbd">Ctrl</span>+<span class="kbd">K</span> searches everything at once — actions, elements by the text they show, resources, properties: see <a href="#palette">Ctrl+K: find anything</a>.</p>` },
+      { id: 'livetree', t: 'Live tree', html: `<p>The tree keeps itself in step with the application. Elements appearing and disappearing splice in and out as they happen — batched four times a second — and fresh lines flash the way the live <b>Size</b> column always did. Expansion, folds, scope, focus and selection survive every update.</p>
+<h3>Step 1. Watch a change land</h3>
+<ol class="steps"><li>Expand the part of the tree you are working on.</li>
+<li>Make the application change — open a flyout, add a list row, remove a control.</li>
+<li>The change splices in within a quarter of a second; the new line flashes and fades.</li></ol>
+<p class="tip">A change with nowhere to land — something moving below a collapsed element or inside a fold — flashes the nearest line that <i>is</i> visible, so a quiet tree always means a quiet application.</p>
+<div class="shot"><img src="assets/img/docs/live-splice.png" alt="A freshly added element flashing in the live tree"><span class="cap">A spawned element right after its splice — the flash fades over a second.</span></div>
+<h3>Step 2. Pause while you read</h3>
+<p>The pulse button next to ↻ pauses live updates. Changes queue instead of moving the tree under your pointer — a dot on the button shows something is waiting. Resuming applies the queue at once, and ↻ refreshes manually in either state.</p>
+<p class="tip">Very large trees pause themselves when watching them would cost too much — the pulse’s tooltip explains, and ↻ always works.</p>
+<h3>Step 3. Opt out if you prefer snapshots</h3>
+<p>Set <code>LiveTree = false</code> in the options — or flip <b>Live tree</b> in the <a href="#settings">settings card</a> — and the tree behaves exactly as before: a snapshot that ↻ refreshes.</p>` },
+      { id: 'windows', t: 'All windows, one DevTools', html: `<p>On desktop the tree is rooted at the application: its root is the App object and every window is a top-level node — dialogs opened later included, appearing and disappearing live. One DevTools serves them all.</p>
+<h3>Step 1. Press F12 anywhere</h3>
+<ol class="steps"><li>Press <span class="kbd">F12</span> in any window of the application.</li>
+<li>The same DevTools opens or comes to front, with that window’s node selected.</li></ol>
+<div class="shot"><img src="assets/img/docs/windows-tree.png" alt="The application-rooted tree with two windows as top-level nodes"><span class="cap">The App root with two windows — the second one arrived live the moment it opened.</span></div>
+<h3>Step 2. Focus on one window</h3>
+<p>Scope to a window (<span class="kbd">S</span> on its line, or the context menu) and it becomes the whole tree, with breadcrumbs leading back to the application. Timeline, Problems, Ctrl+K and the resolution explainer span all windows either way; the 3D view renders the selected element’s window.</p>
+<p class="tip">Prefer the old behavior? <code>ClassicPerWindowMode = true</code> gives every window its own DevTools again; embedded (non-window) hosts always keep their own.</p>` },
+      { id: 'settings', t: 'Settings', html: `<p>The ⚙ button at the toolbar’s right edge opens the settings card. Choices are saved per machine, win over the options passed in code, and gestures apply immediately.</p>
+<h3>Step 1. Remap a gesture</h3>
+<ol class="steps"><li>Click the gesture box next to <b>Open DevTools</b> or <b>Hold the moment</b>.</li>
+<li>Press the new key combination — it is saved as you press it. <span class="kbd">Esc</span> cancels; × restores the default.</li></ol>
+<div class="shot"><img src="assets/img/docs/settings-card.png" alt="The settings card with gesture capture boxes"><span class="cap">The card: gestures, the hover-inspect chord, hold countdown, stay-on-top, live tree, update check.</span></div>
+<h3>Step 2. Tame the hover-inspect chord</h3>
+<p>Ctrl+Shift hover is the classic inspect gesture — and some applications use exactly that chord themselves. Switch it to <b>Alt</b>, or off entirely; the Ctrl+K entry for picking always shows the current chord.</p>` },
       { id: 'problems', t: 'Problems pane', html: `<p>A binding fails silently and the evidence is scattered: an empty control here, a log line there. The <b>Problems</b> tab collects what is broken in one list — binding failures first of all — errors before warnings, each with a plain-language reason.</p>
 <h3>Step 1. Problems arrive on their own</h3>
 <p>Binding errors and error-level app logs land in the list the moment they are logged; repeats collapse into one row with a ×N counter instead of flooding the list.</p>
@@ -304,7 +351,7 @@ en: {
 <p>The Styles tab's <b>📌 Pin states</b> panel forces pseudo-classes without flipping app logic: it scans the element's applied styles and offers exactly the states they react to — <code>:disabled</code>, <code>:focus</code>, plus whatever custom states the theme defines.</p>
 <div class="shot"><img src="assets/img/docs/hold-pinstates.png" alt="The Pin states panel offering :pointerover, :pressed, :focus and other states"><span class="cap">Only the states the element actually reacts to are offered — ● marks the active ones.</span></div>
 <p>Pinned elements get a 📌 on their tree line; pins share the ❄ restore ledger, so releasing restores everything.</p>` },
-      { id: 'tree', t: 'Smart tree inspector', html: `<p>The tree panel is a read-only, code-editor-style view of your UI: elements render as syntax-colored pseudo-XAML lines (<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>) with fold chevrons, indent guides and a live <b>Size</b> column that flashes when an element changes. Two modes match Avalonia exactly: <b>Visual tree</b> (<code>GetVisualChildren</code>, default) and <b>Logical tree</b> (<code>GetLogicalChildren</code>).</p>
+      { id: 'tree', t: 'Smart tree inspector', html: `<p>The tree panel is a read-only, code-editor-style view of your UI: elements render as syntax-colored pseudo-XAML lines (<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>) with fold chevrons, indent guides and a live <b>Size</b> column that flashes when an element changes. Two modes match Avalonia exactly: <b>Visual tree</b> (<code>GetVisualChildren</code>, default) and <b>Logical tree</b> (<code>GetLogicalChildren</code>). The whole tree follows the application live — see <a href="#livetree">Live tree</a>.</p>
 <h3>Step 1. Pick an element</h3>
 <ol class="steps"><li>Click <b>⌖</b> and pick in the app — or just hold <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> over it.</li>
 <li>The tree rebuilds into a compact view: the window, your user controls on the path, the control owning the picked template part, and the element itself.</li></ol>
@@ -433,6 +480,8 @@ en: {
     Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// default: F12</span>
     HoldGesture          = <span class="k">new</span> KeyGesture(Key.F11, KeyModifiers.Shift), <span class="c">// ❄ hold — default: Shift+F12</span>
     HoldCountdownSeconds = 5,                                  <span class="c">// ❄ button countdown — default: 3</span>
+    LiveTree             = <span class="k">false</span>,                              <span class="c">// snapshot + ↻ instead of the live tree — default: true</span>
+    ClassicPerWindowMode = <span class="k">true</span>,                               <span class="c">// one DevTools per window — default: false (one per application)</span>
     WindowSize           = <span class="k">new</span> Size(1280, 760),
     StayOnTop            = <span class="k">false</span>,                              <span class="c">// default: true</span>
 });</code></pre>` },
@@ -451,10 +500,10 @@ en: {
 <li>The tree is a snapshot — use ↻ Refresh after structural UI changes (property values update live).</li></ul>` },
       { id: 'feedback', t: 'Feedback', html: `<p>The <b>Feedback</b> button in the toolbar's top-right corner opens the AvaDevTools issue tracker — report a bug or ask for a feature in one click. The same action lives in <span class="kbd">Ctrl</span>+<span class="kbd">K</span> as "Send feedback".</p>
 <p>Prefer chat? The <a href="https://t.me/avadevtools">Telegram channel</a> takes questions and quick help.</p>` },
-      { id: 'updates', t: 'Update notifications', html: `<p>New AvaDevTools versions bring new panes and fixes, but a NuGet dependency never announces them on its own. When a newer version is published, an <b>Update</b> badge appears in the toolbar, next to <b>Feedback</b>.</p>
-<p>Hover the badge to see what to do: the version to update to, a copyable <code>dotnet add package</code> command, the release notes, and a link to the <a href="releases.html">releases page</a>.</p>
-<div class="shot"><img src="assets/img/docs/update-badge.png" alt="The Update badge with its hint card open"><span class="cap">The badge and its hint card — the release notes load together with the check, so reading them costs no extra click.</span></div>
-<p>The check asks the site for a small manifest at most once a day and remembers the answer between runs, so the badge can appear even when you start offline. If the site is unreachable or the answer does not parse, nothing happens — the badge simply stays hidden. Set <code>AVA_DEVTOOLS_UPDATE_CHECK=0</code> to turn the check off entirely.</p>` },
+      { id: 'updates', t: 'Update notifications', html: `<p>The toolbar always shows the version you are running, dimmed, next to <b>Feedback</b>. New AvaDevTools versions bring new panes and fixes, but a NuGet dependency never announces them on its own — so when a newer version is published, that same label turns blue and grows an <b>↑</b>.</p>
+<p>Click it (or just hover) to see what to do: the version to update to, a copyable <code>dotnet add package</code> command, the release notes, and a link to the <a href="releases.html">releases page</a>.</p>
+<div class="shot"><img src="assets/img/docs/update-badge.png" alt="The lit version label with its hint card open"><span class="cap">The label still names the version you run; the card names the one that is out — release notes load together with the check, so reading them costs no extra click.</span></div>
+<p>The check asks the site for a small manifest at most once a day and remembers the answer between runs, so the arrow can appear even when you start offline. If the site is unreachable or the answer does not parse, nothing happens — the label stays a plain version number. Set <code>AVA_DEVTOOLS_UPDATE_CHECK=0</code> to turn the check off entirely.</p>` },
     ],
   },
   rel: {
@@ -476,27 +525,46 @@ uk: {
     get: 'Почати', stories: 'Подивитися в дії', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.1.2', docs: 'Документація →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.1.3', docs: 'Документація →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   stories: {
-    h: 'Історії', wn: 'find',
+    h: 'Історії', wn: 'live',
     lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
     list: [
+      { key: 'live', h: '⚡ Дерево показує «зараз»', sub: 'Живе дерево всіх вікон застосунку — зміни з’являються щойно стаються, інструмент має власну тему, а жести перепризначаються у картці налаштувань.',
+        steps: [
+          { t: '⚡ Дерево показує «зараз»',
+            d: 'Дерево було знімком: відкрили діалог, розгорнули флаяут, додали рядок — а воно показувало світ таким, яким той був на момент останнього Refresh.',
+            d2: 'Дерево показує «зараз»: воно живе разом із застосунком, усі вікна живуть в одному DevTools із коренем-застосунком, інструмент має власну тему, а жести перепризначаються у картці налаштувань.',
+            newsTitle: 'Нове у 12.1.3',
+            news: [
+              { k: 'Живе дерево', d: 'що йде за застосунком — діалоги, флаяути й нові рядки з’являються щойно стаються' },
+              { k: 'Кнопка паузи', d: 'ставить зміни в чергу за крапкою замість того, щоб рухати дерево під вказівником' },
+              { k: 'Один DevTools на всі вікна', d: 'із коренем-застосунком, діалоги включно' },
+              { k: 'Власна тема', d: 'тож інструмент виглядає як слід із будь-якою темою застосунку чи без неї' },
+              { k: 'Перепризначувані жести', d: 'у картці налаштувань — просто натисніть нові клавіші для відкриття, hold і hover-inspect' },
+              { k: 'Версія на панелі', d: 'синіє і отримує ↑, коли вийшла новіша — клацніть, щоб побачити нотатки' },
+            ] },
+          { img: 'story/l02.png', t: 'Зміни з’являються щойно стаються', d: 'Додайте рядок, відкрийте флаяут, приберіть контрол — дерево вплітає зміну за чверть секунди, і новий рядок спалахує, як завжди спалахували живі розміри. Розгортання, згортки, scope і виділення переживають кожне оновлення.' },
+          { img: 'story/l03.png', t: 'Пауза, коли треба читати', d: 'Кнопка-пульс поруч із Refresh ставить живі оновлення на паузу; зміни стають у чергу за крапкою замість того, щоб рухати дерево під вказівником. Продовження застосовує чергу одразу — а Refresh працює в обох станах.' },
+          { img: 'story/l04.png', t: 'Усі вікна — один DevTools', d: 'Корінь дерева — застосунок: кожне вікно є вузлом верхнього рівня, діалоги включно, і вони з’являються та зникають наживо. F12 у будь-якому вікні фокусує той самий DevTools і виділяє це вікно.' },
+          { img: 'story/l05.png', t: 'Scope на одне вікно', d: 'Scope на вікно віддає йому все дерево, з хлібними крихтами назад до застосунку. Timeline, Problems і пошук у будь-якому разі охоплюють усі вікна.' },
+          { img: 'story/l06.png', t: 'Зробіть інструмент своїм', d: 'Картка налаштувань перепризначає жести відкриття і hold простим натисканням нових клавіш, перемикає hover-inspect на Alt, коли Ctrl+Shift конфліктує з застосунком, і керує зворотним відліком, stay-on-top, живим деревом та перевіркою оновлень. А ще DevTools тепер має власну тему — і виглядає як слід із будь-якою темою застосунку чи без неї.' },
+        ] },
       { key: 'find', h: '🔎 Знайти все', sub: 'Що зламалося, елемент із цими словами, який ресурс переміг, хто обробив подію — знайдено в одному місці.',
         steps: [
           { t: '🔎 Знайти все',
             d: 'Ваш застосунок знає, що не так — впалий біндінг, затінений ресурс, обробник, що проковтнув клік. Докази ж були розкидані по логах, словниках і коду.',
             d2: 'Знайти все: панель Problems збирає зламане, Ctrl+K знаходить будь-що за словами на екрані, ресурси пояснюють себе, події називають обробник, а посилання file:line відкривають ваш власний IDE.',
-            painsTitle: 'До 12.1.2',
-            pains: [
-              { k: 'Біндінг падає', d: 'мовчки на старті — до того, як хоч щось слухає' },
-              { k: 'Редагування ресурсу', d: 'нічого не змінює, бо виграє інше визначення' },
-              { k: 'Подію', d: 'хтось обробив — але хто саме, шукати вам' },
-              { k: 'Посилання file:line', d: 'відкриває не той редактор або другу копію того самого' },
-            ],
-            hook: 'Один реліз знаходить усе — проблеми, елементи, ресурси, обробники.',
-            hookIco: '🔎' },
+            newsTitle: 'Нове у 12.1.2',
+            news: [
+              { k: 'Панель Problems', d: 'збирає помилки біндінгів, помилки застосунку та дубльовані ключі ресурсів — кожну зі зрозумілою причиною' },
+              { k: 'Пошук Ctrl+K', d: 'по діях, елементах, ресурсах і властивостях — наберіть слова, які бачите на екрані' },
+              { k: 'Резолюція ресурсів', d: 'показує кожне визначення ключа в порядку резолюції, переможець позначений' },
+              { k: 'Обробники на ім’я', d: 'у маршруті події — MainWindow.OnDeployClick, із посиланням на код' },
+              { k: 'Посилання file:line', d: 'відкривають ваш власний IDE — знайдений під платформу, працюючі вікна використовуються повторно' },
+            ] },
           { img: 'story/f02.png', t: 'Усе зламане — одним списком', d: 'Панель Problems збирає помилки біндінгів, помилки застосунку та дубльовані ключі ресурсів — помилки першими, кожна зі зрозумілою причиною. Scan now перевіряє кожен живий біндінг і ловить те, що впало до відкриття DevTools.' },
           { img: 'story/f03.png', t: 'Ctrl+K знаходить будь-що', d: 'Один пошук по діях, елементах, ресурсах і властивостях — з категоріями в міру набору. Наберіть слова з екрана й знайдіть те, що їх показує; порожній запит показує всі дії.' },
           { img: 'story/f04.png', t: 'Який ресурс переміг?', d: 'Кожне визначення ключа в порядку резолюції — переможець позначений, затінені закреслено, означальний XAML на один клік нижче. Редагування застосовуються наживо.' },
@@ -508,15 +576,14 @@ uk: {
           { t: '🔍 Explain everything',
             d: 'DevTools показують кожне значення. Але чому воно саме таке — ширина, стрибок фокуса, вміст DataContext — досі доводилося з’ясовувати самотужки.',
             d2: 'Explain everything: вкладка Layout пояснює, як елемент отримав свій розмір, будь-яке значення відкривається в інспекторі, зміни фокуса лягають на таймлайн, а градієнтні пензлі отримали візуальний редактор.',
-            painsTitle: 'До 12.1.1',
-            pains: [
-              { k: 'Ширина 349', d: 'зʼявилася — і ніщо не каже, хто її вирішив' },
-              { k: 'В’ю-модель', d: 'це назва типу, всередину якої не зазирнути' },
-              { k: 'Фокус', d: 'стрибає кудись, і ніщо не фіксує чому' },
-              { k: 'Градієнт', d: 'пише LinearGradientBrush — редагуйте наосліп' },
-            ],
-            hook: 'Один реліз пояснює все — розміри, значення, фокус, градієнти.',
-            hookIco: '🔍' },
+            newsTitle: 'Нове у 12.1.1',
+            news: [
+              { k: 'Вкладка Layout', d: 'відновлює, як елемент отримав свій розмір — аж до властивості, що це вирішила' },
+              { k: 'Інспектор значень', d: 'на кожному посилальному значенні — властивості й поля наживо, вкладені об’єкти включно' },
+              { k: 'Пошук і закріплення', d: 'усередині великих об’єктів: тип відкривається лише з потрібними членами' },
+              { k: 'Фокус на таймлайні', d: 'поруч із подіями, що його спричинили, а сфокусований елемент завжди названо' },
+              { k: 'Редактор градієнтів', d: 'колірні стопи, зсуви, геометрія і режим spread — із живим прев’ю' },
+            ] },
           { img: 'story/e02.png', t: 'Чому такий розмір?', d: 'Вкладка Layout відновлює рішення: що запропонував батько, що попросив елемент, яке обмеження вирішило і що вирівнювання зробило з рештою місця. Вирішальна властивість веде просто туди, де її задано, а панель 3×3 редагує вирівнювання одним кліком.' },
           { img: 'story/e03.png', t: 'Інспектуйте будь-яке значення', d: 'Кожне посилальне значення у Properties має 🔍 — DataContext відкривається живою карткою: властивості й поля, вкладені об’єкти для заглиблення, 👁 спостереження на таймлайні, перехід до C#-коду.' },
           { img: 'story/e04.png', t: 'Шукайте і закріплюйте потрібне', d: 'Великі об’єкти залишаються керованими: шукайте члени за іменем чи значенням, закріплюйте важливі — тип відкриється лише з ними, решта за «show all».' },
@@ -528,14 +595,14 @@ uk: {
           { t: '❄ Hold the moment',
             d: 'Тултіпи, флаяути та hover-стилі живуть, лише поки їх тримає курсор — щойно ви тягнетеся до інспектора, те, за чим ви полювали, закривається саме.',
             d2: 'Заморозьте попапи, флаяути, тултіпи та hover-стилі одним жестом — натисніть Shift+F12, поки застосунок показує потрібний момент — і досліджуйте заморожену сцену як будь-що інше. Плюс панель закріплення станів, копіювання баг-репорту та меню в стилі Office.',
-            painsTitle: 'Без Hold',
-            pains: [
-              { k: 'Флаяут', d: 'закривається від першого кліку повз нього' },
-              { k: 'Тултіп', d: 'зникає, щойно курсор відходить' },
-              { k: ':pointerover-стиль', d: 'пропадає ще до відкриття інспектора' },
-              { k: 'Підсвітка перетягування', d: 'живе, лише поки затиснута кнопка' },
-            ],
-            hook: 'Hold заморожує все це — одним жестом, на льоту.' },
+            newsTitle: 'Нове з Hold',
+            news: [
+              { k: 'Один жест заморозки', d: 'Shift+F12 утримує попапи, флаяути, тултіпи та hover-стилі точно такими, як вони є' },
+              { k: 'Заморожена сцена', d: 'якою можна ходити: попап тепер звичайний UI — виділяйте, читайте властивості, межі та стилі' },
+              { k: 'Панель закріплення станів', d: 'вмикає :pointerover, :pressed, :focus чи будь-який власний псевдоклас' },
+              { k: 'Копіювання баг-репорту', d: 'DPI-коректний скриншот або псевдо-XAML шлях, межі та всі недефолтні властивості' },
+              { k: 'Чисте зняття', d: 'Esc повертає все точно як було, а власні відліки запам’ятовуються' },
+            ] },
           { img: 'story/h02.png', t: 'Заморозьте на льоту', d: 'Озбройте відлік кнопкою ❄ — або натисніть Shift+F12 просто в застосунку — і підготуйте сцену, поки таймер спливає над вікном. На нулі відкритий флаяут перестає слухатись фокуса: він залишається точно як був, а все, що утримує заморозка, отримує в дереві значок ❄.' },
           { img: 'story/h03.png', t: 'Увійдіть у заморожену сцену', d: 'Попап тепер — звичайний UI: виберіть пункт меню, читайте його властивості, межі та стилі — ніщо не закривається, поки діє hold.' },
           { img: 'story/h04.png', t: 'Закріпіть потрібні стани', d: 'У вкладці Styles з’являється панель закріплення станів: увімкніть :pointerover, :pressed, :focus чи будь-який власний псевдоклас — застосунок рендерить його, ніби миша досі там.' },
@@ -600,7 +667,8 @@ uk: {
   feat: {
     h: 'Усе, що очікуєш від DevTools', sub: 'Підключіть один раз і натискайте F12 у будь-якому вікні.',
     cards: [
-      { i: '🌳', t: 'Розумне дерево', d: 'Дерево, що читається як XAML: підсвічування синтаксису, згортання як у редакторі, компактний вигляд після вибору, покрокове розкриття, hide, focus, scope і пошук.' },
+      { i: '🌳', t: 'Живе розумне дерево', d: 'Дерево, що читається як XAML і живе разом із застосунком: структурні зміни вплітаються щойно стаються і спалахують, а кнопка паузи дає спокійно читати. Підсвічування синтаксису, згортання як у редакторі, компактний вигляд після вибору, hide, focus, scope і пошук.' },
+      { i: '🪟', t: 'Усі вікна — один DevTools', d: 'Корінь дерева — застосунок: кожне вікно є вузлом верхнього рівня і з’являється та зникає наживо. F12 будь-де фокусує той самий DevTools; scope віддає одному вікну все дерево.' },
       { i: '🎯', t: 'Трекінг значень', d: 'Відстежуйте будь-яку властивість по всьому дереву: однакове значення = однаковий колір, null у власній групі, жива легенда з лічильниками — а «Fold to changes» показує всі межі одразу.' },
       { i: '❄', t: 'Hold the moment', d: 'Shift+F12 заморожує те, що застосунок показує просто зараз — відкриті попапи, флаяути, тултіпи, hover-стилі. Досліджуйте заморожену сцену як звичайний UI; Esc відновлює все точно як було. Панель pin states вмикає :focus, :disabled чи будь-який кастомний псевдоклас на вимогу.' },
       { i: '⚠️', t: 'Панель Problems', d: 'Лише зламане — насамперед помилки біндінгів — помилки перед попередженнями, кожна зі зрозумілою причиною, посиланням reveal і повним розбором біндінгу. Scan now ловить помилки, що сталися до відкриття DevTools.' },
@@ -620,7 +688,8 @@ uk: {
       { i: '📜', t: 'Перегляд логів', d: 'Помилки біндінгів, layout і система властивостей — навіть без LogToTrace(). З фільтрами, батчингом і захистом від зациклення.' },
       { i: '📊', t: 'Оверлеї рендерера', d: 'Лічильник FPS, графіки часу layout/render та підсвічування dirty-rect — одним перемикачем.' },
       { i: '🕵️', t: 'Джерело кожного значення', d: 'Одразу видно: значення типове, задане вручну, зі стилю, шаблону чи успадковане — з переходом до предка або точного місця в XAML.' },
-      { i: '🌒', t: 'Темна тема в стилі IDE', d: 'Компактні елементи в дусі Rider/Unity, лише у вікні інструментів. Тема вашого застосунку не змінюється.' },
+      { i: '🌒', t: 'Темна тема в стилі IDE', d: 'Компактні елементи в дусі Rider/Unity, лише у вікні інструментів — із власною вбудованою темою, тож DevTools однаково виглядає з Fluent, Simple, сторонньою темою чи без жодної. Тема вашого застосунку не змінюється.' },
+      { i: '⚙️', t: 'Налаштування і свої жести', d: 'Перепризначайте жести відкриття та hold простим натисканням нових клавіш, перемикайте hover-inspect на Alt або вимикайте, керуйте зворотним відліком, stay-on-top, живим деревом і перевіркою оновлень — усе зберігається на цій машині.' },
     ],
   },
   quick: { h: 'Швидкий старт', sub: 'Два рядки в App.axaml.cs — лише в Debug, у Release нічого не потрапляє.' },
@@ -631,7 +700,7 @@ uk: {
     contents: 'Зміст',
     groups: [
       { t: 'Початок роботи', ids: ['install', 'quickstart'] },
-      { t: 'Можливості', ids: ['problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
       { t: 'Довідник', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -647,10 +716,37 @@ uk: {
     <span class="k">this</span>.AttachAvaDevTools();
 <span class="c">#endif</span>
 }</code></pre>
-<p>Або для одного вікна: <code>myWindow.AttachAvaDevTools()</code>. Натисніть <span class="kbd">F12</span> у вікні застосунку. Вікно DevTools за замовчуванням поверх інших (перемикач 📌 на панелі).</p>
+<p>Або для одного вікна: <code>myWindow.AttachAvaDevTools()</code>. Натисніть <span class="kbd">F12</span> у будь-якому вікні — на десктопі всі вікна ділять один DevTools із коренем-застосунком (див. <a href="#windows">Усі вікна — один DevTools</a>). Вікно DevTools за замовчуванням поверх інших (перемикач 📌 на панелі).</p>
 <p>Утримуйте <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> над застосунком, щоб інспектувати елемент під курсором — як у класичних DevTools.</p>
 <p>Натисніть <span class="kbd">Shift</span>+<span class="kbd">F12</span>, поки застосунок показує перехідний стан — відкритий флаяут, тултіп, hover-стиль — щоб заморозити його й дослідити без поспіху: див. <a href="#hold">❄ Hold the moment</a>.</p>
 <p>Усередині DevTools <span class="kbd">Ctrl</span>+<span class="kbd">K</span> шукає по всьому одразу — дії, елементи за текстом на екрані, ресурси, властивості: див. <a href="#palette">Ctrl+K: знайти будь-що</a>.</p>` },
+      { id: 'livetree', t: 'Живе дерево', html: `<p>Дерево саме тримає себе в актуальному стані. Елементи, що з’являються і зникають, вплітаються та випадають щойно це стається — пакетами чотири рази на секунду — і свіжі рядки спалахують так само, як завжди спалахувала жива колонка <b>Size</b>. Розгортання, згортки, scope, focus і виділення переживають кожне оновлення.</p>
+<h3>Крок 1. Побачте, як зміна прилітає</h3>
+<ol class="steps"><li>Розгорніть ту частину дерева, з якою працюєте.</li>
+<li>Змусьте застосунок змінитися — відкрийте флаяут, додайте рядок списку, приберіть контрол.</li>
+<li>Зміна вплітається за чверть секунди; новий рядок спалахує і згасає.</li></ol>
+<p class="tip">Зміні, якій нема куди приземлитися — щось рухається під згорнутим елементом або всередині згортки — спалахує найближчий <i>видимий</i> рядок, тож тихе дерево завжди означає тихий застосунок.</p>
+<div class="shot"><img src="assets/img/docs/live-splice.png" alt="Щойно доданий елемент спалахує в живому дереві"><span class="cap">Новий елемент одразу після вплітання — спалах згасає впродовж секунди.</span></div>
+<h3>Крок 2. Пауза, поки читаєте</h3>
+<p>Кнопка-пульс поруч із ↻ ставить живі оновлення на паузу. Зміни стають у чергу замість того, щоб рухати дерево під вказівником — крапка на кнопці показує, що щось чекає. Продовження застосовує чергу одразу, а ↻ оновлює вручну в будь-якому стані.</p>
+<p class="tip">Дуже великі дерева ставлять себе на паузу самі, коли спостереження коштувало б надто дорого — тултіп пульса пояснює, а ↻ працює завжди.</p>
+<h3>Крок 3. Вимкніть, якщо любите знімки</h3>
+<p>Задайте <code>LiveTree = false</code> в опціях — або перемкніть <b>Live tree</b> у <a href="#settings">картці налаштувань</a> — і дерево поводиться точно як раніше: знімок, який оновлює ↻.</p>` },
+      { id: 'windows', t: 'Усі вікна — один DevTools', html: `<p>На десктопі корінь дерева — застосунок: його корінь — об’єкт App, а кожне вікно є вузлом верхнього рівня — включно з діалогами, відкритими пізніше, які з’являються і зникають наживо. Один DevTools обслуговує їх усі.</p>
+<h3>Крок 1. Натисніть F12 будь-де</h3>
+<ol class="steps"><li>Натисніть <span class="kbd">F12</span> у будь-якому вікні застосунку.</li>
+<li>Відкриється чи вийде на передній план той самий DevTools із виділеним вузлом цього вікна.</li></ol>
+<div class="shot"><img src="assets/img/docs/windows-tree.png" alt="Дерево з коренем-застосунком і двома вікнами як вузлами верхнього рівня"><span class="cap">Корінь App із двома вікнами — друге з’явилося наживо тієї ж миті, коли відкрилося.</span></div>
+<h3>Крок 2. Зосередьтеся на одному вікні</h3>
+<p>Зробіть scope на вікно (<span class="kbd">S</span> на його рядку або контекстне меню) — і воно стане всім деревом, із хлібними крихтами назад до застосунку. Timeline, Problems, Ctrl+K і пояснення ресурсів у будь-якому разі охоплюють усі вікна; 3D-вигляд рендерить вікно виділеного елемента.</p>
+<p class="tip">Хочете стару поведінку? <code>ClassicPerWindowMode = true</code> знову дає кожному вікну власний DevTools; вбудовані (невіконні) хости завжди мають власний.</p>` },
+      { id: 'settings', t: 'Налаштування', html: `<p>Кнопка ⚙ праворуч на панелі інструментів відкриває картку налаштувань. Вибір зберігається на цій машині, має пріоритет над опціями з коду, а жести застосовуються одразу.</p>
+<h3>Крок 1. Перепризначте жест</h3>
+<ol class="steps"><li>Клацніть поле жесту біля <b>Open DevTools</b> або <b>Hold the moment</b>.</li>
+<li>Натисніть нову комбінацію — вона зберігається в момент натискання. <span class="kbd">Esc</span> скасовує; × повертає типове.</li></ol>
+<div class="shot"><img src="assets/img/docs/settings-card.png" alt="Картка налаштувань із полями захоплення жестів"><span class="cap">Картка: жести, hover-inspect, зворотний відлік hold, stay-on-top, живе дерево, перевірка оновлень.</span></div>
+<h3>Крок 2. Приборкайте hover-inspect</h3>
+<p>Ctrl+Shift при наведенні — класичний жест інспекції, а деякі застосунки використовують саме цю комбінацію. Перемкніть її на <b>Alt</b> або вимкніть зовсім; пункт вибору елемента в Ctrl+K завжди показує поточну комбінацію.</p>` },
       { id: 'problems', t: 'Панель Problems', html: `<p>Біндінг падає мовчки, а докази розкидані: тут порожній контрол, там рядок у логу. Вкладка <b>Problems</b> збирає все зламане в один список — насамперед помилки біндінгів — помилки перед попередженнями, кожна зі зрозумілою причиною.</p>
 <h3>Крок 1. Проблеми приходять самі</h3>
 <p>Помилки біндінгів і error-логи застосунку потрапляють до списку одразу, щойно їх залоговано; повтори згортаються в один рядок із лічильником ×N — список не затоплює.</p>
@@ -768,7 +864,7 @@ uk: {
 <p>Панель <b>📌 Pin states</b> у вкладці Styles форсує псевдокласи без жодної логіки застосунку: вона сканує застосовані стилі елемента й пропонує саме ті стани, на які вони реагують — <code>:disabled</code>, <code>:focus</code>, плюс кастомні стани теми.</p>
 <div class="shot"><img src="assets/img/docs/hold-pinstates.png" alt="Панель Pin states зі станами :pointerover, :pressed, :focus та іншими"><span class="cap">Пропонуються лише стани, на які елемент справді реагує — ● позначає активні.</span></div>
 <p>Закріплені елементи отримують 📌 на рядку дерева; піни ділять реєстр відновлення з ❄ — відпускання повертає все.</p>` },
-      { id: 'tree', t: 'Розумний інспектор дерева', html: `<p>Панель дерева — це «редактор коду» лише для читання: елементи відображаються як підсвічені псевдо-XAML рядки (<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>) зі шевронами згортання, лініями відступів і живою колонкою <b>Size</b>, що спалахує при зміні. Два режими точно відповідають Avalonia: <b>Visual tree</b> (<code>GetVisualChildren</code>, за замовчуванням) і <b>Logical tree</b> (<code>GetLogicalChildren</code>).</p>
+      { id: 'tree', t: 'Розумний інспектор дерева', html: `<p>Панель дерева — це «редактор коду» лише для читання: елементи відображаються як підсвічені псевдо-XAML рядки (<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>) зі шевронами згортання, лініями відступів і живою колонкою <b>Size</b>, що спалахує при зміні. Два режими точно відповідають Avalonia: <b>Visual tree</b> (<code>GetVisualChildren</code>, за замовчуванням) і <b>Logical tree</b> (<code>GetLogicalChildren</code>). Усе дерево живе разом із застосунком — див. <a href="#livetree">Живе дерево</a>.</p>
 <h3>Крок 1. Виберіть елемент</h3>
 <ol class="steps"><li>Натисніть <b>⌖</b> і вкажіть елемент у застосунку — або просто утримуйте <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span> над ним.</li>
 <li>Дерево перебудовується в компактний вигляд: вікно, ваші user controls на шляху, контрол-власник вибраної частини шаблону та сам елемент.</li></ol>
@@ -897,6 +993,8 @@ uk: {
     Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// типово: F12</span>
     HoldGesture          = <span class="k">new</span> KeyGesture(Key.F11, KeyModifiers.Shift), <span class="c">// ❄ hold — типово: Shift+F12</span>
     HoldCountdownSeconds = 5,                                  <span class="c">// відлік кнопки ❄ — типово: 3</span>
+    LiveTree             = <span class="k">false</span>,                              <span class="c">// знімок + ↻ замість живого дерева — типово: true</span>
+    ClassicPerWindowMode = <span class="k">true</span>,                               <span class="c">// окремий DevTools на вікно — типово: false (один на застосунок)</span>
     WindowSize           = <span class="k">new</span> Size(1280, 760),
     StayOnTop            = <span class="k">false</span>,                              <span class="c">// типово: true</span>
 });</code></pre>` },
@@ -915,10 +1013,10 @@ uk: {
 <li>Дерево — знімок: після структурних змін UI натисніть ↻ Refresh (значення властивостей оновлюються наживо).</li></ul>` },
       { id: 'feedback', t: 'Фідбек', html: `<p>Кнопка <b>Feedback</b> у правому верхньому куті панелі відкриває трекер задач AvaDevTools — повідомте про баг чи попросіть фічу одним кліком. Та сама дія живе у <span class="kbd">Ctrl</span>+<span class="kbd">K</span> як «Send feedback».</p>
 <p>Зручніше в чаті? <a href="https://t.me/avadevtools">Telegram-канал</a> приймає запитання та швидку допомогу.</p>` },
-      { id: 'updates', t: 'Сповіщення про оновлення', html: `<p>Нові версії AvaDevTools приносять нові вкладки й виправлення, але NuGet-залежність сама про них не оголошує. Коли виходить новіша версія, у панелі поруч із <b>Feedback</b> з'являється значок <b>Update</b>.</p>
-<p>Наведіть на значок, щоб побачити, що робити: версію, до якої оновитись, команду <code>dotnet add package</code> для копіювання, нотатки релізу та посилання на <a href="releases.html">сторінку релізів</a>.</p>
-<div class="shot"><img src="assets/img/docs/update-badge.png" alt="Значок Update з відкритою карткою-підказкою"><span class="cap">Значок і його картка — нотатки релізу завантажуються разом із перевіркою, тож читання не коштує жодного зайвого кліку.</span></div>
-<p>Перевірка запитує в сайту невеликий маніфест щонайбільше раз на день і пам'ятає відповідь між запусками, тож значок може з'явитися навіть після старту офлайн. Якщо сайт недоступний або відповідь не розбирається, нічого не станеться — значок просто залишиться прихованим. Змінна <code>AVA_DEVTOOLS_UPDATE_CHECK=0</code> вимикає перевірку повністю.</p>` },
+      { id: 'updates', t: 'Сповіщення про оновлення', html: `<p>Панель завжди показує версію, яку ви запустили, — приглушено, поруч із <b>Feedback</b>. Нові версії AvaDevTools приносять нові вкладки й виправлення, але NuGet-залежність сама про них не оголошує, тож коли виходить новіша версія, цей самий напис стає синім і отримує <b>↑</b>.</p>
+<p>Клацніть його (або просто наведіть), щоб побачити, що робити: версію, до якої оновитись, команду <code>dotnet add package</code> для копіювання, нотатки релізу та посилання на <a href="releases.html">сторінку релізів</a>.</p>
+<div class="shot"><img src="assets/img/docs/update-badge.png" alt="Підсвічений напис версії з відкритою карткою-підказкою"><span class="cap">Напис і далі називає вашу версію, а картка — ту, що вийшла: нотатки релізу завантажуються разом із перевіркою, тож читання не коштує жодного зайвого кліку.</span></div>
+<p>Перевірка запитує в сайту невеликий маніфест щонайбільше раз на день і пам'ятає відповідь між запусками, тож стрілка може з'явитися навіть після старту офлайн. Якщо сайт недоступний або відповідь не розбирається, нічого не станеться — напис лишиться звичайним номером версії. Змінна <code>AVA_DEVTOOLS_UPDATE_CHECK=0</code> вимикає перевірку повністю.</p>` },
     ],
   },
   rel: {
@@ -940,27 +1038,46 @@ zh: {
     get: '快速上手', stories: '看实际效果', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.1.2 新特性', docs: '文档 →', notes: '版本历史 →' },
+  wn: { h: '12.1.3 新特性', docs: '文档 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   stories: {
-    h: '功能演示', wn: 'find',
+    h: '功能演示', wn: 'live',
     lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
     list: [
+      { key: 'live', h: '⚡ 树显示「现在」', sub: '应用所有窗口的实时树 —— 变化即时呈现，工具自带主题，手势可在设置卡中重新映射。',
+        steps: [
+          { t: '⚡ 树显示「现在」',
+            d: '过去树只是快照：打开对话框、展开浮出菜单、添加一行 —— 树仍停留在上次 Refresh 时的世界。',
+            d2: '树显示「现在」：它实时跟随应用，所有窗口都在同一个以应用为根的 DevTools 里，工具自带主题，手势可在设置卡中重新映射。',
+            newsTitle: '12.1.3 新增',
+            news: [
+              { k: '实时树', d: '跟随应用 —— 对话框、浮出菜单和新增的行即时呈现' },
+              { k: '暂停按钮', d: '把变化排入队列并以小圆点提示，而不是在指针下移动树' },
+              { k: '所有窗口共用一个 DevTools', d: '以应用为根，对话框也不例外' },
+              { k: '自带主题', d: '无论应用用什么主题、甚至没有主题，工具都显示正常' },
+              { k: '可重映射的手势', d: '在设置卡中按下新键即可改写打开、Hold 与悬停检查' },
+              { k: '工具栏上的版本号', d: '有新版本时变蓝并长出 ↑ —— 点击即可查看发布说明' },
+            ] },
+          { img: 'story/l02.png', t: '变化即时呈现', d: '添加一行、打开浮出菜单、移除一个控件 —— 树会在四分之一秒内拼入变化，新行像实时尺寸一样闪烁提示。展开、折叠、Scope 与选中在每次更新后原样保留。' },
+          { img: 'story/l03.png', t: '需要细读时先暂停', d: 'Refresh 旁的脉冲按钮暂停实时更新；变化排入队列并以小圆点提示，而不是在指针下移动树。恢复时队列立即生效 —— Refresh 在两种状态下都可用。' },
+          { img: 'story/l04.png', t: '所有窗口，一个 DevTools', d: '树以应用为根：每个窗口都是顶层节点，对话框也不例外，实时出现与消失。在任意窗口按 F12 都聚焦同一个 DevTools 并选中该窗口。' },
+          { img: 'story/l05.png', t: 'Scope 到单个窗口', d: '对窗口使用 Scope，它就拥有整棵树，面包屑一路指回应用。无论如何，Timeline、Problems 与搜索都覆盖所有窗口。' },
+          { img: 'story/l06.png', t: '把工具调成你的', d: '设置卡按下新键即可重映射打开与 Hold 手势；当 Ctrl+Shift 与应用冲突时可把悬停检查改为 Alt；还能调整倒计时、置顶、实时树与更新检查。DevTools 现在自带主题 —— 无论应用用什么主题，甚至没有主题，它都显示正常。' },
+        ] },
       { key: 'find', h: '🔎 找到一切', sub: '哪里坏了、显示这些字的元素、哪个资源赢了、谁处理了事件 —— 都在一处找到。',
         steps: [
           { t: '🔎 找到一切',
             d: '应用自己知道哪里不对 —— 失败的绑定、被遮蔽的资源、吞掉点击的处理器。证据却散落在日志、字典和代码之间。',
             d2: '找到一切：Problems 面板收集坏掉的东西，Ctrl+K 凭屏幕上的字找到任何东西，资源自己解释自己，事件点名运行过的处理器，file:line 链接打开你自己的 IDE。',
-            painsTitle: '12.1.2 之前',
-            pains: [
-              { k: '绑定失败', d: '在启动时悄无声息 —— 那时还没有任何捕获在听' },
-              { k: '改了资源', d: '什么也不变，因为赢的是另一个定义' },
-              { k: '事件被处理了', d: '在某个地方 —— 哪个地方要你自己找' },
-              { k: 'file:line 链接', d: '打开错误的编辑器，或对的那个的第二份' },
-            ],
-            hook: '一个版本找到全部 —— 问题、元素、资源、处理器。',
-            hookIco: '🔎' },
+            newsTitle: '12.1.2 新增',
+            news: [
+              { k: 'Problems 面板', d: '收集绑定失败、应用错误和重复定义的资源键，每条都有一句白话原因' },
+              { k: 'Ctrl+K 搜索', d: '覆盖动作、元素、资源和属性 —— 输入你在屏幕上看到的字' },
+              { k: '资源解析视图', d: '按解析顺序列出一个键的每个定义，赢家有标记' },
+              { k: '点名的处理器', d: '出现在事件路由上 —— MainWindow.OnDeployClick，并带源码链接' },
+              { k: 'file:line 链接', d: '打开你自己的 IDE —— 按平台自动检测，复用运行中的窗口' },
+            ] },
           { img: 'story/f02.png', t: '坏掉的东西，一个列表', d: 'Problems 面板收集绑定失败、应用错误和重复定义的资源键 —— 错误在前，每条都有一句白话原因。Scan now 探测每个存活的绑定，抓住 DevTools 打开之前的失败。' },
           { img: 'story/f03.png', t: 'Ctrl+K 找到任何东西', d: '一个搜索覆盖动作、元素、资源和属性 —— 边输入边分类。输入屏幕上看到的字，找到显示它们的东西；空查询列出全部动作。' },
           { img: 'story/f04.png', t: '哪个资源赢了？', d: '一个键的每个定义按解析顺序排列 —— 赢家有标记，被遮蔽的画删除线，定义它的 XAML 就在下面一步。编辑实时生效。' },
@@ -972,15 +1089,14 @@ zh: {
           { t: '🔍 全部讲清楚',
             d: 'DevTools 能展示每一个值。但值为什么是这样 —— 一个宽度、一次焦点跳动、DataContext 的内部 —— 一直要靠你自己还原。',
             d2: 'Explain everything：Layout 标签页解释元素的尺寸从何而来，任何值都能在检查器中打开，焦点变化落进时间线，渐变画刷有了可视化编辑器。',
-            painsTitle: '12.1.1 之前',
-            pains: [
-              { k: '宽度 349', d: '就这么出现了 —— 没有任何东西说明是谁决定的' },
-              { k: 'ViewModel', d: '只是一个类型名，无法看到内部' },
-              { k: '焦点', d: '跳到某处，没有任何记录说明原因' },
-              { k: '渐变', d: '只显示 LinearGradientBrush，只能盲改' },
-            ],
-            hook: '一个版本把它们全部讲清楚 —— 尺寸、值、焦点、渐变。',
-            hookIco: '🔍' },
+            newsTitle: '12.1.1 新增',
+            news: [
+              { k: 'Layout 标签页', d: '还原元素尺寸的整个决策过程，直到起决定作用的那个属性' },
+              { k: '值检查器', d: '每个引用值都能打开 —— 属性与字段实时读取，嵌套对象可继续深入' },
+              { k: '成员搜索与固定', d: '大对象也从容：该类型下次打开只显示你关心的成员' },
+              { k: '时间线上的焦点', d: '紧挨着引发它的事件，状态栏始终显示当前焦点元素' },
+              { k: '渐变编辑器', d: '色标、偏移、几何参数与 spread 模式 —— 实时预览' },
+            ] },
           { img: 'story/e02.png', t: '为什么是这个尺寸？', d: 'Layout 标签页还原整个决策：父级给了什么、元素要了什么、哪个约束说了算、对齐又拿剩余空间做了什么。起决定作用的属性直接链接到它被设置的地方，3×3 对齐面板一键修改对齐。' },
           { img: 'story/e03.png', t: '检查任何值', d: 'Properties 里每个引用值都有 🔍 —— DataContext 打开为实时卡片：属性与字段、可继续深入的嵌套对象、👁 时间线观察、跳转 C# 源码。' },
           { img: 'story/e04.png', t: '搜索并固定关注项', d: '大对象也能从容应对：按名称或值搜索成员，固定关心的成员 —— 该类型下次打开只显示它们，其余收在「show all」后面。' },
@@ -992,14 +1108,14 @@ zh: {
           { t: '❄ 定格瞬间',
             d: '工具提示、浮出菜单和悬停样式只在指针托着它们时存在 —— 你一伸手去开检查器，追踪的目标就自己消失了。',
             d2: '一个手势冻结弹出层、浮出菜单、工具提示与悬停样式 —— 在应用呈现关键状态时按 Shift+F12 —— 然后像检查其他元素一样检查被冻结的场景。还有伪类固定面板、一键复制缺陷报告与 Office 风格菜单。',
-            painsTitle: '没有 Hold 时',
-            pains: [
-              { k: '浮出菜单', d: '在第一次点到别处时就关闭' },
-              { k: '工具提示', d: '指针一离开立即消失' },
-              { k: ':pointerover 样式', d: '等不到检查器打开就没了' },
-              { k: '拖拽高亮', d: '只在按住鼠标时存在' },
-            ],
-            hook: 'Hold 一个手势，把这一切原地冻结。' },
+            newsTitle: 'Hold 带来的新能力',
+            news: [
+              { k: '一个冻结手势', d: 'Shift+F12 把弹出层、浮出菜单、工具提示与悬停样式原样定住' },
+              { k: '可走入的冻结场景', d: '弹出层现在就是普通 UI —— 选中它，查看属性、边界和样式' },
+              { k: '伪类固定面板', d: '强制 :pointerover、:pressed、:focus 或任何自定义伪类' },
+              { k: '一键复制缺陷报告', d: 'DPI 正确的截图，或伪 XAML 路径、边界与全部非默认属性' },
+              { k: '干净地解除', d: 'Esc 让一切原样恢复，自定义倒计时会被记住' },
+            ] },
           { img: 'story/h02.png', t: '原地冻结', d: '用 ❄ 按钮设定倒计时 —— 或直接在应用里按 Shift+F12 —— 趁药丸悬浮在窗口上方布置场景。归零那一刻，打开的浮出菜单不再响应焦点：保持原样，冻结保留的每个元素都在树中带上 ❄ 徽章。' },
           { img: 'story/h03.png', t: '走进冻结的场景', d: '弹出层现在就是普通 UI：选中菜单项，查看它的属性、边界和样式 —— 只要冻结还在，什么都不会消失。' },
           { img: 'story/h04.png', t: '固定需要的伪类状态', d: 'Styles 标签页多出一个伪类固定面板：强制 :pointerover、:pressed、:focus 或任何自定义伪类 —— 应用会像鼠标还停在那里一样渲染。' },
@@ -1064,7 +1180,8 @@ zh: {
   feat: {
     h: 'DevTools 应有的一切', sub: '接入一次，在任意窗口按 F12。',
     cards: [
-      { i: '🌳', t: '智能树检查器', d: '像 XAML 一样的树：语法着色、代码式折叠、拾取后的紧凑视图、逐层展开、隐藏、Focus、Scope 与搜索，并有实时尺寸列。' },
+      { i: '🌳', t: '实时智能树', d: '像 XAML 一样的树，并实时跟随应用：结构变化即时拼入并闪烁提示，暂停按钮让你安心细读。语法着色、代码式折叠、拾取后的紧凑视图、隐藏、Focus、Scope 与搜索。' },
+      { i: '🪟', t: '所有窗口，一个 DevTools', d: '树以应用为根 —— 每个窗口都是顶层节点，实时出现与消失。任意窗口按 F12 都聚焦同一个 DevTools；Scope 让单个窗口拥有整棵树。' },
       { i: '🎯', t: '值追踪', d: '在整棵树上追踪任意属性：相同值 = 相同颜色，null 独立分组，实时图例带计数 ——「Fold to changes」一次显示所有边界。' },
       { i: '❄', t: '定格瞬间（Hold）', d: 'Shift+F12 冻结应用此刻呈现的一切 —— 打开的弹出层、浮出菜单、工具提示、悬停样式。像普通 UI 一样检查被冻结的场景；Esc 把一切精确还原。Pin states 面板可随时强制 :focus、:disabled 或任意自定义伪类。' },
       { i: '⚠️', t: 'Problems 面板', d: '只列坏掉的 —— 绑定失败最先 —— 错误在警告之前，每条有白话原因、reveal 链接和完整绑定链。Scan now 抓住 DevTools 打开之前的错误。' },
@@ -1084,7 +1201,8 @@ zh: {
       { i: '📜', t: '日志查看器', d: '绑定错误、布局与属性系统消息 —— 无需 LogToTrace()。带过滤、批量刷新，杜绝反馈循环。' },
       { i: '📊', t: '渲染器叠加层', d: 'FPS 计数、布局/渲染耗时曲线与脏矩形闪烁，一个开关即可打开。' },
       { i: '🕵️', t: '每个值的来源', d: '一眼看出取值来自默认、手动设置、样式、模板还是继承 —— 并可跳到祖先元素或设置它的那行 XAML。' },
-      { i: '🌒', t: 'IDE 风格深色界面', d: '紧凑的 Rider/Unity 风格控件，只作用于工具窗口，绝不影响应用本身的主题。' },
+      { i: '🌒', t: 'IDE 风格深色界面', d: '紧凑的 Rider/Unity 风格控件，只作用于工具窗口 —— 并自带主题，无论应用使用 Fluent、Simple、第三方主题还是没有主题，DevTools 都显示正常。绝不影响应用本身的主题。' },
+      { i: '⚙️', t: '设置与手势重映射', d: '按下新键即可重映射打开与 Hold 手势，把悬停检查改为 Alt 或关闭，调整 Hold 倒计时、置顶、实时树与更新检查 —— 按机器保存。' },
     ],
   },
   quick: { h: '快速开始', sub: '在 App.axaml.cs 里加两行 —— 仅 Debug 生效，Release 不包含任何内容。' },
@@ -1095,7 +1213,7 @@ zh: {
     contents: '目录',
     groups: [
       { t: '入门', ids: ['install', 'quickstart'] },
-      { t: '功能', ids: ['problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
       { t: '参考', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -1111,10 +1229,37 @@ zh: {
     <span class="k">this</span>.AttachAvaDevTools();
 <span class="c">#endif</span>
 }</code></pre>
-<p>也可以只附加到单个窗口：<code>myWindow.AttachAvaDevTools()</code>。在应用窗口中按 <span class="kbd">F12</span> 即可打开。工具窗口默认置顶（工具栏上的 📌 可切换）。</p>
+<p>也可以只附加到单个窗口：<code>myWindow.AttachAvaDevTools()</code>。在任意窗口按 <span class="kbd">F12</span> —— 桌面端所有窗口共享一个以应用为根的 DevTools（见<a href="#windows">所有窗口，一个 DevTools</a>）。工具窗口默认置顶（工具栏上的 📌 可切换）。</p>
 <p>在运行中的应用上按住 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>，即可检查指针下的元素 —— 与经典 DevTools 完全一致。</p>
 <p>当应用正呈现瞬态状态 —— 打开的浮出菜单、工具提示、悬停样式 —— 按 <span class="kbd">Shift</span>+<span class="kbd">F12</span> 把它冻结后从容检查：见 <a href="#hold">❄ 定格瞬间</a>。</p>
 <p>在 DevTools 里按 <span class="kbd">Ctrl</span>+<span class="kbd">K</span> 一次搜索所有内容 —— 命令、按屏幕文本找元素、资源、属性：见 <a href="#palette">Ctrl+K：找到任何东西</a>。</p>` },
+      { id: 'livetree', t: '实时树', html: `<p>树会自己与应用保持同步。元素的出现与消失会即时拼入或移出 —— 每秒最多四批 —— 新行像实时 <b>Size</b> 列一贯的那样闪烁提示。展开、折叠、Scope、Focus 与选中在每次更新后原样保留。</p>
+<h3>第 1 步：看一次变化落地</h3>
+<ol class="steps"><li>展开你正在关注的那部分树。</li>
+<li>让应用发生变化 —— 打开浮出菜单、添加列表行、移除一个控件。</li>
+<li>变化会在四分之一秒内拼入；新行闪烁后淡出。</li></ol>
+<p class="tip">无处落地的变化 —— 发生在已折叠的元素之下或折叠块内部 —— 会让最近的那个<i>可见</i>行闪烁，因此树安静就意味着应用安静。</p>
+<div class="shot"><img src="assets/img/docs/live-splice.png" alt="实时树中闪烁的新增元素"><span class="cap">刚拼入的元素 —— 闪烁在一秒内淡出。</span></div>
+<h3>第 2 步：细读时先暂停</h3>
+<p>↻ 旁的脉冲按钮暂停实时更新。变化排入队列而不是在指针下移动树 —— 按钮上的小圆点表示有内容在等待。恢复时队列立即生效，↻ 在两种状态下都可手动刷新。</p>
+<p class="tip">树过大、监听代价过高时会自动暂停 —— 脉冲按钮的提示会说明原因，↻ 始终可用。</p>
+<h3>第 3 步：偏爱快照就关掉它</h3>
+<p>在选项里设 <code>LiveTree = false</code> —— 或在<a href="#settings">设置卡</a>里关掉 <b>Live tree</b> —— 树就恢复此前的行为：一张由 ↻ 刷新的快照。</p>` },
+      { id: 'windows', t: '所有窗口，一个 DevTools', html: `<p>在桌面端，树以应用为根：根是 App 对象，每个窗口都是顶层节点 —— 包括稍后打开的对话框，实时出现与消失。一个 DevTools 服务全部窗口。</p>
+<h3>第 1 步：在任意窗口按 F12</h3>
+<ol class="steps"><li>在应用的任意窗口按 <span class="kbd">F12</span>。</li>
+<li>同一个 DevTools 打开或到前台，并选中该窗口的节点。</li></ol>
+<div class="shot"><img src="assets/img/docs/windows-tree.png" alt="以应用为根、两个窗口作为顶层节点的树"><span class="cap">App 根下的两个窗口 —— 第二个在打开的那一刻实时出现。</span></div>
+<h3>第 2 步：聚焦单个窗口</h3>
+<p>对窗口使用 Scope（在其行上按 <span class="kbd">S</span> 或用右键菜单），它就成为整棵树，面包屑一路指回应用。无论如何，Timeline、Problems、Ctrl+K 与资源解释器都覆盖所有窗口；3D 视图渲染所选元素所在的窗口。</p>
+<p class="tip">想要旧行为？<code>ClassicPerWindowMode = true</code> 让每个窗口重新拥有自己的 DevTools；嵌入式（非窗口）宿主始终保留独立实例。</p>` },
+      { id: 'settings', t: '设置', html: `<p>工具栏右侧的 ⚙ 按钮打开设置卡。选择按机器保存，优先于代码传入的选项，手势立即生效。</p>
+<h3>第 1 步：重映射手势</h3>
+<ol class="steps"><li>点击 <b>Open DevTools</b> 或 <b>Hold the moment</b> 旁的手势框。</li>
+<li>按下新的组合键 —— 按下即保存。<span class="kbd">Esc</span> 取消；× 恢复默认。</li></ol>
+<div class="shot"><img src="assets/img/docs/settings-card.png" alt="带手势捕获框的设置卡"><span class="cap">设置卡：手势、悬停检查组合键、Hold 倒计时、置顶、实时树、更新检查。</span></div>
+<h3>第 2 步：驯服悬停检查组合键</h3>
+<p>Ctrl+Shift 悬停是经典的检查手势 —— 而有些应用恰好也用这个组合。可把它改为 <b>Alt</b> 或彻底关闭；Ctrl+K 里的拾取条目始终显示当前组合。</p>` },
       { id: 'problems', t: 'Problems 面板', html: `<p>绑定悄无声息地失败，证据却散落各处：这里一个空白控件，那里一行日志。<b>Problems</b> 选项卡把坏掉的东西收进一个列表 —— 绑定失败排在最前 —— 错误在警告之前，每一条都有一句白话原因。</p>
 <h3>第 1 步：问题自己到来</h3>
 <p>绑定错误和应用的 error 级日志在被记录的那一刻进入列表；重复项折叠成一行，带 ×N 计数，不会刷屏。</p>
@@ -1232,7 +1377,7 @@ zh: {
 <p>Styles 选项卡的 <b>📌 Pin states</b> 面板无需改动应用逻辑即可强制伪类：它扫描元素应用的样式，只列出它们真正响应的状态 —— <code>:disabled</code>、<code>:focus</code>，以及主题定义的任意自定义状态。</p>
 <div class="shot"><img src="assets/img/docs/hold-pinstates.png" alt="Pin states 面板列出 :pointerover、:pressed、:focus 等状态"><span class="cap">只列出元素真正响应的状态 —— ● 标记当前激活的。</span></div>
 <p>被固定的元素在树行上有 📌；固定与 ❄ 共用恢复台账，释放即全部还原。</p>` },
-      { id: 'tree', t: '智能树检查器', html: `<p>树面板是只读的「代码编辑器」视图：元素渲染为语法着色的伪 XAML 行（<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>），带折叠箭头、缩进参考线和实时 <b>Size</b> 列（元素变化时闪烁）。两种模式与 Avalonia 完全一致：<b>Visual tree</b>（<code>GetVisualChildren</code>，默认）和 <b>Logical tree</b>（<code>GetLogicalChildren</code>）。</p>
+      { id: 'tree', t: '智能树检查器', html: `<p>树面板是只读的「代码编辑器」视图：元素渲染为语法着色的伪 XAML 行（<code>&lt;Button x:Name="Save" Classes="primary"&gt;</code>），带折叠箭头、缩进参考线和实时 <b>Size</b> 列（元素变化时闪烁）。两种模式与 Avalonia 完全一致：<b>Visual tree</b>（<code>GetVisualChildren</code>，默认）和 <b>Logical tree</b>（<code>GetLogicalChildren</code>）。整棵树实时跟随应用 —— 见<a href="#livetree">实时树</a>。</p>
 <h3>第 1 步：拾取元素</h3>
 <ol class="steps"><li>点 <b>⌖</b> 后在应用中拾取 —— 或直接在应用上按住 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>。</li>
 <li>树重建为紧凑视图：窗口、路径上的用户控件、拥有所选模板部件的控件，以及元素本身。</li></ol>
@@ -1361,6 +1506,8 @@ zh: {
     Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// 默认：F12</span>
     HoldGesture          = <span class="k">new</span> KeyGesture(Key.F11, KeyModifiers.Shift), <span class="c">// ❄ hold — 默认：Shift+F12</span>
     HoldCountdownSeconds = 5,                                  <span class="c">// ❄ 按钮倒计时 — 默认：3</span>
+    LiveTree             = <span class="k">false</span>,                              <span class="c">// 快照 + ↻，关闭实时树 —— 默认 true</span>
+    ClassicPerWindowMode = <span class="k">true</span>,                               <span class="c">// 每窗口独立 DevTools —— 默认 false（每应用一个）</span>
     WindowSize           = <span class="k">new</span> Size(1280, 760),
     StayOnTop            = <span class="k">false</span>,                              <span class="c">// 默认：true</span>
 });</code></pre>` },
@@ -1379,10 +1526,10 @@ zh: {
 <li>树是快照 —— UI 结构变化后请点 ↻ Refresh（属性值本身是实时更新的）。</li></ul>` },
       { id: 'feedback', t: '反馈', html: `<p>工具栏右上角的 <b>Feedback</b> 按钮打开 AvaDevTools 的问题跟踪器 —— 一键报告缺陷或请求功能。同一动作也在 <span class="kbd">Ctrl</span>+<span class="kbd">K</span> 里，叫 “Send feedback”。</p>
 <p>更喜欢聊天？<a href="https://t.me/avadevtools">Telegram 频道</a>接受提问和快速帮助。</p>` },
-      { id: 'updates', t: '更新通知', html: `<p>AvaDevTools 的新版本带来新的面板和修复，但 NuGet 依赖不会自己宣布它们。有更新的版本发布时，工具栏上 <b>Feedback</b> 旁边会出现 <b>Update</b> 徽标。</p>
-<p>把指针悬停在徽标上就能看到该做什么：要更新到的版本、可复制的 <code>dotnet add package</code> 命令、发布说明，以及指向<a href="releases.html">发布页</a>的链接。</p>
-<div class="shot"><img src="assets/img/docs/update-badge.png" alt="Update 徽标及展开的提示卡片"><span class="cap">徽标和它的提示卡片 —— 发布说明随检查一起加载，阅读无需额外点击。</span></div>
-<p>检查每天最多向站点请求一次小清单，并在两次运行之间记住结果，因此即使离线启动徽标也能出现。站点不可达或返回无法解析的内容时，什么也不会发生 —— 徽标只是保持隐藏。设置 <code>AVA_DEVTOOLS_UPDATE_CHECK=0</code> 可完全关闭检查。</p>` },
+      { id: 'updates', t: '更新通知', html: `<p>工具栏上 <b>Feedback</b> 旁边始终以淡色显示你正在运行的版本号。AvaDevTools 的新版本带来新的面板和修复，但 NuGet 依赖不会自己宣布它们 —— 所以有更新的版本发布时，同一个版本号会变成蓝色并长出一个 <b>↑</b>。</p>
+<p>点击它（或只是悬停）就能看到该做什么：要更新到的版本、可复制的 <code>dotnet add package</code> 命令、发布说明，以及指向<a href="releases.html">发布页</a>的链接。</p>
+<div class="shot"><img src="assets/img/docs/update-badge.png" alt="点亮的版本号及展开的提示卡片"><span class="cap">版本号说的仍是你在运行的版本，卡片说的是已发布的那个 —— 发布说明随检查一起加载，阅读无需额外点击。</span></div>
+<p>检查每天最多向站点请求一次小清单，并在两次运行之间记住结果，因此即使离线启动箭头也能出现。站点不可达或返回无法解析的内容时，什么也不会发生 —— 版本号只是保持为一个普通数字。设置 <code>AVA_DEVTOOLS_UPDATE_CHECK=0</code> 可完全关闭检查。</p>` },
     ],
   },
   rel: {

@@ -1,95 +1,43 @@
 {
   "schema": 1,
-  "version": "12.1.2",
+  "version": "12.1.3",
   "notesUrl": "https://pavel-zheltiakov.github.io/AvaDevTools/releases.html",
   "notes": [
     {
       "kind": "p",
-      "text": "Find everything: a Problems pane collects what is broken, Ctrl+K finds anything by the words on screen, resource lookups explain themselves, events name the handler that ran, and text runs are real tree citizens."
+      "text": "The tree shows now: live, across every window, in any theme."
     },
     {
       "kind": "h1",
-      "text": "New features"
-    },
-    {
-      "kind": "h2",
-      "text": "Problems pane"
-    },
-    {
-      "kind": "p",
-      "text": "A new tab lists only what is broken \u2014 binding failures first of all \u2014 errors before warnings, each with a plain-language reason and links onward: the element in the tree, the full binding walk, the source object. Binding errors stream in as they happen; Scan now probes every live binding in the tree and catches errors that fired before DevTools opened. Scan also flags resource keys defined more than once, listing every definition and its place \u2014 the silent bug where editing a resource changes nothing because another definition wins."
-    },
-    {
-      "kind": "h2",
-      "text": "Ctrl+K: find anything"
-    },
-    {
-      "kind": "p",
-      "text": "One search over everything, categorized as you type: DevTools actions with their hotkeys shown, elements of the inspected tree found by type, name, class or the text they show on screen, resource keys and values wherever they are defined, and properties of the selected element. Colored type icons in the same vocabulary as the rest of DevTools say what each row is at a glance. Enter jumps straight there."
-    },
-    {
-      "kind": "h2",
-      "text": "Which resource won?"
-    },
-    {
-      "kind": "p",
-      "text": "Any resource key opens a resolution explainer: every definition across app, windows, styles, theme variants and element dictionaries in resolution order \u2014 the winner marked, the shadowed ones struck through, element scopes revealable in the tree. Values edit live, and the defining XAML is one click away."
-    },
-    {
-      "kind": "h2",
-      "text": "Who handled that event?"
-    },
-    {
-      "kind": "p",
-      "text": "Timeline event details show the route as it actually ran: every element the event visited in order, the handlers subscribed at each hop named \u2014 MainWindow.OnSave \u2014 each with go-to-source, and the hop that set Handled flagged."
-    },
-    {
-      "kind": "h2",
-      "text": "App log feed"
-    },
-    {
-      "kind": "p",
-      "text": "LogCapture.Publish sends the application's own log events into the Logs pane \u2014 no logging framework required; errors also land in Problems. Serilog and Microsoft.Extensions.Logging adapters are about twenty lines each \u2014 see the docs."
-    },
-    {
-      "kind": "h2",
-      "text": "Text runs in the tree"
-    },
-    {
-      "kind": "p",
-      "text": "Runs and spans inside a TextBlock are tree citizens now \u2014 authored in XAML or built at runtime: select them in the tree, read and edit their properties \u2014 local versus inherited values included \u2014 and the Problems scan finds broken bindings that live on a run."
-    },
-    {
-      "kind": "h2",
-      "text": "Editor links open your IDE"
-    },
-    {
-      "kind": "p",
-      "text": "Every file:line link opens in your own IDE \u2014 Rider, VS Code and Visual Studio are found automatically on Windows, macOS and Linux, and the IDE that launched the app opens without asking. An IDE that is already open is preferred over starting a new one, so the file lands in the running window; a link clicked twice while an IDE is still starting opens one instance, not two. With two Visual Studio windows open, the file goes to the instance whose solution contains it, or to the one debugging the app. With several IDEs installed a chooser appears once, remembers the answer, and Shift+click on any link brings it back. AVA_DEVTOOLS_EDITOR still overrides everything."
-    },
-    {
-      "kind": "h2",
-      "text": "Feedback button"
-    },
-    {
-      "kind": "p",
-      "text": "A Feedback button in the toolbar's top-right corner opens the AvaDevTools issue tracker \u2014 report a bug or ask for a feature in one click. Send feedback is available from Ctrl+K as well."
-    },
-    {
-      "kind": "h2",
-      "text": "Update notifications"
-    },
-    {
-      "kind": "p",
-      "text": "When a newer AvaDevTools is on NuGet, an Update badge appears next to Feedback. Hovering it shows the version to update to, the command to run, the release notes and a link to the releases page. The check asks the site at most once a day and remembers the answer between runs; AVA_DEVTOOLS_UPDATE_CHECK=0 turns it off."
-    },
-    {
-      "kind": "h1",
-      "text": "Bug fixes"
+      "text": "New Features"
     },
     {
       "kind": "bullet",
-      "text": "macOS: \"open in editor\" links now open the file in the already-running Rider or VS Code window; previously a second IDE instance flashed open and the file never appeared."
+      "text": "Live tree \u2014 shows new and removed elements in the tree without a refresh."
+    },
+    {
+      "kind": "bullet",
+      "text": "Hidden changes \u2014 flash the nearest visible line when the change is under a fold."
+    },
+    {
+      "kind": "bullet",
+      "text": "Pause \u2014 queues updates while you read, then applies them at once."
+    },
+    {
+      "kind": "bullet",
+      "text": "All windows, one DevTools \u2014 every window is a node of one tree; F12 works anywhere."
+    },
+    {
+      "kind": "bullet",
+      "text": "Its own theme \u2014 DevTools looks the same under Fluent, Simple, any theme or none."
+    },
+    {
+      "kind": "bullet",
+      "text": "Settings card \u2014 remaps the gestures and toggles stay-on-top, live tree and update checks."
+    },
+    {
+      "kind": "bullet",
+      "text": "Version on the toolbar \u2014 turns blue with an \u2191 when a newer version is out."
     }
   ]
 }
