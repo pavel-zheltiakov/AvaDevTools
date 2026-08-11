@@ -12,13 +12,58 @@ en: {
     get: 'Get started', stories: 'See it in action', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.1.3", docs: 'Documentation →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.1.4", docs: 'Documentation →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   stories: {
-    h: 'Stories', wn: 'live',
+    h: 'Stories', wn: 'agent',
     lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
     list: [
+      { key: 'agent', h: '🤖 The app answers for itself', sub: 'The stack behind every change, the slow frames beside it — and a read-only MCP endpoint that hands the whole tool to a coding agent.',
+        steps: [
+          { t: '🤖 The app answers for itself',
+            d: 'A wrong value tells you what it is, never who set it. And the agent you asked to fix it is reading source code for a state that only exists while the app runs.',
+            d2: 'Now one reproduction records the stack behind every change, slow frames land beside what the app was doing, and a coding agent can call the same engines the tabs use — read-only, over loopback.',
+            newsTitle: 'New in 12.1.4',
+            news: [
+              { k: 'An MCP endpoint', d: 'read-only, on loopback — sixteen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots' },
+              { k: 'A tab and a settings page', d: 'turn the endpoint on, set its port, and see what an agent has asked for so far' },
+              { k: 'One line to register it', d: 'the ⚙ card hands you the claude mcp add or codex mcp add command, carrying this application’s own name and port' },
+              { k: 'Cause capture', d: 'the call stack behind every recorded change, so one reproduction answers "who changed this" for every hit at once' },
+              { k: 'Break next', d: 'arms the debugger for exactly one change, for when a live stack with locals is what you need' },
+              { k: 'A perf lane', d: 'slow frames and layout passes filed into the timeline beside what the app was doing' },
+              { k: 'Walk the view model', d: 'inspect_object follows the data context into its collections and the objects inside them' },
+              { k: 'Reach the transient UI', d: 'an agent can list what is open, freeze it, and force :pointerover on something that has no pointer' },
+            ] },
+          { img: 'story/a02.png', t: 'Every row names who did it', d: 'Turn Cause on and reproduce once. Each row carries the first of your own frames inline — MainWindow.OnDeployClick — so a feed of twenty changes is twenty answers instead of twenty more questions. Nothing stops and nothing pauses: the app runs at speed.' },
+          { img: 'story/a03.png', t: 'Open the whole stack', d: 'The detail card lists the stack innermost first, every frame a link into your editor. Only your own frames are named — framework runs between them collapse into "⋯ 26 framework frames", and DevTools drops its own plumbing entirely.' },
+          { img: 'story/a04.png', t: 'Slow frames, beside what caused them', d: 'Perf meters the running application and files the slow ones into the same feed: a 38.7 ms layout pass and a 363.6 ms frame, right after the click. Slow is measured against the budget the display is actually keeping — the median of recent frames, so one stall cannot redefine normal.' },
+          { t: 'Three calls, and an agent has the line', d: 'The XAML says Aprover; the view model offers Approver. A scan that finds bindings which have not fired yet, a walk into the data context, and the declaration site — the agent knows the line to edit, with no debugger attached and nothing typed into your app.',
+            code: [
+              '$ get_problems  {"scan": true}',
+              '  Scanned 266 elements, 455 bindings.',
+              '  ERROR Binding  Run #2.Text',
+              "        'Aprover' resolves to nothing — the binding never produces a value",
+              '',
+              '$ inspect_object  {"elementId": 2, "path": "DataContext"}',
+              '  #2.DataContext  →  AvaDevTools.Demo.MainWindow+ReleaseStatus',
+              '  properties:',
+              '    Approver = on-call: mira',
+              '',
+              '$ get_element  {"elementId": 2}',
+              '  declared at: MainWindow.axaml:309',
+            ] },
+          { t: 'The answers nothing else can give it', d: 'Who changed this, and what a hover looks like to something with no pointer. Fourteen of the sixteen tools only read; freezing popups and forcing states is the exception — it takes a second opt-in, carries a deadline that puts everything back, and shows a banner in the app while it lasts.',
+            code: [
+              '$ get_timeline  {"elementId": 11}',
+              '  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11',
+              '       stack: MainWindow.OnDeployClick  ←  ⋯ 26 framework frames  ←  Program.Main',
+              '',
+              '$ pin_class  {"elementId": 24, "pseudoClass": ":pointerover"}',
+              '  #24 now holds :pointerover. It renders as if the pointer were there —',
+              '  screenshot it, then unpin. Puts itself back in 120s if you do not.',
+            ] },
+        ] },
       { key: 'live', h: '⚡ The tree shows now', sub: 'A live tree of every window in the application — changes appear as they happen, the tool brings its own theme, and gestures remap in a settings card.',
         steps: [
           { t: '⚡ The tree shows now',
@@ -172,6 +217,9 @@ en: {
       { i: '🧊', t: '3D exploded view', d: 'Your window as textured layers in 3D — orbit, zoom, click to select. Visual, merged or logical tree granularity.' },
       { i: '🔗', t: 'Go to source', d: 'file:line for elements, styles, bindings and view models. Syntax-highlighted XAML/C# previews — and links open your own IDE: Rider, VS Code or Visual Studio, on any OS.' },
       { i: '⏱', t: 'Timeline', d: 'Routed events, property changes, VM notifies and focus changes in one chronological feed, scoped to a watchlist you control. Cause links connect a notify to the bound update it produced; every entry opens full details.' },
+    { i: '🕰', t: 'Cause capture', d: 'Every recorded change carries the call stack that caused it, trimmed to your own frames. Reproduce once and read all the culprits in order, each frame linking to its source — no breakpoint per hit. Break next escalates to the debugger for exactly one change.' },
+    { i: '📈', t: 'Perf lane', d: 'Slow frames and layout passes filed into the same feed as everything else, so a stall is readable next to what the app was doing. Slow is measured against the budget your display actually keeps, never an average.' },
+    { i: '🤖', t: 'Let an agent look (MCP)', d: 'A read-only Model Context Protocol endpoint on loopback, off unless asked for: sixteen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots of the running application.' },
       { i: '📜', t: 'Log viewer', d: 'Binding errors, layout and property-system messages — even without LogToTrace(). Filtered, batched and feedback-loop safe.' },
       { i: '📊', t: 'Renderer overlays', d: 'FPS meter, layout/render time graphs and dirty-rect flashing on the inspected window, one toggle away.' },
       { i: '🕵️', t: 'Source of every value', d: 'See whether a value is default, set by hand, styled, templated or inherited — and jump to the ancestor or the exact XAML that set it.' },
@@ -187,7 +235,8 @@ en: {
     contents: 'Contents',
     groups: [
       { t: 'Getting started', ids: ['install', 'quickstart'] },
-      { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
+      { t: 'Agents (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpcases'] },
       { t: 'Reference', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -227,13 +276,15 @@ en: {
 <h3>Step 2. Focus on one window</h3>
 <p>Scope to a window (<span class="kbd">S</span> on its line, or the context menu) and it becomes the whole tree, with breadcrumbs leading back to the application. Timeline, Problems, Ctrl+K and the resolution explainer span all windows either way; the 3D view renders the selected element’s window.</p>
 <p class="tip">Prefer the old behavior? <code>ClassicPerWindowMode = true</code> gives every window its own DevTools again; embedded (non-window) hosts always keep their own.</p>` },
-      { id: 'settings', t: 'Settings', html: `<p>The ⚙ button at the toolbar’s right edge opens the settings card. Choices are saved per machine, win over the options passed in code, and gestures apply immediately.</p>
+      { id: 'settings', t: 'Settings', html: `<p>The ⚙ button at the toolbar’s right edge opens the settings card: <b>General</b> for gestures and the tool's own behaviour, <b>MCP</b> for the endpoint an agent connects to. Choices are saved per machine, win over the options passed in code, and gestures apply immediately.</p>
 <h3>Step 1. Remap a gesture</h3>
 <ol class="steps"><li>Click the gesture box next to <b>Open DevTools</b> or <b>Hold the moment</b>.</li>
 <li>Press the new key combination — it is saved as you press it. <span class="kbd">Esc</span> cancels; × restores the default.</li></ol>
 <div class="shot"><img src="assets/img/docs/settings-card.png" alt="The settings card with gesture capture boxes"><span class="cap">The card: gestures, the hover-inspect chord, hold countdown, stay-on-top, live tree, update check.</span></div>
 <h3>Step 2. Tame the hover-inspect chord</h3>
-<p>Ctrl+Shift hover is the classic inspect gesture — and some applications use exactly that chord themselves. Switch it to <b>Alt</b>, or off entirely; the Ctrl+K entry for picking always shows the current chord.</p>` },
+<p>Ctrl+Shift hover is the classic inspect gesture — and some applications use exactly that chord themselves. Switch it to <b>Alt</b>, or off entirely; the Ctrl+K entry for picking always shows the current chord.</p>
+<h3>Step 3. Open the port for an agent</h3>
+<p>The <b>MCP</b> page carries the endpoint: a switch that opens and closes it there and then, the port, whether an agent may freeze popups — and the one line that registers this application with Claude Code or Codex, with a Copy button. Turning it off here outranks <code>AVA_DEVTOOLS_MCP</code>: a port you closed stays closed on the next run. See <a href="#mcpconnect">Connect it to Claude Code or Codex</a>.</p>` },
       { id: 'problems', t: 'Problems pane', html: `<p>A binding fails silently and the evidence is scattered: an empty control here, a log line there. The <b>Problems</b> tab collects what is broken in one list — binding failures first of all — errors before warnings, each with a plain-language reason.</p>
 <h3>Step 1. Problems arrive on their own</h3>
 <p>Binding errors and error-level app logs land in the list the moment they are logged; repeats collapse into one row with a ×N counter instead of flooding the list.</p>
@@ -431,6 +482,29 @@ en: {
 <p>The status bar always names the focused element (click selects it in the tree), and a <b>follow</b> toggle keeps the tree on it with a ring in the app.</p>
 <div class="shot"><img src="assets/img/docs/tl-status.png" alt="The status bar naming the focused element with the follow toggle"><span class="cap">The status bar always answers "who has focus right now?"</span></div>
 <p>Pause stops capture, lanes and text filter the feed, entries are capped and batch-rendered, and quiet stretches show as <code>⋯ +N s</code> markers.</p>` },
+      { id: 'cause', t: 'Cause capture: who changed this', html: `<p>A value is wrong and the question is never "what is it" — it is <em>who set it</em>. The classic answer is a breakpoint per hit: stop, read the stack, continue, stop again. <b>Cause</b> on the Timeline toolbar records the call stack behind every row the watchlist admits — property changes, view-model notifies and routed events — on the thread that caused them. Reproduce once, then read every culprit in order.</p>
+<h3>Step 1. Arm it, then reproduce</h3>
+<ol class="steps"><li>Put the element on the watchlist (see <a href="#timeline">Timeline</a>).</li>
+<li>Leave <b>Cause</b> on — it is a toolbar toggle, and <span class="kbd">Ctrl</span>+<span class="kbd">K</span> carries it too, because a checkbox on one tab's toolbar is not findable.</li>
+<li>Do the thing once. Nothing stops, nothing pauses; the app runs at speed.</li></ol>
+<h3>Step 2. Read the culprit off the row</h3>
+<p>Each row names the application method that caused it inline — <code>MainWindow.OnDeployClick</code> — so a feed of twenty changes is a list of twenty answers, not twenty more questions.</p>
+<h3>Step 3. Open the stack</h3>
+<p>The detail card lists the stack with a go-to-source link per frame. Only <em>your</em> frames are named: DevTools' own plumbing is dropped by assembly and by namespace (so a source-vendored copy hides itself without hiding the host), and framework runs between two application frames collapse into a count — <code>⋯ 26 framework frames</code> — so the budget is spent on the code you wrote. A change with no application code on the stack says exactly that, rather than showing you a wall of framework.</p>
+<div class="shot"><img src="assets/img/docs/cause-stack.png" alt="A change detail card with the cause stack: MainWindow.OnDeployClick, 26 framework frames, Program.Main"><span class="cap">One click on the app’s own button: the row names the handler, the card holds the whole stack — one link per frame.</span></div>
+<p class="tip">File and line are not resolved while capturing — reading PDBs on the mutating thread would cost orders of magnitude more than the stack walk itself. The card resolves them when you open it.</p>
+<h3>Break next: the escalation, when you want locals</h3>
+<p>Reading the stack answers "who changed this" for every hit at once. Landing in the IDE on the live stack answers it <em>with locals</em>. <b>Break next</b> sits beside Cause and arms for exactly one change, then disarms itself before breaking — continuing does not stop again, and a detached debugger cannot leave a booby trap behind. The armed state is coloured, because this one freezes the application on purpose.</p>
+<p class="tip">With no debugger attached the button is disabled and says why. <code>Debugger.Break()</code> without one raises an unhandled breakpoint that kills the process on Unix — the opposite of a debugging aid.</p>` },
+      { id: 'perf', t: 'Perf lane', html: `<p>A stall is unreadable as a number floating over the application and obvious next to the notify that fired just before it. The <b>Perf</b> toggle meters the running app and files the slow ones into the same chronological feed as events, changes and notifies. That placement is the feature.</p>
+<h3>What it meters</h3>
+<ul><li><b>Frame cadence</b> — how long the compositor actually took between frames, off the public request-animation-frame loop.</li>
+<li><b>Layout passes</b> — how long a measure/arrange pass took, and what it was for.</li></ul>
+<p>Slow entries land in the feed with their duration; the sparkline in the toolbar keeps the recent shape. The classic graph overlays are still there, for when a picture over the window is what you want.</p>
+<div class="shot"><img src="assets/img/docs/perf-lane.png" alt="The perf lane: a 38.7 ms layout pass and a 363.6 ms frame filed right after the click that caused them"><span class="cap">The meter running — slow layout passes and a slow frame land in the same feed, right after the click that caused them.</span></div>
+<h3>What "slow" means here</h3>
+<p>Slow is measured against the budget the display is actually keeping — the <em>median</em> of recent intervals, never a mean, so one 300 ms stall cannot redefine normal. The sparkline is pinned to three fixed budgets for the same reason: a calm application should look calm, not auto-scaled into drama.</p>
+<p class="tip">Arming the meter keeps the render loop ticking, so a fully idle application will not idle quite as deeply. That is on the tooltip rather than buried: measuring costs something, and pretending otherwise would make the numbers a lie.</p>` },
       { id: 'tabs', t: 'Tabs', html: `<h3>Properties</h3>
 <ul><li>Styled, direct, attached (grouped under 📎 owners) and plain CLR properties.</li>
 <li>Hover a row for <b>⊙ track</b> and <b>📌 pin</b> — see <a href="#tracking">Value tracking &amp; pinned properties</a>.</li>
@@ -451,6 +525,7 @@ en: {
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="The exploded 3D view of the window's visual layers"><span class="cap">141 layers of the live window, orbitable — click any card to select it in the tree.</span></div>
 <h3>Timeline</h3><ul><li>Events, property changes, VM notifies, focus changes and binding errors in one feed, scoped to a watchlist — with cause links, a binding walk-through and the instance inspector. See <a href="#timeline">Timeline</a>.</li></ul>
 <h3>Problems</h3><ul><li>Only what is broken — binding failures, error logs — errors before warnings, each with a plain reason, a reveal-in-tree link and the full binding walk. Scan now catches bindings that failed before DevTools opened. See <a href="#problems">Problems pane</a>.</li></ul>
+<h3>MCP Server</h3><ul><li>Whether the endpoint is listening, on which port and under which name, how many calls an agent has made and what the last one was — plus the switch that starts and stops it, the port box, the freeze permission and the client config, ready to copy. See <a href="#mcp">Let an agent look</a>.</li></ul>
 <h3>Logs</h3><ul><li>Live Avalonia logger output with Pause, level, area and text filters. Captures at Warning by default. Entries produced by the DevTools UI itself are dropped and appends are batched — verbose logging can't freeze the tool.</li>
 <li><code>LogCapture.Publish</code> feeds the pane the application's own events — see <a href="#applogs">App log feed</a>.</li></ul>` },
       { id: 'capture', t: 'Screenshots & bug reports', html: `<p>"Can you send me a screenshot and the XAML path?" is one click here — the element, its bounds and the properties that differ from defaults travel together with the picture.</p>
@@ -475,6 +550,194 @@ en: {
 <p>An IDE that is already open receives the file in its window — a second instance is never started. Rider's and VS Code's own goto commands route the file to the window whose project contains it, so with project A and project B open side by side, a link from the app you are debugging lands in the right one. Visual Studio runs one process per solution — DevTools asks each running instance which solution contains the file and routes there, preferring the instance that is debugging your app. And a link clicked twice while an IDE is still starting opens one instance, not two.</p>
 <h3>Where locations come from</h3>
 <p>XAML locations come from the compiler's <code>AvaloniaXamlCreateSourceInfo</code>, which Avalonia 12 enables automatically in Debug builds. C# types — view models, event handlers — are located by searching your solution tree; set <code>AVA_DEVTOOLS_SRC_ROOT</code> when auto-detection needs help. Compiled Fluent theme styles have no source on disk — the popover shows reflection details and a "View theme XAML on GitHub" link matched to your Avalonia version.</p>` },
+      { id: 'mcp', t: 'Let an agent look (MCP)', html: `<p>The interesting application is the one that is <em>already running</em>, with the state that went wrong still on screen. DevTools can hand that application to a coding agent: a <b>read-only</b> <a href="https://modelcontextprotocol.io">Model Context Protocol</a> endpoint, in-process, on loopback, off unless you ask for it.</p>
+<p>In-process is the whole point. An out-of-process inspector can only ask the application to describe itself over a protocol; this one <em>is</em> the application, so the same call that lists a control can render it, read the priority that set its width and quote the binding error it logged — with no serialization boundary in between. Every tab in this documentation is a view over an engine that never needed a window, and the agent calls those engines directly. It reads the same answers you do.</p>
+<h3>Step 1. Turn it on</h3>
+<p>Open DevTools and go to the <b>MCP Server</b> tab: one switch starts and stops the endpoint, a box beside it sets the port, and the line at the top says what is listening — <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>. The ⚙ card carries the same two settings. Both are saved for this machine and apply on the next run.</p>
+<p>To have it up before the window is even opened:</p>
+<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span> });</code></pre>
+<p>or, without touching the code, run the application with <code>AVA_DEVTOOLS_MCP=1</code>. It prints where it is, once:</p>
+<pre><code>MCP server MyApp-avadevtools (read-only) listening on http://127.0.0.1:5171/</code></pre>
+<p><code>McpPort</code> or <code>AVA_DEVTOOLS_MCP_PORT</code> moves the port. A saved choice outranks both: a port you closed in the tab stays closed, whatever the launcher says. Nothing here runs, allocates or listens while the feature is off — that is the entire cost when unused.</p>
+<h3>Step 2. Point a client at it</h3>
+<pre><code>{ <span class="s">"mcpServers"</span>: { <span class="s">"myapp-avadevtools"</span>: { <span class="s">"type"</span>: <span class="s">"http"</span>, <span class="s">"url"</span>: <span class="s">"http://127.0.0.1:5171/"</span> } } }</code></pre>
+<p>The key is yours to choose; the server introduces itself as <code>&lt;assembly name&gt;-avadevtools</code>. Two applications open at once, each on its own port, stay apart in the agent's tool list.</p>
+<p>Transport is Streamable HTTP rather than stdio, deliberately: stdio would require the client to have launched the application, and the application worth inspecting is the one you started yourself and just broke. Any MCP client that speaks HTTP works; the server answers <code>initialize</code> in whatever protocol dialect the client opened with, so a client pinned to an older spec is not turned away over a version string.</p>
+<p>Nothing needs an agent to try it — the endpoint is plain JSON-RPC over POST:</p>
+<pre><code>curl -s http://127.0.0.1:5171/ -H <span class="s">'Content-Type: application/json'</span> \
+  -d <span class="s">'{"jsonrpc":"2.0","id":1,"method":"tools/call",
+       "params":{"name":"list_windows","arguments":{}}}'</span></code></pre>
+<h3>Step 3. Read the answers</h3>
+<p>Every reply is text shaped for a reader that pays by the token: the tree is indented lines rather than nested JSON, values are truncated, and every line starts with the element id the next call will use.</p>
+<pre><code>#1 MainWindow <span class="s">"Orbit — deployment console"</span> 1080x600  [main]
+#5 Button #DeployButton .primary 349x34
+#11 Run #StatusRun  <span class="s">"idle"</span></code></pre>
+<ul><li><b>Ids are handed out weakly.</b> A debugging tool must never be the reason a control stays alive; an id whose element is gone says so instead of answering about a corpse.</li>
+<li><b>Everything runs on the UI thread.</b> The tree is not thread-safe and a racing tool would report states that never existed.</li>
+<li><b>A busy application says so.</b> If the UI thread does not answer within a minute — a modal dialog is up, or a debugger has it stopped — the call comes back saying exactly that, instead of leaving the agent on a dead socket.</li></ul>
+<h3>What it may and may not do</h3>
+<ul><li><b>Loopback only</b>, and not as a configuration knob: the day this binds to 0.0.0.0 is the day a debugging aid becomes a way to read someone's screen from the next desk. The <code>Origin</code> header is checked too, so a page in a browser cannot reach it through DNS rebinding.</li>
+<li><b>Fourteen of the sixteen tools are pure reads.</b> No input is injected, no application property is written, no handler is run. That is the entire safety story, and the reason there is no confirmation flow: there is nothing to confirm.</li>
+<li><b>Two tools change something, and need a second opt-in.</b> <code>hold</code> and <code>pin_class</code> freeze transient UI and force pseudo-classes — the only way something with no pointer can look at a hover state. They are off unless the <b>Allow freezing</b> checkbox — on the ⚙ card's MCP page and in the MCP Server tab — <code>McpAllowHold</code>, or <code>AVA_DEVTOOLS_MCP_HOLD=1</code> says otherwise, they change transient UI state and nothing else, every hold carries a deadline that releases it, the application shows a banner while one lasts, and <span class="kbd">Esc</span> in the application releases it too.</li>
+<li><b>It releases what it took.</b> An agent's hold auto-releases only what the agent engaged: press <span class="kbd">Shift</span>+<span class="kbd">F12</span> yourself afterwards and the deadline will not take your hold away.</li></ul>
+<p class="tip">Ship it Debug-only, like the rest of DevTools. The endpoint is off by default in every build, but an application that never attaches DevTools in Release cannot serve one by accident.</p>` },
+      { id: 'mcpconnect', t: 'Connect it to Claude Code or Codex', html: `<p>The endpoint exists only while your application runs, so the order never changes: start the app, turn the server on, point the agent at it. The name it registers under is <code>&lt;assembly name&gt;-avadevtools</code> — that is what you will see in the client's own list.</p>
+<h3>Step 1. Start the application with the server on</h3>
+<ol class="steps"><li>Run your app and press <span class="kbd">F12</span>.</li>
+<li>Open the <b>MCP Server</b> tab and tick <b>Serve MCP on loopback</b>.</li>
+<li>Copy the block under <em>Point your agent at it</em> — it already carries the right name and port.</li></ol>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="The settings card MCP page: the switch, the port, the freeze permission, and the two register-with-your-agent command lines with Copy buttons"><span class="cap">⚙ → MCP: the switch, the port, and the line that registers this application — already carrying its name and the port that is actually open.</span></div>
+<h3>Step 2a. Claude Code</h3>
+<pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
+<p>The scope decides who gets it. <code>--scope local</code> (the default) is this project, for you; <code>--scope project</code> writes a <code>.mcp.json</code> in the repository root so everyone working on the application gets the same entry; <code>--scope user</code> is every project on your machine. What it writes is the same JSON the tab shows:</p>
+<pre><code>{ <span class="s">"mcpServers"</span>: { <span class="s">"myapp-avadevtools"</span>: { <span class="s">"type"</span>: <span class="s">"http"</span>, <span class="s">"url"</span>: <span class="s">"http://127.0.0.1:5171/"</span> } } }</code></pre>
+<p><code>claude mcp list</code> says whether it connected; <code>/mcp</code> inside a session lists the tools it found. Then ask in plain words — <em>which element shows the text "Deploy", and why is it that wide?</em> — and it will reach for <code>find_elements</code> and <code>explain_layout</code> against the window in front of you.</p>
+<h3>Step 2b. Codex</h3>
+<p>The ⚙ card hands you a line for Codex too — it bridges the endpoint through <code>mcp-remote</code>, which is what a stdio client needs:</p>
+<pre><code>codex mcp add myapp-avadevtools -- npx -y mcp-remote http://127.0.0.1:5171/</code></pre>
+<p>Or write it into <code>~/.codex/config.toml</code> yourself:</p>
+<pre><code>[mcp_servers.myapp-avadevtools]
+url = <span class="s">"http://127.0.0.1:5171/"</span></code></pre>
+<p>A build of the CLI that only speaks stdio needs a bridge — <code>mcp-remote</code> turns this endpoint into a stdio server, and the same trick works for any stdio-only client:</p>
+<pre><code>[mcp_servers.myapp-avadevtools]
+command = <span class="s">"npx"</span>
+args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span class="s">"http://127.0.0.1:5171/"</span>]</code></pre>
+<h3>Step 3. Check it from the application's side</h3>
+<p>The <b>MCP Server</b> tab counts what it has answered: <code>7 call(s) served · last: get_tree 3s ago</code>. If the client reports a connection and this line stays empty, it is talking to a different application — check the port on both ends.</p>
+<h3>Two applications at once</h3>
+<p>Give the second one its own port (the tab's <b>Port</b> box, <code>McpPort</code>, or <code>AVA_DEVTOOLS_MCP_PORT</code>) and add it as a second entry. Their names differ already, so the agent's tool list stays readable.</p>
+<p class="tip">A client that started before your application usually shows no tools until it reconnects — <code>/mcp</code> in Claude Code, a new session in Codex. That is a reconnect, not a config problem.</p>` },
+      { id: 'mcptools', t: 'The sixteen tools', html: `<p>Sixteen tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
+<h3>Finding your way around</h3>
+<table>
+<tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
+<tr><td><code>list_windows</code></td><td>Which windows are open, with the id that roots each tree. Start here.</td><td>—</td></tr>
+<tr><td><code>get_tree</code></td><td>The tree as indented lines — text inlines and open popups included, template internals folded into a placeholder until asked for.</td><td><code>elementId</code>, <code>depth</code> (3, max 12), <code>mode</code>: important / logical / visual</td></tr>
+<tr><td><code>find_elements</code></td><td>Elements by type, <code>x:Name</code>, <code>.class</code> or the text they show — the same matcher as <span class="kbd">Ctrl</span>+<span class="kbd">F</span> in the tree.</td><td><code>query</code>, <code>limit</code></td></tr>
+</table>
+<h3>Reading one element</h3>
+<table>
+<tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
+<tr><td><code>get_element</code></td><td>Type, name, classes, bounds, the properties that are actually set with the priority that set them, attached properties, the data context, and the XAML line it was declared on.</td><td><code>elementId</code>, <code>allProperties</code></td></tr>
+<tr><td><code>explain_layout</code></td><td>Why it is that size: what the parent offered, what the element asked for, what clamped it, what alignment did with the remainder.</td><td><code>elementId</code></td></tr>
+<tr><td><code>get_styles</code></td><td>Every style, template and local value contributing to it, in priority order, each marked active or not.</td><td><code>elementId</code>, <code>property</code></td></tr>
+<tr><td><code>get_resources</code></td><td>Every definition of a key visible from an element, in resolution order, winner marked and shadowed ones listed.</td><td><code>key</code>, <code>elementId</code>, <code>limit</code></td></tr>
+<tr><td><code>inspect_object</code></td><td>What hangs off the element: its data context, that view model's collections, the objects inside them. Every member that has an inside comes back with the path to reach it.</td><td><code>elementId</code>, <code>path</code>, <code>fields</code></td></tr>
+</table>
+<p class="tip"><code>get_element</code> is a read by default. <code>allProperties</code> also collects the type's public CLR properties, and reading one means calling the application's own getter — so it is asked for explicitly rather than done behind your back. <code>inspect_object</code> calls getters by design; one that throws is reported, not hidden.</p>
+<h3>Asking what is wrong</h3>
+<table>
+<tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
+<tr><td><code>get_problems</code></td><td>Failed bindings and duplicated resource keys, with element, property, a plain reason and a count. Problems logged before the agent connected are included.</td><td><code>scan</code>, <code>limit</code></td></tr>
+<tr><td><code>get_logs</code></td><td>Recent Avalonia log entries, binding errors among them — where a silent UI failure usually explains itself.</td><td><code>limit</code>, <code>minLevel</code></td></tr>
+</table>
+<p><code>scan: true</code> is the one an agent cannot approximate any other way: it sweeps every live binding in the tree and reports what is broken <em>right now</em>, including the bindings that failed at startup before anything was watching and the ones that have not been exercised yet.</p>
+<h3>Asking what happened</h3>
+<table>
+<tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
+<tr><td><code>watch_element</code></td><td>Starts recording: an element's property changes, the routed events in its subtree, its view model's notifies, and the call stack behind each one. Omit the element to record routed events across every window instead.</td><td><code>elementId</code>, <code>stop</code>, <code>cause</code>, <code>events</code>, <code>dataContext</code>, <code>noisy</code></td></tr>
+<tr><td><code>get_timeline</code></td><td>What has happened since, in order — property changes, events, notifies, focus moves, binding errors, slow frames — each with the stack that caused it.</td><td><code>elementId</code>, <code>lanes</code>, <code>limit</code>, <code>sinceSequence</code></td></tr>
+</table>
+<p>Nothing is recorded retroactively: watch, exercise the application, then read. The capture is MCP's own, not the Timeline tab's — an agent's watch must not blink out because a DevTools window was closed, nor mean something different depending on whether one is open. <a href="#cause">Cause capture</a> defaults <em>on</em> here, since an agent has no debugger to fall back on. Poll with the sequence number the last reply printed and you get only what is new.</p>
+<h3>Seeing it</h3>
+<table>
+<tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
+<tr><td><code>screenshot</code></td><td>A PNG of one element or a whole window — what the user is actually looking at.</td><td><code>elementId</code></td></tr>
+<tr><td><code>list_popups</code></td><td>Every popup, flyout, menu and tooltip open right now, with the ids of their contents, and whether a hold is keeping them there.</td><td>—</td></tr>
+<tr><td><code>hold</code></td><td>Freezes a window's transient UI so it can be examined: popups and tooltips stay open, hover styling stays pinned. Needs the hold opt-in; auto-releases.</td><td><code>elementId</code>, <code>stop</code>, <code>seconds</code> (120, max 900)</td></tr>
+<tr><td><code>pin_class</code></td><td>Forces a pseudo-class — <code>:pointerover</code>, <code>:pressed</code>, <code>:checked</code>, <code>:disabled</code> — so that state's styling can be read and screenshotted. Needs the hold opt-in.</td><td><code>elementId</code>, <code>pseudoClass</code>, <code>pin</code></td></tr>
+</table>
+<p>Transient UI is invisible to a tree dump taken a moment later, and an agent has no pointer to hold a menu open with. These three are how it looks at the part of the interface that only exists while someone is interacting with it.</p>` },
+      { id: 'mcpcases', t: 'MCP: five real cases', html: `<p>Four sessions against the sample application, verbatim. Every reply below is what the tool actually printed — the point is not that the tools exist, it is how few calls a real question takes.</p>
+<h3>Case 1. The approver line is empty</h3>
+<p>A release card renders <code>status idle · window Fri 16:00 UTC · approver</code> — and then nothing. No exception, no red, nothing in the log, because a binding that resolves to nothing is not an error the application ever hears about.</p>
+<pre><code><span class="k">get_problems</span> {<span class="s">"scan"</span>: <span class="k">true</span>}
+
+  Scanned 266 elements, 455 bindings.
+  ERROR Binding  Run #2.Text
+        'Aprover' resolves to nothing — the binding never produces a value
+  ERROR Binding  TextBlock "LatencyReadout" #3.Text
+        'LatencyTxt' resolves to nothing — the binding never produces a value</code></pre>
+<p>The scan found it on a <code>Run</code> — a piece of text inside a TextBlock, which is not a Visual and which classic inspectors cannot select at all. Now ask the object on the other side of the binding what it actually offers:</p>
+<pre><code><span class="k">inspect_object</span> {<span class="s">"elementId"</span>: 2, <span class="s">"path"</span>: <span class="s">"DataContext"</span>}
+
+  #2.DataContext  →  AvaDevTools.Demo.MainWindow+ReleaseStatus
+  properties:
+    Approver = on-call: mira
+    DeployWindow = Fri 16:00 UTC</code></pre>
+<p>The view model says <code>Approver</code>; the XAML said <code>Aprover</code>. One more call turns that into an edit:</p>
+<pre><code><span class="k">get_element</span> {<span class="s">"elementId"</span>: 2}
+
+  #2 Run
+  parent: #9 TextBlock "DeployStatus"
+  data context: AvaDevTools.Demo.MainWindow+ReleaseStatus
+  declared at: MainWindow.axaml:309</code></pre>
+<p>Three calls: the defect, its cause, and the line to fix. Nothing was typed into the application and nothing was guessed.</p>
+<h3>Case 2. Who wrote this text?</h3>
+<p>A status flips to <code>shipped</code> and nobody admits to setting it. With no debugger to attach, the agent watches and then asks:</p>
+<pre><code><span class="k">watch_element</span> {<span class="s">"elementId"</span>: 11}
+
+  Watching #11 Run "StatusRun".
+  Recording: property changes on it, routed events in its subtree, and the call
+  stack behind each one.
+  Nothing is recorded retroactively — exercise the app, then call get_timeline.</code></pre>
+<p>Then the application is used normally — a human clicks Deploy, or the test suite does — and:</p>
+<pre><code><span class="k">get_timeline</span> {<span class="s">"elementId"</span>: 11}
+
+  11  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11
+        stack: MainWindow.OnDeployClick  ←  ⋯ 26 framework frames  ←  Program.Main
+  12  property Run "StatusRun"  Foreground  #ff7c90be → #ff4dd8ff  [LocalValue]  #11
+        stack: MainWindow.OnDeployClick  ←  ⋯ 26 framework frames  ←  Program.Main</code></pre>
+<p>The method that did it, by name, for every change at once — and the priority that wrote each value, so "a style did it" and "code did it" are never confused. Reading the same feed filtered to the parent TextBlock shows the same two rows: inlines belong to the element the tree shows them under.</p>
+<h3>Case 3. Why is it this colour?</h3>
+<p>Two questions hide inside "why is it this colour" — which setter wins, and which definition of the key the winner resolved to. One call each:</p>
+<pre><code><span class="k">get_styles</span> {<span class="s">"elementId"</span>: 10, <span class="s">"property"</span>: <span class="s">"Background"</span>}
+
+  #10 Button #DeployButton .primary 349x34
+  ● Theme  [Style]  Button
+      Background = DynamicResource ButtonBackground
+  ● Style  [StyleTrigger]  MainWindow.axaml:23
+      Background = Linear gradient, 2 stops: #ff6fa0ff → #ff3d6de8</code></pre>
+<pre><code><span class="k">get_resources</span> {<span class="s">"key"</span>: <span class="s">"AccentBrush"</span>, <span class="s">"elementId"</span>: 10}
+
+  ★ AccentBrush = #ff4dd8ff   in MainWindow
+    AccentBrush = #ff5b8cff   in App   — shadowed</code></pre>
+<p>The window's definition wins where its scope applies and the App-level one is shadowed — which is why editing App.axaml changed nothing. <code>get_problems</code> flags that duplication on its own, without being asked about the key at all.</p>
+<h3>Case 4. What does the hover state do — with no pointer?</h3>
+<p>An agent cannot hover. It can force the state instead. Before pinning, the theme's hover setter is present but idle:</p>
+<pre><code><span class="k">get_styles</span> {<span class="s">"elementId"</span>: 19, <span class="s">"property"</span>: <span class="s">"Background"</span>}
+
+  ○ Style  [StyleTrigger]  ^:pointerover /template/ ContentPresenter#PART_ContentPresenter   (not active right now)
+      Background = DynamicResource ButtonBackgroundPointerOver</code></pre>
+<pre><code><span class="k">pin_class</span> {<span class="s">"elementId"</span>: 18, <span class="s">"pseudoClass"</span>: <span class="s">":pointerover"</span>}
+
+  #18 now holds :pointerover. It renders as if the pointer were there —
+  screenshot it, then unpin. Puts itself back in 120s if you do not.</code></pre>
+<pre><code><span class="k">get_styles</span> {<span class="s">"elementId"</span>: 19, <span class="s">"property"</span>: <span class="s">"Background"</span>}
+
+  ● Style  [StyleTrigger]  ^:pointerover /template/ ContentPresenter#PART_ContentPresenter
+      Background = DynamicResource ButtonBackgroundPointerOver</code></pre>
+<p>Same row, now active — and a <code>screenshot</code> taken while the class is pinned captures the element with that state applied. The setter lives on the template's ContentPresenter, not on the Button, which is exactly the sort of thing that is obvious once seen and unguessable before.</p>
+<h3>Case 5. The menu that closes when you look at it</h3>
+<p>A flyout is open and misaligned. Dump the tree and it is gone — the act of doing anything else dismissed it.</p>
+<pre><code><span class="k">list_popups</span> {}
+
+  popup   #13  content #14 MenuFlyoutPresenter  in MainWindow
+
+<span class="k">hold</span> {<span class="s">"seconds"</span>: 300}
+
+  Holding MainWindow. 1 popup(s) and 0 tooltip(s) are held open, with the hover
+  chain that produced them. Auto-releases in 300s — call hold again to extend,
+  hold with stop to end it now. The app shows a banner while this lasts, and Esc
+  in the app releases it too.
+
+<span class="k">get_tree</span> {<span class="s">"elementId"</span>: 14, <span class="s">"depth"</span>: 3}
+
+  #14 MenuFlyoutPresenter 192x119
+    #15 Border #LayoutRoot 192x119
+      #16 ScrollViewer 190x117
+        #17 DockPanel 190x117</code></pre>
+<p>Now the popup is an ordinary part of the tree: measurable, explainable with <code>explain_layout</code>, screenshottable. <code>hold</code> with <code>stop</code> gives it back, and if the agent forgets, the deadline does.</p>` },
       { id: 'options', t: 'Options', html: `<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions
 {
     Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// default: F12</span>
@@ -484,7 +747,12 @@ en: {
     ClassicPerWindowMode = <span class="k">true</span>,                               <span class="c">// one DevTools per window — default: false (one per application)</span>
     WindowSize           = <span class="k">new</span> Size(1280, 760),
     StayOnTop            = <span class="k">false</span>,                              <span class="c">// default: true</span>
-});</code></pre>` },
+
+    McpServer            = <span class="k">true</span>,                               <span class="c">// serve the read-only MCP endpoint — default: false</span>
+    McpPort              = 5171,                               <span class="c">// on 127.0.0.1 only — default: 5171</span>
+    McpAllowHold         = <span class="k">true</span>,                               <span class="c">// let an agent freeze popups / pin :pointerover — default: false</span>
+});</code></pre>
+<p>The three <code>Mcp*</code> options are described in <a href="#mcp">Let an agent look (MCP)</a>. Everything else is off or absent unless asked for, and the settings a user saves in the <a href="#settings">⚙ card</a> win over what the code passes here.</p>` },
       { id: 'env', t: 'Environment variables', html: `<table>
 <tr><th>Variable</th><th>Meaning</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>Open DevTools automatically when a window loads.</td></tr>
@@ -493,11 +761,17 @@ en: {
 <tr><td><code>AVA_DEVTOOLS_SRC_ROOT</code></td><td>Source root for resolving files when auto-detection fails.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_LOG_LEVEL=Verbose</code></td><td>Initial log capture level.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_UPDATE_CHECK=0</code></td><td>Disable the once-a-day new-version check.</td></tr>
-</table>` },
+<tr><td><code>AVA_DEVTOOLS_MCP=1</code></td><td>Serve the read-only <a href="#mcp">MCP endpoint</a> on 127.0.0.1.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>Port for it. Default 5171.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Also allow <code>hold</code> and <code>pin_class</code> — the only two tools that change anything.</td></tr>
+</table>
+<p class="tip">The three <code>MCP</code> variables are a starting state, not the last word: the switch in the <a href="#settings">⚙ card</a> and the <b>MCP Server</b> tab are saved per machine and win over them. A port you closed in the tool stays closed on the next run, whatever the launcher exports.</p>` },
       { id: 'limits', t: 'Limitations', html: `<ul>
 <li>Desktop only — secondary windows are not supported on mobile/browser targets.</li>
-<li>The tool window uses the host app's loaded theme (Fluent, Simple, …).</li>
-<li>The tree is a snapshot — use ↻ Refresh after structural UI changes (property values update live).</li></ul>` },
+<li>DevTools brings its own theme — the application's theme, or its absence, does not matter.</li>
+<li>With <code>LiveTree = false</code> the tree is a snapshot again — use ↻ Refresh after structural changes (property values update live either way).</li>
+<li>Screenshots and bug reports double-scale the <em>contents</em> of box-shadowed borders on HiDPI displays — a render-layer quirk of Avalonia 12. Capturing the element rather than the whole window usually sidesteps it.</li>
+<li>The MCP endpoint binds to 127.0.0.1 only. That is deliberate and not configurable.</li></ul>` },
       { id: 'feedback', t: 'Feedback', html: `<p>The <b>Feedback</b> button in the toolbar's top-right corner opens the AvaDevTools issue tracker — report a bug or ask for a feature in one click. The same action lives in <span class="kbd">Ctrl</span>+<span class="kbd">K</span> as "Send feedback".</p>
 <p>Prefer chat? The <a href="https://t.me/avadevtools">Telegram channel</a> takes questions and quick help.</p>` },
       { id: 'updates', t: 'Update notifications', html: `<p>The toolbar always shows the version you are running, dimmed, next to <b>Feedback</b>. New AvaDevTools versions bring new panes and fixes, but a NuGet dependency never announces them on its own — so when a newer version is published, that same label turns blue and grows an <b>↑</b>.</p>
@@ -525,13 +799,58 @@ uk: {
     get: 'Почати', stories: 'Подивитися в дії', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.1.3', docs: 'Документація →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.1.4', docs: 'Документація →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   stories: {
-    h: 'Історії', wn: 'live',
+    h: 'Історії', wn: 'agent',
     lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
     list: [
+      { key: 'agent', h: '🤖 Застосунок відповідає сам за себе', sub: 'Стек за кожною зміною, повільні кадри поруч із ним — і MCP-ендпойнт лише для читання, що віддає весь інструмент кодовому агенту.',
+        steps: [
+          { t: '🤖 Застосунок відповідає сам за себе',
+            d: 'Неправильне значення каже, яке воно, і ніколи — хто його встановив. А агент, якого ви попросили це виправити, читає вихідний код заради стану, який існує лише під час роботи застосунку.',
+            d2: 'Тепер одне відтворення записує стек за кожною зміною, повільні кадри лягають поруч із тим, що робив застосунок, а кодовий агент може викликати ті самі рушії, якими користуються вкладки — лише на читання, через loopback.',
+            newsTitle: 'Нове у 12.1.4',
+            news: [
+              { k: 'MCP-ендпойнт', d: 'лише для читання, на loopback — шістнадцять інструментів віддають агенту дерево, властивості, стилі, лейаут, ресурси, проблеми, таймлайн, логи та знімки' },
+              { k: 'Вкладка й сторінка налаштувань', d: 'увімкнути ендпойнт, задати порт і побачити, що агент уже запитував' },
+              { k: 'Один рядок, щоб зареєструвати', d: 'картка ⚙ дає команду claude mcp add чи codex mcp add — уже з іменем і портом цього застосунку' },
+              { k: 'Захоплення причини', d: 'стек викликів за кожною записаною зміною, тож одне відтворення відповідає «хто це змінив» одразу для всіх влучань' },
+              { k: 'Break next', d: 'зводить дебагер рівно на одну зміну — коли потрібен живий стек із локальними змінними' },
+              { k: 'Смуга Perf', d: 'повільні кадри та проходи layout лягають у таймлайн поруч із тим, що робив застосунок' },
+              { k: 'Прогулянка по вьюмоделі', d: 'inspect_object йде за DataContext у його колекції та в об’єкти всередині них' },
+              { k: 'Дотягнутися до тимчасового UI', d: 'агент може перелічити відкрите, заморозити його і примусити :pointerover там, де вказівника немає' },
+            ] },
+          { img: 'story/a02.png', t: 'Кожен рядок називає винуватця', d: 'Увімкніть Cause і відтворіть один раз. Кожен рядок несе перший із ваших власних кадрів прямо в собі — MainWindow.OnDeployClick — тож стрічка з двадцяти змін є двадцятьма відповідями, а не двадцятьма новими питаннями. Ніщо не зупиняється й не паузиться: застосунок працює на повній швидкості.' },
+          { img: 'story/a03.png', t: 'Розгорніть весь стек', d: 'Картка деталей показує стек від найглибшого кадру, і кожен кадр — посилання у ваш редактор. Названо лише ваші кадри — прогони фреймворка між ними згортаються в «⋯ 26 framework frames», а власну механіку DevTools відкидає повністю.' },
+          { img: 'story/a04.png', t: 'Повільні кадри поруч із причиною', d: 'Perf міряє застосунок на ходу і кладе повільне в ту саму стрічку: прохід layout на 38.7 мс і кадр на 363.6 мс — одразу після кліку. Повільне міряється проти бюджету, який дисплей справді витримує — медіани нещодавніх кадрів, тож одна затримка не перевизначить норми.' },
+          { t: 'Три виклики — і агент має рядок', d: 'У XAML написано Aprover, а в’юмодель пропонує Approver. Скан, який знаходить біндінги, що ще не спрацювали, прогулянка в DataContext і місце оголошення — і агент знає рядок для правки, без дебагера і не ввівши нічого у ваш застосунок.',
+            code: [
+              '$ get_problems  {"scan": true}',
+              '  Scanned 266 elements, 455 bindings.',
+              '  ERROR Binding  Run #2.Text',
+              "        'Aprover' resolves to nothing — the binding never produces a value",
+              '',
+              '$ inspect_object  {"elementId": 2, "path": "DataContext"}',
+              '  #2.DataContext  →  AvaDevTools.Demo.MainWindow+ReleaseStatus',
+              '  properties:',
+              '    Approver = on-call: mira',
+              '',
+              '$ get_element  {"elementId": 2}',
+              '  declared at: MainWindow.axaml:309',
+            ] },
+          { t: 'Відповіді, яких більше ніхто не дасть', d: 'Хто це змінив — і як виглядає hover для того, хто не має вказівника. Чотирнадцять із шістнадцяти інструментів лише читають; замороження попапів і примусові стани — виняток: вони вимагають окремого дозволу, мають дедлайн, який все повертає, і показують банер у застосунку, поки тривають.',
+            code: [
+              '$ get_timeline  {"elementId": 11}',
+              '  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11',
+              '       stack: MainWindow.OnDeployClick  ←  ⋯ 26 framework frames  ←  Program.Main',
+              '',
+              '$ pin_class  {"elementId": 24, "pseudoClass": ":pointerover"}',
+              '  #24 now holds :pointerover. It renders as if the pointer were there —',
+              '  screenshot it, then unpin. Puts itself back in 120s if you do not.',
+            ] },
+        ] },
       { key: 'live', h: '⚡ Дерево показує «зараз»', sub: 'Живе дерево всіх вікон застосунку — зміни з’являються щойно стаються, інструмент має власну тему, а жести перепризначаються у картці налаштувань.',
         steps: [
           { t: '⚡ Дерево показує «зараз»',
@@ -685,6 +1004,9 @@ uk: {
       { i: '🧊', t: '3D-вигляд шарами', d: 'Ваше вікно як текстуровані шари у 3D — обертайте, масштабуйте, клікайте для вибору. Візуальне, згорнуте або логічне дерево.' },
       { i: '🔗', t: 'Перехід до коду', d: 'file:line для елементів, стилів, біндінгів і в’ю-моделей. Підсвічені фрагменти XAML/C# — а посилання відкривають ваш власний IDE: Rider, VS Code чи Visual Studio, на будь-якій ОС.' },
       { i: '⏱', t: 'Таймлайн', d: 'Routed-події, зміни властивостей, сповіщення VM і зміни фокуса в одній хронологічній стрічці за вашим списком спостереження. Причинні зв’язки з’єднують сповіщення з оновленням від біндінга; кожен запис відкриває повні деталі.' },
+    { i: '🕰', t: 'Захоплення причини', d: 'Кожна записана зміна несе стек викликів, що її спричинив, обрізаний до ваших власних кадрів. Відтворіть один раз і прочитайте всіх винуватців по черзі, кожен кадр веде до джерела — без брейкпойнта на кожне влучання. Break next ескалює до дебагера рівно на одну зміну.' },
+    { i: '📈', t: 'Смуга Perf', d: 'Повільні кадри й проходи layout потрапляють у ту саму стрічку, що й усе інше, тож затримку видно поруч із тим, що робив застосунок. Повільне міряється проти бюджету, який ваш дисплей насправді витримує, а не проти середнього.' },
+    { i: '🤖', t: 'Дати агентові подивитись (MCP)', d: 'Ендпойнт Model Context Protocol лише для читання на локальному інтерфейсі, вимкнений, доки не попросять: шістнадцять інструментів дають агентові дерево, властивості, стилі, layout, ресурси, проблеми, таймлайн, логи і скріншоти запущеного застосунку.' },
       { i: '📜', t: 'Перегляд логів', d: 'Помилки біндінгів, layout і система властивостей — навіть без LogToTrace(). З фільтрами, батчингом і захистом від зациклення.' },
       { i: '📊', t: 'Оверлеї рендерера', d: 'Лічильник FPS, графіки часу layout/render та підсвічування dirty-rect — одним перемикачем.' },
       { i: '🕵️', t: 'Джерело кожного значення', d: 'Одразу видно: значення типове, задане вручну, зі стилю, шаблону чи успадковане — з переходом до предка або точного місця в XAML.' },
@@ -700,7 +1022,8 @@ uk: {
     contents: 'Зміст',
     groups: [
       { t: 'Початок роботи', ids: ['install', 'quickstart'] },
-      { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
+      { t: 'Агенти (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpcases'] },
       { t: 'Довідник', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -740,11 +1063,13 @@ uk: {
 <h3>Крок 2. Зосередьтеся на одному вікні</h3>
 <p>Зробіть scope на вікно (<span class="kbd">S</span> на його рядку або контекстне меню) — і воно стане всім деревом, із хлібними крихтами назад до застосунку. Timeline, Problems, Ctrl+K і пояснення ресурсів у будь-якому разі охоплюють усі вікна; 3D-вигляд рендерить вікно виділеного елемента.</p>
 <p class="tip">Хочете стару поведінку? <code>ClassicPerWindowMode = true</code> знову дає кожному вікну власний DevTools; вбудовані (невіконні) хости завжди мають власний.</p>` },
-      { id: 'settings', t: 'Налаштування', html: `<p>Кнопка ⚙ праворуч на панелі інструментів відкриває картку налаштувань. Вибір зберігається на цій машині, має пріоритет над опціями з коду, а жести застосовуються одразу.</p>
+      { id: 'settings', t: 'Налаштування', html: `<p>Кнопка ⚙ праворуч на панелі інструментів відкриває картку налаштувань: <b>General</b> — жести й поведінка самого інструмента, <b>MCP</b> — ендпойнт, до якого під’єднується агент. Вибір зберігається на цій машині, має пріоритет над опціями з коду, а жести застосовуються одразу.</p>
 <h3>Крок 1. Перепризначте жест</h3>
 <ol class="steps"><li>Клацніть поле жесту біля <b>Open DevTools</b> або <b>Hold the moment</b>.</li>
 <li>Натисніть нову комбінацію — вона зберігається в момент натискання. <span class="kbd">Esc</span> скасовує; × повертає типове.</li></ol>
 <div class="shot"><img src="assets/img/docs/settings-card.png" alt="Картка налаштувань із полями захоплення жестів"><span class="cap">Картка: жести, hover-inspect, зворотний відлік hold, stay-on-top, живе дерево, перевірка оновлень.</span></div>
+<h3>Крок 3. Відкрийте порт для агента</h3>
+<p>Сторінка <b>MCP</b> тримає ендпойнт: перемикач, що відкриває й закриває його тут-таки, порт, дозвіл агенту заморожувати попапи — і той єдиний рядок, який реєструє цей застосунок у Claude Code чи Codex, із кнопкою Copy. Вимкнення тут має перевагу над <code>AVA_DEVTOOLS_MCP</code>: закритий порт лишиться закритим і наступного запуску. Див. <a href="#mcpconnect">Під’єднати до Claude Code чи Codex</a>.</p>
 <h3>Крок 2. Приборкайте hover-inspect</h3>
 <p>Ctrl+Shift при наведенні — класичний жест інспекції, а деякі застосунки використовують саме цю комбінацію. Перемкніть її на <b>Alt</b> або вимкніть зовсім; пункт вибору елемента в Ctrl+K завжди показує поточну комбінацію.</p>` },
       { id: 'problems', t: 'Панель Problems', html: `<p>Біндінг падає мовчки, а докази розкидані: тут порожній контрол, там рядок у логу. Вкладка <b>Problems</b> збирає все зламане в один список — насамперед помилки біндінгів — помилки перед попередженнями, кожна зі зрозумілою причиною.</p>
@@ -944,6 +1269,29 @@ uk: {
 <p>Статусний рядок завжди називає сфокусований елемент (клік вибирає його в дереві), а перемикач <b>follow</b> тримає дерево на ньому з кільцем у застосунку.</p>
 <div class="shot"><img src="assets/img/docs/tl-status.png" alt="Статусний рядок називає сфокусований елемент, поруч перемикач follow"><span class="cap">Статусний рядок завжди відповідає: «у кого зараз фокус?»</span></div>
 <p>Pause зупиняє захоплення, смуги й текст фільтрують стрічку, записи обмежені та батчаться, а тихі проміжки позначаються як <code>⋯ +N s</code>.</p>` },
+      { id: 'cause', t: 'Захоплення причини: хто це змінив', html: `<p>Значення неправильне, і питання ніколи не «яке воно» — питання <em>хто його встановив</em>. Класична відповідь — брейкпойнт на кожне влучання: зупинитись, прочитати стек, продовжити, зупинитись знову. Перемикач <b>Cause</b> на панелі Timeline записує стек викликів за кожним рядком, який пропускає список спостереження — зміни властивостей, нотифікації віюмоделей і маршрутизовані події — на тому потоці, що їх спричинив. Відтворіть один раз і прочитайте всіх винуватців по черзі.</p>
+<h3>Крок 1. Увімкніть і відтворіть</h3>
+<ol class="steps"><li>Додайте елемент до списку спостереження (див. <a href="#timeline">Timeline</a>).</li>
+<li>Залиште <b>Cause</b> увімкненим — це перемикач на панелі, і <span class="kbd">Ctrl</span>+<span class="kbd">K</span> теж його несе, бо чекбокс на панелі однієї вкладки неможливо знайти.</li>
+<li>Зробіть дію один раз. Ніщо не зупиняється, ніщо не паузиться; застосунок працює на повній швидкості.</li></ol>
+<h3>Крок 2. Прочитайте винуватця прямо в рядку</h3>
+<p>Кожен рядок називає метод застосунку, який його спричинив — <code>MainWindow.OnDeployClick</code> — тож стрічка з двадцяти змін є списком двадцяти відповідей, а не двадцяти нових питань.</p>
+<h3>Крок 3. Розгорніть стек</h3>
+<p>Картка деталей показує стек із посиланням на джерело для кожного кадру. Названо лише <em>ваші</em> кадри: власна механіка DevTools відкидається за збіркою і за простором імен (тож копія, вбудована як сорси, ховає себе, не ховаючи хост), а прогони фреймворку між двома кадрами застосунку згортаються в лічильник — <code>⋯ 26 framework frames</code> — щоб бюджет витрачався на код, який ви написали. Зміна, за якою немає жодного кадру застосунку, так і каже, замість показати стіну фреймворку.</p>
+<div class="shot"><img src="assets/img/docs/cause-stack.png" alt="Картка деталей зміни зі стеком причини: MainWindow.OnDeployClick, 26 framework frames, Program.Main"><span class="cap">Один клік по власній кнопці застосунку: рядок називає обробник, картка тримає весь стек — по посиланню на кадр.</span></div>
+<p class="tip">Файл і рядок не резолвляться під час захоплення — читати PDB на потоці, що змінює значення, коштувало б на порядки більше за сам обхід стека. Картка резолвить їх, коли ви її відкриваєте.</p>
+<h3>Break next: ескалація, коли потрібні локальні змінні</h3>
+<p>Читання стека відповідає «хто це змінив» одразу для всіх влучань. Приземлення в IDE на живому стеку відповідає <em>з локальними змінними</em>. <b>Break next</b> стоїть поруч із Cause і зводиться рівно на одну зміну, а потім знімає себе перед зупинкою — продовження не зупинить знову, і від'єднаний дебагер не залишить пастки. Зведений стан підсвічено кольором, бо цей перемикач морозить застосунок навмисне.</p>
+<p class="tip">Без під'єднаного дебагера кнопка вимкнена і каже чому. <code>Debugger.Break()</code> без нього піднімає необроблений брейкпойнт, який на Unix убиває процес — протилежність допомоги в налагодженні.</p>` },
+      { id: 'perf', t: 'Смуга Perf', html: `<p>Затримку неможливо прочитати як число, що висить над застосунком, і очевидно видно поруч із нотифікацією, що спрацювала за мить до неї. Перемикач <b>Perf</b> міряє застосунок на ходу і кладе повільні події в ту саму хронологічну стрічку, що й події, зміни та нотифікації. Саме це розміщення і є функцією.</p>
+<h3>Що саме міряється</h3>
+<ul><li><b>Каденс кадрів</b> — скільки насправді минуло між кадрами, через публічний цикл request-animation-frame.</li>
+<li><b>Проходи layout</b> — скільки тривав прохід measure/arrange і задля чого.</li></ul>
+<p>Повільні записи потрапляють у стрічку зі своєю тривалістю; спарклайн на панелі тримає нещодавню форму. Класичні графічні оверлеї нікуди не поділись — для випадків, коли потрібна саме картинка над вікном.</p>
+<div class="shot"><img src="assets/img/docs/perf-lane.png" alt="Смуга Perf: прохід layout на 38.7 мс і кадр на 363.6 мс одразу після кліку, що їх спричинив"><span class="cap">Лічильник на ходу — повільні проходи layout і повільний кадр лягають у ту саму стрічку, одразу після кліку.</span></div>
+<h3>Що тут означає «повільно»</h3>
+<p>Повільне міряється проти бюджету, який дисплей насправді витримує — <em>медіани</em> нещодавніх інтервалів, ніколи не середнього, щоб одна затримка в 300 мс не перевизначила норму. Спарклайн прив'язаний до трьох фіксованих бюджетів з тієї ж причини: спокійний застосунок має виглядати спокійно, а не бути автомасштабованим у драму.</p>
+<p class="tip">Зведений лічильник тримає цикл рендеру живим, тож абсолютно простійний застосунок простоюватиме не так глибоко. Це написано в підказці, а не сховане: вимірювання щось коштує, і вдавати інше означало б зробити числа брехнею.</p>` },
       { id: 'tabs', t: 'Вкладки', html: `<h3>Properties</h3>
 <ul><li>Styled-, direct-, attached- (згруповані під 📎 власниками) та звичайні CLR-властивості.</li>
 <li>Наведіть курсор на рядок — <b>⊙ track</b> і <b>📌 pin</b>: див. <a href="#tracking">Трекінг значень і закріплені властивості</a>.</li>
@@ -964,6 +1312,7 @@ uk: {
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="Пошаровий 3D-вигляд візуальних шарів вікна"><span class="cap">141 шар живого вікна, з обертанням — клік по будь-якій картці вибирає її в дереві.</span></div>
 <h3>Timeline</h3><ul><li>Події, зміни властивостей, сповіщення VM, зміни фокуса й помилки біндінгів в одній стрічці за вашим списком спостереження — з причинними зв’язками, розбором біндінгів та інспектором інстансів. Див. <a href="#timeline">Таймлайн</a>.</li></ul>
 <h3>Problems</h3><ul><li>Лише зламане — помилки біндінгів, error-логи — помилки перед попередженнями, кожна з причиною, посиланням reveal у дерево та повним розбором біндінгу. Scan now ловить біндінги, що впали до відкриття DevTools. Див. <a href="#problems">Панель Problems</a>.</li></ul>
+<h3>MCP Server</h3><ul><li>Чи слухає ендпойнт, на якому порту й під яким іменем, скільки викликів зробив агент і яким був останній — а також перемикач запуску, поле порту, дозвіл на заморожування та готовий до копіювання конфіг клієнта. Див. <a href="#mcp">Хай подивиться агент</a>.</li></ul>
 <h3>Logs</h3><ul><li>Живі логи Avalonia з Pause та фільтрами за рівнем, областю і текстом. За замовчуванням — Warning. Записи від самого DevTools відкидаються, оновлення батчаться — «зациклення» неможливе.</li>
 <li><code>LogCapture.Publish</code> додає в панель події вашого застосунку — див. <a href="#applogs">Логи застосунку</a>.</li></ul>` },
       { id: 'capture', t: 'Скриншоти та баг-репорти', html: `<p>«Надішли скриншот і XAML-шлях» — тут це один клік: елемент, його bounds і властивості, що відрізняються від типових, їдуть разом із картинкою.</p>
@@ -988,6 +1337,194 @@ uk: {
 <p>IDE, що вже відкритий, отримує файл у своє вікно — другий екземпляр не запускається ніколи. Власні goto-команди Rider і VS Code ведуть файл у вікно, чий проєкт його містить, тож із проєктами A і B поруч посилання з застосунку, який ви налагоджуєте, ляже в правильне. Visual Studio тримає окремий процес на кожне рішення — DevTools питає кожен запущений екземпляр, чиє рішення містить файл, і веде туди, віддаючи перевагу тому, що налагоджує ваш застосунок. А подвійний клік по посиланню, поки IDE ще стартує, відкриє один екземпляр, не два.</p>
 <h3>Звідки беруться локації</h3>
 <p>XAML-локації дає <code>AvaloniaXamlCreateSourceInfo</code> компілятора (в Avalonia 12 увімкнено в Debug автоматично). C#-типи — в'ю-моделі, обробники подій — знаходяться пошуком по дереву рішення; задайте <code>AVA_DEVTOOLS_SRC_ROOT</code>, якщо автовизначенню потрібна допомога. Скомпільовані стилі Fluent не мають коду на диску — поповер показує дані з рефлексії та посилання «View theme XAML on GitHub» для вашої версії Avalonia.</p>` },
+      { id: 'mcp', t: 'Дати агентові подивитись (MCP)', html: `<p>Цікавий застосунок — той, що <em>вже запущений</em>, зі станом, який пішов не так, просто на екрані. DevTools може передати цей застосунок агентові: <b>лише для читання</b> ендпойнт <a href="https://modelcontextprotocol.io">Model Context Protocol</a>, усередині процесу, на локальному інтерфейсі, вимкнений, доки ви не попросите.</p>
+<p>Усередині процесу — у цьому вся суть. Позапроцесний інспектор може лише попросити застосунок описати себе по протоколу; цей <em>і є</em> застосунком, тож той самий виклик, що перелічує контрол, може його відрендерити, прочитати пріоритет, який задав ширину, і процитувати помилку прив'язки, яку він залогував — без жодної межі серіалізації між ними. Кожна вкладка в цій документації — це вигляд над рушієм, якому ніколи не було потрібне вікно, і агент викликає ці рушії напряму. Він читає ті самі відповіді, що й ви.</p>
+<h3>Крок 1. Увімкніть</h3>
+<p>Відкрийте DevTools і перейдіть на вкладку <b>MCP Server</b>: один перемикач запускає й зупиняє ендпойнт, поле поруч задає порт, а рядок згори каже, що саме слухає — <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>. Ті самі два налаштування є і в картці ⚙. Обидва зберігаються для цієї машини й діють і наступного запуску.</p>
+<p>Щоб сервер піднявся ще до відкриття вікна:</p>
+<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span> });</code></pre>
+<p>або, не чіпаючи код, запустіть застосунок із <code>AVA_DEVTOOLS_MCP=1</code>. Він один раз друкує, де він:</p>
+<pre><code>MCP server MyApp-avadevtools (read-only) listening on http://127.0.0.1:5171/</code></pre>
+<p><code>McpPort</code> або <code>AVA_DEVTOOLS_MCP_PORT</code> змінює порт. Поки функція вимкнена, тут ніщо не працює, не виділяє пам'ять і не слухає — це вся її ціна, коли вона не потрібна.</p>
+<h3>Крок 2. Наведіть на нього клієнта</h3>
+<pre><code>{ <span class="s">"mcpServers"</span>: { <span class="s">"myapp-avadevtools"</span>: { <span class="s">"type"</span>: <span class="s">"http"</span>, <span class="s">"url"</span>: <span class="s">"http://127.0.0.1:5171/"</span> } } }</code></pre>
+<p>Ключ обираєте ви; сервер представляється як <code>&lt;назва збірки&gt;-avadevtools</code>. Два застосунки, відкриті водночас, кожен на своєму порту, не зіллються в списку інструментів агента.</p>
+<p>Транспорт — Streamable HTTP, а не stdio, і це навмисно: stdio вимагав би, щоб клієнт сам запустив застосунок, а вартий огляду застосунок — це той, який ви запустили самі й щойно зламали. Підходить будь-який MCP-клієнт, що говорить HTTP; сервер відповідає на <code>initialize</code> тим діалектом протоколу, з яким клієнт відкрив з'єднання, тож клієнта, закріпленого на старшій специфікації, не відсіють через рядок версії.</p>
+<p>Щоб спробувати, агент не потрібен — ендпойнт це звичайний JSON-RPC через POST:</p>
+<pre><code>curl -s http://127.0.0.1:5171/ -H <span class="s">'Content-Type: application/json'</span> \
+  -d <span class="s">'{"jsonrpc":"2.0","id":1,"method":"tools/call",
+       "params":{"name":"list_windows","arguments":{}}}'</span></code></pre>
+<h3>Крок 3. Читайте відповіді</h3>
+<p>Кожна відповідь — це текст, форма якого розрахована на читача, що платить за токени: дерево подано рядками з відступами, а не вкладеним JSON, значення обрізаються, і кожен рядок починається з ідентифікатора елемента, який знадобиться наступному виклику.</p>
+<pre><code>#1 MainWindow <span class="s">"Orbit — deployment console"</span> 1080x600  [main]
+#5 Button #DeployButton .primary 349x34
+#11 Run #StatusRun  <span class="s">"idle"</span></code></pre>
+<ul><li><b>Ідентифікатори видаються слабко.</b> Інструмент налагодження ніколи не має бути причиною, чому контрол лишається живим; ідентифікатор, чий елемент зник, так і каже, замість відповідати про небіжчика.</li>
+<li><b>Усе виконується на UI-потоці.</b> Дерево не потокобезпечне, і інструмент, що з ним змагався б, повідомляв би про стани, яких ніколи не існувало.</li>
+<li><b>Зайнятий застосунок так і каже.</b> Якщо UI-потік не відповідає протягом хвилини — піднято модальне вікно або його зупинив дебагер — виклик повертає саме це, замість лишити агента на мертвому сокеті.</li></ul>
+<h3>Що йому можна і чого не можна</h3>
+<ul><li><b>Лише локальний інтерфейс</b>, і це не налаштування: день, коли це прив'яжеться до 0.0.0.0, буде днем, коли допоміжний інструмент стане способом читати чужий екран із сусіднього столу. Заголовок <code>Origin</code> теж перевіряється, тож сторінка в браузері не дістанеться сюди через DNS rebinding.</li>
+<li><b>Чотирнадцять із шістнадцяти інструментів — чисте читання.</b> Ніякого введення не інжектується, жодна властивість застосунку не записується, жоден обробник не запускається. Це вся історія безпеки і причина, чому тут немає підтверджень: підтверджувати нічого.</li>
+<li><b>Два інструменти щось змінюють і потребують окремого дозволу.</b> <code>hold</code> і <code>pin_class</code> морозять тимчасовий UI і форсують псевдокласи — єдиний спосіб для того, хто не має вказівника, побачити стан наведення. Вони вимкнені, доки не скаже інакше галочка <b>Allow freezing</b> — на сторінці MCP у картці ⚙ і на вкладці MCP Server, — <code>McpAllowHold</code> або <code>AVA_DEVTOOLS_MCP_HOLD=1</code>, змінюють лише тимчасовий стан UI, кожне утримання має дедлайн, який його звільняє, застосунок показує банер, доки воно триває, і <span class="kbd">Esc</span> у застосунку теж його звільняє.</li>
+<li><b>Він віддає те, що взяв.</b> Утримання агента саме звільняє лише те, що агент і зайняв: натисніть <span class="kbd">Shift</span>+<span class="kbd">F12</span> самі після цього — і дедлайн не забере ваше утримання.</li></ul>
+<p class="tip">Постачайте це лише в Debug, як і решту DevTools. Ендпойнт вимкнено у будь-якій збірці, але застосунок, який ніколи не під'єднує DevTools у Release, не зможе випадково його підняти.</p>` },
+      { id: 'mcpconnect', t: 'Під’єднати до Claude Code чи Codex', html: `<p>Ендпойнт існує лише поки працює ваш застосунок, тож порядок незмінний: запустіть застосунок, увімкніть сервер, наведіть на нього агента. Реєструється він під іменем <code>&lt;назва збірки&gt;-avadevtools</code> — саме це ви побачите у списку клієнта.</p>
+<h3>Крок 1. Запустіть застосунок з увімкненим сервером</h3>
+<ol class="steps"><li>Запустіть застосунок і натисніть <span class="kbd">F12</span>.</li>
+<li>Відкрийте вкладку <b>MCP Server</b> і поставте <b>Serve MCP on loopback</b>.</li>
+<li>Скопіюйте блок під <em>Point your agent at it</em> — там уже правильні ім’я та порт.</li></ol>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="Сторінка MCP у картці налаштувань: перемикач, порт, дозвіл на заморожування і два командні рядки з кнопками Copy"><span class="cap">⚙ → MCP: перемикач, порт і рядок, який реєструє цей застосунок — уже з його іменем і портом, що справді відкритий.</span></div>
+<h3>Крок 2a. Claude Code</h3>
+<pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
+<p>Область визначає, кому це дістанеться. <code>--scope local</code> (типово) — цей проєкт і лише вам; <code>--scope project</code> пише <code>.mcp.json</code> у корені репозиторію, тож запис отримають усі, хто працює над застосунком; <code>--scope user</code> — усі проєкти на вашій машині. Пишеться той самий JSON, що показує вкладка:</p>
+<pre><code>{ <span class="s">"mcpServers"</span>: { <span class="s">"myapp-avadevtools"</span>: { <span class="s">"type"</span>: <span class="s">"http"</span>, <span class="s">"url"</span>: <span class="s">"http://127.0.0.1:5171/"</span> } } }</code></pre>
+<p><code>claude mcp list</code> покаже, чи з’єднався; <code>/mcp</code> усередині сесії перелічить знайдені інструменти. Далі питайте звичайними словами — <em>який елемент показує текст «Deploy» і чому він саме такої ширини?</em> — і агент візьме <code>find_elements</code> та <code>explain_layout</code> для вікна перед вами.</p>
+<h3>Крок 2b. Codex</h3>
+<p>Картка ⚙ дає рядок і для Codex — він проводить ендпойнт через <code>mcp-remote</code>, як і потребує stdio-клієнт:</p>
+<pre><code>codex mcp add myapp-avadevtools -- npx -y mcp-remote http://127.0.0.1:5171/</code></pre>
+<p>Або впишіть це в <code>~/.codex/config.toml</code> самі:</p>
+<pre><code>[mcp_servers.myapp-avadevtools]
+url = <span class="s">"http://127.0.0.1:5171/"</span></code></pre>
+<p>Збірка CLI, яка вміє лише stdio, потребує містка — <code>mcp-remote</code> перетворює цей ендпойнт на stdio-сервер, і той самий трюк працює для будь-якого stdio-клієнта:</p>
+<pre><code>[mcp_servers.myapp-avadevtools]
+command = <span class="s">"npx"</span>
+args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span class="s">"http://127.0.0.1:5171/"</span>]</code></pre>
+<h3>Крок 3. Перевірте з боку застосунку</h3>
+<p>Вкладка <b>MCP Server</b> рахує, на що вже відповіла: <code>7 call(s) served · last: get_tree 3s ago</code>. Якщо клієнт каже, що з’єднався, а цей рядок порожній — він говорить з іншим застосунком; перевірте порт з обох боків.</p>
+<h3>Два застосунки водночас</h3>
+<p>Дайте другому власний порт (поле <b>Port</b> на вкладці, <code>McpPort</code> або <code>AVA_DEVTOOLS_MCP_PORT</code>) і додайте другим записом. Імена вже різні, тож список інструментів агента лишиться читабельним.</p>
+<p class="tip">Клієнт, запущений раніше за застосунок, зазвичай не бачить інструментів, доки не перез’єднається — <code>/mcp</code> у Claude Code, нова сесія в Codex. Це перез’єднання, а не проблема конфігурації.</p>` },
+      { id: 'mcptools', t: 'Шістнадцять інструментів', html: `<p>Шістнадцять інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
+<h3>Зорієнтуватись</h3>
+<table>
+<tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
+<tr><td><code>list_windows</code></td><td>Які вікна відкриті, з ідентифікатором, що є коренем кожного дерева. Починайте звідси.</td><td>—</td></tr>
+<tr><td><code>get_tree</code></td><td>Дерево рядками з відступами — разом із текстовими інлайнами і відкритими попапами, нутрощі шаблонів згорнуті в заглушку, доки їх не попросять.</td><td><code>elementId</code>, <code>depth</code> (3, макс. 12), <code>mode</code>: important / logical / visual</td></tr>
+<tr><td><code>find_elements</code></td><td>Елементи за типом, <code>x:Name</code>, <code>.class</code> або текстом, який вони показують — той самий матчер, що й <span class="kbd">Ctrl</span>+<span class="kbd">F</span> у дереві.</td><td><code>query</code>, <code>limit</code></td></tr>
+</table>
+<h3>Прочитати один елемент</h3>
+<table>
+<tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
+<tr><td><code>get_element</code></td><td>Тип, ім'я, класи, межі, властивості, які справді встановлені, з пріоритетом, що їх задав, приєднані властивості, контекст даних і рядок XAML, де його оголошено.</td><td><code>elementId</code>, <code>allProperties</code></td></tr>
+<tr><td><code>explain_layout</code></td><td>Чому він такого розміру: що запропонував батько, що попросив елемент, що обмежило, що зробило вирівнювання з рештою.</td><td><code>elementId</code></td></tr>
+<tr><td><code>get_styles</code></td><td>Кожен стиль, шаблон і локальне значення, що впливають на нього, у порядку пріоритету, кожен позначений активним чи ні.</td><td><code>elementId</code>, <code>property</code></td></tr>
+<tr><td><code>get_resources</code></td><td>Кожне визначення ключа, видиме з елемента, у порядку резолюції, з позначеним переможцем і переліченими затіненими.</td><td><code>key</code>, <code>elementId</code>, <code>limit</code></td></tr>
+<tr><td><code>inspect_object</code></td><td>Те, що висить на елементі: його контекст даних, колекції тієї віюмоделі, об'єкти всередині них. Кожен член, у якого є нутрощі, повертається зі шляхом, яким до нього дійти.</td><td><code>elementId</code>, <code>path</code>, <code>fields</code></td></tr>
+</table>
+<p class="tip"><code>get_element</code> типово є читанням. <code>allProperties</code> додатково збирає публічні CLR-властивості типу, а прочитати таку означає викликати геттер самого застосунку — тому це просять явно, а не роблять за вашою спиною. <code>inspect_object</code> викликає геттери за задумом; той, що кидає виняток, повідомляється, а не ховається.</p>
+<h3>Спитати, що не так</h3>
+<table>
+<tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
+<tr><td><code>get_problems</code></td><td>Зламані прив'язки і продубльовані ключі ресурсів, з елементом, властивістю, зрозумілою причиною і лічильником. Проблеми, залоговані до під'єднання агента, включені.</td><td><code>scan</code>, <code>limit</code></td></tr>
+<tr><td><code>get_logs</code></td><td>Нещодавні записи логера Avalonia, серед них помилки прив'язок — там мовчазна поломка UI зазвичай пояснює себе сама.</td><td><code>limit</code>, <code>minLevel</code></td></tr>
+</table>
+<p><code>scan: true</code> — те, чого агент не наблизить жодним іншим способом: він обходить кожну живу прив'язку в дереві і повідомляє, що зламано <em>саме зараз</em>, включно з прив'язками, що впали на старті, коли ще ніхто не дивився, і тими, які ще жодного разу не спрацьовували.</p>
+<h3>Спитати, що сталося</h3>
+<table>
+<tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
+<tr><td><code>watch_element</code></td><td>Починає запис: зміни властивостей елемента, маршрутизовані події в його піддереві, нотифікації його віюмоделі та стек викликів за кожною з них. Без елемента записуються маршрутизовані події в усіх вікнах.</td><td><code>elementId</code>, <code>stop</code>, <code>cause</code>, <code>events</code>, <code>dataContext</code>, <code>noisy</code></td></tr>
+<tr><td><code>get_timeline</code></td><td>Що сталося відтоді, по порядку — зміни властивостей, події, нотифікації, переходи фокуса, помилки прив'язок, повільні кадри — кожне зі стеком, що це спричинив.</td><td><code>elementId</code>, <code>lanes</code>, <code>limit</code>, <code>sinceSequence</code></td></tr>
+</table>
+<p>Заднім числом не записується нічого: спостерігайте, попрацюйте із застосунком, потім читайте. Захоплення належить самому MCP, а не вкладці Timeline — спостереження агента не має гаснути через те, що вікно DevTools закрили, і не має означати різне залежно від того, чи воно відкрите. <a href="#cause">Захоплення причини</a> тут типово <em>увімкнене</em>, бо агентові немає на що відступати — дебагера в нього немає. Опитуйте з номером послідовності з попередньої відповіді — і отримаєте лише нове.</p>
+<h3>Побачити</h3>
+<table>
+<tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
+<tr><td><code>screenshot</code></td><td>PNG одного елемента або цілого вікна — те, на що користувач насправді дивиться.</td><td><code>elementId</code></td></tr>
+<tr><td><code>list_popups</code></td><td>Кожен попап, флайаут, меню і тултіп, відкриті просто зараз, з ідентифікаторами їхнього вмісту і позначкою, чи тримає їх утримання.</td><td>—</td></tr>
+<tr><td><code>hold</code></td><td>Морозить тимчасовий UI вікна, щоб його можна було розглянути: попапи й тултіпи лишаються відкритими, стилі наведення — закріпленими. Потребує дозволу на утримання; звільняється саме.</td><td><code>elementId</code>, <code>stop</code>, <code>seconds</code> (120, макс. 900)</td></tr>
+<tr><td><code>pin_class</code></td><td>Форсує псевдоклас — <code>:pointerover</code>, <code>:pressed</code>, <code>:checked</code>, <code>:disabled</code> — щоб стилі того стану можна було прочитати і зняти. Потребує дозволу на утримання.</td><td><code>elementId</code>, <code>pseudoClass</code>, <code>pin</code></td></tr>
+</table>
+<p>Тимчасовий UI невидимий для дампа дерева, зробленого миттю пізніше, а в агента немає вказівника, щоб тримати меню відкритим. Ці три — те, як він дивиться на частину інтерфейсу, яка існує лише поки з нею взаємодіють.</p>` },
+      { id: 'mcpcases', t: 'MCP: п\'ять реальних випадків', html: `<p>П'ять сесій проти демозастосунку, дослівно. Кожна відповідь нижче — те, що інструмент справді надрукував. Суть не в тому, що інструменти існують, а в тому, як мало викликів займає справжнє питання.</p>
+<h3>Випадок 1. Рядок «approver» порожній</h3>
+<p>Картка релізу показує <code>status idle · window Fri 16:00 UTC · approver</code> — і далі нічого. Ні винятку, ні червоного, ні рядка в лозі, бо прив'язка, що ні до чого не резолвиться, не є помилкою, про яку застосунок узагалі чує.</p>
+<pre><code><span class="k">get_problems</span> {<span class="s">"scan"</span>: <span class="k">true</span>}
+
+  Scanned 266 elements, 455 bindings.
+  ERROR Binding  Run #2.Text
+        'Aprover' resolves to nothing — the binding never produces a value
+  ERROR Binding  TextBlock "LatencyReadout" #3.Text
+        'LatencyTxt' resolves to nothing — the binding never produces a value</code></pre>
+<p>Скан знайшов її на <code>Run</code> — шматку тексту всередині TextBlock, який не є Visual і якого класичні інспектори взагалі не вміють вибрати. Тепер спитаймо об'єкт з іншого боку прив'язки, що він насправді пропонує:</p>
+<pre><code><span class="k">inspect_object</span> {<span class="s">"elementId"</span>: 2, <span class="s">"path"</span>: <span class="s">"DataContext"</span>}
+
+  #2.DataContext  →  AvaDevTools.Demo.MainWindow+ReleaseStatus
+  properties:
+    Approver = on-call: mira
+    DeployWindow = Fri 16:00 UTC</code></pre>
+<p>Віюмодель каже <code>Approver</code>; XAML сказав <code>Aprover</code>. Ще один виклик перетворює це на правку:</p>
+<pre><code><span class="k">get_element</span> {<span class="s">"elementId"</span>: 2}
+
+  #2 Run
+  parent: #9 TextBlock "DeployStatus"
+  data context: AvaDevTools.Demo.MainWindow+ReleaseStatus
+  declared at: MainWindow.axaml:309</code></pre>
+<p>Три виклики: дефект, його причина і рядок, який треба виправити. Нічого не вводили в застосунок і нічого не вгадували.</p>
+<h3>Випадок 2. Хто написав цей текст?</h3>
+<p>Статус перемикається на <code>shipped</code>, і ніхто не зізнається, що його встановив. Не маючи дебагера, агент спостерігає, а потім питає:</p>
+<pre><code><span class="k">watch_element</span> {<span class="s">"elementId"</span>: 11}
+
+  Watching #11 Run "StatusRun".
+  Recording: property changes on it, routed events in its subtree, and the call
+  stack behind each one.
+  Nothing is recorded retroactively — exercise the app, then call get_timeline.</code></pre>
+<p>Далі застосунком просто користуються — людина натискає Deploy або це робить тестовий набір — і:</p>
+<pre><code><span class="k">get_timeline</span> {<span class="s">"elementId"</span>: 11}
+
+  11  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11
+        stack: MainWindow.OnDeployClick  ←  ⋯ 26 framework frames  ←  Program.Main
+  12  property Run "StatusRun"  Foreground  #ff7c90be → #ff4dd8ff  [LocalValue]  #11
+        stack: MainWindow.OnDeployClick  ←  ⋯ 26 framework frames  ←  Program.Main</code></pre>
+<p>Метод, що це зробив, на ім'я, одразу для всіх змін — і пріоритет, який записав кожне значення, тож «це зробив стиль» і «це зробив код» ніколи не сплутати. Та сама стрічка, відфільтрована по батьківському TextBlock, показує ті самі два рядки: інлайни належать елементу, під яким їх показує дерево.</p>
+<h3>Випадок 3. Чому воно такого кольору?</h3>
+<p>У питанні «чому воно такого кольору» ховаються два: який сеттер виграє і до якого визначення ключа резолвиться переможець. По одному виклику на кожне:</p>
+<pre><code><span class="k">get_styles</span> {<span class="s">"elementId"</span>: 10, <span class="s">"property"</span>: <span class="s">"Background"</span>}
+
+  #10 Button #DeployButton .primary 349x34
+  ● Theme  [Style]  Button
+      Background = DynamicResource ButtonBackground
+  ● Style  [StyleTrigger]  MainWindow.axaml:23
+      Background = Linear gradient, 2 stops: #ff6fa0ff → #ff3d6de8</code></pre>
+<pre><code><span class="k">get_resources</span> {<span class="s">"key"</span>: <span class="s">"AccentBrush"</span>, <span class="s">"elementId"</span>: 10}
+
+  ★ AccentBrush = #ff4dd8ff   in MainWindow
+    AccentBrush = #ff5b8cff   in App   — shadowed</code></pre>
+<p>Визначення вікна виграє там, де діє його область, а рівень App затінений — саме тому правка App.axaml нічого не змінювала. <code>get_problems</code> позначає це дублювання сам, навіть якщо про ключ ніхто не питав.</p>
+<h3>Випадок 4. Що робить стан наведення — без вказівника?</h3>
+<p>Агент не може навести. Замість цього він може форсувати стан. До закріплення сеттер наведення з теми присутній, але неактивний:</p>
+<pre><code><span class="k">get_styles</span> {<span class="s">"elementId"</span>: 19, <span class="s">"property"</span>: <span class="s">"Background"</span>}
+
+  ○ Style  [StyleTrigger]  ^:pointerover /template/ ContentPresenter#PART_ContentPresenter   (not active right now)
+      Background = DynamicResource ButtonBackgroundPointerOver</code></pre>
+<pre><code><span class="k">pin_class</span> {<span class="s">"elementId"</span>: 18, <span class="s">"pseudoClass"</span>: <span class="s">":pointerover"</span>}
+
+  #18 now holds :pointerover. It renders as if the pointer were there —
+  screenshot it, then unpin. Puts itself back in 120s if you do not.</code></pre>
+<pre><code><span class="k">get_styles</span> {<span class="s">"elementId"</span>: 19, <span class="s">"property"</span>: <span class="s">"Background"</span>}
+
+  ● Style  [StyleTrigger]  ^:pointerover /template/ ContentPresenter#PART_ContentPresenter
+      Background = DynamicResource ButtonBackgroundPointerOver</code></pre>
+<p>Той самий рядок, тепер активний — а <code>screenshot</code>, знятий поки клас закріплено, фіксує елемент із застосованим станом. Сеттер живе на ContentPresenter шаблону, а не на кнопці, — саме те, що очевидно, коли побачив, і невгадуване, доки не побачив.</p>
+<h3>Випадок 5. Меню, яке закривається, щойно на нього подивишся</h3>
+<p>Флайаут відкрито і він зміщений. Знімаєте дамп дерева — а його вже немає: сама дія його і згорнула.</p>
+<pre><code><span class="k">list_popups</span> {}
+
+  popup   #13  content #14 MenuFlyoutPresenter  in MainWindow
+
+<span class="k">hold</span> {<span class="s">"seconds"</span>: 300}
+
+  Holding MainWindow. 1 popup(s) and 0 tooltip(s) are held open, with the hover
+  chain that produced them. Auto-releases in 300s — call hold again to extend,
+  hold with stop to end it now. The app shows a banner while this lasts, and Esc
+  in the app releases it too.
+
+<span class="k">get_tree</span> {<span class="s">"elementId"</span>: 14, <span class="s">"depth"</span>: 3}
+
+  #14 MenuFlyoutPresenter 192x119
+    #15 Border #LayoutRoot 192x119
+      #16 ScrollViewer 190x117
+        #17 DockPanel 190x117</code></pre>
+<p>Тепер попап — звичайна частина дерева: його можна виміряти, пояснити через <code>explain_layout</code>, зняти скріншотом. <code>hold</code> зі <code>stop</code> повертає все назад, а якщо агент забуде — це зробить дедлайн.</p>` },
       { id: 'options', t: 'Налаштування', html: `<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions
 {
     Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// типово: F12</span>
@@ -997,7 +1534,12 @@ uk: {
     ClassicPerWindowMode = <span class="k">true</span>,                               <span class="c">// окремий DevTools на вікно — типово: false (один на застосунок)</span>
     WindowSize           = <span class="k">new</span> Size(1280, 760),
     StayOnTop            = <span class="k">false</span>,                              <span class="c">// типово: true</span>
-});</code></pre>` },
+
+    McpServer            = <span class="k">true</span>,                               <span class="c">// підняти MCP-ендпойнт лише для читання — типово: false</span>
+    McpPort              = 5171,                               <span class="c">// лише на 127.0.0.1 — типово: 5171</span>
+    McpAllowHold         = <span class="k">true</span>,                               <span class="c">// дозволити агентові морозити попапи / закріплювати :pointerover — типово: false</span>
+});</code></pre>
+<p>Три опції <code>Mcp*</code> описано в розділі <a href="#mcp">Дати агентові подивитись (MCP)</a>. Усе інше вимкнене або відсутнє, доки його не попросять, а налаштування, збережені користувачем у <a href="#settings">картці ⚙</a>, мають пріоритет над тим, що передав код.</p>` },
       { id: 'env', t: 'Змінні середовища', html: `<table>
 <tr><th>Змінна</th><th>Значення</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>Відкривати DevTools автоматично при завантаженні вікна.</td></tr>
@@ -1006,11 +1548,17 @@ uk: {
 <tr><td><code>AVA_DEVTOOLS_SRC_ROOT</code></td><td>Корінь сорсів, якщо автопошук не спрацював.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_LOG_LEVEL=Verbose</code></td><td>Початковий рівень захоплення логів.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_UPDATE_CHECK=0</code></td><td>Вимкнути щоденну перевірку нової версії.</td></tr>
-</table>` },
+<tr><td><code>AVA_DEVTOOLS_MCP=1</code></td><td>Підняти <a href="#mcp">MCP-ендпойнт</a> лише для читання на 127.0.0.1.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>Порт для нього. Типово 5171.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Дозволити ще й <code>hold</code> та <code>pin_class</code> — єдині два інструменти, що щось змінюють.</td></tr>
+</table>
+<p class="tip">Три змінні <code>MCP</code> — це стартовий стан, а не остаточне слово: перемикач у <a href="#settings">картці ⚙</a> і вкладка <b>MCP Server</b> зберігаються для машини й мають перевагу над ними. Порт, який ви закрили в інструменті, лишиться закритим і наступного запуску, хоч би що експортував ваш лаунчер.</p>` },
       { id: 'limits', t: 'Обмеження', html: `<ul>
 <li>Лише десктоп — додаткові вікна не підтримуються на мобільних/браузерних платформах.</li>
-<li>Вікно інструментів використовує тему застосунку (Fluent, Simple, …).</li>
-<li>Дерево — знімок: після структурних змін UI натисніть ↻ Refresh (значення властивостей оновлюються наживо).</li></ul>` },
+<li>DevTools приносить власну тему — тема застосунку, чи її відсутність, не має значення.</li>
+<li>З <code>LiveTree = false</code> дерево знову є знімком: після структурних змін натисніть ↻ Refresh (значення властивостей оновлюються наживо в обох режимах).</li>
+<li>Скріншоти та звіти про ваду подвоюють масштаб <em>вмісту</em> рамок із тінню (BoxShadow) на HiDPI-екранах — особливість шару рендеру Avalonia 12. Знімок самого елемента, а не цілого вікна, зазвичай це обходить.</li>
+<li>MCP-ендпойнт прив'язується лише до 127.0.0.1. Це навмисно і не налаштовується.</li></ul>` },
       { id: 'feedback', t: 'Фідбек', html: `<p>Кнопка <b>Feedback</b> у правому верхньому куті панелі відкриває трекер задач AvaDevTools — повідомте про баг чи попросіть фічу одним кліком. Та сама дія живе у <span class="kbd">Ctrl</span>+<span class="kbd">K</span> як «Send feedback».</p>
 <p>Зручніше в чаті? <a href="https://t.me/avadevtools">Telegram-канал</a> приймає запитання та швидку допомогу.</p>` },
       { id: 'updates', t: 'Сповіщення про оновлення', html: `<p>Панель завжди показує версію, яку ви запустили, — приглушено, поруч із <b>Feedback</b>. Нові версії AvaDevTools приносять нові вкладки й виправлення, але NuGet-залежність сама про них не оголошує, тож коли виходить новіша версія, цей самий напис стає синім і отримує <b>↑</b>.</p>
@@ -1038,13 +1586,58 @@ zh: {
     get: '快速上手', stories: '看实际效果', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.1.3 新特性', docs: '文档 →', notes: '版本历史 →' },
+  wn: { h: '12.1.4 新特性', docs: '文档 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   stories: {
-    h: '功能演示', wn: 'live',
+    h: '功能演示', wn: 'agent',
     lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
     list: [
+      { key: 'agent', h: '🤖 应用自己回答问题', sub: '每次变化背后的调用栈、紧挨着它的慢帧，以及一个只读的 MCP 端点，把整套工具交给编码智能体。',
+        steps: [
+          { t: '🤖 应用自己回答问题',
+            d: '错的值只会告诉你它是什么，从不告诉你是谁设的。而你让去修它的智能体，正在为一个只存在于运行时的状态阅读源码。',
+            d2: '现在，复现一次就会记下每次变化背后的调用栈，慢帧落在应用当时在做的事旁边；编码智能体也能调用选项卡所用的同一批引擎 —— 只读，走回环地址。',
+            newsTitle: '12.1.4 新增',
+            news: [
+              { k: 'MCP 端点', d: '只读，走回环地址 —— 十六个工具把树、属性、样式、布局、资源、问题、时间线、日志和截图交给编码智能体' },
+              { k: '一个选项卡加一页设置', d: '打开端点、设置端口，并看到智能体到目前为止问过什么' },
+              { k: '一行命令就注册好', d: '⚙ 卡片直接给出 claude mcp add 或 codex mcp add 命令，里面已经是这个应用自己的名字和端口' },
+              { k: '原因捕获', d: '每条记录下来的变化都带着调用栈，复现一次就一次性回答所有命中的「是谁改的」' },
+              { k: 'Break next', d: '只为一次变化装填调试器 —— 当你需要带局部变量的活调用栈时' },
+              { k: 'Perf 泳道', d: '慢帧与布局过程归入时间线，就在应用当时在做的事旁边' },
+              { k: '走进视图模型', d: 'inspect_object 顺着 DataContext 走进它的集合，以及集合里的对象' },
+              { k: '触及瞬态 UI', d: '智能体可以列出当前打开的东西、把它冻住，并在根本没有指针的东西上强制 :pointerover' },
+            ] },
+          { img: 'story/a02.png', t: '每一行都写出是谁干的', d: '打开 Cause，复现一次。每行都就地带着你自己的第一帧 —— MainWindow.OnDeployClick —— 于是二十条变化的信息流是二十个答案，而不是二十个新问题。什么都不会停、不会暂停：应用照常全速运行。' },
+          { img: 'story/a03.png', t: '展开整条调用栈', d: '详情卡从最内层开始列出整条栈，每一帧都是通向你编辑器的链接。只有你自己的帧会被命名 —— 夹在中间的框架调用折叠成「⋯ 26 framework frames」，而 DevTools 自己的管道则完全丢弃。' },
+          { img: 'story/a04.png', t: '慢帧，就在起因旁边', d: 'Perf 对运行中的应用计量，并把慢的那些归入同一条信息流：38.7 毫秒的布局过程和 363.6 毫秒的帧，就在那次点击之后。慢是相对于显示器实际维持的预算 —— 最近帧的中位数 —— 来衡量的，因此一次卡顿无法重新定义「正常」。' },
+          { t: '三次调用，智能体就拿到了行号', d: 'XAML 里写的是 Aprover，视图模型提供的是 Approver。一次能找出尚未触发的绑定的扫描、一次走进 DataContext，再加上声明位置 —— 智能体就知道该改哪一行，无需调试器，也没往你的应用里输入任何东西。',
+            code: [
+              '$ get_problems  {"scan": true}',
+              '  Scanned 266 elements, 455 bindings.',
+              '  ERROR Binding  Run #2.Text',
+              "        'Aprover' resolves to nothing — the binding never produces a value",
+              '',
+              '$ inspect_object  {"elementId": 2, "path": "DataContext"}',
+              '  #2.DataContext  →  AvaDevTools.Demo.MainWindow+ReleaseStatus',
+              '  properties:',
+              '    Approver = on-call: mira',
+              '',
+              '$ get_element  {"elementId": 2}',
+              '  declared at: MainWindow.axaml:309',
+            ] },
+          { t: '别处拿不到的答案', d: '是谁改的，以及对一个没有指针的东西来说 hover 长什么样。十六个工具中有十四个只读；冻住弹出和强制状态是例外 —— 它们需要单独开启，带着会把一切复原的截止时间，并在持续期间于应用中显示横幅。',
+            code: [
+              '$ get_timeline  {"elementId": 11}',
+              '  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11',
+              '       stack: MainWindow.OnDeployClick  ←  ⋯ 26 framework frames  ←  Program.Main',
+              '',
+              '$ pin_class  {"elementId": 24, "pseudoClass": ":pointerover"}',
+              '  #24 now holds :pointerover. It renders as if the pointer were there —',
+              '  screenshot it, then unpin. Puts itself back in 120s if you do not.',
+            ] },
+        ] },
       { key: 'live', h: '⚡ 树显示「现在」', sub: '应用所有窗口的实时树 —— 变化即时呈现，工具自带主题，手势可在设置卡中重新映射。',
         steps: [
           { t: '⚡ 树显示「现在」',
@@ -1198,6 +1791,9 @@ zh: {
       { i: '🧊', t: '3D 分层视图', d: '把窗口展开为带纹理的 3D 图层 —— 旋转、缩放、点击选中。支持可视化、合并或逻辑树粒度。' },
       { i: '🔗', t: '跳转到源码', d: '元素、样式、绑定与 ViewModel 的 file:line。语法高亮的 XAML/C# 预览 —— 链接在你自己的 IDE 里打开：Rider、VS Code 或 Visual Studio，任何操作系统。' },
       { i: '⏱', t: '时间线', d: '路由事件、属性变化、VM 通知与焦点变化汇入一条按时间排序的流，范围由你的观察列表决定。因果链接把通知与它产生的绑定更新连在一起；每条记录都可展开完整细节。' },
+    { i: '🕰', t: '原因捕获', d: '每条被记录的变化都带着引发它的调用栈，并裁剪到你自己的帧。复现一次就能按顺序读完所有「凶手」，每一帧都可跳转源码 —— 不必每命中一次下一个断点。Break next 则只为一次变化升级到调试器。' },
+    { i: '📈', t: 'Perf 泳道', d: '慢帧与布局过程归入与其它一切相同的信息流，于是卡顿可以放在「应用当时在做什么」旁边阅读。「慢」以你的显示器实际维持的预算衡量，而不是平均值。' },
+    { i: '🤖', t: '让智能体来看（MCP）', d: '回环上的只读 Model Context Protocol 端点，不索取即关闭：十六个工具把运行中应用的树、属性、样式、布局、资源、问题、时间线、日志与截图交给编码智能体。' },
       { i: '📜', t: '日志查看器', d: '绑定错误、布局与属性系统消息 —— 无需 LogToTrace()。带过滤、批量刷新，杜绝反馈循环。' },
       { i: '📊', t: '渲染器叠加层', d: 'FPS 计数、布局/渲染耗时曲线与脏矩形闪烁，一个开关即可打开。' },
       { i: '🕵️', t: '每个值的来源', d: '一眼看出取值来自默认、手动设置、样式、模板还是继承 —— 并可跳到祖先元素或设置它的那行 XAML。' },
@@ -1213,7 +1809,8 @@ zh: {
     contents: '目录',
     groups: [
       { t: '入门', ids: ['install', 'quickstart'] },
-      { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'tabs', 'capture', 'source'] },
+      { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
+      { t: '智能体（MCP）', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpcases'] },
       { t: '参考', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -1253,11 +1850,13 @@ zh: {
 <h3>第 2 步：聚焦单个窗口</h3>
 <p>对窗口使用 Scope（在其行上按 <span class="kbd">S</span> 或用右键菜单），它就成为整棵树，面包屑一路指回应用。无论如何，Timeline、Problems、Ctrl+K 与资源解释器都覆盖所有窗口；3D 视图渲染所选元素所在的窗口。</p>
 <p class="tip">想要旧行为？<code>ClassicPerWindowMode = true</code> 让每个窗口重新拥有自己的 DevTools；嵌入式（非窗口）宿主始终保留独立实例。</p>` },
-      { id: 'settings', t: '设置', html: `<p>工具栏右侧的 ⚙ 按钮打开设置卡。选择按机器保存，优先于代码传入的选项，手势立即生效。</p>
+      { id: 'settings', t: '设置', html: `<p>工具栏右侧的 ⚙ 按钮打开设置卡：<b>General</b> 管手势和工具自身的行为，<b>MCP</b> 管智能体要连的那个端点。选择按机器保存，优先于代码传入的选项，手势立即生效。</p>
 <h3>第 1 步：重映射手势</h3>
 <ol class="steps"><li>点击 <b>Open DevTools</b> 或 <b>Hold the moment</b> 旁的手势框。</li>
 <li>按下新的组合键 —— 按下即保存。<span class="kbd">Esc</span> 取消；× 恢复默认。</li></ol>
 <div class="shot"><img src="assets/img/docs/settings-card.png" alt="带手势捕获框的设置卡"><span class="cap">设置卡：手势、悬停检查组合键、Hold 倒计时、置顶、实时树、更新检查。</span></div>
+<h3>第 3 步：为智能体打开端口</h3>
+<p><b>MCP</b> 页管着端点：一个当场开关它的开关、端口、是否允许智能体冻结弹出层 —— 以及把这个应用注册到 Claude Code 或 Codex 的那一行命令，带复制按钮。在这里关掉它的优先级高于 <code>AVA_DEVTOOLS_MCP</code>：你关掉的端口，下次启动依然是关的。见<a href="#mcpconnect">接到 Claude Code 或 Codex</a>。</p>
 <h3>第 2 步：驯服悬停检查组合键</h3>
 <p>Ctrl+Shift 悬停是经典的检查手势 —— 而有些应用恰好也用这个组合。可把它改为 <b>Alt</b> 或彻底关闭；Ctrl+K 里的拾取条目始终显示当前组合。</p>` },
       { id: 'problems', t: 'Problems 面板', html: `<p>绑定悄无声息地失败，证据却散落各处：这里一个空白控件，那里一行日志。<b>Problems</b> 选项卡把坏掉的东西收进一个列表 —— 绑定失败排在最前 —— 错误在警告之前，每一条都有一句白话原因。</p>
@@ -1457,6 +2056,29 @@ zh: {
 <p>状态栏始终显示当前焦点元素（点击即在树中选中），<b>follow</b> 开关让树一路跟随，并在应用中画出焦点环。</p>
 <div class="shot"><img src="assets/img/docs/tl-status.png" alt="状态栏显示当前焦点元素，旁边是 follow 开关"><span class="cap">状态栏永远回答「现在焦点在谁那里？」</span></div>
 <p>Pause 暂停捕获，泳道与文本过滤流内容，记录有上限并批量渲染，安静时段显示为 <code>⋯ +N s</code> 标记。</p>` },
+      { id: 'cause', t: '原因捕获：是谁改的', html: `<p>值不对时，问题从来不是「它是什么」，而是<em>谁把它设成这样</em>。传统答案是每命中一次下一个断点：停下、读栈、继续、再停。Timeline 工具栏上的 <b>Cause</b> 会为观察列表放行的每一行记录调用栈 —— 属性变化、视图模型通知、路由事件 —— 而且是在真正引发它的那个线程上记录。复现一次，然后按顺序把每个「凶手」读完。</p>
+<h3>第 1 步。打开它，然后复现</h3>
+<ol class="steps"><li>把元素加入观察列表（见 <a href="#timeline">Timeline</a>）。</li>
+<li>保持 <b>Cause</b> 打开 —— 它是工具栏开关，<span class="kbd">Ctrl</span>+<span class="kbd">K</span> 里也有，因为藏在某个选项卡工具栏上的复选框是找不到的。</li>
+<li>把那件事做一次。什么都不会停下、不会暂停；应用照常全速运行。</li></ol>
+<h3>第 2 步。直接从行里读出凶手</h3>
+<p>每一行都就地写出引发它的应用方法 —— <code>MainWindow.OnDeployClick</code> —— 于是二十条变化的信息流是二十个答案，而不是二十个新问题。</p>
+<h3>第 3 步。展开调用栈</h3>
+<p>详情卡列出整条栈，每一帧都带跳转源码的链接。只有<em>你的</em>帧会被命名：DevTools 自己的管道按程序集和命名空间双重丢弃（因此以源码方式内嵌的副本会隐藏自己，而不会连宿主一起隐藏），两个应用帧之间的框架调用折叠成一个计数 —— <code>⋯ 26 framework frames</code> —— 让预算花在你写的代码上。栈上完全没有应用代码的变化会如实这么说，而不是甩给你一堵框架墙。</p>
+<div class="shot"><img src="assets/img/docs/cause-stack.png" alt="变化详情卡与原因调用栈：MainWindow.OnDeployClick、26 framework frames、Program.Main"><span class="cap">在应用自己的按钮上点一下：行里写出处理方法，卡片提供整条调用栈 —— 每一帧一个链接。</span></div>
+<p class="tip">捕获时不解析文件与行号 —— 在正在改值的线程上读 PDB，代价比栈回溯本身高出几个数量级。卡片会在你打开它时才解析。</p>
+<h3>Break next：需要局部变量时的升级手段</h3>
+<p>读栈能一次性回答所有命中的「谁改的」。落到 IDE 的活栈上则能<em>带着局部变量</em>回答。<b>Break next</b> 就在 Cause 旁边，只为一次变化装填，并在中断前自行解除 —— 继续执行不会再次停下，脱离的调试器也不会留下陷阱。装填状态带颜色，因为这个开关是故意冻结应用的。</p>
+<p class="tip">没有附加调试器时按钮是禁用的，并说明原因。没有调试器的 <code>Debugger.Break()</code> 会抛出未处理断点，在 Unix 上直接杀掉进程 —— 那是调试辅助的反面。</p>` },
+      { id: 'perf', t: 'Perf 泳道', html: `<p>卡顿作为悬浮在应用之上的一个数字是读不懂的，但放在它前一刻触发的通知旁边就一目了然。<b>Perf</b> 开关会对运行中的应用计量，并把慢的那些归入与事件、变化、通知同一条时间线。这个「放在哪里」就是功能本身。</p>
+<h3>它计量什么</h3>
+<ul><li><b>帧节奏</b> —— 合成器两帧之间实际用了多久，取自公开的 request-animation-frame 循环。</li>
+<li><b>布局过程</b> —— 一次 measure/arrange 用了多久，以及为的是什么。</li></ul>
+<p>慢条目带着耗时落进信息流；工具栏上的迷你折线保留最近的形状。经典的图形叠加层依然在，适合你确实想要窗口之上那张图的时候。</p>
+<div class="shot"><img src="assets/img/docs/perf-lane.png" alt="Perf 泳道：38.7 毫秒的布局过程与 363.6 毫秒的帧，就落在引发它们的点击之后"><span class="cap">计量进行中 —— 慢的布局过程和慢帧落进同一条信息流，就在引发它们的点击之后。</span></div>
+<h3>这里的「慢」是什么意思</h3>
+<p>慢是相对于显示器实际维持的预算来衡量的 —— 取最近间隔的<em>中位数</em>，绝不用平均值，这样一次 300 毫秒的卡顿就无法重新定义「正常」。迷你折线固定在三档预算上也是同一个理由：平静的应用应当看起来平静，而不是被自动缩放成一场大戏。</p>
+<p class="tip">开启计量会让渲染循环保持跳动，因此完全空闲的应用不会闲得那么彻底。这一点写在提示里而不是埋起来：测量本身有代价，假装没有就会让这些数字变成谎言。</p>` },
       { id: 'tabs', t: '选项卡', html: `<h3>Properties（属性）</h3>
 <ul><li>Styled、direct、attached（按 📎 所有者分组）以及普通 CLR 属性。</li>
 <li>悬停属性行可见 <b>⊙ track</b> 与 <b>📌 pin</b> —— 见<a href="#tracking">值追踪与置顶属性</a>。</li>
@@ -1477,6 +2099,7 @@ zh: {
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="窗口可视图层的 3D 分层视图"><span class="cap">实时窗口的 141 个图层，可旋转 —— 点击任意图层即在树中选中。</span></div>
 <h3>Timeline（时间线）</h3><ul><li>事件、属性变化、VM 通知、焦点变化与绑定错误汇入一条流，范围由观察列表决定 —— 带因果链接、绑定逐步展开与实例检查器。见<a href="#timeline">时间线</a>。</li></ul>
 <h3>Problems（问题）</h3><ul><li>只列坏掉的 —— 绑定失败、error 日志 —— 错误在警告之前，每条带原因、树内 reveal 链接与完整绑定链。Scan now 抓住在 DevTools 打开前就失败的绑定。见 <a href="#problems">Problems 面板</a>。</li></ul>
+<h3>MCP Server</h3><ul><li>端点是否在听、用哪个端口、以什么名字，智能体发过多少次调用、最后一次是什么 —— 以及启停开关、端口输入框、冻结许可，和可以直接复制的客户端配置。见 <a href="#mcp">让智能体看看</a>。</li></ul>
 <h3>Logs（日志）</h3><ul><li>实时 Avalonia 日志，支持暂停、级别、区域与文本过滤。默认捕获 Warning 及以上。工具自身产生的日志会被丢弃、UI 批量刷新 —— 不会出现反馈循环卡死。</li>
 <li><code>LogCapture.Publish</code> 把应用自己的事件送进此面板 —— 见<a href="#applogs">应用日志接入</a>。</li></ul>` },
       { id: 'capture', t: '截图与缺陷报告', html: `<p>「发我一张截图和 XAML 路径」在这里是一次点击 —— 元素、它的 bounds 和与默认值不同的属性，随图片一起上路。</p>
@@ -1501,6 +2124,194 @@ zh: {
 <p>已经打开的 IDE 会在自己的窗口里收到文件 —— 永远不会启动第二个实例。Rider 和 VS Code 自带的 goto 命令把文件送进包含它的项目所在的窗口：项目 A 和项目 B 并排开着时，来自被调试应用的链接会落进正确的那个。Visual Studio 每个解决方案一个进程 —— DevTools 会询问每个运行中的实例谁的解决方案包含该文件并送到那里，优先选正在调试你应用的那个。IDE 还在启动时连点两次链接，也只会开一个实例，不是两个。</p>
 <h3>位置从哪里来</h3>
 <p>XAML 位置来自编译器的 <code>AvaloniaXamlCreateSourceInfo</code>（Avalonia 12 在 Debug 构建中默认开启）。C# 类型 —— ViewModel、事件处理器 —— 通过在解决方案目录中搜索定位；自动探测不够时设置 <code>AVA_DEVTOOLS_SRC_ROOT</code>。编译进主题程序集的 Fluent 样式在磁盘上没有源码 —— 弹窗会显示反射信息，并给出与你的 Avalonia 版本匹配的 “View theme XAML on GitHub” 链接。</p>` },
+      { id: 'mcp', t: '让智能体来看（MCP）', html: `<p>值得看的应用，是那个<em>已经在运行</em>、出错的状态还留在屏幕上的应用。DevTools 可以把这个应用交给编码智能体：一个<b>只读</b>的 <a href="https://modelcontextprotocol.io">Model Context Protocol</a> 端点，进程内、只监听回环、不主动开启。</p>
+<p>「进程内」是关键。进程外的检查器只能通过协议请应用描述自己；而这个<em>就是</em>应用本身，所以列出控件的那同一次调用，也能把它渲染出来、读出设定其宽度的优先级、引用它记录的绑定错误 —— 中间没有任何序列化边界。本文档里的每个选项卡都是某个从不需要窗口的引擎之上的一层视图，智能体直接调用那些引擎。它读到的答案和你看到的一模一样。</p>
+<h3>第 1 步。打开它</h3>
+<p>打开 DevTools，切到 <b>MCP Server</b> 选项卡：一个开关启停端点，旁边的输入框设置端口，顶部那行说明当前在听什么 —— <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>。⚙ 卡片里也有同样这两项设置。两者都按本机保存，下次启动依然生效。</p>
+<p>如果想在窗口打开之前服务器就已经起来：</p>
+<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span> });</code></pre>
+<p>或者不改代码，用 <code>AVA_DEVTOOLS_MCP=1</code> 启动应用。它会打印一次自己的位置：</p>
+<pre><code>MCP server MyApp-avadevtools (read-only) listening on http://127.0.0.1:5171/</code></pre>
+<p><code>McpPort</code> 或 <code>AVA_DEVTOOLS_MCP_PORT</code> 可改端口。功能关闭时这里不运行、不分配、不监听 —— 这就是它闲置时的全部成本。</p>
+<h3>第 2 步。把客户端指过来</h3>
+<pre><code>{ <span class="s">"mcpServers"</span>: { <span class="s">"myapp-avadevtools"</span>: { <span class="s">"type"</span>: <span class="s">"http"</span>, <span class="s">"url"</span>: <span class="s">"http://127.0.0.1:5171/"</span> } } }</code></pre>
+<p>这个键由你决定；服务器自报的名字是 <code>&lt;程序集名&gt;-avadevtools</code>。同时开着的两个应用（各自一个端口）在智能体的工具列表里不会混作一团。</p>
+<p>传输用 Streamable HTTP 而不是 stdio，这是有意的：stdio 要求客户端自己启动应用，而值得检查的恰恰是你自己启动、刚刚弄坏的那一个。任何会说 HTTP 的 MCP 客户端都可以；服务器会用客户端发起时所用的协议方言回应 <code>initialize</code>，因此固定在旧规范上的客户端不会因为一个版本字符串被拒之门外。</p>
+<p>试一下并不需要智能体 —— 端点就是 POST 上的普通 JSON-RPC：</p>
+<pre><code>curl -s http://127.0.0.1:5171/ -H <span class="s">'Content-Type: application/json'</span> \
+  -d <span class="s">'{"jsonrpc":"2.0","id":1,"method":"tools/call",
+       "params":{"name":"list_windows","arguments":{}}}'</span></code></pre>
+<h3>第 3 步。读回答</h3>
+<p>每条回复都是为「按 token 付费的读者」塑形的文本：树是带缩进的行而不是嵌套 JSON，值会截断，每一行都以下一次调用要用的元素 id 开头。</p>
+<pre><code>#1 MainWindow <span class="s">"Orbit — deployment console"</span> 1080x600  [main]
+#5 Button #DeployButton .primary 349x34
+#11 Run #StatusRun  <span class="s">"idle"</span></code></pre>
+<ul><li><b>id 是弱引用发放的。</b>调试工具绝不该成为某个控件活着的原因；元素已消失的 id 会如实告知，而不是回答一具遗体的情况。</li>
+<li><b>一切都在 UI 线程上执行。</b>树不是线程安全的，与它竞争的工具会报出从未存在过的状态。</li>
+<li><b>繁忙的应用会直说。</b>如果 UI 线程一分钟内没有响应 —— 弹出了模态框，或者被调试器停住了 —— 调用会明确返回这一点，而不是把智能体丢在一个死掉的套接字上。</li></ul>
+<h3>它能做什么、不能做什么</h3>
+<ul><li><b>只监听回环</b>，而且这不是一个配置项：它绑定到 0.0.0.0 的那天，就是一个调试辅助变成隔壁工位读你屏幕的手段的那天。<code>Origin</code> 头同样会检查，因此浏览器页面无法通过 DNS 重绑定摸到它。</li>
+<li><b>十六个工具里有十四个是纯读。</b>不注入任何输入，不写任何应用属性，不运行任何处理器。这就是全部的安全故事，也是这里没有确认流程的原因：没有什么需要确认。</li>
+<li><b>两个工具会改变东西，需要第二道开关。</b><code>hold</code> 和 <code>pin_class</code> 冻结瞬时 UI、强制伪类 —— 这是没有指针的一方查看悬停状态的唯一途径。除非 ⚙ 卡片 MCP 页和 MCP Server 选项卡里的 <b>Allow freezing</b> 勾选框、<code>McpAllowHold</code> 或 <code>AVA_DEVTOOLS_MCP_HOLD=1</code> 另有说法，否则它们是关的；它们只改变瞬时 UI 状态，每次保持都带一个自动释放的期限，保持期间应用会显示横幅，应用里按 <span class="kbd">Esc</span> 同样能释放。</li>
+<li><b>它只归还自己拿走的。</b>智能体的保持只会自动释放智能体自己发起的那部分：之后你自己按 <span class="kbd">Shift</span>+<span class="kbd">F12</span>，期限不会把你的保持一并撤掉。</li></ul>
+<p class="tip">和 DevTools 的其余部分一样，只在 Debug 里发布。端点在任何构建里都默认关闭，但一个在 Release 中根本不附加 DevTools 的应用，就不可能意外地把它开起来。</p>` },
+      { id: 'mcpconnect', t: '接到 Claude Code 或 Codex', html: `<p>端点只在你的应用运行期间存在，所以顺序始终不变：启动应用、打开服务器、把智能体指过去。它注册的名字是 <code>&lt;程序集名&gt;-avadevtools</code> —— 这也是你在客户端列表里会看到的名字。</p>
+<h3>第 1 步。带着服务器启动应用</h3>
+<ol class="steps"><li>运行你的应用，按 <span class="kbd">F12</span>。</li>
+<li>打开 <b>MCP Server</b> 选项卡，勾上 <b>Serve MCP on loopback</b>。</li>
+<li>复制 <em>Point your agent at it</em> 下面那段 —— 里面已经是正确的名字和端口。</li></ol>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="设置卡片的 MCP 页：开关、端口、冻结许可，以及两条带复制按钮的注册命令"><span class="cap">⚙ → MCP：开关、端口，以及注册这个应用的那一行 —— 里面已经是它的名字和真正打开的端口。</span></div>
+<h3>第 2a 步。Claude Code</h3>
+<pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
+<p>作用域决定谁能用到它。<code>--scope local</code>（默认）是这个项目、只给你自己；<code>--scope project</code> 会在仓库根目录写一个 <code>.mcp.json</code>，参与这个应用的每个人都拿到同一条配置；<code>--scope user</code> 是这台机器上的所有项目。写进去的就是选项卡里显示的那段 JSON：</p>
+<pre><code>{ <span class="s">"mcpServers"</span>: { <span class="s">"myapp-avadevtools"</span>: { <span class="s">"type"</span>: <span class="s">"http"</span>, <span class="s">"url"</span>: <span class="s">"http://127.0.0.1:5171/"</span> } } }</code></pre>
+<p><code>claude mcp list</code> 会告诉你是否连上；会话里的 <code>/mcp</code> 会列出它找到的工具。然后用大白话问 —— <em>哪个元素显示着「Deploy」，它为什么是这个宽度？</em> —— 它就会对你眼前这个窗口调用 <code>find_elements</code> 和 <code>explain_layout</code>。</p>
+<h3>第 2b 步。Codex</h3>
+<p>⚙ 卡片也给了 Codex 一行 —— 它通过 <code>mcp-remote</code> 把端点桥接过去，这正是 stdio 客户端需要的：</p>
+<pre><code>codex mcp add myapp-avadevtools -- npx -y mcp-remote http://127.0.0.1:5171/</code></pre>
+<p>或者自己写进 <code>~/.codex/config.toml</code>：</p>
+<pre><code>[mcp_servers.myapp-avadevtools]
+url = <span class="s">"http://127.0.0.1:5171/"</span></code></pre>
+<p>只会说 stdio 的 CLI 版本需要一座桥 —— <code>mcp-remote</code> 把这个端点变成 stdio 服务器，同样的办法对任何只支持 stdio 的客户端都有效：</p>
+<pre><code>[mcp_servers.myapp-avadevtools]
+command = <span class="s">"npx"</span>
+args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span class="s">"http://127.0.0.1:5171/"</span>]</code></pre>
+<h3>第 3 步。从应用这一侧确认</h3>
+<p><b>MCP Server</b> 选项卡会数它已经回答过多少次：<code>7 call(s) served · last: get_tree 3s ago</code>。如果客户端说连上了而这一行始终是空的，那它在跟另一个应用说话 —— 两头都查一下端口。</p>
+<h3>同时开着两个应用</h3>
+<p>给第二个应用自己的端口（选项卡上的 <b>Port</b> 框、<code>McpPort</code>，或 <code>AVA_DEVTOOLS_MCP_PORT</code>），然后作为第二条配置加进去。它们的名字本来就不同，智能体的工具列表依然清楚。</p>
+<p class="tip">比应用先启动的客户端通常要重连之后才看得到工具 —— Claude Code 里的 <code>/mcp</code>，Codex 里开新会话。那是重连问题，不是配置问题。</p>` },
+      { id: 'mcptools', t: '十六个工具', html: `<p>十六个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
+<h3>先找到方向</h3>
+<table>
+<tr><th>工具</th><th>回答</th><th>参数</th></tr>
+<tr><td><code>list_windows</code></td><td>哪些窗口开着，以及作为各自树根的 id。从这里开始。</td><td>—</td></tr>
+<tr><td><code>get_tree</code></td><td>以缩进行呈现的树 —— 包含文本内联与打开的弹出层，模板内部折叠成占位符直到你要求展开。</td><td><code>elementId</code>、<code>depth</code>（默认 3，最大 12）、<code>mode</code>：important / logical / visual</td></tr>
+<tr><td><code>find_elements</code></td><td>按类型、<code>x:Name</code>、<code>.class</code> 或元素显示的文本查找 —— 与树里 <span class="kbd">Ctrl</span>+<span class="kbd">F</span> 用的是同一个匹配器。</td><td><code>query</code>、<code>limit</code></td></tr>
+</table>
+<h3>读懂一个元素</h3>
+<table>
+<tr><th>工具</th><th>回答</th><th>参数</th></tr>
+<tr><td><code>get_element</code></td><td>类型、名称、样式类、边界、真正被设置的属性及设置它们的优先级、附加属性、数据上下文，以及声明它的那一行 XAML。</td><td><code>elementId</code>、<code>allProperties</code></td></tr>
+<tr><td><code>explain_layout</code></td><td>它为什么是这个尺寸：父级给了什么、元素要了什么、什么在钳制它、对齐又对剩余空间做了什么。</td><td><code>elementId</code></td></tr>
+<tr><td><code>get_styles</code></td><td>作用于它的每条样式、模板与本地值，按优先级排列，逐条标明当前是否生效。</td><td><code>elementId</code>、<code>property</code></td></tr>
+<tr><td><code>get_resources</code></td><td>从某个元素看得见的某个键的全部定义，按解析顺序排列，标出胜出者并列出被遮蔽的那些。</td><td><code>key</code>、<code>elementId</code>、<code>limit</code></td></tr>
+<tr><td><code>inspect_object</code></td><td>挂在元素上的东西：数据上下文、那个视图模型的集合、集合里的对象。每个「还有内部」的成员都会连同抵达它的路径一起返回。</td><td><code>elementId</code>、<code>path</code>、<code>fields</code></td></tr>
+</table>
+<p class="tip"><code>get_element</code> 默认是纯读。<code>allProperties</code> 会额外收集该类型的公共 CLR 属性，而读取其中一个意味着调用应用自己的 getter —— 所以它需要显式索取，而不是背着你去做。<code>inspect_object</code> 按设计就会调用 getter；抛异常的 getter 会被如实报告，而不是藏起来。</p>
+<h3>问「哪里坏了」</h3>
+<table>
+<tr><th>工具</th><th>回答</th><th>参数</th></tr>
+<tr><td><code>get_problems</code></td><td>失败的绑定与重复的资源键，带元素、属性、大白话的原因和次数。智能体连上之前记录的问题也包含在内。</td><td><code>scan</code>、<code>limit</code></td></tr>
+<tr><td><code>get_logs</code></td><td>最近的 Avalonia 日志条目，绑定错误也在其中 —— 沉默的 UI 故障通常在这里自己交代。</td><td><code>limit</code>、<code>minLevel</code></td></tr>
+</table>
+<p><code>scan: true</code> 是智能体用别的办法无从逼近的那一个：它扫遍树中每一条活的绑定，报出<em>此刻</em>坏掉的一切 —— 包括启动时无人观察就已失败的绑定，以及至今尚未被触发过的绑定。</p>
+<h3>问「刚才发生了什么」</h3>
+<table>
+<tr><th>工具</th><th>回答</th><th>参数</th></tr>
+<tr><td><code>watch_element</code></td><td>开始记录：某元素的属性变化、其子树中的路由事件、其视图模型的通知，以及每一条背后的调用栈。省略元素则改为记录所有窗口的路由事件。</td><td><code>elementId</code>、<code>stop</code>、<code>cause</code>、<code>events</code>、<code>dataContext</code>、<code>noisy</code></td></tr>
+<tr><td><code>get_timeline</code></td><td>自那以后按顺序发生的一切 —— 属性变化、事件、通知、焦点移动、绑定错误、慢帧 —— 每条都带引发它的调用栈。</td><td><code>elementId</code>、<code>lanes</code>、<code>limit</code>、<code>sinceSequence</code></td></tr>
+</table>
+<p>没有任何东西是事后补录的：先观察，再操作应用，然后读取。这套捕获属于 MCP 自己，而不是 Timeline 选项卡 —— 智能体的观察不该因为某个 DevTools 窗口被关掉而熄灭，也不该因为是否开着窗口而改变含义。<a href="#cause">原因捕获</a>在这里默认<em>开启</em>，因为智能体没有调试器可退守。用上一次回复里的序号轮询，就只会拿到新增的部分。</p>
+<h3>看见它</h3>
+<table>
+<tr><th>工具</th><th>回答</th><th>参数</th></tr>
+<tr><td><code>screenshot</code></td><td>某个元素或整扇窗口的 PNG —— 用户真正在看的东西。</td><td><code>elementId</code></td></tr>
+<tr><td><code>list_popups</code></td><td>此刻打开的每个弹出层、浮出控件、菜单和工具提示，带其内容的 id，以及是否有保持在撑着它们。</td><td>—</td></tr>
+<tr><td><code>hold</code></td><td>冻结窗口的瞬时 UI 以便查看：弹出层与工具提示保持打开，悬停样式保持钉住。需要保持开关；会自动释放。</td><td><code>elementId</code>、<code>stop</code>、<code>seconds</code>（默认 120，最大 900）</td></tr>
+<tr><td><code>pin_class</code></td><td>强制某个伪类 —— <code>:pointerover</code>、<code>:pressed</code>、<code>:checked</code>、<code>:disabled</code> —— 以便读取并截取该状态的样式。需要保持开关。</td><td><code>elementId</code>、<code>pseudoClass</code>、<code>pin</code></td></tr>
+</table>
+<p>瞬时 UI 对稍晚一刻拍下的树快照是不可见的，而智能体也没有指针去把菜单撑开。这三个工具，就是它查看那部分「只在有人交互时才存在」的界面的方式。</p>` },
+      { id: 'mcpcases', t: 'MCP：五个真实案例', html: `<p>对示例应用的五次会话，原样照录。下面每一条回复都是工具真实打印出来的。重点不在于这些工具存在，而在于一个真实问题只需要这么少的几次调用。</p>
+<h3>案例 1。approver 那一行是空的</h3>
+<p>发布卡片显示 <code>status idle · window Fri 16:00 UTC · approver</code> —— 然后就没了。没有异常、没有红色、日志里也没有一行，因为「解析不到任何东西」的绑定，压根不是应用会听说的错误。</p>
+<pre><code><span class="k">get_problems</span> {<span class="s">"scan"</span>: <span class="k">true</span>}
+
+  Scanned 266 elements, 455 bindings.
+  ERROR Binding  Run #2.Text
+        'Aprover' resolves to nothing — the binding never produces a value
+  ERROR Binding  TextBlock "LatencyReadout" #3.Text
+        'LatencyTxt' resolves to nothing — the binding never produces a value</code></pre>
+<p>扫描在一个 <code>Run</code> 上找到了它 —— TextBlock 内部的一段文本，它不是 Visual，传统检查器根本无法选中。接着去问绑定另一端的对象，它究竟提供了什么：</p>
+<pre><code><span class="k">inspect_object</span> {<span class="s">"elementId"</span>: 2, <span class="s">"path"</span>: <span class="s">"DataContext"</span>}
+
+  #2.DataContext  →  AvaDevTools.Demo.MainWindow+ReleaseStatus
+  properties:
+    Approver = on-call: mira
+    DeployWindow = Fri 16:00 UTC</code></pre>
+<p>视图模型写的是 <code>Approver</code>，XAML 写的是 <code>Aprover</code>。再一次调用就把它变成一处可改的代码：</p>
+<pre><code><span class="k">get_element</span> {<span class="s">"elementId"</span>: 2}
+
+  #2 Run
+  parent: #9 TextBlock "DeployStatus"
+  data context: AvaDevTools.Demo.MainWindow+ReleaseStatus
+  declared at: MainWindow.axaml:309</code></pre>
+<p>三次调用：缺陷、成因，以及要改的那一行。没有往应用里输入任何东西，也没有靠猜。</p>
+<h3>案例 2。这段文字是谁写的？</h3>
+<p>状态翻成了 <code>shipped</code>，没人承认设过它。没有调试器可用，智能体先观察，再发问：</p>
+<pre><code><span class="k">watch_element</span> {<span class="s">"elementId"</span>: 11}
+
+  Watching #11 Run "StatusRun".
+  Recording: property changes on it, routed events in its subtree, and the call
+  stack behind each one.
+  Nothing is recorded retroactively — exercise the app, then call get_timeline.</code></pre>
+<p>然后照常使用应用 —— 人点一下 Deploy，或者测试套件去点 —— 于是：</p>
+<pre><code><span class="k">get_timeline</span> {<span class="s">"elementId"</span>: 11}
+
+  11  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11
+        stack: MainWindow.OnDeployClick  ←  ⋯ 26 framework frames  ←  Program.Main
+  12  property Run "StatusRun"  Foreground  #ff7c90be → #ff4dd8ff  [LocalValue]  #11
+        stack: MainWindow.OnDeployClick  ←  ⋯ 26 framework frames  ←  Program.Main</code></pre>
+<p>动手的那个方法，指名道姓，一次覆盖所有变化 —— 还有写入每个值的优先级，于是「样式干的」和「代码干的」永远不会混淆。把同一条信息流按父级 TextBlock 过滤，会看到同样这两行：内联属于树把它们挂在下面的那个元素。</p>
+<h3>案例 3。它为什么是这个颜色？</h3>
+<p>「它为什么是这个颜色」里藏着两个问题：哪个 setter 胜出，以及胜出者解析到了这个键的哪个定义。各一次调用：</p>
+<pre><code><span class="k">get_styles</span> {<span class="s">"elementId"</span>: 10, <span class="s">"property"</span>: <span class="s">"Background"</span>}
+
+  #10 Button #DeployButton .primary 349x34
+  ● Theme  [Style]  Button
+      Background = DynamicResource ButtonBackground
+  ● Style  [StyleTrigger]  MainWindow.axaml:23
+      Background = Linear gradient, 2 stops: #ff6fa0ff → #ff3d6de8</code></pre>
+<pre><code><span class="k">get_resources</span> {<span class="s">"key"</span>: <span class="s">"AccentBrush"</span>, <span class="s">"elementId"</span>: 10}
+
+  ★ AccentBrush = #ff4dd8ff   in MainWindow
+    AccentBrush = #ff5b8cff   in App   — shadowed</code></pre>
+<p>窗口里的定义在其作用域内胜出，App 一级的被遮蔽 —— 这正是改 App.axaml 毫无效果的原因。即便没人问起这个键，<code>get_problems</code> 也会自己把这处重复标出来。</p>
+<h3>案例 4。没有指针，怎么看悬停状态？</h3>
+<p>智能体无法悬停，但它可以强制状态。钉住之前，主题里的悬停 setter 在场却未生效：</p>
+<pre><code><span class="k">get_styles</span> {<span class="s">"elementId"</span>: 19, <span class="s">"property"</span>: <span class="s">"Background"</span>}
+
+  ○ Style  [StyleTrigger]  ^:pointerover /template/ ContentPresenter#PART_ContentPresenter   (not active right now)
+      Background = DynamicResource ButtonBackgroundPointerOver</code></pre>
+<pre><code><span class="k">pin_class</span> {<span class="s">"elementId"</span>: 18, <span class="s">"pseudoClass"</span>: <span class="s">":pointerover"</span>}
+
+  #18 now holds :pointerover. It renders as if the pointer were there —
+  screenshot it, then unpin. Puts itself back in 120s if you do not.</code></pre>
+<pre><code><span class="k">get_styles</span> {<span class="s">"elementId"</span>: 19, <span class="s">"property"</span>: <span class="s">"Background"</span>}
+
+  ● Style  [StyleTrigger]  ^:pointerover /template/ ContentPresenter#PART_ContentPresenter
+      Background = DynamicResource ButtonBackgroundPointerOver</code></pre>
+<p>同一行，现在生效了 —— 在伪类钉住期间调用 <code>screenshot</code>，截到的就是应用了该状态的元素。这个 setter 住在模板的 ContentPresenter 上而不是 Button 上，正属于那种「看见就明白、没看见永远猜不到」的事。</p>
+<h3>案例 5。一看它就关掉的菜单</h3>
+<p>浮出菜单开着而且位置偏了。你去导出树 —— 它已经没了：做别的动作这件事本身就把它关掉了。</p>
+<pre><code><span class="k">list_popups</span> {}
+
+  popup   #13  content #14 MenuFlyoutPresenter  in MainWindow
+
+<span class="k">hold</span> {<span class="s">"seconds"</span>: 300}
+
+  Holding MainWindow. 1 popup(s) and 0 tooltip(s) are held open, with the hover
+  chain that produced them. Auto-releases in 300s — call hold again to extend,
+  hold with stop to end it now. The app shows a banner while this lasts, and Esc
+  in the app releases it too.
+
+<span class="k">get_tree</span> {<span class="s">"elementId"</span>: 14, <span class="s">"depth"</span>: 3}
+
+  #14 MenuFlyoutPresenter 192x119
+    #15 Border #LayoutRoot 192x119
+      #16 ScrollViewer 190x117
+        #17 DockPanel 190x117</code></pre>
+<p>现在这个弹出层就是树里普通的一部分：可以测量，可以用 <code>explain_layout</code> 解释，可以截图。<code>hold</code> 带 <code>stop</code> 把一切还回去；智能体若是忘了，期限会替它还。</p>` },
       { id: 'options', t: '选项', html: `<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions
 {
     Gesture              = <span class="k">new</span> KeyGesture(Key.F11),                     <span class="c">// 默认：F12</span>
@@ -1510,7 +2321,12 @@ zh: {
     ClassicPerWindowMode = <span class="k">true</span>,                               <span class="c">// 每窗口独立 DevTools —— 默认 false（每应用一个）</span>
     WindowSize           = <span class="k">new</span> Size(1280, 760),
     StayOnTop            = <span class="k">false</span>,                              <span class="c">// 默认：true</span>
-});</code></pre>` },
+
+    McpServer            = <span class="k">true</span>,                               <span class="c">// 开启只读 MCP 端点 —— 默认 false</span>
+    McpPort              = 5171,                               <span class="c">// 仅 127.0.0.1 —— 默认 5171</span>
+    McpAllowHold         = <span class="k">true</span>,                               <span class="c">// 允许智能体冻结弹出层 / 钉住 :pointerover —— 默认 false</span>
+});</code></pre>
+<p>三个 <code>Mcp*</code> 选项详见 <a href="#mcp">让智能体来看（MCP）</a>。其余一切不索取即关闭或不存在；用户在 <a href="#settings">⚙ 设置卡</a>里保存的选择优先于代码传入的值。</p>` },
       { id: 'env', t: '环境变量', html: `<table>
 <tr><th>变量</th><th>含义</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>窗口加载时自动打开 DevTools。</td></tr>
@@ -1519,11 +2335,17 @@ zh: {
 <tr><td><code>AVA_DEVTOOLS_SRC_ROOT</code></td><td>自动探测失败时的源码根目录。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_LOG_LEVEL=Verbose</code></td><td>日志捕获的初始级别。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_UPDATE_CHECK=0</code></td><td>关闭每日一次的新版本检查。</td></tr>
-</table>` },
+<tr><td><code>AVA_DEVTOOLS_MCP=1</code></td><td>在 127.0.0.1 上开启只读 <a href="#mcp">MCP 端点</a>。</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>它使用的端口，默认 5171。</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>额外允许 <code>hold</code> 与 <code>pin_class</code> —— 仅有的两个会改变东西的工具。</td></tr>
+</table>
+<p class="tip">这三个 <code>MCP</code> 变量只是起始状态，不是最终决定：<a href="#settings">⚙ 卡片</a>里的开关和 <b>MCP Server</b> 选项卡按机器保存，并且优先于它们。你在工具里关掉的端口，下次启动依然是关的，无论启动脚本导出了什么。</p>` },
       { id: 'limits', t: '限制', html: `<ul>
 <li>仅桌面端 —— 移动/浏览器平台不支持辅助窗口。</li>
-<li>工具窗口使用宿主应用已加载的主题（Fluent、Simple 等）。</li>
-<li>树是快照 —— UI 结构变化后请点 ↻ Refresh（属性值本身是实时更新的）。</li></ul>` },
+<li>DevTools 自带主题 —— 应用用什么主题、甚至没有主题，都不影响它。</li>
+<li>设为 <code>LiveTree = false</code> 后树重新变回快照：结构变化后请点 ↻ Refresh（两种模式下属性值都是实时更新的）。</li>
+<li>在 HiDPI 屏幕上，截图与缺陷报告会把带 BoxShadow 的边框<em>内容</em>放大一倍 —— 这是 Avalonia 12 渲染层的一个特性。改为截取元素而不是整扇窗口通常可以绕开。</li>
+<li>MCP 端点只绑定 127.0.0.1。这是刻意为之，且不可配置。</li></ul>` },
       { id: 'feedback', t: '反馈', html: `<p>工具栏右上角的 <b>Feedback</b> 按钮打开 AvaDevTools 的问题跟踪器 —— 一键报告缺陷或请求功能。同一动作也在 <span class="kbd">Ctrl</span>+<span class="kbd">K</span> 里，叫 “Send feedback”。</p>
 <p>更喜欢聊天？<a href="https://t.me/avadevtools">Telegram 频道</a>接受提问和快速帮助。</p>` },
       { id: 'updates', t: '更新通知', html: `<p>工具栏上 <b>Feedback</b> 旁边始终以淡色显示你正在运行的版本号。AvaDevTools 的新版本带来新的面板和修复，但 NuGet 依赖不会自己宣布它们 —— 所以有更新的版本发布时，同一个版本号会变成蓝色并长出一个 <b>↑</b>。</p>

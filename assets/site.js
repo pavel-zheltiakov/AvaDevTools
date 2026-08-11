@@ -101,13 +101,18 @@ function initStoryEngine(rebuild) {
 }
 
 // A step's visual: its screenshot, or — for the opening step of a release
-// story (b.news) — a card listing what that release added.
+// story (b.news) — a card listing what that release added, or — for a step
+// about something headless (b.code) — the session transcript itself, which is
+// all there is to see when the caller is an agent rather than a person.
 function storyVisual(b, i) {
   const di = i >= 0 ? ' data-i="' + i + '"' : '';
   if (b.news) return '<div class="story-news"' + di + '>' +
     (b.newsTitle ? '<div class="story-news-h">' + esc(b.newsTitle) + '</div>' : '') +
     b.news.map(p => '<div class="story-new"><span>+</span><p><b>' + esc(p.k) + '</b> ' + esc(p.d) + '</p></div>').join('') +
     '</div>';
+  if (b.code) return '<pre class="story-code"' + di + '>' + b.code.map(line =>
+    '<div' + (line.slice(0, 2) === '$ ' ? ' class="cmd"' : '') + '>' + (esc(line) || '&nbsp;') + '</div>').join('') +
+    '</pre>';
   return '<img' + di + ' src="assets/img/' + b.img + '" alt="' + esc(b.t) + '" loading="lazy">';
 }
 
@@ -120,7 +125,7 @@ function renderStoryTrack(track, steps, flat, head, foot) {
     track.style.height = '';
     track.innerHTML = (head || '') + steps.map(b =>
       '<div class="story-flat-step">' + storyVisual(b, -1) +
-      '<h3>' + esc(b.t) + '</h3><p>' + esc(b.d || b.lead) + '</p>' +
+      (b.t ? '<h3>' + esc(b.t) + '</h3>' : '') + '<p>' + esc(b.d || b.lead) + '</p>' +
       (b.d2 ? '<p>' + esc(b.d2) + '</p>' : '') + '</div>').join('') + (foot || '');
     return;
   }
@@ -130,7 +135,8 @@ function renderStoryTrack(track, steps, flat, head, foot) {
     '<div class="story-sticky' + (head ? ' with-head' : '') + '">' + (head || '') +
     '<div class="story-bar"><span class="story-fill"></span></div><div class="story-grid">' +
     '<div class="story-text">' + steps.map((b, i) =>
-      '<div class="story-step" data-i="' + i + '"><h3>' + esc(b.t) + '</h3><p>' + esc(b.d || b.lead) + '</p>' +
+      '<div class="story-step" data-i="' + i + '">' + (b.t ? '<h3>' + esc(b.t) + '</h3>' : '') +
+      '<p>' + esc(b.d || b.lead) + '</p>' +
       (b.d2 ? '<p>' + esc(b.d2) + '</p>' : '') +
       (b.pts ? '<ul>' + b.pts.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>' : '') + '</div>').join('') + '</div>' +
     '<div class="story-shot">' + steps.map((b, i) => storyVisual(b, i)).join('') + '</div>' +
@@ -172,18 +178,30 @@ function buildHomeStories(R) {
       '<h2 class="sec">' + esc(R.wn.h) + '</h2>' +
       '</div></div>';
     const foot = '<div class="story-track-foot"><div class="wrap">' +
-      '<a href="docs.html#problems">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
+      '<a href="docs.html#mcp">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
       '<a href="releases.html">' + esc(R.wn.notes) + '</a></div></div>';
     if (wn) renderStoryTrack(wnTrack, wn.steps, !wide, head, foot);
   }
   if (host) {
     const rest = R.stories.list.filter(s => s.key !== R.stories.wn);
-    host.innerHTML = rest.map((s, i) =>
-      '<section class="story-chapter"><div class="wrap"><h2 class="sec">' + esc(s.h) + '</h2>' +
-      '<p class="sub">' + esc(s.sub) + '</p></div>' +
+    // A release story opens with its own title card carrying the same heading — printed
+    // twice, a screen apart, it reads as a bug. The chapter keeps the heading (and gains
+    // the release it belongs to, which was nowhere on the page); the card drops it.
+    const chapters = rest.map(s => {
+      const opener = s.steps[0] || {};
+      const version = (opener.newsTitle || '').match(/\d+(?:\.\d+)+/);
+      const steps = opener.t === s.h
+        ? [Object.assign({}, opener, { t: '' })].concat(s.steps.slice(1))
+        : s.steps;
+      return { story: s, steps: steps, version: version ? version[0] : '' };
+    });
+    host.innerHTML = chapters.map((c, i) =>
+      '<section class="story-chapter"><div class="wrap"><h2 class="sec">' + esc(c.story.h) +
+      (c.version ? '<span class="story-ver">' + esc(c.version) + '</span>' : '') + '</h2>' +
+      '<p class="sub">' + esc(c.story.sub) + '</p></div>' +
       '<div class="story-track" data-story="' + i + '"></div></section>').join('');
     [].slice.call(host.querySelectorAll('.story-track')).forEach((tr, i) =>
-      renderStoryTrack(tr, rest[i].steps, !wide));
+      renderStoryTrack(tr, chapters[i].steps, !wide));
   }
   updateStoryTracks();
 }

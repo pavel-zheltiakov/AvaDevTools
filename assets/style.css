@@ -176,13 +176,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
    sticky panel, so both ride with the slides for the whole story. Content is
    top-anchored so caption, step text and slide read as one block. */
 #whats-new{padding:0}
-.story-sticky.with-head{top:59px;height:calc(100vh - 59px);flex-direction:column;align-items:stretch}
-.story-sticky.with-head .story-grid{flex:1;min-height:0;grid-template-rows:100%;align-items:stretch}
+.story-sticky.with-head{top:59px;height:calc(100vh - 59px);flex-direction:column;align-items:stretch;justify-content:center;gap:10px}
+/* Caption pinned at the top, the slide centred in what is left. Top-anchoring both read as
+   one block on a laptop, but a short slide — a transcript, a small card — left most of a tall
+   window empty below it, which looks like a page that failed to load rather than a design. */
+.story-sticky.with-head .story-grid{flex:0 1 auto;min-height:0;align-content:center;align-items:center}
 .story-sticky.with-head .story-text{min-height:0}
-.story-sticky.with-head .story-step{justify-content:flex-start;padding-top:26px}
-.story-sticky.with-head .story-shot{height:auto}
-.story-sticky.with-head .story-shot img{max-height:93%;top:18px;transform:translateX(-50%) scale(.965)}
-.story-sticky.with-head .story-shot img.on{transform:translateX(-50%) scale(1)}
+.story-sticky.with-head .story-step{justify-content:center}
+.story-sticky.with-head .story-shot{height:auto;min-height:min(46vh,400px)}
+.story-sticky.with-head .story-shot img{max-height:78vh}
 .story-track-head{padding:14px 0 0}
 .story-track-head .sec{margin-bottom:0}
 .story-track-foot{padding:10px 0 14px;font-size:14px}
@@ -199,9 +201,20 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .story-new p b{color:var(--text);font-weight:600}
 .story-shot .story-news{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.965);opacity:0;transition:opacity .5s ease,transform .5s ease}
 .story-shot .story-news.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
-.story-sticky.with-head .story-shot .story-news{top:18px;transform:translateX(-50%) scale(.965)}
-.story-sticky.with-head .story-shot .story-news.on{transform:translateX(-50%) scale(1)}
 .story-flat-step .story-news{margin:0 auto}
+
+/* transcript slide: what a headless step actually looks like — an MCP session,
+   the calls the agent made and what came back */
+.story-code{width:min(760px,96%);margin:0;background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 24px 70px rgba(0,0,0,.5);font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--muted)}
+/* a transcript line is quoted verbatim, so a long one wraps rather than being cut off
+   or hidden behind a horizontal scrollbar nobody uses mid-slide; the hanging indent
+   keeps a wrapped tail from reading as a line of its own */
+.story-code div{white-space:pre-wrap;padding-left:1.8em;text-indent:-1.8em}
+.story-code .cmd{color:#6fa8ff}
+.story-shot .story-code{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.965);opacity:0;transition:opacity .5s ease,transform .5s ease}
+.story-shot .story-code.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.story-flat-step .story-code{margin:0 auto}
+@media(max-width:860px){.story-code{font-size:11.5px;padding:14px 12px}}
 
 /* stories section: a chapter (heading + track) per story */
 .stories-head{padding:8px 0 0}
@@ -209,6 +222,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .story-chapter{padding:34px 0 0;border-top:1px solid var(--border);margin-top:34px}
 .story-chapter:first-child{border-top:0;margin-top:8px}
 .story-chapter .sub{margin-bottom:6px;max-width:720px}
+.story-ver{display:inline-block;margin-left:12px;padding:2px 9px;border:1px solid var(--border);border-radius:999px;background:var(--panel2);color:var(--muted);font-size:13px;font-weight:600;vertical-align:middle}
 
 /* flat story fallback: stacked step blocks on narrow screens / reduced motion */
 .story-track.flat{padding:4px 0 28px}

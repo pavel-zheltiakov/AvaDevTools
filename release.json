@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "version": "12.1.3",
+  "version": "12.1.4",
   "notesUrl": "https://pavel-zheltiakov.github.io/AvaDevTools/releases.html",
   "notes": [
     {
       "kind": "p",
-      "text": "The tree shows now: live, across every window, in any theme."
+      "text": "The app answers for itself now \u2014 to you, and to an agent."
     },
     {
       "kind": "h1",
@@ -13,31 +13,43 @@
     },
     {
       "kind": "bullet",
-      "text": "Live tree \u2014 shows new and removed elements in the tree without a refresh."
+      "text": "MCP server \u2014 a read-only endpoint on loopback; sixteen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots."
     },
     {
       "kind": "bullet",
-      "text": "Hidden changes \u2014 flash the nearest visible line when the change is under a fold."
+      "text": "MCP Server tab \u2014 what is listening, on which port, what an agent has asked for, and every tool it can reach."
     },
     {
       "kind": "bullet",
-      "text": "Pause \u2014 queues updates while you read, then applies them at once."
+      "text": "MCP in the settings card \u2014 turn the endpoint on or off and set its port from the \u2699 card, saved per machine."
     },
     {
       "kind": "bullet",
-      "text": "All windows, one DevTools \u2014 every window is a node of one tree; F12 works anywhere."
+      "text": "One line to register it \u2014 the card hands you the claude mcp add or codex mcp add command, already carrying this application's name and port."
     },
     {
       "kind": "bullet",
-      "text": "Its own theme \u2014 DevTools looks the same under Fluent, Simple, any theme or none."
+      "text": "Named per application \u2014 each app serves as <assembly>-avadevtools, so two open at once stay apart in the agent's list."
     },
     {
       "kind": "bullet",
-      "text": "Settings card \u2014 remaps the gestures and toggles stay-on-top, live tree and update checks."
+      "text": "Cause capture \u2014 the call stack behind every recorded change, so one reproduction answers \"who changed this\" for every hit at once."
     },
     {
       "kind": "bullet",
-      "text": "Version on the toolbar \u2014 turns blue with an \u2191 when a newer version is out."
+      "text": "Break next \u2014 arms the debugger for exactly one change, for when a live stack with locals is what you need."
+    },
+    {
+      "kind": "bullet",
+      "text": "Perf lane \u2014 slow frames and layout passes filed into the timeline beside what the app was doing."
+    },
+    {
+      "kind": "bullet",
+      "text": "Walk the view model \u2014 inspect_object follows the data context into its collections and the objects inside them."
+    },
+    {
+      "kind": "bullet",
+      "text": "Reach the transient UI \u2014 an agent can list open popups, freeze them, and force :pointerover on something that has no pointer."
     }
   ]
 }

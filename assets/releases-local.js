@@ -3,9 +3,9 @@
 // whose tag already exists on GitHub is ignored, so this never duplicates or
 // overrides a published release. Updated each release round with RELEASE_NOTES.md.
 window.LOCAL_RELEASES = [{
-  tag_name: 'v12.1.3',
-  name: 'AvaDevTools 12.1.3',
-  published_at: '2026-08-06T00:00:00Z',
+  tag_name: 'v12.1.4',
+  name: 'AvaDevTools 12.1.4',
+  published_at: '2026-08-11T00:00:00Z',
   html_url: 'https://github.com/pavel-zheltiakov/AvaDevTools/releases',
-  body: "The tree shows now: live, across every window, in any theme.\n\n## New Features\n\n- **Live tree** \u2014 shows new and removed elements in the tree without a refresh.\n- **Hidden changes** \u2014 flash the nearest visible line when the change is under a fold.\n- **Pause** \u2014 queues updates while you read, then applies them at once.\n- **All windows, one DevTools** \u2014 every window is a node of one tree; F12 works anywhere.\n- **Its own theme** \u2014 DevTools looks the same under Fluent, Simple, any theme or none.\n- **Settings card** \u2014 remaps the gestures and toggles stay-on-top, live tree and update checks.\n- **Version on the toolbar** \u2014 turns blue with an \u2191 when a newer version is out.\n\nDocs: https://pavel-zheltiakov.github.io/AvaDevTools/docs.html",
+  body: "The app answers for itself now — to you, and to an agent.\n\n## New Features\n\n- **MCP server** — a read-only endpoint on loopback; sixteen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots.\n- **MCP Server tab** — what is listening, on which port, what an agent has asked for, and every tool it can reach.\n- **MCP in the settings card** — turn the endpoint on or off and set its port from the ⚙ card, saved per machine.\n- **One line to register it** — the card hands you the `claude mcp add` or `codex mcp add` command, already carrying this application's name and port.\n- **Named per application** — each app serves as `<assembly>-avadevtools`, so two open at once stay apart in the agent's list.\n- **Cause capture** — the call stack behind every recorded change, so one reproduction answers \"who changed this\" for every hit at once.\n- **Break next** — arms the debugger for exactly one change, for when a live stack with locals is what you need.\n- **Perf lane** — slow frames and layout passes filed into the timeline beside what the app was doing.\n- **Walk the view model** — `inspect_object` follows the data context into its collections and the objects inside them.\n- **Reach the transient UI** — an agent can list open popups, freeze them, and force `:pointerover` on something that has no pointer.\n\nDocs: https://pavel-zheltiakov.github.io/AvaDevTools/docs.html",
 }];
