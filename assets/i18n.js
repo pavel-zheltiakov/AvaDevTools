@@ -19,9 +19,9 @@ en: {
     h: 'Stories', wn: 'a11y',
     lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
     list: [
-      { key: 'a11y', h: '♿ The other tree', sub: 'The tree a screen reader walks, an audit that reads it for you, and every keyboard stop numbered over the running application.',
+      { key: 'a11y', h: '🩻 The other tree', sub: 'The tree a screen reader walks, an audit that reads it for you, and every keyboard stop numbered over the running application.',
         steps: [
-          { t: '♿ The other tree',
+          { t: '🩻 The other tree',
             d: 'Your application has two trees. One is the tree you see; the other is the one a screen reader walks — different membership, different nesting, different names.',
             d2: 'Every accessibility bug is a disagreement between the two, and until now you could not look at the second one from inside the process that builds it.',
             newsTitle: 'New in 12.1.5',
@@ -244,7 +244,7 @@ en: {
       { i: '🎯', t: 'Value tracking', d: 'Track any property across the whole tree: same value = same color, null in its own bucket, a live legend with counts — and "Fold to changes" shows every boundary at once.' },
       { i: '❄', t: 'Hold the moment', d: 'Shift+F12 freezes what your app shows right now — open popups, flyouts, tooltips, hover styling. Inspect the frozen scene like ordinary UI; Esc restores everything exactly as it was. A pin-states panel forces :focus, :disabled or any custom pseudo-class on demand.' },
       { i: '⚠️', t: 'Problems pane', d: 'Only what is broken — binding failures first — errors before warnings, each with a plain reason, a reveal link and the full binding walk. Scan now catches errors that fired before DevTools opened.' },
-      { i: '♿', t: 'The other tree', d: 'What a screen reader walks, beside what you see: role, announced name and patterns per element. A tab-order overlay numbers every keyboard stop over the running app, WCAG contrast is measured the way the standard defines it, and unnamed controls, keyboard traps and unreachable focus stops file into Problems with everything else.' },
+      { i: '🩻', t: 'The other tree', d: 'What a screen reader walks, beside what you see: role, announced name and patterns per element. A tab-order overlay numbers every keyboard stop over the running app, WCAG contrast is measured the way the standard defines it, and unnamed controls, keyboard traps and unreachable focus stops file into Problems with everything else.' },
       { i: '⌨️', t: 'Ctrl+K: find anything', d: 'One search over actions, elements, resources and properties — type the words you see on screen and find the thing showing them.' },
       { i: '🏆', t: 'Which resource won?', d: 'Every definition of a key in resolution order — the winner marked, shadowed ones struck through, live edits and one-click source.' },
       { i: '📷', t: 'Copy as bug report', d: 'One click puts a DPI-correct screenshot plus a readable report — pseudo-XAML path, bounds, non-default properties — on the clipboard. Rich targets paste both, image targets the PNG, text targets the markdown.' },
@@ -877,9 +877,9 @@ uk: {
     h: 'Історії', wn: 'a11y',
     lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
     list: [
-      { key: 'a11y', h: '♿ Інше дерево', sub: 'Дерево, яким ходить скрінрідер, аудит, що читає його за вас, і кожна клавіатурна зупинка, пронумерована просто над застосунком.',
+      { key: 'a11y', h: '🩻 Інше дерево', sub: 'Дерево, яким ходить скрінрідер, аудит, що читає його за вас, і кожна клавіатурна зупинка, пронумерована просто над застосунком.',
         steps: [
-          { t: '♿ Інше дерево',
+          { t: '🩻 Інше дерево',
             d: 'У вашого застосунку два дерева. Одне — те, яке ви бачите; друге — те, яким ходить скрінрідер: інший склад, інша вкладеність, інші назви.',
             d2: 'Кожен баг доступності — це розбіжність між ними, і досі на друге не було як подивитися зсередини процесу, який його будує.',
             newsTitle: 'Нове у 12.1.5',
@@ -1102,7 +1102,7 @@ uk: {
       { i: '🎯', t: 'Трекінг значень', d: 'Відстежуйте будь-яку властивість по всьому дереву: однакове значення = однаковий колір, null у власній групі, жива легенда з лічильниками — а «Fold to changes» показує всі межі одразу.' },
       { i: '❄', t: 'Hold the moment', d: 'Shift+F12 заморожує те, що застосунок показує просто зараз — відкриті попапи, флаяути, тултіпи, hover-стилі. Досліджуйте заморожену сцену як звичайний UI; Esc відновлює все точно як було. Панель pin states вмикає :focus, :disabled чи будь-який кастомний псевдоклас на вимогу.' },
       { i: '⚠️', t: 'Панель Problems', d: 'Лише зламане — насамперед помилки біндінгів — помилки перед попередженнями, кожна зі зрозумілою причиною, посиланням reveal і повним розбором біндінгу. Scan now ловить помилки, що сталися до відкриття DevTools.' },
-      { i: '♿', t: 'Інше дерево', d: 'Те, чим ходить скрінрідер, поруч із тим, що бачите ви: роль, озвучувана назва і патерни для кожного елемента. Оверлей порядку Tab нумерує кожну клавіатурну зупинку просто над застосунком, контраст міряється так, як його визначає WCAG, а безіменні контроли, клавіатурні пастки й недосяжні зупинки фокуса потрапляють у Problems разом з усім іншим.' },
+      { i: '🩻', t: 'Інше дерево', d: 'Те, чим ходить скрінрідер, поруч із тим, що бачите ви: роль, озвучувана назва і патерни для кожного елемента. Оверлей порядку Tab нумерує кожну клавіатурну зупинку просто над застосунком, контраст міряється так, як його визначає WCAG, а безіменні контроли, клавіатурні пастки й недосяжні зупинки фокуса потрапляють у Problems разом з усім іншим.' },
       { i: '⌨️', t: 'Ctrl+K: знайти будь-що', d: 'Один пошук по діях, елементах, ресурсах і властивостях — наберіть слова з екрана й знайдіть те, що їх показує.' },
       { i: '🏆', t: 'Який ресурс переміг?', d: 'Кожне визначення ключа в порядку резолюції — переможець позначений, затінені закреслено, живі редагування та код за один клік.' },
       { i: '📷', t: 'Копія як баг-репорт', d: 'Один клік кладе в буфер DPI-коректний скриншот плюс читабельний звіт — псевдо-XAML шлях, bounds, властивості з нетиповими значеннями. Rich-цілі вставляють обидва, графічні — PNG, текстові — markdown.' },
@@ -1735,9 +1735,9 @@ zh: {
     h: '功能演示', wn: 'a11y',
     lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
     list: [
-      { key: 'a11y', h: '♿ 另一棵树', sub: '屏幕阅读器走的那棵树、替你读它的审计，以及在运行中的应用上给每个键盘停靠点编上的号。',
+      { key: 'a11y', h: '🩻 另一棵树', sub: '屏幕阅读器走的那棵树、替你读它的审计，以及在运行中的应用上给每个键盘停靠点编上的号。',
         steps: [
-          { t: '♿ 另一棵树',
+          { t: '🩻 另一棵树',
             d: '你的应用有两棵树。一棵是你看见的；另一棵是屏幕阅读器走的 —— 成员不同、嵌套不同、名字也不同。',
             d2: '每一个无障碍缺陷都是这两棵树之间的分歧，而在此之前，你没法从构建它的进程内部去看第二棵。',
             newsTitle: '12.1.5 新增',
@@ -1960,7 +1960,7 @@ zh: {
       { i: '🎯', t: '值追踪', d: '在整棵树上追踪任意属性：相同值 = 相同颜色，null 独立分组，实时图例带计数 ——「Fold to changes」一次显示所有边界。' },
       { i: '❄', t: '定格瞬间（Hold）', d: 'Shift+F12 冻结应用此刻呈现的一切 —— 打开的弹出层、浮出菜单、工具提示、悬停样式。像普通 UI 一样检查被冻结的场景；Esc 把一切精确还原。Pin states 面板可随时强制 :focus、:disabled 或任意自定义伪类。' },
       { i: '⚠️', t: 'Problems 面板', d: '只列坏掉的 —— 绑定失败最先 —— 错误在警告之前，每条有白话原因、reveal 链接和完整绑定链。Scan now 抓住 DevTools 打开之前的错误。' },
-      { i: '♿', t: '另一棵树', d: '屏幕阅读器走的那棵树，与你看见的那棵并排：每个元素的角色、被念出的名称和模式。Tab 顺序浮层直接在运行中的应用上为每个键盘停靠点编号，对比度按标准的定义测量，而没有名字的控件、键盘陷阱和到不了的焦点停靠点，都和其它问题一起进 Problems。' },
+      { i: '🩻', t: '另一棵树', d: '屏幕阅读器走的那棵树，与你看见的那棵并排：每个元素的角色、被念出的名称和模式。Tab 顺序浮层直接在运行中的应用上为每个键盘停靠点编号，对比度按标准的定义测量，而没有名字的控件、键盘陷阱和到不了的焦点停靠点，都和其它问题一起进 Problems。' },
       { i: '⌨️', t: 'Ctrl+K：找到任何东西', d: '一个搜索覆盖动作、元素、资源和属性 —— 输入屏幕上看到的字，找到显示它们的东西。' },
       { i: '🏆', t: '哪个资源赢了？', d: '一个键的每个定义按解析顺序排列 —— 赢家有标记，被遮蔽的画删除线，实时编辑，一键到源码。' },
       { i: '📷', t: '复制为缺陷报告', d: '一次点击把 DPI 精确的截图加上可读的报告 —— 伪 XAML 路径、bounds、非默认属性 —— 放进剪贴板。富文本目标同时粘贴两者，图像目标得到 PNG，纯文本目标得到 markdown。' },
