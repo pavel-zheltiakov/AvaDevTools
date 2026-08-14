@@ -12,13 +12,53 @@ en: {
     get: 'Get started', stories: 'See it in action', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.1.4", docs: 'Documentation →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.1.5", docs: 'Documentation →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   stories: {
-    h: 'Stories', wn: 'agent',
+    h: 'Stories', wn: 'a11y',
     lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
     list: [
+      { key: 'a11y', h: '♿ The other tree', sub: 'The tree a screen reader walks, an audit that reads it for you, and every keyboard stop numbered over the running application.',
+        steps: [
+          { t: '♿ The other tree',
+            d: 'Your application has two trees. One is the tree you see; the other is the one a screen reader walks — different membership, different nesting, different names.',
+            d2: 'Every accessibility bug is a disagreement between the two, and until now you could not look at the second one from inside the process that builds it.',
+            newsTitle: 'New in 12.1.5',
+            news: [
+              { k: 'The accessibility tree', d: 'a third mode beside visual and logical — the tree assistive technology actually walks, with the announced name and the role riding along as columns' },
+              { k: 'Tab-order overlay', d: 'every keyboard stop numbered over the running application and threaded in visiting order, with anything Tab never reaches boxed in red' },
+              { k: 'Findings in Problems', d: 'controls announced as nothing but their role, labels pointing at nothing, mouse-only stops and keyboard traps — filed beside the broken bindings' },
+              { k: 'Contrast, measured', d: 'computed the way WCAG 2.1 defines it, compositing the translucent layers behind the text first; gradients are left unmeasured rather than measured badly' },
+              { k: 'Avalonia’s own walker', d: 'the order comes from the framework’s tab navigator rather than a reimplementation of it, so it agrees exactly — template quirks and all' },
+              { k: 'Where the keyboard goes, for an agent', d: 'a seventeenth MCP tool: an agent has no fingers, so get_tab_order presses Tab through the window and reports where focus actually went' },
+              { k: 'Nothing new to learn', d: 'get_tree takes an accessibility mode, and get_problems reports the audit as another category' },
+              { k: 'Columns you can size', d: 'every column edge in the tree is a rule you can see and drag — and a width you set survives leaving the mode and coming back' },
+              { k: 'What an agent has asked for', d: 'the MCP Server tab counts the calls made to each tool, failures counted apart from the rest' },
+              { k: 'An audit that stays quiet', d: 'a theme’s own template parts are never asked for names — a slider’s increase button arrives unnamed in every Avalonia application there is' },
+            ] },
+          { img: 'story/y02.png', t: 'Switch the tree to what a screen reader sees', d: 'The mode dropdown has a third entry. The tree rebuilds against the automation peers and gains two columns — the announced name and the role — so what each element will be called out as reads in the same glance as its structure. It is the control view, not the raw peer tree: 66 nodes where the visual tree has 228, and the difference is the whole point.' },
+          { img: 'story/y03.png', t: 'Announced as nothing but its role', d: 'Press Scan now and the audit runs with everything else. Four controls here answer to "edit", "combobox", "slider" and "button" and nothing more — the type, never the purpose. Open a row and it says what will be announced and what the control is missing, next to the broken bindings and the shadowed resource keys.' },
+          { img: 'story/y04.png', t: 'See where the keyboard goes', d: 'Pressing Tab is the cheapest accessibility test there is and the one nobody runs, because finding out means pressing it thirty times and remembering what happened. Switch the overlay on and every stop is numbered over the running application, threaded in visiting order, the wrap back to the start dashed. The thread crossing the window twice is the finding: this form does not read in the order it looks.' },
+          { t: 'An agent has no fingers', d: 'So it asks. The walk is the framework’s own, which means an agent gets the order Tab actually takes — and the audit answers, in the same breath, which of those stops will announce as nothing at all. Stop 8 has nothing to call itself.',
+            code: [
+              '$ get_tab_order  {}',
+              '  10 tab stops, cycling',
+              '',
+              '   1  #7 Button  eu-central ▾',
+              '   2  #8 CheckBox  auto',
+              '   3  #9 Button  Scale up',
+              '   4  #10 Button  Scale down',
+              '   5  #4 ToggleSwitch  ToggleSwitch "AutoScale"',
+              '   ⋯',
+              '   8  #1 TextBox  TextBox',
+              '',
+              '$ get_problems  {"scan": true}',
+              '  ERROR Accessibility  TextBox #1',
+              '        an Edit with no accessible name — a screen reader',
+              '        announces it as "edit" and nothing else',
+            ] },
+        ] },
       { key: 'agent', h: '🤖 The app answers for itself', sub: 'The stack behind every change, the slow frames beside it — and a read-only MCP endpoint that hands the whole tool to a coding agent.',
         steps: [
           { t: '🤖 The app answers for itself',
@@ -26,7 +66,7 @@ en: {
             d2: 'Now one reproduction records the stack behind every change, slow frames land beside what the app was doing, and a coding agent can call the same engines the tabs use — read-only, over loopback.',
             newsTitle: 'New in 12.1.4',
             news: [
-              { k: 'An MCP endpoint', d: 'read-only, on loopback — sixteen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots' },
+              { k: 'An MCP endpoint', d: 'read-only, on loopback — seventeen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots' },
               { k: 'A tab and a settings page', d: 'turn the endpoint on, set its port, and see what an agent has asked for so far' },
               { k: 'One line to register it', d: 'the ⚙ card hands you the claude mcp add or codex mcp add command, carrying this application’s own name and port' },
               { k: 'Cause capture', d: 'the call stack behind every recorded change, so one reproduction answers "who changed this" for every hit at once' },
@@ -53,7 +93,7 @@ en: {
               '$ get_element  {"elementId": 2}',
               '  declared at: MainWindow.axaml:309',
             ] },
-          { t: 'The answers nothing else can give it', d: 'Who changed this, and what a hover looks like to something with no pointer. Fourteen of the sixteen tools only read; freezing popups and forcing states is the exception — it takes a second opt-in, carries a deadline that puts everything back, and shows a banner in the app while it lasts.',
+          { t: 'The answers nothing else can give it', d: 'Who changed this, and what a hover looks like to something with no pointer. Fifteen of the seventeen tools only read; freezing popups and forcing states is the exception — it takes a second opt-in, carries a deadline that puts everything back, and shows a banner in the app while it lasts.',
             code: [
               '$ get_timeline  {"elementId": 11}',
               '  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11',
@@ -204,6 +244,7 @@ en: {
       { i: '🎯', t: 'Value tracking', d: 'Track any property across the whole tree: same value = same color, null in its own bucket, a live legend with counts — and "Fold to changes" shows every boundary at once.' },
       { i: '❄', t: 'Hold the moment', d: 'Shift+F12 freezes what your app shows right now — open popups, flyouts, tooltips, hover styling. Inspect the frozen scene like ordinary UI; Esc restores everything exactly as it was. A pin-states panel forces :focus, :disabled or any custom pseudo-class on demand.' },
       { i: '⚠️', t: 'Problems pane', d: 'Only what is broken — binding failures first — errors before warnings, each with a plain reason, a reveal link and the full binding walk. Scan now catches errors that fired before DevTools opened.' },
+      { i: '♿', t: 'The other tree', d: 'What a screen reader walks, beside what you see: role, announced name and patterns per element. A tab-order overlay numbers every keyboard stop over the running app, WCAG contrast is measured the way the standard defines it, and unnamed controls, keyboard traps and unreachable focus stops file into Problems with everything else.' },
       { i: '⌨️', t: 'Ctrl+K: find anything', d: 'One search over actions, elements, resources and properties — type the words you see on screen and find the thing showing them.' },
       { i: '🏆', t: 'Which resource won?', d: 'Every definition of a key in resolution order — the winner marked, shadowed ones struck through, live edits and one-click source.' },
       { i: '📷', t: 'Copy as bug report', d: 'One click puts a DPI-correct screenshot plus a readable report — pseudo-XAML path, bounds, non-default properties — on the clipboard. Rich targets paste both, image targets the PNG, text targets the markdown.' },
@@ -219,7 +260,7 @@ en: {
       { i: '⏱', t: 'Timeline', d: 'Routed events, property changes, VM notifies and focus changes in one chronological feed, scoped to a watchlist you control. Cause links connect a notify to the bound update it produced; every entry opens full details.' },
     { i: '🕰', t: 'Cause capture', d: 'Every recorded change carries the call stack that caused it, trimmed to your own frames. Reproduce once and read all the culprits in order, each frame linking to its source — no breakpoint per hit. Break next escalates to the debugger for exactly one change.' },
     { i: '📈', t: 'Perf lane', d: 'Slow frames and layout passes filed into the same feed as everything else, so a stall is readable next to what the app was doing. Slow is measured against the budget your display actually keeps, never an average.' },
-    { i: '🤖', t: 'Let an agent look (MCP)', d: 'A read-only Model Context Protocol endpoint on loopback, off unless asked for: sixteen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots of the running application.' },
+    { i: '🤖', t: 'Let an agent look (MCP)', d: 'A read-only Model Context Protocol endpoint on loopback, off unless asked for: seventeen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots of the running application.' },
       { i: '📜', t: 'Log viewer', d: 'Binding errors, layout and property-system messages — even without LogToTrace(). Filtered, batched and feedback-loop safe.' },
       { i: '📊', t: 'Renderer overlays', d: 'FPS meter, layout/render time graphs and dirty-rect flashing on the inspected window, one toggle away.' },
       { i: '🕵️', t: 'Source of every value', d: 'See whether a value is default, set by hand, styled, templated or inherited — and jump to the ancestor or the exact XAML that set it.' },
@@ -235,7 +276,7 @@ en: {
     contents: 'Contents',
     groups: [
       { t: 'Getting started', ids: ['install', 'quickstart'] },
-      { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
+      { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
       { t: 'Agents (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpcases'] },
       { t: 'Reference', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -297,6 +338,33 @@ en: {
 <div class="shot"><img src="assets/img/docs/problems-detail.png" alt="A binding problem opened: element with a reveal link, property, reason, and the binding walk with the failing step"><span class="cap">The walk shows each step live: DataContext resolved fine — the path name is what is wrong.</span></div>
 <p>A duplicated-resource problem lists every definition with its place — element scopes revealable in the tree — and links to the <a href="#resources">resolution explainer</a>.</p>
 <p class="tip"><b>Tip.</b> <span class="kbd">Ctrl</span>+<span class="kbd">K</span> → "Scan bindings for problems" runs the scan from anywhere.</p>` },
+      { id: 'a11y', t: 'Accessibility: the other tree', html: `<p>Your application has two trees. One is the tree you see; the other is the tree a screen reader walks — different membership, different nesting, different names. Every accessibility bug is a disagreement between the two, and until now you could not look at the second one from inside the process that builds it.</p>
+<h3>Step 1. Switch the tree to what a screen reader sees</h3>
+<p>The mode dropdown above the tree has a third entry: <b>Accessibility tree</b>. The tree rebuilds against the automation peers and gains two columns — the <b>announced name</b> and the <b>role</b> — so what each element will be called out as is readable in the same glance as its structure. The pane takes the room the two columns need while the mode is on, and hands it back on the way out. Every column edge is drawn — in the header and down the tree — and every one of them is a handle: the pointer anywhere over the header strip brightens them all, and dragging one sets that column's width out of the room the element names have. A width you set yourself is remembered across the mode.</p>
+<p>What appears is the <b>control view</b>: the tree assistive technology actually navigates, not the raw peer tree the framework hands out. Every <code>ContentPresenter</code> and template part a screen reader steps over is gone. On the sample application that is 66 nodes instead of 228, and the difference is the whole point — a tree that looks suspiciously like the visual one is showing you the wrong thing.</p>
+<p>It is still the same tree in every other respect: search, scoping, folding, the Properties pane, go-to-source and Ctrl+K all work, because selecting a peer selects the control that owns it.</p>
+<div class="shot"><img src="assets/img/docs/a11y-tree.png" alt="The tree in accessibility mode, with Name and Role columns"><span class="cap">The control view of the sample application: the announced name and the role beside every node — 66 of them where the visual tree has 228.</span></div>
+<h3>Step 2. What is wrong lands where everything wrong lands</h3>
+<p>Accessibility findings are <a href="#problems">Problems</a> rows, next to the broken bindings and the shadowed resource keys — "what is wrong with my app" is one question and deserves one list. Press <b>Scan now</b> and the audit runs with the rest:</p>
+<ul>
+<li><b>Announced as nothing but its role.</b> A button, checkbox, text box or slider with no accessible name — a screen reader says "button" and stops. This is the one that makes an application unusable rather than awkward.</li>
+<li><b>A label that labels nothing.</b> <code>LabeledBy</code> pointing at an element with no name of its own resolves to silence.</li>
+<li><b>Focus you cannot see.</b> Reachable with Tab, but off screen.</li>
+<li><b>Reachable by mouse only.</b> Focusable and enabled, but pressing Tab never gets there.</li>
+<li><b>A keyboard trap.</b> A container focus can enter and not leave — a mouse user walks out of it, a keyboard user does not.</li>
+<li><b>Duplicated automation ids, skipped heading levels, and text contrast below what WCAG asks at that size.</b></li>
+</ul>
+<div class="shot"><img src="assets/img/docs/a11y-problems.png" alt="Accessibility findings in the Problems pane"><span class="cap">Eight controls that answer to nothing but their role — four of them list items announced as the class name of the panel inside them — filed beside the broken bindings and the shadowed resource keys.</span></div>
+<p>A finding you cannot act on is not a finding. A theme's own template parts are never asked for names — a slider's increase button arrives unnamed in every Avalonia application there is, and the slider is what wants a name. An id a peer invented from a markup name is not read as one somebody set, because every stamp of a control template carries the same part names.</p>
+<div class="shot"><img src="assets/img/docs/a11y-finding.png" alt="One accessibility finding opened"><span class="cap">Opening a row: what a screen reader will say, and what the control is missing.</span></div>
+<h3>Step 3. See where the keyboard goes</h3>
+<p>Pressing Tab is the cheapest accessibility test there is and the one nobody runs, because finding out means pressing it thirty times and remembering what happened. Open the <b>overlays</b> menu in the toolbar and switch on <b>Tab order</b>: every keyboard stop is numbered over the running application, threaded in visiting order, with the wrap back to the start dashed and anything focusable-but-unreachable boxed in red.</p>
+<div class="shot"><img src="assets/img/docs/a11y-overlays.png" alt="The overlays menu with Tab order switched on"><span class="cap">The overlays menu — and under the switch, what the walk found: ten stops.</span></div>
+<p>The order is walked with <b>Avalonia's own tab navigator</b>, not a reimplementation of it — the value is agreeing with the framework exactly, template quirks and all. A list contributes one stop, not one per row, because that is what Tab does; the rows belong to the arrow keys.</p>
+<div class="shot"><img src="assets/img/docs/a11y-taborder.png" alt="The tab-order overlay over the running application"><span class="cap">Ten stops threaded in visiting order. The thread crosses the window twice: this form does not read in the order it looks.</span></div>
+<h3>Step 4. Contrast, measured rather than eyeballed</h3>
+<p>Text contrast is computed the way WCAG 2.1 defines it: relative luminance, 4.5:1 for body text and 3:1 for large text, with the translucent layers behind the text composited first — a half-transparent panel over a dark window is a different colour than either. Gradients, images and tiles are not measured at all rather than measured badly: a gradient has as many contrast ratios as it has pixels, and reporting one of them as though it were the answer would be worse than staying quiet.</p>
+<p class="tip"><b>Tip.</b> All of it reaches an agent with no new surface to learn: <code>get_tree</code> takes <code>mode: "accessibility"</code>, <code>get_problems</code> reports the audit as another category, and <code>get_tab_order</code> presses Tab through the window and says where focus actually went. See <a href="#mcptools">the tools</a>.</p>` },
       { id: 'palette', t: 'Ctrl+K: find anything', html: `<p>You rarely know the type or the name of the thing you are chasing — you know the words it shows on screen. Press <span class="kbd">Ctrl</span>+<span class="kbd">K</span> (or <span class="kbd">⌘</span>+<span class="kbd">K</span>) in DevTools: one search over everything, categorized as you type. Every row carries a colored type icon in the vocabulary the rest of DevTools already speaks — the tree's element glyphs, <code>◈</code> for resources, <code>◆</code> for properties, the menu icons for actions — so what a hit is reads before its text does.</p>
 <h3>An empty query is the actions menu</h3>
 <div class="shot"><img src="assets/img/docs/palette-actions.png" alt="Ctrl+K with an empty query: every DevTools action listed with its icon and a hint"><span class="cap">Every DevTools command in one list — the palette doubles as the discoverability menu.</span></div>
@@ -525,7 +593,7 @@ en: {
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="The exploded 3D view of the window's visual layers"><span class="cap">141 layers of the live window, orbitable — click any card to select it in the tree.</span></div>
 <h3>Timeline</h3><ul><li>Events, property changes, VM notifies, focus changes and binding errors in one feed, scoped to a watchlist — with cause links, a binding walk-through and the instance inspector. See <a href="#timeline">Timeline</a>.</li></ul>
 <h3>Problems</h3><ul><li>Only what is broken — binding failures, error logs — errors before warnings, each with a plain reason, a reveal-in-tree link and the full binding walk. Scan now catches bindings that failed before DevTools opened. See <a href="#problems">Problems pane</a>.</li></ul>
-<h3>MCP Server</h3><ul><li>Whether the endpoint is listening, on which port and under which name, how many calls an agent has made and what the last one was — plus the switch that starts and stops it, the port box, the freeze permission and the client config, ready to copy. See <a href="#mcp">Let an agent look</a>.</li></ul>
+<h3>MCP Server</h3><ul><li>There while the endpoint is listening, gone when it is not: what is listening, on which port and under which name, the one line that registers this application with your agent, and every tool with the number of calls an agent has made to it — failures counted apart. The switch, the port and the freeze permission are on the ⚙ card's MCP page. See <a href="#mcp">Let an agent look</a>.</li></ul>
 <h3>Logs</h3><ul><li>Live Avalonia logger output with Pause, level, area and text filters. Captures at Warning by default. Entries produced by the DevTools UI itself are dropped and appends are batched — verbose logging can't freeze the tool.</li>
 <li><code>LogCapture.Publish</code> feeds the pane the application's own events — see <a href="#applogs">App log feed</a>.</li></ul>` },
       { id: 'capture', t: 'Screenshots & bug reports', html: `<p>"Can you send me a screenshot and the XAML path?" is one click here — the element, its bounds and the properties that differ from defaults travel together with the picture.</p>
@@ -553,7 +621,7 @@ en: {
       { id: 'mcp', t: 'Let an agent look (MCP)', html: `<p>The interesting application is the one that is <em>already running</em>, with the state that went wrong still on screen. DevTools can hand that application to a coding agent: a <b>read-only</b> <a href="https://modelcontextprotocol.io">Model Context Protocol</a> endpoint, in-process, on loopback, off unless you ask for it.</p>
 <p>In-process is the whole point. An out-of-process inspector can only ask the application to describe itself over a protocol; this one <em>is</em> the application, so the same call that lists a control can render it, read the priority that set its width and quote the binding error it logged — with no serialization boundary in between. Every tab in this documentation is a view over an engine that never needed a window, and the agent calls those engines directly. It reads the same answers you do.</p>
 <h3>Step 1. Turn it on</h3>
-<p>Open DevTools and go to the <b>MCP Server</b> tab: one switch starts and stops the endpoint, a box beside it sets the port, and the line at the top says what is listening — <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>. The ⚙ card carries the same two settings. Both are saved for this machine and apply on the next run.</p>
+<p>Open DevTools, open the ⚙ card and go to its <b>MCP</b> page: one switch starts and stops the endpoint, a box beside it sets the port. While it is on, an <b>MCP Server</b> tab is there, and the line at the top of it says what is listening — <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>. The choice is saved for this machine and applies on the next run.</p>
 <p>To have it up before the window is even opened:</p>
 <pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span> });</code></pre>
 <p>or, without touching the code, run the application with <code>AVA_DEVTOOLS_MCP=1</code>. It prints where it is, once:</p>
@@ -577,16 +645,17 @@ en: {
 <li><b>A busy application says so.</b> If the UI thread does not answer within a minute — a modal dialog is up, or a debugger has it stopped — the call comes back saying exactly that, instead of leaving the agent on a dead socket.</li></ul>
 <h3>What it may and may not do</h3>
 <ul><li><b>Loopback only</b>, and not as a configuration knob: the day this binds to 0.0.0.0 is the day a debugging aid becomes a way to read someone's screen from the next desk. The <code>Origin</code> header is checked too, so a page in a browser cannot reach it through DNS rebinding.</li>
-<li><b>Fourteen of the sixteen tools are pure reads.</b> No input is injected, no application property is written, no handler is run. That is the entire safety story, and the reason there is no confirmation flow: there is nothing to confirm.</li>
-<li><b>Two tools change something, and need a second opt-in.</b> <code>hold</code> and <code>pin_class</code> freeze transient UI and force pseudo-classes — the only way something with no pointer can look at a hover state. They are off unless the <b>Allow freezing</b> checkbox — on the ⚙ card's MCP page and in the MCP Server tab — <code>McpAllowHold</code>, or <code>AVA_DEVTOOLS_MCP_HOLD=1</code> says otherwise, they change transient UI state and nothing else, every hold carries a deadline that releases it, the application shows a banner while one lasts, and <span class="kbd">Esc</span> in the application releases it too.</li>
+<li><b>Fifteen of the seventeen tools are pure reads.</b> No input is injected, no application property is written, no handler is run. That is the entire safety story, and the reason there is no confirmation flow: there is nothing to confirm.</li>
+<li><b>Two tools change something, and need a second opt-in.</b> <code>hold</code> and <code>pin_class</code> freeze transient UI and force pseudo-classes — the only way something with no pointer can look at a hover state. They are off unless the <b>Allow freezing</b> checkbox on the ⚙ card's MCP page — <code>McpAllowHold</code>, or <code>AVA_DEVTOOLS_MCP_HOLD=1</code> says otherwise, they change transient UI state and nothing else, every hold carries a deadline that releases it, the application shows a banner while one lasts, and <span class="kbd">Esc</span> in the application releases it too.</li>
 <li><b>It releases what it took.</b> An agent's hold auto-releases only what the agent engaged: press <span class="kbd">Shift</span>+<span class="kbd">F12</span> yourself afterwards and the deadline will not take your hold away.</li></ul>
 <p class="tip">Ship it Debug-only, like the rest of DevTools. The endpoint is off by default in every build, but an application that never attaches DevTools in Release cannot serve one by accident.</p>` },
       { id: 'mcpconnect', t: 'Connect it to Claude Code or Codex', html: `<p>The endpoint exists only while your application runs, so the order never changes: start the app, turn the server on, point the agent at it. The name it registers under is <code>&lt;assembly name&gt;-avadevtools</code> — that is what you will see in the client's own list.</p>
 <h3>Step 1. Start the application with the server on</h3>
 <ol class="steps"><li>Run your app and press <span class="kbd">F12</span>.</li>
-<li>Open the <b>MCP Server</b> tab and tick <b>Serve MCP on loopback</b>.</li>
+<li>Open the ⚙ card's <b>MCP</b> page and tick <b>Serve MCP on loopback</b>.</li>
 <li>Copy the block under <em>Point your agent at it</em> — it already carries the right name and port.</li></ol>
-<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="The settings card MCP page: the switch, the port, the freeze permission, and the two register-with-your-agent command lines with Copy buttons"><span class="cap">⚙ → MCP: the switch, the port, and the line that registers this application — already carrying its name and the port that is actually open.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="The settings card MCP page: the switch, the port and the freeze permission, with the line below saying what is listening"><span class="cap">⚙ → MCP: everything you set, and nothing else — the switch, the port, the freeze permission, and a line saying what came of them.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="The MCP Server tab: what is listening, and every tool with the number of calls made to it"><span class="cap">The tab, which is there only while the endpoint is: seventeen tools, and what an agent has actually asked of each. A dash is a tool it has never touched; an amber number had failures in it.</span></div>
 <h3>Step 2a. Claude Code</h3>
 <pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
 <p>The scope decides who gets it. <code>--scope local</code> (the default) is this project, for you; <code>--scope project</code> writes a <code>.mcp.json</code> in the repository root so everyone working on the application gets the same entry; <code>--scope user</code> is every project on your machine. What it writes is the same JSON the tab shows:</p>
@@ -603,16 +672,16 @@ url = <span class="s">"http://127.0.0.1:5171/"</span></code></pre>
 command = <span class="s">"npx"</span>
 args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span class="s">"http://127.0.0.1:5171/"</span>]</code></pre>
 <h3>Step 3. Check it from the application's side</h3>
-<p>The <b>MCP Server</b> tab counts what it has answered: <code>7 call(s) served · last: get_tree 3s ago</code>. If the client reports a connection and this line stays empty, it is talking to a different application — check the port on both ends.</p>
+<p>The <b>MCP Server</b> tab counts what it has answered — <code>7 call(s) served · last: get_tree 3s ago</code> — and counts it per tool as well, which is how you see what an agent actually uses and what it never touches. If the client reports a connection and the total stays empty, it is talking to a different application — check the port on both ends.</p>
 <h3>Two applications at once</h3>
-<p>Give the second one its own port (the tab's <b>Port</b> box, <code>McpPort</code>, or <code>AVA_DEVTOOLS_MCP_PORT</code>) and add it as a second entry. Their names differ already, so the agent's tool list stays readable.</p>
+<p>Give the second one its own port (the <b>Port</b> box on the ⚙ card's MCP page, <code>McpPort</code>, or <code>AVA_DEVTOOLS_MCP_PORT</code>) and add it as a second entry. Their names differ already, so the agent's tool list stays readable.</p>
 <p class="tip">A client that started before your application usually shows no tools until it reconnects — <code>/mcp</code> in Claude Code, a new session in Codex. That is a reconnect, not a config problem.</p>` },
-      { id: 'mcptools', t: 'The sixteen tools', html: `<p>Sixteen tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
+      { id: 'mcptools', t: 'The seventeen tools', html: `<p>Seventeen tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
 <h3>Finding your way around</h3>
 <table>
 <tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
 <tr><td><code>list_windows</code></td><td>Which windows are open, with the id that roots each tree. Start here.</td><td>—</td></tr>
-<tr><td><code>get_tree</code></td><td>The tree as indented lines — text inlines and open popups included, template internals folded into a placeholder until asked for.</td><td><code>elementId</code>, <code>depth</code> (3, max 12), <code>mode</code>: important / logical / visual</td></tr>
+<tr><td><code>get_tree</code></td><td>The tree as indented lines — text inlines and open popups included, template internals folded into a placeholder until asked for.</td><td><code>elementId</code>, <code>depth</code> (3, max 12), <code>mode</code>: important / logical / visual / accessibility</td></tr>
 <tr><td><code>find_elements</code></td><td>Elements by type, <code>x:Name</code>, <code>.class</code> or the text they show — the same matcher as <span class="kbd">Ctrl</span>+<span class="kbd">F</span> in the tree.</td><td><code>query</code>, <code>limit</code></td></tr>
 </table>
 <h3>Reading one element</h3>
@@ -628,9 +697,11 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Asking what is wrong</h3>
 <table>
 <tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
-<tr><td><code>get_problems</code></td><td>Failed bindings and duplicated resource keys, with element, property, a plain reason and a count. Problems logged before the agent connected are included.</td><td><code>scan</code>, <code>limit</code></td></tr>
+<tr><td><code>get_problems</code></td><td>Failed bindings, duplicated resource keys and accessibility findings, with element, property, a plain reason and a count. Problems logged before the agent connected are included.</td><td><code>scan</code>, <code>limit</code></td></tr>
+<tr><td><code>get_tab_order</code></td><td>Where the keyboard goes: every stop in the order Tab visits them, whether it wraps, what it never reaches and what it cannot leave.</td><td><code>elementId</code></td></tr>
 <tr><td><code>get_logs</code></td><td>Recent Avalonia log entries, binding errors among them — where a silent UI failure usually explains itself.</td><td><code>limit</code>, <code>minLevel</code></td></tr>
 </table>
+<p><code>get_tab_order</code> is the other one an agent cannot approximate: it has no fingers, and the order is not in the tree — it is the framework's, computed from navigation modes and tab indices scattered across templates. The tool presses Tab through the window with Avalonia's own navigator and reports where focus actually went.</p>
 <p><code>scan: true</code> is the one an agent cannot approximate any other way: it sweeps every live binding in the tree and reports what is broken <em>right now</em>, including the bindings that failed at startup before anything was watching and the ones that have not been exercised yet.</p>
 <h3>Asking what happened</h3>
 <table>
@@ -765,7 +836,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>Port for it. Default 5171.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Also allow <code>hold</code> and <code>pin_class</code> — the only two tools that change anything.</td></tr>
 </table>
-<p class="tip">The three <code>MCP</code> variables are a starting state, not the last word: the switch in the <a href="#settings">⚙ card</a> and the <b>MCP Server</b> tab are saved per machine and win over them. A port you closed in the tool stays closed on the next run, whatever the launcher exports.</p>` },
+<p class="tip">The three <code>MCP</code> variables are a starting state, not the last word: the switches on the <a href="#settings">⚙ card</a>'s MCP page are saved per machine and win over them. A port you closed in the tool stays closed on the next run, whatever the launcher exports.</p>` },
       { id: 'limits', t: 'Limitations', html: `<ul>
 <li>Desktop only — secondary windows are not supported on mobile/browser targets.</li>
 <li>DevTools brings its own theme — the application's theme, or its absence, does not matter.</li>
@@ -799,13 +870,53 @@ uk: {
     get: 'Почати', stories: 'Подивитися в дії', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.1.4', docs: 'Документація →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.1.5', docs: 'Документація →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   stories: {
-    h: 'Історії', wn: 'agent',
+    h: 'Історії', wn: 'a11y',
     lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
     list: [
+      { key: 'a11y', h: '♿ Інше дерево', sub: 'Дерево, яким ходить скрінрідер, аудит, що читає його за вас, і кожна клавіатурна зупинка, пронумерована просто над застосунком.',
+        steps: [
+          { t: '♿ Інше дерево',
+            d: 'У вашого застосунку два дерева. Одне — те, яке ви бачите; друге — те, яким ходить скрінрідер: інший склад, інша вкладеність, інші назви.',
+            d2: 'Кожен баг доступності — це розбіжність між ними, і досі на друге не було як подивитися зсередини процесу, який його будує.',
+            newsTitle: 'Нове у 12.1.5',
+            news: [
+              { k: 'Дерево доступності', d: 'третій режим поруч із візуальним і логічним — те дерево, яким справді ходять допоміжні технології, з озвучуваною назвою та роллю в колонках' },
+              { k: 'Оверлей порядку Tab', d: 'кожну клавіатурну зупинку пронумеровано над робочим застосунком і з’єднано в порядку відвідування, а все, куди Tab не потрапляє, обведено червоним' },
+              { k: 'Знахідки в Problems', d: 'контроли, що озвучуються лише роллю, підписи в нікуди, зупинки лише для миші та клавіатурні пастки — поруч зі зламаними прив’язками' },
+              { k: 'Контраст, виміряний', d: 'рахується так, як визначає WCAG 2.1, із попереднім накладанням напівпрозорих шарів під текстом; градієнти не міряються взагалі, замість того щоб міряти погано' },
+              { k: 'Власний обхід Avalonia', d: 'порядок бере навігатор самого фреймворку, а не його переспів, тож збіг точний — з усіма примхами шаблонів' },
+              { k: 'Куди йде клавіатура — для агента', d: 'сімнадцятий інструмент MCP: у агента немає пальців, тож get_tab_order натискає Tab крізь вікно і каже, куди фокус пішов насправді' },
+              { k: 'Нічого нового вчити', d: 'get_tree приймає режим accessibility, а get_problems віддає аудит як ще одну категорію' },
+              { k: 'Колонки, яким можна задати ширину', d: 'кожна межа колонки в дереві — видима лінія, за яку можна тягнути, а задана вами ширина переживає вихід із режиму і повернення' },
+              { k: 'Що вже питав агент', d: 'вкладка MCP Server рахує виклики до кожного інструмента, невдалі — окремо' },
+              { k: 'Аудит, який мовчить дарма', d: 'від частин шаблону теми ніколи не вимагається назва — кнопка збільшення слайдера приходить безіменною в кожному застосунку на Avalonia' },
+            ] },
+          { img: 'story/y02.png', t: 'Перемкніть дерево на те, що бачить скрінрідер', d: 'У випадайці режимів є третій пункт. Дерево перебудовується на автоматизаційних peer’ах і отримує дві колонки — озвучувану назву й роль — тож те, як елемент назвуть уголос, читається тим самим поглядом, що й структура. Це control view, а не сирий peer-tree: 66 вузлів там, де у візуальному дереві 228, і саме ця різниця — суть.' },
+          { img: 'story/y03.png', t: 'Озвучується лише роллю', d: 'Натисніть Scan now — і аудит проходить разом з рештою. Чотири контроли тут відгукуються на «edit», «combobox», «slider» і «button» — тип, ніколи призначення. Відкритий рядок каже, що саме буде озвучено і чого контролю бракує, поруч зі зламаними прив’язками і затіненими ключами ресурсів.' },
+          { img: 'story/y04.png', t: 'Подивіться, куди йде клавіатура', d: 'Натиснути Tab — найдешевший тест доступності, і його ніхто не робить, бо дізнатися означає натиснути тридцять разів і все запам’ятати. Увімкніть оверлей — і кожну зупинку пронумеровано просто над застосунком, з’єднано в порядку відвідування, поворот на початок — пунктиром. Нитка, що двічі перетинає вікно, і є знахідкою: ця форма читається не в тому порядку, в якому виглядає.' },
+          { t: 'У агента немає пальців', d: 'Тому він питає. Обхід — власний обхід фреймворку, тож агент отримує той порядок, яким Tab іде насправді, а аудит тим самим подихом каже, яка з цих зупинок не озвучиться ніяк. Зупинці 8 нічим себе назвати.',
+            code: [
+              '$ get_tab_order  {}',
+              '  10 tab stops, cycling',
+              '',
+              '   1  #7 Button  eu-central ▾',
+              '   2  #8 CheckBox  auto',
+              '   3  #9 Button  Scale up',
+              '   4  #10 Button  Scale down',
+              '   5  #4 ToggleSwitch  ToggleSwitch "AutoScale"',
+              '   ⋯',
+              '   8  #1 TextBox  TextBox',
+              '',
+              '$ get_problems  {"scan": true}',
+              '  ERROR Accessibility  TextBox #1',
+              '        an Edit with no accessible name — a screen reader',
+              '        announces it as "edit" and nothing else',
+            ] },
+        ] },
       { key: 'agent', h: '🤖 Застосунок відповідає сам за себе', sub: 'Стек за кожною зміною, повільні кадри поруч із ним — і MCP-ендпойнт лише для читання, що віддає весь інструмент кодовому агенту.',
         steps: [
           { t: '🤖 Застосунок відповідає сам за себе',
@@ -813,7 +924,7 @@ uk: {
             d2: 'Тепер одне відтворення записує стек за кожною зміною, повільні кадри лягають поруч із тим, що робив застосунок, а кодовий агент може викликати ті самі рушії, якими користуються вкладки — лише на читання, через loopback.',
             newsTitle: 'Нове у 12.1.4',
             news: [
-              { k: 'MCP-ендпойнт', d: 'лише для читання, на loopback — шістнадцять інструментів віддають агенту дерево, властивості, стилі, лейаут, ресурси, проблеми, таймлайн, логи та знімки' },
+              { k: 'MCP-ендпойнт', d: 'лише для читання, на loopback — сімнадцять інструментів віддають агенту дерево, властивості, стилі, лейаут, ресурси, проблеми, таймлайн, логи та знімки' },
               { k: 'Вкладка й сторінка налаштувань', d: 'увімкнути ендпойнт, задати порт і побачити, що агент уже запитував' },
               { k: 'Один рядок, щоб зареєструвати', d: 'картка ⚙ дає команду claude mcp add чи codex mcp add — уже з іменем і портом цього застосунку' },
               { k: 'Захоплення причини', d: 'стек викликів за кожною записаною зміною, тож одне відтворення відповідає «хто це змінив» одразу для всіх влучань' },
@@ -840,7 +951,7 @@ uk: {
               '$ get_element  {"elementId": 2}',
               '  declared at: MainWindow.axaml:309',
             ] },
-          { t: 'Відповіді, яких більше ніхто не дасть', d: 'Хто це змінив — і як виглядає hover для того, хто не має вказівника. Чотирнадцять із шістнадцяти інструментів лише читають; замороження попапів і примусові стани — виняток: вони вимагають окремого дозволу, мають дедлайн, який все повертає, і показують банер у застосунку, поки тривають.',
+          { t: 'Відповіді, яких більше ніхто не дасть', d: 'Хто це змінив — і як виглядає hover для того, хто не має вказівника. П’ятнадцять із сімнадцяти інструментів лише читають; замороження попапів і примусові стани — виняток: вони вимагають окремого дозволу, мають дедлайн, який все повертає, і показують банер у застосунку, поки тривають.',
             code: [
               '$ get_timeline  {"elementId": 11}',
               '  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11',
@@ -991,6 +1102,7 @@ uk: {
       { i: '🎯', t: 'Трекінг значень', d: 'Відстежуйте будь-яку властивість по всьому дереву: однакове значення = однаковий колір, null у власній групі, жива легенда з лічильниками — а «Fold to changes» показує всі межі одразу.' },
       { i: '❄', t: 'Hold the moment', d: 'Shift+F12 заморожує те, що застосунок показує просто зараз — відкриті попапи, флаяути, тултіпи, hover-стилі. Досліджуйте заморожену сцену як звичайний UI; Esc відновлює все точно як було. Панель pin states вмикає :focus, :disabled чи будь-який кастомний псевдоклас на вимогу.' },
       { i: '⚠️', t: 'Панель Problems', d: 'Лише зламане — насамперед помилки біндінгів — помилки перед попередженнями, кожна зі зрозумілою причиною, посиланням reveal і повним розбором біндінгу. Scan now ловить помилки, що сталися до відкриття DevTools.' },
+      { i: '♿', t: 'Інше дерево', d: 'Те, чим ходить скрінрідер, поруч із тим, що бачите ви: роль, озвучувана назва і патерни для кожного елемента. Оверлей порядку Tab нумерує кожну клавіатурну зупинку просто над застосунком, контраст міряється так, як його визначає WCAG, а безіменні контроли, клавіатурні пастки й недосяжні зупинки фокуса потрапляють у Problems разом з усім іншим.' },
       { i: '⌨️', t: 'Ctrl+K: знайти будь-що', d: 'Один пошук по діях, елементах, ресурсах і властивостях — наберіть слова з екрана й знайдіть те, що їх показує.' },
       { i: '🏆', t: 'Який ресурс переміг?', d: 'Кожне визначення ключа в порядку резолюції — переможець позначений, затінені закреслено, живі редагування та код за один клік.' },
       { i: '📷', t: 'Копія як баг-репорт', d: 'Один клік кладе в буфер DPI-коректний скриншот плюс читабельний звіт — псевдо-XAML шлях, bounds, властивості з нетиповими значеннями. Rich-цілі вставляють обидва, графічні — PNG, текстові — markdown.' },
@@ -1006,7 +1118,7 @@ uk: {
       { i: '⏱', t: 'Таймлайн', d: 'Routed-події, зміни властивостей, сповіщення VM і зміни фокуса в одній хронологічній стрічці за вашим списком спостереження. Причинні зв’язки з’єднують сповіщення з оновленням від біндінга; кожен запис відкриває повні деталі.' },
     { i: '🕰', t: 'Захоплення причини', d: 'Кожна записана зміна несе стек викликів, що її спричинив, обрізаний до ваших власних кадрів. Відтворіть один раз і прочитайте всіх винуватців по черзі, кожен кадр веде до джерела — без брейкпойнта на кожне влучання. Break next ескалює до дебагера рівно на одну зміну.' },
     { i: '📈', t: 'Смуга Perf', d: 'Повільні кадри й проходи layout потрапляють у ту саму стрічку, що й усе інше, тож затримку видно поруч із тим, що робив застосунок. Повільне міряється проти бюджету, який ваш дисплей насправді витримує, а не проти середнього.' },
-    { i: '🤖', t: 'Дати агентові подивитись (MCP)', d: 'Ендпойнт Model Context Protocol лише для читання на локальному інтерфейсі, вимкнений, доки не попросять: шістнадцять інструментів дають агентові дерево, властивості, стилі, layout, ресурси, проблеми, таймлайн, логи і скріншоти запущеного застосунку.' },
+    { i: '🤖', t: 'Дати агентові подивитись (MCP)', d: 'Ендпойнт Model Context Protocol лише для читання на локальному інтерфейсі, вимкнений, доки не попросять: сімнадцять інструментів дають агентові дерево, властивості, стилі, layout, ресурси, проблеми, таймлайн, логи і скріншоти запущеного застосунку.' },
       { i: '📜', t: 'Перегляд логів', d: 'Помилки біндінгів, layout і система властивостей — навіть без LogToTrace(). З фільтрами, батчингом і захистом від зациклення.' },
       { i: '📊', t: 'Оверлеї рендерера', d: 'Лічильник FPS, графіки часу layout/render та підсвічування dirty-rect — одним перемикачем.' },
       { i: '🕵️', t: 'Джерело кожного значення', d: 'Одразу видно: значення типове, задане вручну, зі стилю, шаблону чи успадковане — з переходом до предка або точного місця в XAML.' },
@@ -1022,7 +1134,7 @@ uk: {
     contents: 'Зміст',
     groups: [
       { t: 'Початок роботи', ids: ['install', 'quickstart'] },
-      { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
+      { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
       { t: 'Агенти (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpcases'] },
       { t: 'Довідник', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -1084,6 +1196,33 @@ uk: {
 <div class="shot"><img src="assets/img/docs/problems-detail.png" alt="Відкрита проблема біндінгу: елемент із посиланням reveal, властивість, причина та розбір біндінгу з кроком, що ламається"><span class="cap">Розбір показує кожен крок наживо: DataContext знайшовся — зламане саме ім'я шляху.</span></div>
 <p>Проблема дубльованого ресурсу перелічує кожне визначення з його місцем — scope-елементи відкриваються в дереві через reveal — і веде до <a href="#resources">пояснювача резолюції</a>.</p>
 <p class="tip"><b>Порада.</b> <span class="kbd">Ctrl</span>+<span class="kbd">K</span> → «Scan bindings for problems» запускає скан звідусіль.</p>` },
+      { id: 'a11y', t: 'Доступність: інше дерево', html: `<p>У вашого застосунку два дерева. Одне — те, яке ви бачите; друге — те, яким ходить скрінрідер: інший склад, інша вкладеність, інші назви. Кожен баг доступності — це розбіжність між ними, і досі на друге не було як подивитися зсередини процесу, який його будує.</p>
+<h3>Крок 1. Перемкніть дерево на те, що бачить скрінрідер</h3>
+<p>У випадайці режимів над деревом є третій пункт: <b>Accessibility tree</b>. Дерево перебудовується на автоматизаційних peer'ах і отримує дві колонки — <b>озвучувану назву</b> і <b>роль</b> — тож те, як елемент буде названо вголос, читається тим самим поглядом, що й структура. Поки режим увімкнено, панель бере місце, потрібне для двох колонок, і повертає його на виході. Межі колонок намальовані — і в заголовку, і вниз по дереву — і кожна з них є ручкою: вказівник будь-де над смугою заголовка підсвічує їх усі, а перетягування задає ширину тієї колонки за рахунок місця, яке мають імена елементів. Задана вами ширина запам'ятовується попри зміну режиму.</p>
+<p>З'являється <b>control view</b>: саме те дерево, яким навігують допоміжні технології, а не сирий peer-tree, що його віддає фреймворк. Кожен <code>ContentPresenter</code> і частина шаблону, які скрінрідер переступає, зникають. На демо-застосунку це 66 вузлів замість 228 — і різниця тут головна: дерево, підозріло схоже на візуальне, показує вам не те.</p>
+<p>В усьому іншому це те саме дерево: пошук, scope, згортання, панель Properties, перехід до джерела і Ctrl+K працюють, бо вибір peer'а вибирає контрол, якому він належить.</p>
+<div class="shot"><img src="assets/img/docs/a11y-tree.png" alt="Дерево в режимі доступності з колонками Name і Role"><span class="cap">Control view демо-застосунку: озвучувана назва і роль поруч із кожним вузлом — 66 вузлів там, де у візуальному дереві 228.</span></div>
+<h3>Крок 2. Зламане потрапляє туди, куди потрапляє все зламане</h3>
+<p>Знахідки доступності — це рядки <a href="#problems">Problems</a>, поруч зі зламаними прив'язками і затіненими ключами ресурсів: «що не так із моїм застосунком» — одне питання і заслуговує на один список. Натисніть <b>Scan now</b>, і аудит проходить разом з рештою:</p>
+<ul>
+<li><b>Озвучується лише роллю.</b> Кнопка, чекбокс, поле вводу чи слайдер без доступної назви — скрінрідер каже «кнопка» і замовкає. Саме це робить застосунок непридатним, а не просто незручним.</li>
+<li><b>Підпис, який нічого не підписує.</b> <code>LabeledBy</code>, що вказує на елемент без власної назви, розв'язується в тишу.</li>
+<li><b>Фокус, якого не видно.</b> Досяжний через Tab, але за межами екрана.</li>
+<li><b>Досяжне лише мишею.</b> Фокусоване й увімкнене, але Tab туди ніколи не потрапляє.</li>
+<li><b>Клавіатурна пастка.</b> Контейнер, куди фокус заходить і не виходить — мишею з нього вийдеш, клавіатурою ні.</li>
+<li><b>Продубльовані automation id, пропущені рівні заголовків і контраст тексту, нижчий за той, що WCAG вимагає для цього розміру.</b></li>
+</ul>
+<div class="shot"><img src="assets/img/docs/a11y-problems.png" alt="Знахідки доступності в панелі Problems"><span class="cap">Вісім контролів, що озвучуються лише роллю — чотири з них елементи списку, названі класом панелі всередині, — поруч зі зламаними прив'язками і затіненими ключами ресурсів.</span></div>
+<p>Знахідка, з якою нічого не вдієш, — не знахідка. Від частин шаблону теми ніколи не вимагається назва: кнопка збільшення слайдера приходить безіменною в кожному застосунку на Avalonia, а назви хоче сам слайдер. Id, який peer вигадав із назви в розмітці, не вважається за встановлений кимось, бо кожне накладання шаблону несе ті самі імена частин.</p>
+<div class="shot"><img src="assets/img/docs/a11y-finding.png" alt="Відкрита знахідка доступності"><span class="cap">Відкритий рядок: що саме скаже скрінрідер і чого контролю бракує.</span></div>
+<h3>Крок 3. Подивіться, куди йде клавіатура</h3>
+<p>Натиснути Tab — найдешевший тест доступності, і його ніхто не робить, бо дізнатися означає натиснути його тридцять разів і все запам'ятати. Відкрийте меню <b>overlays</b> на панелі і ввімкніть <b>Tab order</b>: кожну клавіатурну зупинку пронумеровано просто над застосунком, з'єднано ниткою в порядку відвідування, поворот на початок — пунктиром, а все фокусоване, але недосяжне, обведено червоним.</p>
+<div class="shot"><img src="assets/img/docs/a11y-overlays.png" alt="Меню overlays з увімкненим Tab order"><span class="cap">Меню overlays — і під перемикачем те, що знайшов обхід: десять зупинок.</span></div>
+<p>Порядок проходиться <b>власним навігатором Avalonia</b>, а не його переспівом — цінність саме в тому, щоб збігатися з фреймворком точно, з усіма примхами шаблонів. Список дає одну зупинку, а не по одній на рядок, бо саме так поводиться Tab: рядки належать стрілкам.</p>
+<div class="shot"><img src="assets/img/docs/a11y-taborder.png" alt="Оверлей порядку Tab над робочим застосунком"><span class="cap">Десять зупинок, з'єднаних у порядку відвідування. Нитка двічі перетинає вікно: ця форма читається не в тому порядку, в якому виглядає.</span></div>
+<h3>Крок 4. Контраст, виміряний, а не прикинутий на око</h3>
+<p>Контраст тексту рахується так, як його визначає WCAG 2.1: відносна яскравість, 4.5:1 для звичайного тексту і 3:1 для великого, з попереднім накладанням напівпрозорих шарів під текстом — напівпрозора панель над темним вікном має інший колір, ніж будь-яка з них. Градієнти, зображення й плитки не міряються взагалі, замість того щоб міряти погано: у градієнта стільки коефіцієнтів контрасту, скільки пікселів, і видати один із них за відповідь було б гірше, ніж промовчати.</p>
+<p class="tip"><b>Порада.</b> Усе це доходить до агента без жодної нової поверхні: <code>get_tree</code> приймає <code>mode: "accessibility"</code>, <code>get_problems</code> віддає аудит як ще одну категорію, а <code>get_tab_order</code> натискає Tab крізь вікно і каже, куди фокус пішов насправді. Див. <a href="#mcptools">інструменти</a>.</p>` },
       { id: 'palette', t: 'Ctrl+K: знайти будь-що', html: `<p>Тип чи ім'я того, що ви шукаєте, рідко відомі — відомі слова, які воно показує на екрані. Натисніть <span class="kbd">Ctrl</span>+<span class="kbd">K</span> (або <span class="kbd">⌘</span>+<span class="kbd">K</span>) у DevTools: один пошук по всьому, з категоріями в міру набору. Кожен рядок несе кольорову іконку типу в словнику, яким уже говорить решта DevTools — гліфи елементів із дерева, <code>◈</code> для ресурсів, <code>◆</code> для властивостей, іконки меню для дій — тож що це за знахідка, видно раніше, ніж прочитано текст.</p>
 <h3>Порожній запит — меню дій</h3>
 <div class="shot"><img src="assets/img/docs/palette-actions.png" alt="Ctrl+K з порожнім запитом: кожна дія DevTools з іконкою та підказкою"><span class="cap">Кожна команда DevTools в одному списку — палітра водночас є меню знайомства з можливостями.</span></div>
@@ -1312,7 +1451,7 @@ uk: {
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="Пошаровий 3D-вигляд візуальних шарів вікна"><span class="cap">141 шар живого вікна, з обертанням — клік по будь-якій картці вибирає її в дереві.</span></div>
 <h3>Timeline</h3><ul><li>Події, зміни властивостей, сповіщення VM, зміни фокуса й помилки біндінгів в одній стрічці за вашим списком спостереження — з причинними зв’язками, розбором біндінгів та інспектором інстансів. Див. <a href="#timeline">Таймлайн</a>.</li></ul>
 <h3>Problems</h3><ul><li>Лише зламане — помилки біндінгів, error-логи — помилки перед попередженнями, кожна з причиною, посиланням reveal у дерево та повним розбором біндінгу. Scan now ловить біндінги, що впали до відкриття DevTools. Див. <a href="#problems">Панель Problems</a>.</li></ul>
-<h3>MCP Server</h3><ul><li>Чи слухає ендпойнт, на якому порту й під яким іменем, скільки викликів зробив агент і яким був останній — а також перемикач запуску, поле порту, дозвіл на заморожування та готовий до копіювання конфіг клієнта. Див. <a href="#mcp">Хай подивиться агент</a>.</li></ul>
+<h3>MCP Server</h3><ul><li>Є, поки ендпойнт слухає, і зникає разом із ним: що саме слухає, на якому порту й під яким іменем, той єдиний рядок, що реєструє застосунок у вашого агента, і кожен інструмент із кількістю зроблених до нього викликів — невдалі рахуються окремо. Перемикач, порт і дозвіл на заморожування — на сторінці MCP у картці ⚙. Див. <a href="#mcp">Хай подивиться агент</a>.</li></ul>
 <h3>Logs</h3><ul><li>Живі логи Avalonia з Pause та фільтрами за рівнем, областю і текстом. За замовчуванням — Warning. Записи від самого DevTools відкидаються, оновлення батчаться — «зациклення» неможливе.</li>
 <li><code>LogCapture.Publish</code> додає в панель події вашого застосунку — див. <a href="#applogs">Логи застосунку</a>.</li></ul>` },
       { id: 'capture', t: 'Скриншоти та баг-репорти', html: `<p>«Надішли скриншот і XAML-шлях» — тут це один клік: елемент, його bounds і властивості, що відрізняються від типових, їдуть разом із картинкою.</p>
@@ -1340,7 +1479,7 @@ uk: {
       { id: 'mcp', t: 'Дати агентові подивитись (MCP)', html: `<p>Цікавий застосунок — той, що <em>вже запущений</em>, зі станом, який пішов не так, просто на екрані. DevTools може передати цей застосунок агентові: <b>лише для читання</b> ендпойнт <a href="https://modelcontextprotocol.io">Model Context Protocol</a>, усередині процесу, на локальному інтерфейсі, вимкнений, доки ви не попросите.</p>
 <p>Усередині процесу — у цьому вся суть. Позапроцесний інспектор може лише попросити застосунок описати себе по протоколу; цей <em>і є</em> застосунком, тож той самий виклик, що перелічує контрол, може його відрендерити, прочитати пріоритет, який задав ширину, і процитувати помилку прив'язки, яку він залогував — без жодної межі серіалізації між ними. Кожна вкладка в цій документації — це вигляд над рушієм, якому ніколи не було потрібне вікно, і агент викликає ці рушії напряму. Він читає ті самі відповіді, що й ви.</p>
 <h3>Крок 1. Увімкніть</h3>
-<p>Відкрийте DevTools і перейдіть на вкладку <b>MCP Server</b>: один перемикач запускає й зупиняє ендпойнт, поле поруч задає порт, а рядок згори каже, що саме слухає — <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>. Ті самі два налаштування є і в картці ⚙. Обидва зберігаються для цієї машини й діють і наступного запуску.</p>
+<p>Відкрийте DevTools, відкрийте картку ⚙ і перейдіть на її сторінку <b>MCP</b>: один перемикач запускає й зупиняє ендпойнт, поле поруч задає порт. Поки він увімкнений, є вкладка <b>MCP Server</b>, і рядок згори на ній каже, що саме слухає — <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>. Вибір зберігається для цієї машини й діє і наступного запуску.</p>
 <p>Щоб сервер піднявся ще до відкриття вікна:</p>
 <pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span> });</code></pre>
 <p>або, не чіпаючи код, запустіть застосунок із <code>AVA_DEVTOOLS_MCP=1</code>. Він один раз друкує, де він:</p>
@@ -1364,16 +1503,17 @@ uk: {
 <li><b>Зайнятий застосунок так і каже.</b> Якщо UI-потік не відповідає протягом хвилини — піднято модальне вікно або його зупинив дебагер — виклик повертає саме це, замість лишити агента на мертвому сокеті.</li></ul>
 <h3>Що йому можна і чого не можна</h3>
 <ul><li><b>Лише локальний інтерфейс</b>, і це не налаштування: день, коли це прив'яжеться до 0.0.0.0, буде днем, коли допоміжний інструмент стане способом читати чужий екран із сусіднього столу. Заголовок <code>Origin</code> теж перевіряється, тож сторінка в браузері не дістанеться сюди через DNS rebinding.</li>
-<li><b>Чотирнадцять із шістнадцяти інструментів — чисте читання.</b> Ніякого введення не інжектується, жодна властивість застосунку не записується, жоден обробник не запускається. Це вся історія безпеки і причина, чому тут немає підтверджень: підтверджувати нічого.</li>
-<li><b>Два інструменти щось змінюють і потребують окремого дозволу.</b> <code>hold</code> і <code>pin_class</code> морозять тимчасовий UI і форсують псевдокласи — єдиний спосіб для того, хто не має вказівника, побачити стан наведення. Вони вимкнені, доки не скаже інакше галочка <b>Allow freezing</b> — на сторінці MCP у картці ⚙ і на вкладці MCP Server, — <code>McpAllowHold</code> або <code>AVA_DEVTOOLS_MCP_HOLD=1</code>, змінюють лише тимчасовий стан UI, кожне утримання має дедлайн, який його звільняє, застосунок показує банер, доки воно триває, і <span class="kbd">Esc</span> у застосунку теж його звільняє.</li>
+<li><b>П’ятнадцять із сімнадцяти інструментів — чисте читання.</b> Ніякого введення не інжектується, жодна властивість застосунку не записується, жоден обробник не запускається. Це вся історія безпеки і причина, чому тут немає підтверджень: підтверджувати нічого.</li>
+<li><b>Два інструменти щось змінюють і потребують окремого дозволу.</b> <code>hold</code> і <code>pin_class</code> морозять тимчасовий UI і форсують псевдокласи — єдиний спосіб для того, хто не має вказівника, побачити стан наведення. Вони вимкнені, доки не скаже інакше галочка <b>Allow freezing</b> на сторінці MCP у картці ⚙ — <code>McpAllowHold</code> або <code>AVA_DEVTOOLS_MCP_HOLD=1</code>, змінюють лише тимчасовий стан UI, кожне утримання має дедлайн, який його звільняє, застосунок показує банер, доки воно триває, і <span class="kbd">Esc</span> у застосунку теж його звільняє.</li>
 <li><b>Він віддає те, що взяв.</b> Утримання агента саме звільняє лише те, що агент і зайняв: натисніть <span class="kbd">Shift</span>+<span class="kbd">F12</span> самі після цього — і дедлайн не забере ваше утримання.</li></ul>
 <p class="tip">Постачайте це лише в Debug, як і решту DevTools. Ендпойнт вимкнено у будь-якій збірці, але застосунок, який ніколи не під'єднує DevTools у Release, не зможе випадково його підняти.</p>` },
       { id: 'mcpconnect', t: 'Під’єднати до Claude Code чи Codex', html: `<p>Ендпойнт існує лише поки працює ваш застосунок, тож порядок незмінний: запустіть застосунок, увімкніть сервер, наведіть на нього агента. Реєструється він під іменем <code>&lt;назва збірки&gt;-avadevtools</code> — саме це ви побачите у списку клієнта.</p>
 <h3>Крок 1. Запустіть застосунок з увімкненим сервером</h3>
 <ol class="steps"><li>Запустіть застосунок і натисніть <span class="kbd">F12</span>.</li>
-<li>Відкрийте вкладку <b>MCP Server</b> і поставте <b>Serve MCP on loopback</b>.</li>
+<li>Відкрийте сторінку <b>MCP</b> у картці ⚙ і поставте <b>Serve MCP on loopback</b>.</li>
 <li>Скопіюйте блок під <em>Point your agent at it</em> — там уже правильні ім’я та порт.</li></ol>
-<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="Сторінка MCP у картці налаштувань: перемикач, порт, дозвіл на заморожування і два командні рядки з кнопками Copy"><span class="cap">⚙ → MCP: перемикач, порт і рядок, який реєструє цей застосунок — уже з його іменем і портом, що справді відкритий.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="Сторінка MCP у картці налаштувань: перемикач, порт і дозвіл на заморожування, а нижче — рядок про те, що слухає"><span class="cap">⚙ → MCP: усе, що ви задаєте, і нічого більше — перемикач, порт, дозвіл на заморожування і рядок про те, що з цього вийшло.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="Вкладка MCP Server: що слухає і кожен інструмент із кількістю зроблених до нього викликів"><span class="cap">Вкладка, яка є лише поки є ендпойнт: сімнадцять інструментів і те, що агент справді просив у кожного. Риска — інструмент, якого він не чіпав; бурштинове число містить невдалі виклики.</span></div>
 <h3>Крок 2a. Claude Code</h3>
 <pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
 <p>Область визначає, кому це дістанеться. <code>--scope local</code> (типово) — цей проєкт і лише вам; <code>--scope project</code> пише <code>.mcp.json</code> у корені репозиторію, тож запис отримають усі, хто працює над застосунком; <code>--scope user</code> — усі проєкти на вашій машині. Пишеться той самий JSON, що показує вкладка:</p>
@@ -1390,16 +1530,16 @@ url = <span class="s">"http://127.0.0.1:5171/"</span></code></pre>
 command = <span class="s">"npx"</span>
 args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span class="s">"http://127.0.0.1:5171/"</span>]</code></pre>
 <h3>Крок 3. Перевірте з боку застосунку</h3>
-<p>Вкладка <b>MCP Server</b> рахує, на що вже відповіла: <code>7 call(s) served · last: get_tree 3s ago</code>. Якщо клієнт каже, що з’єднався, а цей рядок порожній — він говорить з іншим застосунком; перевірте порт з обох боків.</p>
+<p>Вкладка <b>MCP Server</b> рахує, на що вже відповіла: <code>7 call(s) served · last: get_tree 3s ago</code> — і окремо по кожному інструменту, тож видно, чим агент справді користується, а чого не чіпав жодного разу. Якщо клієнт каже, що з’єднався, а загальний лічильник порожній — він говорить з іншим застосунком; перевірте порт з обох боків.</p>
 <h3>Два застосунки водночас</h3>
-<p>Дайте другому власний порт (поле <b>Port</b> на вкладці, <code>McpPort</code> або <code>AVA_DEVTOOLS_MCP_PORT</code>) і додайте другим записом. Імена вже різні, тож список інструментів агента лишиться читабельним.</p>
+<p>Дайте другому власний порт (поле <b>Port</b> на сторінці MCP у картці ⚙, <code>McpPort</code> або <code>AVA_DEVTOOLS_MCP_PORT</code>) і додайте другим записом. Імена вже різні, тож список інструментів агента лишиться читабельним.</p>
 <p class="tip">Клієнт, запущений раніше за застосунок, зазвичай не бачить інструментів, доки не перез’єднається — <code>/mcp</code> у Claude Code, нова сесія в Codex. Це перез’єднання, а не проблема конфігурації.</p>` },
-      { id: 'mcptools', t: 'Шістнадцять інструментів', html: `<p>Шістнадцять інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
+      { id: 'mcptools', t: 'Сімнадцять інструментів', html: `<p>Сімнадцять інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
 <h3>Зорієнтуватись</h3>
 <table>
 <tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
 <tr><td><code>list_windows</code></td><td>Які вікна відкриті, з ідентифікатором, що є коренем кожного дерева. Починайте звідси.</td><td>—</td></tr>
-<tr><td><code>get_tree</code></td><td>Дерево рядками з відступами — разом із текстовими інлайнами і відкритими попапами, нутрощі шаблонів згорнуті в заглушку, доки їх не попросять.</td><td><code>elementId</code>, <code>depth</code> (3, макс. 12), <code>mode</code>: important / logical / visual</td></tr>
+<tr><td><code>get_tree</code></td><td>Дерево рядками з відступами — разом із текстовими інлайнами і відкритими попапами, нутрощі шаблонів згорнуті в заглушку, доки їх не попросять.</td><td><code>elementId</code>, <code>depth</code> (3, макс. 12), <code>mode</code>: important / logical / visual / accessibility</td></tr>
 <tr><td><code>find_elements</code></td><td>Елементи за типом, <code>x:Name</code>, <code>.class</code> або текстом, який вони показують — той самий матчер, що й <span class="kbd">Ctrl</span>+<span class="kbd">F</span> у дереві.</td><td><code>query</code>, <code>limit</code></td></tr>
 </table>
 <h3>Прочитати один елемент</h3>
@@ -1415,9 +1555,11 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Спитати, що не так</h3>
 <table>
 <tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
-<tr><td><code>get_problems</code></td><td>Зламані прив'язки і продубльовані ключі ресурсів, з елементом, властивістю, зрозумілою причиною і лічильником. Проблеми, залоговані до під'єднання агента, включені.</td><td><code>scan</code>, <code>limit</code></td></tr>
+<tr><td><code>get_problems</code></td><td>Зламані прив'язки, продубльовані ключі ресурсів і знахідки доступності, з елементом, властивістю, зрозумілою причиною і лічильником. Проблеми, залоговані до під'єднання агента, включені.</td><td><code>scan</code>, <code>limit</code></td></tr>
+<tr><td><code>get_tab_order</code></td><td>Куди йде клавіатура: кожна зупинка в порядку, у якому їх відвідує Tab, чи замикається коло, чого воно ніколи не досягає і звідки не може вийти.</td><td><code>elementId</code></td></tr>
 <tr><td><code>get_logs</code></td><td>Нещодавні записи логера Avalonia, серед них помилки прив'язок — там мовчазна поломка UI зазвичай пояснює себе сама.</td><td><code>limit</code>, <code>minLevel</code></td></tr>
 </table>
+<p><code>get_tab_order</code> — друге, чого агент не наблизить: у нього немає пальців, а порядку немає в дереві — він фреймворковий, зібраний із режимів навігації та tab-індексів, розкиданих по шаблонах. Інструмент натискає Tab крізь усе вікно власним навігатором Avalonia і повідомляє, куди фокус пішов насправді.</p>
 <p><code>scan: true</code> — те, чого агент не наблизить жодним іншим способом: він обходить кожну живу прив'язку в дереві і повідомляє, що зламано <em>саме зараз</em>, включно з прив'язками, що впали на старті, коли ще ніхто не дивився, і тими, які ще жодного разу не спрацьовували.</p>
 <h3>Спитати, що сталося</h3>
 <table>
@@ -1552,7 +1694,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>Порт для нього. Типово 5171.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Дозволити ще й <code>hold</code> та <code>pin_class</code> — єдині два інструменти, що щось змінюють.</td></tr>
 </table>
-<p class="tip">Три змінні <code>MCP</code> — це стартовий стан, а не остаточне слово: перемикач у <a href="#settings">картці ⚙</a> і вкладка <b>MCP Server</b> зберігаються для машини й мають перевагу над ними. Порт, який ви закрили в інструменті, лишиться закритим і наступного запуску, хоч би що експортував ваш лаунчер.</p>` },
+<p class="tip">Три змінні <code>MCP</code> — це стартовий стан, а не остаточне слово: перемикачі на сторінці MCP у <a href="#settings">картці ⚙</a> зберігаються для машини й мають перевагу над ними. Порт, який ви закрили в інструменті, лишиться закритим і наступного запуску, хоч би що експортував ваш лаунчер.</p>` },
       { id: 'limits', t: 'Обмеження', html: `<ul>
 <li>Лише десктоп — додаткові вікна не підтримуються на мобільних/браузерних платформах.</li>
 <li>DevTools приносить власну тему — тема застосунку, чи її відсутність, не має значення.</li>
@@ -1586,13 +1728,53 @@ zh: {
     get: '快速上手', stories: '看实际效果', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.1.4 新特性', docs: '文档 →', notes: '版本历史 →' },
+  wn: { h: '12.1.5 新特性', docs: '文档 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   stories: {
-    h: '功能演示', wn: 'agent',
+    h: '功能演示', wn: 'a11y',
     lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
     list: [
+      { key: 'a11y', h: '♿ 另一棵树', sub: '屏幕阅读器走的那棵树、替你读它的审计，以及在运行中的应用上给每个键盘停靠点编上的号。',
+        steps: [
+          { t: '♿ 另一棵树',
+            d: '你的应用有两棵树。一棵是你看见的；另一棵是屏幕阅读器走的 —— 成员不同、嵌套不同、名字也不同。',
+            d2: '每一个无障碍缺陷都是这两棵树之间的分歧，而在此之前，你没法从构建它的进程内部去看第二棵。',
+            newsTitle: '12.1.5 新增',
+            news: [
+              { k: '无障碍树', d: '视觉树和逻辑树之外的第三种模式 —— 辅助技术真正走的那棵树，被念出的名称和角色作为两列一同呈现' },
+              { k: 'Tab 顺序浮层', d: '每个键盘停靠点都在运行中的应用上编了号，并按访问顺序串起来；Tab 永远到不了的东西用红框圈出' },
+              { k: 'Problems 里的发现', d: '除了角色什么也念不出的控件、指向空处的标注、只有鼠标够得着的停靠点和键盘陷阱 —— 就放在坏掉的绑定旁边' },
+              { k: '量出来的对比度', d: '按 WCAG 2.1 的定义计算，并先把文字背后的半透明层合成起来；渐变干脆不测，而不是测得很糟' },
+              { k: 'Avalonia 自己的走查', d: '顺序来自框架自己的 Tab 导航器，而不是它的复刻，所以分毫不差 —— 连模板的怪脾气一起' },
+              { k: '键盘走到哪里，给智能体', d: '第十七个 MCP 工具：智能体没有手指，于是 get_tab_order 把 Tab 按遍整个窗口，报出焦点实际去了哪里' },
+              { k: '不用学任何新东西', d: 'get_tree 接受 accessibility 模式，get_problems 把审计作为又一个类别报出' },
+              { k: '宽窄由你的列', d: '树里每条列边界都是看得见、拖得动的线 —— 你设定的宽度在离开这个模式再回来后依然保留' },
+              { k: '智能体问过些什么', d: 'MCP Server 选项卡按工具分别计数，失败的另算' },
+              { k: '不乱响的审计', d: '主题自带的模板部件从不被要求命名 —— 滑块的增加按钮在每一个 Avalonia 应用里都是没名字的' },
+            ] },
+          { img: 'story/y02.png', t: '把树切到屏幕阅读器看见的那棵', d: '模式下拉框里有第三项。树会基于自动化 peer 重建，并多出两列 —— 被念出的名称与角色 —— 于是每个元素会被怎么念出来，和它的结构在同一眼里读完。出现的是 control view，而不是原始 peer 树：视觉树有 228 个节点，这里是 66 个，而这个差别正是要点。' },
+          { img: 'story/y03.png', t: '除了角色什么也念不出', d: '按 Scan now，审计和其它检查一起跑。这里有四个控件只答得出「edit」「combobox」「slider」和「button」—— 只有类型，从来没有用途。打开一行，它会说出将被念出的内容和这个控件缺了什么，就在坏掉的绑定和被遮蔽的资源键旁边。' },
+          { img: 'story/y04.png', t: '看看键盘会走到哪里', d: '按 Tab 是最便宜的无障碍测试，也是没人做的那个，因为要知道答案就得按三十次并且全记住。打开浮层，每个停靠点都直接在运行中的应用上编了号，按访问顺序串起来，绕回起点的那一段是虚线。线两次横穿窗口，这本身就是结论：这张表单读起来的顺序，和它看起来的顺序不一样。' },
+          { t: '智能体没有手指', d: '所以它问。走查用的是框架自己的那一套，于是智能体拿到的就是 Tab 实际走的顺序；而审计在同一口气里说出，这些停靠点里哪一个根本念不出任何东西。第 8 站没有可以自称的名字。',
+            code: [
+              '$ get_tab_order  {}',
+              '  10 tab stops, cycling',
+              '',
+              '   1  #7 Button  eu-central ▾',
+              '   2  #8 CheckBox  auto',
+              '   3  #9 Button  Scale up',
+              '   4  #10 Button  Scale down',
+              '   5  #4 ToggleSwitch  ToggleSwitch "AutoScale"',
+              '   ⋯',
+              '   8  #1 TextBox  TextBox',
+              '',
+              '$ get_problems  {"scan": true}',
+              '  ERROR Accessibility  TextBox #1',
+              '        an Edit with no accessible name — a screen reader',
+              '        announces it as "edit" and nothing else',
+            ] },
+        ] },
       { key: 'agent', h: '🤖 应用自己回答问题', sub: '每次变化背后的调用栈、紧挨着它的慢帧，以及一个只读的 MCP 端点，把整套工具交给编码智能体。',
         steps: [
           { t: '🤖 应用自己回答问题',
@@ -1600,7 +1782,7 @@ zh: {
             d2: '现在，复现一次就会记下每次变化背后的调用栈，慢帧落在应用当时在做的事旁边；编码智能体也能调用选项卡所用的同一批引擎 —— 只读，走回环地址。',
             newsTitle: '12.1.4 新增',
             news: [
-              { k: 'MCP 端点', d: '只读，走回环地址 —— 十六个工具把树、属性、样式、布局、资源、问题、时间线、日志和截图交给编码智能体' },
+              { k: 'MCP 端点', d: '只读，走回环地址 —— 十七个工具把树、属性、样式、布局、资源、问题、时间线、日志和截图交给编码智能体' },
               { k: '一个选项卡加一页设置', d: '打开端点、设置端口，并看到智能体到目前为止问过什么' },
               { k: '一行命令就注册好', d: '⚙ 卡片直接给出 claude mcp add 或 codex mcp add 命令，里面已经是这个应用自己的名字和端口' },
               { k: '原因捕获', d: '每条记录下来的变化都带着调用栈，复现一次就一次性回答所有命中的「是谁改的」' },
@@ -1627,7 +1809,7 @@ zh: {
               '$ get_element  {"elementId": 2}',
               '  declared at: MainWindow.axaml:309',
             ] },
-          { t: '别处拿不到的答案', d: '是谁改的，以及对一个没有指针的东西来说 hover 长什么样。十六个工具中有十四个只读；冻住弹出和强制状态是例外 —— 它们需要单独开启，带着会把一切复原的截止时间，并在持续期间于应用中显示横幅。',
+          { t: '别处拿不到的答案', d: '是谁改的，以及对一个没有指针的东西来说 hover 长什么样。十七个工具中有十五个只读；冻住弹出和强制状态是例外 —— 它们需要单独开启，带着会把一切复原的截止时间，并在持续期间于应用中显示横幅。',
             code: [
               '$ get_timeline  {"elementId": 11}',
               '  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11',
@@ -1778,6 +1960,7 @@ zh: {
       { i: '🎯', t: '值追踪', d: '在整棵树上追踪任意属性：相同值 = 相同颜色，null 独立分组，实时图例带计数 ——「Fold to changes」一次显示所有边界。' },
       { i: '❄', t: '定格瞬间（Hold）', d: 'Shift+F12 冻结应用此刻呈现的一切 —— 打开的弹出层、浮出菜单、工具提示、悬停样式。像普通 UI 一样检查被冻结的场景；Esc 把一切精确还原。Pin states 面板可随时强制 :focus、:disabled 或任意自定义伪类。' },
       { i: '⚠️', t: 'Problems 面板', d: '只列坏掉的 —— 绑定失败最先 —— 错误在警告之前，每条有白话原因、reveal 链接和完整绑定链。Scan now 抓住 DevTools 打开之前的错误。' },
+      { i: '♿', t: '另一棵树', d: '屏幕阅读器走的那棵树，与你看见的那棵并排：每个元素的角色、被念出的名称和模式。Tab 顺序浮层直接在运行中的应用上为每个键盘停靠点编号，对比度按标准的定义测量，而没有名字的控件、键盘陷阱和到不了的焦点停靠点，都和其它问题一起进 Problems。' },
       { i: '⌨️', t: 'Ctrl+K：找到任何东西', d: '一个搜索覆盖动作、元素、资源和属性 —— 输入屏幕上看到的字，找到显示它们的东西。' },
       { i: '🏆', t: '哪个资源赢了？', d: '一个键的每个定义按解析顺序排列 —— 赢家有标记，被遮蔽的画删除线，实时编辑，一键到源码。' },
       { i: '📷', t: '复制为缺陷报告', d: '一次点击把 DPI 精确的截图加上可读的报告 —— 伪 XAML 路径、bounds、非默认属性 —— 放进剪贴板。富文本目标同时粘贴两者，图像目标得到 PNG，纯文本目标得到 markdown。' },
@@ -1793,7 +1976,7 @@ zh: {
       { i: '⏱', t: '时间线', d: '路由事件、属性变化、VM 通知与焦点变化汇入一条按时间排序的流，范围由你的观察列表决定。因果链接把通知与它产生的绑定更新连在一起；每条记录都可展开完整细节。' },
     { i: '🕰', t: '原因捕获', d: '每条被记录的变化都带着引发它的调用栈，并裁剪到你自己的帧。复现一次就能按顺序读完所有「凶手」，每一帧都可跳转源码 —— 不必每命中一次下一个断点。Break next 则只为一次变化升级到调试器。' },
     { i: '📈', t: 'Perf 泳道', d: '慢帧与布局过程归入与其它一切相同的信息流，于是卡顿可以放在「应用当时在做什么」旁边阅读。「慢」以你的显示器实际维持的预算衡量，而不是平均值。' },
-    { i: '🤖', t: '让智能体来看（MCP）', d: '回环上的只读 Model Context Protocol 端点，不索取即关闭：十六个工具把运行中应用的树、属性、样式、布局、资源、问题、时间线、日志与截图交给编码智能体。' },
+    { i: '🤖', t: '让智能体来看（MCP）', d: '回环上的只读 Model Context Protocol 端点，不索取即关闭：十七个工具把运行中应用的树、属性、样式、布局、资源、问题、时间线、日志与截图交给编码智能体。' },
       { i: '📜', t: '日志查看器', d: '绑定错误、布局与属性系统消息 —— 无需 LogToTrace()。带过滤、批量刷新，杜绝反馈循环。' },
       { i: '📊', t: '渲染器叠加层', d: 'FPS 计数、布局/渲染耗时曲线与脏矩形闪烁，一个开关即可打开。' },
       { i: '🕵️', t: '每个值的来源', d: '一眼看出取值来自默认、手动设置、样式、模板还是继承 —— 并可跳到祖先元素或设置它的那行 XAML。' },
@@ -1809,7 +1992,7 @@ zh: {
     contents: '目录',
     groups: [
       { t: '入门', ids: ['install', 'quickstart'] },
-      { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
+      { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
       { t: '智能体（MCP）', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpcases'] },
       { t: '参考', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -1871,6 +2054,33 @@ zh: {
 <div class="shot"><img src="assets/img/docs/problems-detail.png" alt="打开的绑定问题：带 reveal 链接的元素、属性、原因，以及标出失败一步的绑定链"><span class="cap">绑定链逐步实时展示：DataContext 解析正常 —— 坏的是路径名本身。</span></div>
 <p>重复资源问题列出每个定义及其所在之处 —— 元素作用域可用 reveal 在树中打开 —— 并链接到<a href="#resources">资源解释器</a>。</p>
 <p class="tip"><b>提示：</b><span class="kbd">Ctrl</span>+<span class="kbd">K</span> → “Scan bindings for problems” 随处可运行扫描。</p>` },
+      { id: 'a11y', t: '无障碍：另一棵树', html: `<p>你的应用有两棵树。一棵是你看见的；另一棵是屏幕阅读器走的 —— 成员不同、嵌套不同、名字也不同。每一个无障碍缺陷都是这两棵树之间的分歧，而在此之前，你没法从构建它的进程内部去看第二棵。</p>
+<h3>第 1 步。把树切到屏幕阅读器看见的那棵</h3>
+<p>树上方的模式下拉框里有第三项：<b>Accessibility tree</b>。树会基于自动化 peer 重建，并多出两列 —— <b>被念出的名称</b>与<b>角色</b> —— 于是每个元素会被怎么念出来，和它的结构在同一眼里读完。 这个模式开着的时候，面板会占走这两列需要的宽度，退出时再还回去。每条列边界都画了出来 —— 表头里有，树里也有 —— 而且每一条都是把手：指针只要落在表头条上，所有边界就会变亮，拖动其中一条就从元素名称的空间里给那一列分配宽度。你自己设定的宽度会跨模式记住。</p>
+<p>出现的是 <b>control view</b>：辅助技术真正导航的那棵树，而不是框架交出来的原始 peer 树。屏幕阅读器会跨过去的每个 <code>ContentPresenter</code> 和模板部件都不见了。在示例应用上是 66 个节点而不是 228 个 —— 这个差别正是要点：一棵可疑地像视觉树的树，给你看的是错的东西。</p>
+<p>其它方面它仍是同一棵树：搜索、scope、折叠、Properties 面板、跳到源码和 Ctrl+K 都照常工作，因为选中一个 peer 就是选中拥有它的控件。</p>
+<div class="shot"><img src="assets/img/docs/a11y-tree.png" alt="无障碍模式下的树，带 Name 和 Role 两列"><span class="cap">示例应用的 control view：每个节点旁边是被念出的名称和角色 —— 视觉树有 228 个节点，这里是 66 个。</span></div>
+<h3>第 2 步。坏掉的东西，进坏掉的东西该进的地方</h3>
+<p>无障碍发现就是 <a href="#problems">Problems</a> 的行，和坏掉的绑定、被遮蔽的资源键并排 —— 「我的应用哪里不对」是一个问题，值得一个列表。按 <b>Scan now</b>，审计和其它检查一起跑：</p>
+<ul>
+<li><b>除了角色什么也念不出。</b>没有可访问名称的按钮、复选框、输入框或滑块 —— 屏幕阅读器说一句「按钮」就没了。这一条让应用不是不便，而是不能用。</li>
+<li><b>什么也没标注的标注。</b><code>LabeledBy</code> 指向一个自己也没有名称的元素，解析出来是一片安静。</li>
+<li><b>看不见的焦点。</b>Tab 能到，但在屏幕之外。</li>
+<li><b>只有鼠标够得着。</b>可聚焦、已启用，但按 Tab 永远到不了。</li>
+<li><b>键盘陷阱。</b>焦点进得去、出不来的容器 —— 鼠标用户能走出来，键盘用户不能。</li>
+<li><b>重复的 automation id、跳级的标题层级，以及在该字号下低于 WCAG 要求的文字对比度。</b></li>
+</ul>
+<div class="shot"><img src="assets/img/docs/a11y-problems.png" alt="Problems 面板里的无障碍发现"><span class="cap">八个除了角色什么也念不出的控件 —— 其中四个列表项被念成里面那个面板的类名 —— 和坏掉的绑定、被遮蔽的资源键并排。</span></div>
+<p>你没法处理的发现不算发现。主题自带的模板部件从不被要求命名 —— 滑块的增加按钮在每一个 Avalonia 应用里都是没名字的，想要名字的是滑块本身。peer 从标记名称里现编出来的 id，不会被当成谁设过的 id，因为控件模板每盖一次章，都带着同样的部件名。</p>
+<div class="shot"><img src="assets/img/docs/a11y-finding.png" alt="打开的一条无障碍发现"><span class="cap">打开一行：屏幕阅读器会说什么，以及这个控件缺了什么。</span></div>
+<h3>第 3 步。看看键盘会走到哪里</h3>
+<p>按 Tab 是最便宜的无障碍测试，也是没人做的那个，因为要知道答案就得按三十次并且全记住。打开工具栏的 <b>overlays</b> 菜单，开启 <b>Tab order</b>：每个键盘停靠点都直接在运行中的应用上编了号，按访问顺序用线串起来，绕回起点的那一段是虚线，而所有可聚焦却到不了的东西都被红框圈住。</p>
+<div class="shot"><img src="assets/img/docs/a11y-overlays.png" alt="开启了 Tab order 的 overlays 菜单"><span class="cap">overlays 菜单 —— 开关下面就是这次走查的结果：十个停靠点。</span></div>
+<p>顺序是用 <b>Avalonia 自己的 Tab 导航器</b>走出来的，不是它的复刻 —— 价值恰恰在于和框架分毫不差地一致，连模板的怪脾气一起。一个列表只贡献一站，而不是每行一站，因为 Tab 就是这么走的：行属于方向键。</p>
+<div class="shot"><img src="assets/img/docs/a11y-taborder.png" alt="运行中的应用上的 Tab 顺序浮层"><span class="cap">十个停靠点，按访问顺序串起来。线两次横穿窗口：这张表单读起来的顺序，和它看起来的顺序不一样。</span></div>
+<h3>第 4 步。对比度是量出来的，不是眼估的</h3>
+<p>文字对比度按 WCAG 2.1 的定义计算：相对亮度，正文 4.5:1、大字 3:1，并且先把文字背后的半透明层合成起来 —— 深色窗口上盖一层半透明面板，颜色跟两者都不一样。渐变、图片和平铺干脆不测，而不是测得很糟：一个渐变有多少像素就有多少个对比度，把其中一个当作答案报出来，比闭嘴更糟。</p>
+<p class="tip"><b>提示。</b>这一切到智能体那里不需要学任何新东西：<code>get_tree</code> 接受 <code>mode: "accessibility"</code>，<code>get_problems</code> 把审计作为又一个类别报出，而 <code>get_tab_order</code> 会把 Tab 按遍整个窗口，说出焦点实际去了哪里。见<a href="#mcptools">工具</a>。</p>` },
       { id: 'palette', t: 'Ctrl+K：找到任何东西', html: `<p>你很少知道要找的东西叫什么类型、什么名字 —— 你知道的是它在屏幕上显示的字。在 DevTools 中按 <span class="kbd">Ctrl</span>+<span class="kbd">K</span>（或 <span class="kbd">⌘</span>+<span class="kbd">K</span>）：一个搜索框覆盖一切，边输入边分类。每一行都带一个彩色类型图标，词汇与 DevTools 其他面板一致 —— 树的元素字形、资源的 <code>◈</code>、属性的 <code>◆</code>、动作用菜单图标 —— 还没读文字就先看出这条结果是什么。</p>
 <h3>空查询就是动作菜单</h3>
 <div class="shot"><img src="assets/img/docs/palette-actions.png" alt="空查询的 Ctrl+K：每个 DevTools 动作带图标和提示"><span class="cap">所有 DevTools 命令在一个列表里 —— 面板同时是功能发现菜单。</span></div>
@@ -2099,7 +2309,7 @@ zh: {
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="窗口可视图层的 3D 分层视图"><span class="cap">实时窗口的 141 个图层，可旋转 —— 点击任意图层即在树中选中。</span></div>
 <h3>Timeline（时间线）</h3><ul><li>事件、属性变化、VM 通知、焦点变化与绑定错误汇入一条流，范围由观察列表决定 —— 带因果链接、绑定逐步展开与实例检查器。见<a href="#timeline">时间线</a>。</li></ul>
 <h3>Problems（问题）</h3><ul><li>只列坏掉的 —— 绑定失败、error 日志 —— 错误在警告之前，每条带原因、树内 reveal 链接与完整绑定链。Scan now 抓住在 DevTools 打开前就失败的绑定。见 <a href="#problems">Problems 面板</a>。</li></ul>
-<h3>MCP Server</h3><ul><li>端点是否在听、用哪个端口、以什么名字，智能体发过多少次调用、最后一次是什么 —— 以及启停开关、端口输入框、冻结许可，和可以直接复制的客户端配置。见 <a href="#mcp">让智能体看看</a>。</li></ul>
+<h3>MCP Server</h3><ul><li>端点在听的时候才有这个选项卡，停了就随之消失：在听什么、用哪个端口、以什么名字，把本应用注册给智能体的那一行命令，以及每个工具各自被调用了多少次 —— 失败的另算。启停开关、端口和冻结许可都在 ⚙ 卡片的 MCP 页。见 <a href="#mcp">让智能体看看</a>。</li></ul>
 <h3>Logs（日志）</h3><ul><li>实时 Avalonia 日志，支持暂停、级别、区域与文本过滤。默认捕获 Warning 及以上。工具自身产生的日志会被丢弃、UI 批量刷新 —— 不会出现反馈循环卡死。</li>
 <li><code>LogCapture.Publish</code> 把应用自己的事件送进此面板 —— 见<a href="#applogs">应用日志接入</a>。</li></ul>` },
       { id: 'capture', t: '截图与缺陷报告', html: `<p>「发我一张截图和 XAML 路径」在这里是一次点击 —— 元素、它的 bounds 和与默认值不同的属性，随图片一起上路。</p>
@@ -2127,7 +2337,7 @@ zh: {
       { id: 'mcp', t: '让智能体来看（MCP）', html: `<p>值得看的应用，是那个<em>已经在运行</em>、出错的状态还留在屏幕上的应用。DevTools 可以把这个应用交给编码智能体：一个<b>只读</b>的 <a href="https://modelcontextprotocol.io">Model Context Protocol</a> 端点，进程内、只监听回环、不主动开启。</p>
 <p>「进程内」是关键。进程外的检查器只能通过协议请应用描述自己；而这个<em>就是</em>应用本身，所以列出控件的那同一次调用，也能把它渲染出来、读出设定其宽度的优先级、引用它记录的绑定错误 —— 中间没有任何序列化边界。本文档里的每个选项卡都是某个从不需要窗口的引擎之上的一层视图，智能体直接调用那些引擎。它读到的答案和你看到的一模一样。</p>
 <h3>第 1 步。打开它</h3>
-<p>打开 DevTools，切到 <b>MCP Server</b> 选项卡：一个开关启停端点，旁边的输入框设置端口，顶部那行说明当前在听什么 —— <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>。⚙ 卡片里也有同样这两项设置。两者都按本机保存，下次启动依然生效。</p>
+<p>打开 DevTools，打开 ⚙ 卡片并切到它的 <b>MCP</b> 页：一个开关启停端点，旁边的输入框设置端口。开着的时候就有 <b>MCP Server</b> 选项卡，它顶部那行说明当前在听什么 —— <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>。这个选择按本机保存，下次启动依然生效。</p>
 <p>如果想在窗口打开之前服务器就已经起来：</p>
 <pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span> });</code></pre>
 <p>或者不改代码，用 <code>AVA_DEVTOOLS_MCP=1</code> 启动应用。它会打印一次自己的位置：</p>
@@ -2151,16 +2361,17 @@ zh: {
 <li><b>繁忙的应用会直说。</b>如果 UI 线程一分钟内没有响应 —— 弹出了模态框，或者被调试器停住了 —— 调用会明确返回这一点，而不是把智能体丢在一个死掉的套接字上。</li></ul>
 <h3>它能做什么、不能做什么</h3>
 <ul><li><b>只监听回环</b>，而且这不是一个配置项：它绑定到 0.0.0.0 的那天，就是一个调试辅助变成隔壁工位读你屏幕的手段的那天。<code>Origin</code> 头同样会检查，因此浏览器页面无法通过 DNS 重绑定摸到它。</li>
-<li><b>十六个工具里有十四个是纯读。</b>不注入任何输入，不写任何应用属性，不运行任何处理器。这就是全部的安全故事，也是这里没有确认流程的原因：没有什么需要确认。</li>
-<li><b>两个工具会改变东西，需要第二道开关。</b><code>hold</code> 和 <code>pin_class</code> 冻结瞬时 UI、强制伪类 —— 这是没有指针的一方查看悬停状态的唯一途径。除非 ⚙ 卡片 MCP 页和 MCP Server 选项卡里的 <b>Allow freezing</b> 勾选框、<code>McpAllowHold</code> 或 <code>AVA_DEVTOOLS_MCP_HOLD=1</code> 另有说法，否则它们是关的；它们只改变瞬时 UI 状态，每次保持都带一个自动释放的期限，保持期间应用会显示横幅，应用里按 <span class="kbd">Esc</span> 同样能释放。</li>
+<li><b>十七个工具里有十五个是纯读。</b>不注入任何输入，不写任何应用属性，不运行任何处理器。这就是全部的安全故事，也是这里没有确认流程的原因：没有什么需要确认。</li>
+<li><b>两个工具会改变东西，需要第二道开关。</b><code>hold</code> 和 <code>pin_class</code> 冻结瞬时 UI、强制伪类 —— 这是没有指针的一方查看悬停状态的唯一途径。除非 ⚙ 卡片 MCP 页里的 <b>Allow freezing</b> 勾选框、<code>McpAllowHold</code> 或 <code>AVA_DEVTOOLS_MCP_HOLD=1</code> 另有说法，否则它们是关的；它们只改变瞬时 UI 状态，每次保持都带一个自动释放的期限，保持期间应用会显示横幅，应用里按 <span class="kbd">Esc</span> 同样能释放。</li>
 <li><b>它只归还自己拿走的。</b>智能体的保持只会自动释放智能体自己发起的那部分：之后你自己按 <span class="kbd">Shift</span>+<span class="kbd">F12</span>，期限不会把你的保持一并撤掉。</li></ul>
 <p class="tip">和 DevTools 的其余部分一样，只在 Debug 里发布。端点在任何构建里都默认关闭，但一个在 Release 中根本不附加 DevTools 的应用，就不可能意外地把它开起来。</p>` },
       { id: 'mcpconnect', t: '接到 Claude Code 或 Codex', html: `<p>端点只在你的应用运行期间存在，所以顺序始终不变：启动应用、打开服务器、把智能体指过去。它注册的名字是 <code>&lt;程序集名&gt;-avadevtools</code> —— 这也是你在客户端列表里会看到的名字。</p>
 <h3>第 1 步。带着服务器启动应用</h3>
 <ol class="steps"><li>运行你的应用，按 <span class="kbd">F12</span>。</li>
-<li>打开 <b>MCP Server</b> 选项卡，勾上 <b>Serve MCP on loopback</b>。</li>
+<li>打开 ⚙ 卡片的 <b>MCP</b> 页，勾上 <b>Serve MCP on loopback</b>。</li>
 <li>复制 <em>Point your agent at it</em> 下面那段 —— 里面已经是正确的名字和端口。</li></ol>
-<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="设置卡片的 MCP 页：开关、端口、冻结许可，以及两条带复制按钮的注册命令"><span class="cap">⚙ → MCP：开关、端口，以及注册这个应用的那一行 —— 里面已经是它的名字和真正打开的端口。</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="设置卡片的 MCP 页：开关、端口和冻结许可，下面一行说明当前在听什么"><span class="cap">⚙ → MCP：要设置的都在这里，别的都不在 —— 开关、端口、冻结许可，外加一行结果。</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="MCP Server 选项卡：在听什么，以及每个工具各被调用了多少次"><span class="cap">端点在，这个选项卡才在：十七个工具，以及智能体对每一个究竟问过多少次。横杠表示从没碰过；琥珀色的数字里含失败调用。</span></div>
 <h3>第 2a 步。Claude Code</h3>
 <pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
 <p>作用域决定谁能用到它。<code>--scope local</code>（默认）是这个项目、只给你自己；<code>--scope project</code> 会在仓库根目录写一个 <code>.mcp.json</code>，参与这个应用的每个人都拿到同一条配置；<code>--scope user</code> 是这台机器上的所有项目。写进去的就是选项卡里显示的那段 JSON：</p>
@@ -2177,16 +2388,16 @@ url = <span class="s">"http://127.0.0.1:5171/"</span></code></pre>
 command = <span class="s">"npx"</span>
 args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span class="s">"http://127.0.0.1:5171/"</span>]</code></pre>
 <h3>第 3 步。从应用这一侧确认</h3>
-<p><b>MCP Server</b> 选项卡会数它已经回答过多少次：<code>7 call(s) served · last: get_tree 3s ago</code>。如果客户端说连上了而这一行始终是空的，那它在跟另一个应用说话 —— 两头都查一下端口。</p>
+<p><b>MCP Server</b> 选项卡会数它已经回答过多少次：<code>7 call(s) served · last: get_tree 3s ago</code>，并且按工具分别计数 —— 于是能看出智能体真正在用哪几个、又有哪几个从没碰过。如果客户端说连上了而总数始终是空的，那它在跟另一个应用说话 —— 两头都查一下端口。</p>
 <h3>同时开着两个应用</h3>
-<p>给第二个应用自己的端口（选项卡上的 <b>Port</b> 框、<code>McpPort</code>，或 <code>AVA_DEVTOOLS_MCP_PORT</code>），然后作为第二条配置加进去。它们的名字本来就不同，智能体的工具列表依然清楚。</p>
+<p>给第二个应用自己的端口（⚙ 卡片 MCP 页上的 <b>Port</b> 框、<code>McpPort</code>，或 <code>AVA_DEVTOOLS_MCP_PORT</code>），然后作为第二条配置加进去。它们的名字本来就不同，智能体的工具列表依然清楚。</p>
 <p class="tip">比应用先启动的客户端通常要重连之后才看得到工具 —— Claude Code 里的 <code>/mcp</code>，Codex 里开新会话。那是重连问题，不是配置问题。</p>` },
-      { id: 'mcptools', t: '十六个工具', html: `<p>十六个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
+      { id: 'mcptools', t: '十七个工具', html: `<p>十七个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
 <h3>先找到方向</h3>
 <table>
 <tr><th>工具</th><th>回答</th><th>参数</th></tr>
 <tr><td><code>list_windows</code></td><td>哪些窗口开着，以及作为各自树根的 id。从这里开始。</td><td>—</td></tr>
-<tr><td><code>get_tree</code></td><td>以缩进行呈现的树 —— 包含文本内联与打开的弹出层，模板内部折叠成占位符直到你要求展开。</td><td><code>elementId</code>、<code>depth</code>（默认 3，最大 12）、<code>mode</code>：important / logical / visual</td></tr>
+<tr><td><code>get_tree</code></td><td>以缩进行呈现的树 —— 包含文本内联与打开的弹出层，模板内部折叠成占位符直到你要求展开。</td><td><code>elementId</code>、<code>depth</code>（默认 3，最大 12）、<code>mode</code>：important / logical / visual / accessibility</td></tr>
 <tr><td><code>find_elements</code></td><td>按类型、<code>x:Name</code>、<code>.class</code> 或元素显示的文本查找 —— 与树里 <span class="kbd">Ctrl</span>+<span class="kbd">F</span> 用的是同一个匹配器。</td><td><code>query</code>、<code>limit</code></td></tr>
 </table>
 <h3>读懂一个元素</h3>
@@ -2202,9 +2413,11 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>问「哪里坏了」</h3>
 <table>
 <tr><th>工具</th><th>回答</th><th>参数</th></tr>
-<tr><td><code>get_problems</code></td><td>失败的绑定与重复的资源键，带元素、属性、大白话的原因和次数。智能体连上之前记录的问题也包含在内。</td><td><code>scan</code>、<code>limit</code></td></tr>
+<tr><td><code>get_problems</code></td><td>失败的绑定、重复的资源键与无障碍发现，带元素、属性、大白话的原因和次数。智能体连上之前记录的问题也包含在内。</td><td><code>scan</code>、<code>limit</code></td></tr>
+<tr><td><code>get_tab_order</code></td><td>键盘会走到哪里：Tab 依次访问的每一站、是否绕回起点、它永远到不了什么，以及它进去之后出不来的地方。</td><td><code>elementId</code></td></tr>
 <tr><td><code>get_logs</code></td><td>最近的 Avalonia 日志条目，绑定错误也在其中 —— 沉默的 UI 故障通常在这里自己交代。</td><td><code>limit</code>、<code>minLevel</code></td></tr>
 </table>
+<p><code>get_tab_order</code> 是另一个智能体无从逼近的：它没有手指，而这个顺序也不在树里 —— 它属于框架，由散落在各个模板里的导航模式与 tab 索引算出。工具用 Avalonia 自己的导航器把 Tab 按遍整个窗口，报出焦点实际去了哪里。</p>
 <p><code>scan: true</code> 是智能体用别的办法无从逼近的那一个：它扫遍树中每一条活的绑定，报出<em>此刻</em>坏掉的一切 —— 包括启动时无人观察就已失败的绑定，以及至今尚未被触发过的绑定。</p>
 <h3>问「刚才发生了什么」</h3>
 <table>
@@ -2339,7 +2552,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>它使用的端口，默认 5171。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>额外允许 <code>hold</code> 与 <code>pin_class</code> —— 仅有的两个会改变东西的工具。</td></tr>
 </table>
-<p class="tip">这三个 <code>MCP</code> 变量只是起始状态，不是最终决定：<a href="#settings">⚙ 卡片</a>里的开关和 <b>MCP Server</b> 选项卡按机器保存，并且优先于它们。你在工具里关掉的端口，下次启动依然是关的，无论启动脚本导出了什么。</p>` },
+<p class="tip">这三个 <code>MCP</code> 变量只是起始状态，不是最终决定：<a href="#settings">⚙ 卡片</a> MCP 页里的开关按机器保存，并且优先于它们。你在工具里关掉的端口，下次启动依然是关的，无论启动脚本导出了什么。</p>` },
       { id: 'limits', t: '限制', html: `<ul>
 <li>仅桌面端 —— 移动/浏览器平台不支持辅助窗口。</li>
 <li>DevTools 自带主题 —— 应用用什么主题、甚至没有主题，都不影响它。</li>

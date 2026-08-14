@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "version": "12.1.4",
+  "version": "12.1.5",
   "notesUrl": "https://pavel-zheltiakov.github.io/AvaDevTools/releases.html",
   "notes": [
     {
       "kind": "p",
-      "text": "The app answers for itself now \u2014 to you, and to an agent."
+      "text": "Your application has two trees. This release shows you the other one."
     },
     {
       "kind": "h1",
@@ -13,43 +13,35 @@
     },
     {
       "kind": "bullet",
-      "text": "MCP server \u2014 a read-only endpoint on loopback; sixteen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots."
+      "text": "Accessibility \u2014 a third tree mode with the announced name and role, tab-order overlay, WCAG contrast, findings in Problems."
     },
     {
       "kind": "bullet",
-      "text": "MCP Server tab \u2014 what is listening, on which port, what an agent has asked for, and every tool it can reach."
+      "text": "Accessibility over MCP \u2014 get_tab_order, plus the new mode in get_tree and the new category in get_problems."
     },
     {
       "kind": "bullet",
-      "text": "MCP in the settings card \u2014 turn the endpoint on or off and set its port from the \u2699 card, saved per machine."
+      "text": "Call counts per MCP tool \u2014 in the MCP Server tab."
+    },
+    {
+      "kind": "h1",
+      "text": "Changes"
     },
     {
       "kind": "bullet",
-      "text": "One line to register it \u2014 the card hands you the claude mcp add or codex mcp add command, already carrying this application's name and port."
+      "text": "MCP settings in one place \u2014 the \u2699 card. The tab is there while the endpoint listens."
     },
     {
       "kind": "bullet",
-      "text": "Named per application \u2014 each app serves as <assembly>-avadevtools, so two open at once stay apart in the agent's list."
+      "text": "UI improvements \u2014 draggable tree columns, drawn column edges, ellipsized Problems rows."
+    },
+    {
+      "kind": "h1",
+      "text": "Bug Fixes"
     },
     {
       "kind": "bullet",
-      "text": "Cause capture \u2014 the call stack behind every recorded change, so one reproduction answers \"who changed this\" for every hit at once."
-    },
-    {
-      "kind": "bullet",
-      "text": "Break next \u2014 arms the debugger for exactly one change, for when a live stack with locals is what you need."
-    },
-    {
-      "kind": "bullet",
-      "text": "Perf lane \u2014 slow frames and layout passes filed into the timeline beside what the app was doing."
-    },
-    {
-      "kind": "bullet",
-      "text": "Walk the view model \u2014 inspect_object follows the data context into its collections and the objects inside them."
-    },
-    {
-      "kind": "bullet",
-      "text": "Reach the transient UI \u2014 an agent can list open popups, freeze them, and force :pointerover on something that has no pointer."
+      "text": "Element screenshots \u2014 no longer twice-scaled on a scaled display."
     }
   ]
 }
