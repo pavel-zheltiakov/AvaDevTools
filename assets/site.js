@@ -62,7 +62,7 @@ function applyLang(lang) {
   if (page === 'docs') buildDocs(R);
   if (page === 'releases') {
     const el = document.getElementById('rel');
-    if (el) { el.innerHTML = '<p style="color:var(--muted)">' + esc(R.rel.loading) + '</p>'; loadReleases(el, Object.assign({ docsLabel: R.nav.docs }, R.rel)); }
+    if (el) loadReleases(el, Object.assign({ docsLabel: R.nav.docs }, R.rel));
   }
 }
 
@@ -371,13 +371,62 @@ function md(src) {
   return h.split(/\n{2,}/).map(p => /^<(h\d|ul|hr)/.test(p.trim()) ? p : '<p>' + p.replace(/\n/g, '<br>') + '</p>').join('');
 }
 
+// The GitHub list is cached so the page can paint before the network answers.
+// The call costs half a second on a good line, and the page used to wait on it
+// with nothing on screen; now a return visit renders from the cache at once and
+// revalidates behind the card, and a language switch (which re-runs applyLang)
+// repaints from memory without touching the network at all.
+const REL_CACHE = 'adt.releases';
+const REL_TTL = 10 * 60 * 1000;
+let relMem = null;
+
+function relCached() {
+  if (relMem) return relMem;
+  try {
+    const c = JSON.parse(localStorage.getItem(REL_CACHE));
+    if (c && Array.isArray(c.r)) relMem = c;
+  } catch (e) {}
+  return relMem;
+}
+
+function relStore(list) {
+  // Only the fields the cards read — the API answer is 50 KB of assets, authors
+  // and upload URLs the page never looks at.
+  relMem = { t: Date.now(), r: list.map(r => ({
+    tag_name: r.tag_name, name: r.name, published_at: r.published_at,
+    body: r.body, html_url: r.html_url,
+  })) };
+  try { localStorage.setItem(REL_CACHE, JSON.stringify(relMem)); } catch (e) {}
+  return relMem.r;
+}
+
 async function loadReleases(el, L) {
-  let fetched = [], fetchOk = false;
+  const cached = relCached();
+  if (cached) renderReleases(el, L, cached.r);
+  else el.innerHTML = '<p style="color:var(--muted)">' + esc(L.loading) + '</p>';
+  // Fresh enough: no request at all. This is what makes paging back and forth,
+  // and switching language, free.
+  if (cached && Date.now() - cached.t < REL_TTL) return;
+  let fetched = null;
   try {
     const res = await fetch('https://api.github.com/repos/pavel-zheltiakov/AvaDevTools/releases');
-    if (res.ok) { fetched = await res.json(); fetchOk = true; }
+    if (res.ok) fetched = await res.json();
   } catch (e) {}
-  if (!Array.isArray(fetched)) fetched = [];
+  if (!Array.isArray(fetched)) {
+    // A stale cache is still real data — keep showing it rather than replacing a
+    // full page of releases with a failure notice.
+    if (!cached) renderReleases(el, L, null);
+    return;
+  }
+  const before = cached && JSON.stringify(cached.r);
+  const slim = relStore(fetched);
+  if (JSON.stringify(slim) !== before) renderReleases(el, L, slim);
+}
+
+// fetched: the GitHub list, or null when the request failed.
+function renderReleases(el, L, fetched) {
+  const fetchOk = Array.isArray(fetched);
+  if (!fetchOk) fetched = [];
   // A release prepared but not yet tagged is listed locally; GitHub's entry
   // replaces it once the tag is pushed.
   const local = (window.LOCAL_RELEASES || []).filter(l => !fetched.some(r => r.tag_name === l.tag_name));

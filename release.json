@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "version": "12.1.5",
+  "version": "12.1.6",
   "notesUrl": "https://pavel-zheltiakov.github.io/AvaDevTools/releases.html",
   "notes": [
     {
       "kind": "p",
-      "text": "Your application has two trees. This release shows you the other one."
+      "text": "An agent could read the application, not touch it. This release adds input over MCP."
     },
     {
       "kind": "h1",
@@ -13,15 +13,19 @@
     },
     {
       "kind": "bullet",
-      "text": "Accessibility \u2014 a third tree mode with the announced name and role, tab-order overlay, WCAG contrast, findings in Problems."
+      "text": "Eight new tools, twenty-five in all \u2014 click, hover, drag, scroll, keys, text, focus, wait."
     },
     {
       "kind": "bullet",
-      "text": "Accessibility over MCP \u2014 get_tab_order, plus the new mode in get_tree and the new category in get_problems."
+      "text": "Real input, not simulated \u2014 your handlers run as for a person."
     },
     {
       "kind": "bullet",
-      "text": "Call counts per MCP tool \u2014 in the MCP Server tab."
+      "text": "An input lane on the Timeline \u2014 every action, above what it caused."
+    },
+    {
+      "kind": "bullet",
+      "text": "A marker over the application \u2014 a pill naming what is happening."
     },
     {
       "kind": "h1",
@@ -29,19 +33,15 @@
     },
     {
       "kind": "bullet",
-      "text": "MCP settings in one place \u2014 the \u2699 card. The tab is there while the endpoint listens."
+      "text": "No pretend success \u2014 an impossible action is refused, with the reason."
     },
     {
       "kind": "bullet",
-      "text": "UI improvements \u2014 draggable tree columns, drawn column edges, ellipsized Problems rows."
-    },
-    {
-      "kind": "h1",
-      "text": "Bug Fixes"
+      "text": "The acting tools are marked \u2014 the tool list says which ones can act."
     },
     {
       "kind": "bullet",
-      "text": "Element screenshots \u2014 no longer twice-scaled on a scaled display."
+      "text": "The handshake says what is allowed \u2014 before the agent's first call."
     }
   ]
 }

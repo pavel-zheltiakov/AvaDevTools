@@ -12,13 +12,51 @@ en: {
     get: 'Get started', stories: 'See it in action', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.1.5", docs: 'Documentation →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.1.6", docs: 'Documentation →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   stories: {
-    h: 'Stories', wn: 'a11y',
+    h: 'Stories', wn: 'input',
     lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
     list: [
+      { key: 'input', h: '⌁ Input over MCP', sub: 'An agent can click, type and drag your application — real platform input, behind a switch of its own, with everything it did on the Timeline.',
+        steps: [
+          { t: '⌁ Input over MCP',
+            d: 'An agent could read every consequence of an action and had no way to perform one. It could see that a flyout was open but not open it, read a validation message but not type the value that produces it.',
+            d2: 'Now it can act: seven tools that click, hover, drag, scroll, press keys, type text and move focus — real platform input, behind a permission of its own, with every action on your Timeline as well as its own.',
+            newsTitle: 'New in 12.1.6',
+            news: [
+              { k: 'Eight new tools, 25 in all', d: 'click, hover, drag, scroll, keys, text, focus, wait' },
+              { k: 'Real input, not simulated', d: 'your handlers run as for a person' },
+              { k: 'An input lane on the Timeline', d: 'every action, above what it caused' },
+              { k: 'A marker over the application', d: 'a pill naming what is happening' },
+              { k: 'No pretend success', d: 'an impossible action is refused, with the reason' },
+            ] },
+          { img: 'story/i02.png', t: 'That is your application, being clicked', d: 'Nothing was raised at the button. The action went in as a raw platform event through Avalonia’s own input manager — the same door the operating system uses — so hit testing found the target, the handler ran because it was reached, and the deploy is really running. The violet pill is the tool saying so: an application moving on its own is a bug hunt, one that names its visitor is a session.' },
+          { img: 'story/i03.png', t: 'The click, above everything it caused', d: 'Focus, pressed, the status text going from idle to deploying 65% with MainWindow.OnDeployClick behind it, then Button.Click itself — all under the one row that explains them. Typed text and a key chord land in the same lane a moment later. This is your feed, not only the agent’s: when something else is driving your application, its actions have to appear above their consequences.' },
+          { img: 'story/i04.png', t: 'It waited for you to allow it', d: 'The server is one switch and input is another. Ticking Allow input is what turns seven of the twenty-five tools on; it takes effect on the next call rather than the next run, so un-ticking it stops an agent mid-session, and the line underneath stops saying read-only the moment it is ticked. A click runs your handlers, and your handlers can do whatever your application can do.' },
+          { img: 'story/i05.png', t: 'Which tools can act, and what has been asked of them', d: 'The tab marks the acting tools with ⌁ in the colour the Timeline uses, and counts the calls made to each one. Sixteen only look; two freeze transient state; seven act. The counters are how you find out afterwards exactly what an agent did — and the status line says input is allowed for as long as it is.' },
+          { t: 'The reply is the application’s verdict', d: 'An action that reported only “clicked” would be worth little. Each one says what the application did about it: whether anything handled it, where focus went, what opened or closed, what text changed. And wait_for is how an agent knows the application has finished reacting instead of sleeping and hoping.',
+            code: [
+              '$ click  {"elementId": 2}',
+              '  Clicked #2 Button #DeployButton at (871, 398). The application handled it.',
+              '  Focus moved from nothing to #2 Button #DeployButton.',
+              '',
+              '$ wait_for  {"query": "deploying"}',
+              '  There after 1 ms.',
+              '  #9 Run #StatusRun  "deploying 65%"',
+            ] },
+          { t: 'It refuses rather than pretending', d: 'The dangerous reply is a cheerful “clicked” for a click that did nothing. A target that is covered, disabled, invisible, zero-sized or not a rectangle at all is refused in its own words — and so is input that would quietly mean something else.',
+            code: [
+              '$ click  {"elementId": 2}',
+              '  #2 Button #DeployButton is at (871, 396), but what is on top there is',
+              '  #14 LightDismissOverlayLayer. A click would go to that, not to this.',
+              '',
+              '$ type_text  {"elementId": 10, "text": "a\\nb"}',
+              '  That string contains a newline or a tab. Those are keys, not text: type',
+              '  the line, then press_key Enter (or Tab).',
+            ] },
+        ] },
       { key: 'a11y', h: '🩻 The other tree', sub: 'The tree a screen reader walks, an audit that reads it for you, and every keyboard stop numbered over the running application.',
         steps: [
           { t: '🩻 The other tree',
@@ -62,7 +100,7 @@ en: {
             d2: 'Now one reproduction records the stack behind every change, slow frames land beside what the app was doing, and a coding agent can call the same engines the tabs use — read-only, over loopback.',
             newsTitle: 'New in 12.1.4',
             news: [
-              { k: 'An MCP endpoint', d: 'read-only, on loopback — seventeen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots' },
+              { k: 'An MCP endpoint', d: 'on loopback, read-only until you say otherwise — twenty-five tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots, and clicking and typing if you allow it' },
               { k: 'A tab and a settings page', d: 'turn the endpoint on, set its port, and see what an agent has asked for so far' },
               { k: 'One line to register it', d: 'the ⚙ card hands you the claude mcp add or codex mcp add command, carrying this application’s own name and port' },
               { k: 'Cause capture', d: 'the call stack behind every recorded change, so one reproduction answers "who changed this" for every hit at once' },
@@ -89,7 +127,7 @@ en: {
               '$ get_element  {"elementId": 2}',
               '  declared at: MainWindow.axaml:309',
             ] },
-          { t: 'The answers nothing else can give it', d: 'Who changed this, and what a hover looks like to something with no pointer. Fifteen of the seventeen tools only read; freezing popups and forcing states is the exception — it takes a second opt-in, carries a deadline that puts everything back, and shows a banner in the app while it lasts.',
+          { t: 'The answers nothing else can give it', d: 'Who changed this, and what a hover looks like to something with no pointer. Sixteen of the twenty-five tools only read. Freezing popups takes a second opt-in and puts everything back; clicking and typing take one of their own, and every injected action is marked on the timeline.',
             code: [
               '$ get_timeline  {"elementId": 11}',
               '  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11',
@@ -256,7 +294,7 @@ en: {
       { i: '⏱', t: 'Timeline', d: 'Routed events, property changes, VM notifies and focus changes in one chronological feed, scoped to a watchlist you control. Cause links connect a notify to the bound update it produced; every entry opens full details.' },
     { i: '🕰', t: 'Cause capture', d: 'Every recorded change carries the call stack that caused it, trimmed to your own frames. Reproduce once and read all the culprits in order, each frame linking to its source — no breakpoint per hit. Break next escalates to the debugger for exactly one change.' },
     { i: '📈', t: 'Perf lane', d: 'Slow frames and layout passes filed into the same feed as everything else, so a stall is readable next to what the app was doing. Slow is measured against the budget your display actually keeps, never an average.' },
-    { i: '🤖', t: 'Let an agent look (MCP)', d: 'A read-only Model Context Protocol endpoint on loopback, off unless asked for: seventeen tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots of the running application.' },
+    { i: '🤖', t: 'Let an agent look (MCP)', d: 'A Model Context Protocol endpoint on loopback, off unless asked for and read-only until you say otherwise: twenty-five tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots of the running application — and, behind a switch of its own, the ability to click and type in it.' },
       { i: '📜', t: 'Log viewer', d: 'Binding errors, layout and property-system messages — even without LogToTrace(). Filtered, batched and feedback-loop safe.' },
       { i: '📊', t: 'Renderer overlays', d: 'FPS meter, layout/render time graphs and dirty-rect flashing on the inspected window, one toggle away.' },
       { i: '🕵️', t: 'Source of every value', d: 'See whether a value is default, set by hand, styled, templated or inherited — and jump to the ancestor or the exact XAML that set it.' },
@@ -273,7 +311,7 @@ en: {
     groups: [
       { t: 'Getting started', ids: ['install', 'quickstart'] },
       { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
-      { t: 'Agents (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpcases'] },
+      { t: 'Agents (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: 'Reference', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -321,7 +359,7 @@ en: {
 <h3>Step 2. Tame the hover-inspect chord</h3>
 <p>Ctrl+Shift hover is the classic inspect gesture — and some applications use exactly that chord themselves. Switch it to <b>Alt</b>, or off entirely; the Ctrl+K entry for picking always shows the current chord.</p>
 <h3>Step 3. Open the port for an agent</h3>
-<p>The <b>MCP</b> page carries the endpoint: a switch that opens and closes it there and then, the port, whether an agent may freeze popups — and the one line that registers this application with Claude Code or Codex, with a Copy button. Turning it off here outranks <code>AVA_DEVTOOLS_MCP</code>: a port you closed stays closed on the next run. See <a href="#mcpconnect">Connect it to Claude Code or Codex</a>.</p>` },
+<p>The <b>MCP</b> page carries the endpoint: a switch that opens and closes it there and then, the port, the two permissions — whether an agent may freeze popups, and whether it may <a href="#mcpinput">click and type</a> — and the one line that registers this application with Claude Code or Codex, with a Copy button. Turning it off here outranks <code>AVA_DEVTOOLS_MCP</code>: a port you closed stays closed on the next run. See <a href="#mcpconnect">Connect it to Claude Code or Codex</a>.</p>` },
       { id: 'problems', t: 'Problems pane', html: `<p>A binding fails silently and the evidence is scattered: an empty control here, a log line there. The <b>Problems</b> tab collects what is broken in one list — binding failures first of all — errors before warnings, each with a plain-language reason.</p>
 <h3>Step 1. Problems arrive on their own</h3>
 <p>Binding errors and error-level app logs land in the list the moment they are logged; repeats collapse into one row with a ×N counter instead of flooding the list.</p>
@@ -587,9 +625,10 @@ en: {
 <h3>3D</h3><ul><li>Exploded 3D view textured from a live snapshot. Drag to orbit, wheel to zoom, click a card to select in the tree.</li>
 <li>Granularity: <em>Visual · merged</em> (wrappers collapsed), <em>Visual · all</em>, or <em>Logical</em>. "Reset view" restores the camera.</li></ul>
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="The exploded 3D view of the window's visual layers"><span class="cap">141 layers of the live window, orbitable — click any card to select it in the tree.</span></div>
-<h3>Timeline</h3><ul><li>Events, property changes, VM notifies, focus changes and binding errors in one feed, scoped to a watchlist — with cause links, a binding walk-through and the instance inspector. See <a href="#timeline">Timeline</a>.</li></ul>
+<h3>Timeline</h3><ul><li>Events, property changes, VM notifies, focus changes and binding errors in one feed, scoped to a watchlist — with cause links, a binding walk-through and the instance inspector. See <a href="#timeline">Timeline</a>.</li>
+<li>The violet <b>⌁ Input</b> lane carries what an agent did to the application — every click, key and drag it injected, above the changes they caused. See <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li></ul>
 <h3>Problems</h3><ul><li>Only what is broken — binding failures, error logs — errors before warnings, each with a plain reason, a reveal-in-tree link and the full binding walk. Scan now catches bindings that failed before DevTools opened. See <a href="#problems">Problems pane</a>.</li></ul>
-<h3>MCP Server</h3><ul><li>There while the endpoint is listening, gone when it is not: what is listening, on which port and under which name, the one line that registers this application with your agent, and every tool with the number of calls an agent has made to it — failures counted apart. The switch, the port and the freeze permission are on the ⚙ card's MCP page. See <a href="#mcp">Let an agent look</a>.</li></ul>
+<h3>MCP Server</h3><ul><li>There while the endpoint is listening, gone when it is not: what is listening, on which port and under which name, the one line that registers this application with your agent, and every tool with the number of calls an agent has made to it — failures counted apart. The tools that can act on the application are marked <b>⌁</b> in that list, so what an agent could have done to it is readable without knowing the names by heart. The switch, the port and the two permissions are on the ⚙ card's MCP page. See <a href="#mcp">Let an agent look</a>.</li></ul>
 <h3>Logs</h3><ul><li>Live Avalonia logger output with Pause, level, area and text filters. Captures at Warning by default. Entries produced by the DevTools UI itself are dropped and appends are batched — verbose logging can't freeze the tool.</li>
 <li><code>LogCapture.Publish</code> feeds the pane the application's own events — see <a href="#applogs">App log feed</a>.</li></ul>` },
       { id: 'capture', t: 'Screenshots & bug reports', html: `<p>"Can you send me a screenshot and the XAML path?" is one click here — the element, its bounds and the properties that differ from defaults travel together with the picture.</p>
@@ -614,7 +653,7 @@ en: {
 <p>An IDE that is already open receives the file in its window — a second instance is never started. Rider's and VS Code's own goto commands route the file to the window whose project contains it, so with project A and project B open side by side, a link from the app you are debugging lands in the right one. Visual Studio runs one process per solution — DevTools asks each running instance which solution contains the file and routes there, preferring the instance that is debugging your app. And a link clicked twice while an IDE is still starting opens one instance, not two.</p>
 <h3>Where locations come from</h3>
 <p>XAML locations come from the compiler's <code>AvaloniaXamlCreateSourceInfo</code>, which Avalonia 12 enables automatically in Debug builds. C# types — view models, event handlers — are located by searching your solution tree; set <code>AVA_DEVTOOLS_SRC_ROOT</code> when auto-detection needs help. Compiled Fluent theme styles have no source on disk — the popover shows reflection details and a "View theme XAML on GitHub" link matched to your Avalonia version.</p>` },
-      { id: 'mcp', t: 'Let an agent look (MCP)', html: `<p>The interesting application is the one that is <em>already running</em>, with the state that went wrong still on screen. DevTools can hand that application to a coding agent: a <b>read-only</b> <a href="https://modelcontextprotocol.io">Model Context Protocol</a> endpoint, in-process, on loopback, off unless you ask for it.</p>
+      { id: 'mcp', t: 'Let an agent look (MCP)', html: `<p>The interesting application is the one that is <em>already running</em>, with the state that went wrong still on screen. DevTools can hand that application to a coding agent: a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> endpoint, in-process, on loopback, off unless you ask for it — <b>read-only</b> as it stands, with clicking and typing behind <a href="#mcpinput">a second switch</a> you turn on yourself.</p>
 <p>In-process is the whole point. An out-of-process inspector can only ask the application to describe itself over a protocol; this one <em>is</em> the application, so the same call that lists a control can render it, read the priority that set its width and quote the binding error it logged — with no serialization boundary in between. Every tab in this documentation is a view over an engine that never needed a window, and the agent calls those engines directly. It reads the same answers you do.</p>
 <h3>Step 1. Turn it on</h3>
 <p>Open DevTools, open the ⚙ card and go to its <b>MCP</b> page: one switch starts and stops the endpoint, a box beside it sets the port. While it is on, an <b>MCP Server</b> tab is there, and the line at the top of it says what is listening — <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>. The choice is saved for this machine and applies on the next run.</p>
@@ -641,8 +680,9 @@ en: {
 <li><b>A busy application says so.</b> If the UI thread does not answer within a minute — a modal dialog is up, or a debugger has it stopped — the call comes back saying exactly that, instead of leaving the agent on a dead socket.</li></ul>
 <h3>What it may and may not do</h3>
 <ul><li><b>Loopback only</b>, and not as a configuration knob: the day this binds to 0.0.0.0 is the day a debugging aid becomes a way to read someone's screen from the next desk. The <code>Origin</code> header is checked too, so a page in a browser cannot reach it through DNS rebinding.</li>
-<li><b>Fifteen of the seventeen tools are pure reads.</b> No input is injected, no application property is written, no handler is run. That is the entire safety story, and the reason there is no confirmation flow: there is nothing to confirm.</li>
-<li><b>Two tools change something, and need a second opt-in.</b> <code>hold</code> and <code>pin_class</code> freeze transient UI and force pseudo-classes — the only way something with no pointer can look at a hover state. They are off unless the <b>Allow freezing</b> checkbox on the ⚙ card's MCP page — <code>McpAllowHold</code>, or <code>AVA_DEVTOOLS_MCP_HOLD=1</code> says otherwise, they change transient UI state and nothing else, every hold carries a deadline that releases it, the application shows a banner while one lasts, and <span class="kbd">Esc</span> in the application releases it too.</li>
+<li><b>Sixteen of the twenty-five tools are pure reads.</b> They inject no input, write no application property and run no handler. Nothing about them needs a confirmation flow, because there is nothing to confirm.</li>
+<li><b>Two tools freeze transient state, and need a second opt-in.</b> <code>hold</code> and <code>pin_class</code> hold popups open and force pseudo-classes — the only way something with no pointer can look at a hover state. They are off unless the <b>Allow freezing</b> checkbox on the ⚙ card's MCP page — <code>McpAllowHold</code>, or <code>AVA_DEVTOOLS_MCP_HOLD=1</code> — says otherwise, they change transient UI state and nothing else, every hold carries a deadline that releases it, the application shows a banner while one lasts, and <span class="kbd">Esc</span> in the application releases it too.</li>
+<li><b>Seven tools act on the application, behind a switch of their own.</b> <code>click</code>, <code>hover</code>, <code>drag</code>, <code>scroll</code>, <code>press_key</code>, <code>type_text</code> and <code>focus_element</code> run your handlers, which can do whatever your application can do — so they wait on their own permission, not on the freeze one. Off unless you say otherwise; see <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li>
 <li><b>It releases what it took.</b> An agent's hold auto-releases only what the agent engaged: press <span class="kbd">Shift</span>+<span class="kbd">F12</span> yourself afterwards and the deadline will not take your hold away.</li></ul>
 <p class="tip">Ship it Debug-only, like the rest of DevTools. The endpoint is off by default in every build, but an application that never attaches DevTools in Release cannot serve one by accident.</p>` },
       { id: 'mcpconnect', t: 'Connect it to Claude Code or Codex', html: `<p>The endpoint exists only while your application runs, so the order never changes: start the app, turn the server on, point the agent at it. The name it registers under is <code>&lt;assembly name&gt;-avadevtools</code> — that is what you will see in the client's own list.</p>
@@ -650,8 +690,8 @@ en: {
 <ol class="steps"><li>Run your app and press <span class="kbd">F12</span>.</li>
 <li>Open the ⚙ card's <b>MCP</b> page and tick <b>Serve MCP on loopback</b>.</li>
 <li>Copy the block under <em>Point your agent at it</em> — it already carries the right name and port.</li></ol>
-<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="The settings card MCP page: the switch, the port and the freeze permission, with the line below saying what is listening"><span class="cap">⚙ → MCP: everything you set, and nothing else — the switch, the port, the freeze permission, and a line saying what came of them.</span></div>
-<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="The MCP Server tab: what is listening, and every tool with the number of calls made to it"><span class="cap">The tab, which is there only while the endpoint is: seventeen tools, and what an agent has actually asked of each. A dash is a tool it has never touched; an amber number had failures in it.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="The settings card MCP page: the switch, the port and the two permissions, with the line below saying what is listening"><span class="cap">⚙ → MCP: everything you set, and nothing else — the switch, the port, the freeze and input permissions, and a line saying what came of them.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="The MCP Server tab: what is listening, and every tool with the number of calls made to it"><span class="cap">The tab, which is there only while the endpoint is: twenty-five tools, and what an agent has actually asked of each. A dash is a tool it has never touched; an amber number had failures in it; the ⌁ ones can act on the application.</span></div>
 <h3>Step 2a. Claude Code</h3>
 <pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
 <p>The scope decides who gets it. <code>--scope local</code> (the default) is this project, for you; <code>--scope project</code> writes a <code>.mcp.json</code> in the repository root so everyone working on the application gets the same entry; <code>--scope user</code> is every project on your machine. What it writes is the same JSON the tab shows:</p>
@@ -672,7 +712,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Two applications at once</h3>
 <p>Give the second one its own port (the <b>Port</b> box on the ⚙ card's MCP page, <code>McpPort</code>, or <code>AVA_DEVTOOLS_MCP_PORT</code>) and add it as a second entry. Their names differ already, so the agent's tool list stays readable.</p>
 <p class="tip">A client that started before your application usually shows no tools until it reconnects — <code>/mcp</code> in Claude Code, a new session in Codex. That is a reconnect, not a config problem.</p>` },
-      { id: 'mcptools', t: 'The seventeen tools', html: `<p>Seventeen tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
+      { id: 'mcptools', t: 'The twenty-five tools', html: `<p>Twenty-five tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
+<p>Sixteen only look. Two freeze transient state and wait on the freeze permission. Seven act on the application and wait on <a href="#mcpinput">the input permission</a> — they are the last table here.</p>
 <h3>Finding your way around</h3>
 <table>
 <tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
@@ -714,7 +755,89 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>hold</code></td><td>Freezes a window's transient UI so it can be examined: popups and tooltips stay open, hover styling stays pinned. Needs the hold opt-in; auto-releases.</td><td><code>elementId</code>, <code>stop</code>, <code>seconds</code> (120, max 900)</td></tr>
 <tr><td><code>pin_class</code></td><td>Forces a pseudo-class — <code>:pointerover</code>, <code>:pressed</code>, <code>:checked</code>, <code>:disabled</code> — so that state's styling can be read and screenshotted. Needs the hold opt-in.</td><td><code>elementId</code>, <code>pseudoClass</code>, <code>pin</code></td></tr>
 </table>
-<p>Transient UI is invisible to a tree dump taken a moment later, and an agent has no pointer to hold a menu open with. These three are how it looks at the part of the interface that only exists while someone is interacting with it.</p>` },
+<p>Transient UI is invisible to a tree dump taken a moment later, and an agent has no pointer to hold a menu open with. These three are how it looks at the part of the interface that only exists while someone is interacting with it.</p>
+<h3>Acting on it</h3>
+<p>These seven need the input opt-in, and each one goes in as real platform input — see <a href="#mcpinput">Input over MCP: click, type, drag</a> for what that means and what it refuses to do.</p>
+<table>
+<tr><th>Tool</th><th>Does</th><th>Arguments</th></tr>
+<tr><td><code>click</code></td><td>Clicks an element where a person would click it, and reports what the application did about it.</td><td><code>elementId</code>, <code>button</code>, <code>count</code>, <code>modifiers</code>, <code>x</code>, <code>y</code></td></tr>
+<tr><td><code>hover</code></td><td>Moves the pointer onto an element and leaves it there — the app's own hover handlers run, so a tooltip appears on its own delay.</td><td><code>elementId</code>, <code>x</code>, <code>y</code></td></tr>
+<tr><td><code>drag</code></td><td>Press, move, release — a slider thumb, a splitter, a reorderable row. Delivered with intermediate moves, because controls that track movement ignore a single jump.</td><td><code>elementId</code>, <code>toElementId</code>, <code>dx</code>, <code>dy</code>, <code>modifiers</code></td></tr>
+<tr><td><code>scroll</code></td><td>Turns the wheel over an element, and says whether the offset actually moved.</td><td><code>elementId</code>, <code>lines</code>, <code>horizontal</code>, <code>modifiers</code></td></tr>
+<tr><td><code>press_key</code></td><td>A key or a chord — Enter, Escape, Tab, Ctrl+A. Key bindings, access keys and tunnelled handlers all see it.</td><td><code>keys</code>, <code>elementId</code>, <code>repeat</code></td></tr>
+<tr><td><code>type_text</code></td><td>Types a string as text input, the same event an IME or a paste produces.</td><td><code>text</code>, <code>elementId</code></td></tr>
+<tr><td><code>focus_element</code></td><td>Gives keyboard focus without clicking — the way Tab would, without walking there.</td><td><code>elementId</code></td></tr>
+</table>
+<h3>Waiting for the result</h3>
+<table>
+<tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
+<tr><td><code>wait_for</code></td><td>Waits until something appears or disappears, then answers. Pure observation — no opt-in, and it changes nothing.</td><td><code>query</code>, <code>elementId</code>, <code>gone</code>, <code>timeoutMs</code> (5000, max 30000)</td></tr>
+</table>
+<p>A click that opens a dialog, starts a load or clears a list finishes some time after the call that caused it. <code>wait_for</code> is how that loop closes — polling <code>get_tree</code> in a loop is slower, costs more tokens and still cannot tell you <em>when</em> it arrived.</p>` },
+      { id: 'mcpinput', t: 'Input over MCP: click, type, drag', html: `<p>Reading answers <em>why is it that wide</em> and <em>what is broken</em>. It never answers <em>does the button work</em>. For that the button has to be pressed — so, behind a switch of its own, an agent can press it: seven tools that click, hover, drag, scroll, press keys, type text and move focus.</p>
+<h3>It is real input, not a shortcut</h3>
+<p>Nothing here raises an event at a control. Each action is built as a raw platform event and pushed through Avalonia's own input manager — the same door the macOS, X11 and Windows backends push through. Hit testing decides what is hit, the click count comes from real timestamps, pointer capture and pointer-over behave as they do for a person, and your handlers run because they were <em>reached</em>, not because they were called.</p>
+<p>That is the whole reason to trust the answer. An agent that raises <code>Click</code> on a button has proved nothing about whether a user could have clicked it — the button may be under a dialog, disabled, or three pixels tall. Going in through the front door means the framework, not the tool, decides what happens.</p>
+<h3>Turn it on separately</h3>
+<p>It is opted into apart from the server and apart from the freeze permission, because the failure modes differ in kind: a hold puts itself back, a click runs your code. Tick <b>Allow input (click, type, keys)</b> on the ⚙ card's MCP page — it takes effect on the next call, not the next run, so un-ticking it stops an agent mid-session. Or start that way:</p>
+<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span>, McpAllowInput = <span class="k">true</span> });</code></pre>
+<p>or run with <code>AVA_DEVTOOLS_MCP_INPUT=1</code>. The line it prints says which half is open:</p>
+<pre><code>MCP server MyApp-avadevtools (input allowed) listening on http://127.0.0.1:5199/</code></pre>
+<p>With it off, the acting tools are still listed — an agent should know what it could ask for — and each one answers by saying how to enable it. Everything that only looks keeps working.</p>
+<h3>The reply is the application's verdict</h3>
+<p>An action that reported only "clicked" would be worth little. Each one reports what the application did about it — whether anything handled it, where focus went, what opened or closed, what text changed, whether the scroll offset moved:</p>
+<pre><code><span class="k">click</span> {<span class="s">"elementId"</span>: 2}
+
+  Clicked #2 Button #DeployButton at (871, 398). The application handled it.
+  Focus moved from nothing to #2 Button #DeployButton.
+
+<span class="k">wait_for</span> {<span class="s">"query"</span>: <span class="s">"deploying"</span>}
+
+  There after 1 ms.
+  #9 Run #StatusRun  <span class="s">"deploying 65%"</span></code></pre>
+<p>"Nothing handled it" is an answer too, and a different one from "it did not arrive":</p>
+<pre><code><span class="k">press_key</span> {<span class="s">"keys"</span>: <span class="s">"Ctrl+A"</span>}
+
+  Pressed Ctrl+A, with focus on #10 TextBox #BuildFilter "orbit".
+  Nothing in the application handled it — the input was delivered and no
+  handler took it, which is a real answer: the control may have no handler
+  for this.</code></pre>
+<h3>It refuses rather than pretending</h3>
+<p>The dangerous reply is a cheerful "clicked" for a click that did nothing. Every case that cannot honestly happen is refused, in its own words, as an error:</p>
+<pre><code><span class="k">click</span> {<span class="s">"elementId"</span>: 2}
+
+  #2 Button #DeployButton is at (871, 396), but what is on top there is
+  #14 LightDismissOverlayLayer. A click would go to that, not to this.
+  Something is covering the element — a dialog, a flyout, an overlay.</code></pre>
+<p>The same for an element that is disabled, invisible, zero-sized, scrolled out of view, or not a rectangle at all:</p>
+<pre><code><span class="k">click</span> {<span class="s">"elementId"</span>: 9}
+
+  #9 Run #StatusRun is a text inline: it has no rectangle of its own to
+  click. The element that renders it is #4 TextBlock.</code></pre>
+<p>And input that would quietly mean something else is refused before it is sent — a newline is a key, not text, and typing it as text inserts a control character that only some controls accept:</p>
+<pre><code><span class="k">type_text</span> {<span class="s">"elementId"</span>: 10, <span class="s">"text"</span>: <span class="s">"a\\nb"</span>}
+
+  That string contains a newline or a tab. Those are keys, not text: type
+  the line, then press_key Enter (or Tab).</code></pre>
+<h3>Everything it did is on the Timeline</h3>
+<p>Injected input goes into a lane of its own, <b>⌁ Input</b>, with the point it landed on and the element hit testing actually found — which is usually a child of the one that was named, and worth seeing:</p>
+<pre><code><span class="k">get_timeline</span> {<span class="s">"lanes"</span>: [<span class="s">"input"</span>]}
+
+  1  15:02:54.246 input  ⌁ click #2 Button #DeployButton
+                           agent click at (871, 398) · hit #3 TextBlock "Deploy to production"
+  3  15:03:11.706 input  ⌁ type "orbit"
+                           agent typed 5 character(s) into #10 TextBox #BuildFilter
+  4  15:03:11.732 input  ⌁ key Ctrl+A
+                           agent pressed Ctrl+A · focus was #10 TextBox #BuildFilter
+ 14  15:04:04.093 input  ⌁ drag #17 Slider #Throttle
+                           agent drag at (485, 200) → (565, 200) · hit #24 Border #TrackBackground</code></pre>
+<p>The same rows appear in the <a href="#timeline">Timeline tab</a> in front of you, not only in the agent's own capture. That is the point: when an agent is working on the application you are watching, its click has to appear <em>above</em> the property changes it caused, or events seem to come from nowhere. The lane has its own toggle, so it is also easy to take back out.</p>
+<p>While an action happens, a violet marker sits over the application saying what was done to what. It is not hit-testable, it fades after a couple of seconds, and it is hidden while a screenshot renders — an agent looking at your window should photograph your application, not our overlay.</p>
+<h3>What it will not touch</h3>
+<ul><li><b>The DevTools window is never a target.</b> Asked to click something inside it, the tool says so and does nothing. A tool that can drive its own controls can turn its own switches off.</li>
+<li><b>The operating system's pointer does not move.</b> Events are delivered into the application, not onto the desktop — so anything the OS owns rather than your application (a native file dialog, the macOS menu bar, dragging to another application) is outside what this reaches.</li>
+<li><b>Nothing is retried and nothing is guessed.</b> One call is one action; if it could not happen it is reported, not approximated with something adjacent.</li></ul>
+<p class="tip"><b>Tip.</b> <code>hover</code> and <code>pin_class</code> are not the same tool. <code>pin_class</code> forces the styling so a hover state can be read with nothing happening; <code>hover</code> is the real pointer, so the control's own handlers run and a tooltip appears on its own delay. Use the first to look, the second to test.</p>` },
       { id: 'mcpcases', t: 'MCP: five real cases', html: `<p>Four sessions against the sample application, verbatim. Every reply below is what the tool actually printed — the point is not that the tools exist, it is how few calls a real question takes.</p>
 <h3>Case 1. The approver line is empty</h3>
 <p>A release card renders <code>status idle · window Fri 16:00 UTC · approver</code> — and then nothing. No exception, no red, nothing in the log, because a binding that resolves to nothing is not an error the application ever hears about.</p>
@@ -818,8 +941,9 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
     McpServer            = <span class="k">true</span>,                               <span class="c">// serve the read-only MCP endpoint — default: false</span>
     McpPort              = 5171,                               <span class="c">// on 127.0.0.1 only — default: 5171</span>
     McpAllowHold         = <span class="k">true</span>,                               <span class="c">// let an agent freeze popups / pin :pointerover — default: false</span>
+    McpAllowInput        = <span class="k">true</span>,                               <span class="c">// let an agent click, type and drag — default: false</span>
 });</code></pre>
-<p>The three <code>Mcp*</code> options are described in <a href="#mcp">Let an agent look (MCP)</a>. Everything else is off or absent unless asked for, and the settings a user saves in the <a href="#settings">⚙ card</a> win over what the code passes here.</p>` },
+<p>The four <code>Mcp*</code> options are described in <a href="#mcp">Let an agent look (MCP)</a> and <a href="#mcpinput">Input over MCP: click, type, drag</a>. Everything else is off or absent unless asked for, and the settings a user saves in the <a href="#settings">⚙ card</a> win over what the code passes here.</p>` },
       { id: 'env', t: 'Environment variables', html: `<table>
 <tr><th>Variable</th><th>Meaning</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>Open DevTools automatically when a window loads.</td></tr>
@@ -830,15 +954,17 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_UPDATE_CHECK=0</code></td><td>Disable the once-a-day new-version check.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP=1</code></td><td>Serve the read-only <a href="#mcp">MCP endpoint</a> on 127.0.0.1.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>Port for it. Default 5171.</td></tr>
-<tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Also allow <code>hold</code> and <code>pin_class</code> — the only two tools that change anything.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Also allow <code>hold</code> and <code>pin_class</code> — the two tools that freeze transient state.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td><td>Also allow the seven tools that <a href="#mcpinput">act on the application</a> — click, hover, drag, scroll, keys, typed text, focus.</td></tr>
 </table>
-<p class="tip">The three <code>MCP</code> variables are a starting state, not the last word: the switches on the <a href="#settings">⚙ card</a>'s MCP page are saved per machine and win over them. A port you closed in the tool stays closed on the next run, whatever the launcher exports.</p>` },
+<p class="tip">The four <code>MCP</code> variables are a starting state, not the last word: the switches on the <a href="#settings">⚙ card</a>'s MCP page are saved per machine and win over them. A port you closed in the tool stays closed on the next run, whatever the launcher exports.</p>` },
       { id: 'limits', t: 'Limitations', html: `<ul>
 <li>Desktop only — secondary windows are not supported on mobile/browser targets.</li>
 <li>DevTools brings its own theme — the application's theme, or its absence, does not matter.</li>
 <li>With <code>LiveTree = false</code> the tree is a snapshot again — use ↻ Refresh after structural changes (property values update live either way).</li>
 <li>Screenshots and bug reports double-scale the <em>contents</em> of box-shadowed borders on HiDPI displays — a render-layer quirk of Avalonia 12. Capturing the element rather than the whole window usually sidesteps it.</li>
-<li>The MCP endpoint binds to 127.0.0.1 only. That is deliberate and not configurable.</li></ul>` },
+<li>The MCP endpoint binds to 127.0.0.1 only. That is deliberate and not configurable.</li>
+<li>Injected input reaches your application, not the desktop: the OS pointer never moves, so native file dialogs, the macOS menu bar and drag-and-drop to another application are out of its reach. See <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li></ul>` },
       { id: 'feedback', t: 'Feedback', html: `<p>The <b>Feedback</b> button in the toolbar's top-right corner opens the AvaDevTools issue tracker — report a bug or ask for a feature in one click. The same action lives in <span class="kbd">Ctrl</span>+<span class="kbd">K</span> as "Send feedback".</p>
 <p>Prefer chat? The <a href="https://t.me/avadevtools">Telegram channel</a> takes questions and quick help.</p>` },
       { id: 'updates', t: 'Update notifications', html: `<p>The toolbar always shows the version you are running, dimmed, next to <b>Feedback</b>. New AvaDevTools versions bring new panes and fixes, but a NuGet dependency never announces them on its own — so when a newer version is published, that same label turns blue and grows an <b>↑</b>.</p>
@@ -866,13 +992,51 @@ uk: {
     get: 'Почати', stories: 'Подивитися в дії', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.1.5', docs: 'Документація →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.1.6', docs: 'Документація →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   stories: {
-    h: 'Історії', wn: 'a11y',
+    h: 'Історії', wn: 'input',
     lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
     list: [
+      { key: 'input', h: '⌁ Ввід через MCP', sub: 'Агент може клікати, вводити текст і перетягувати у вашому застосунку — справжній ввід платформи, за власним перемикачем, і все зроблене видно на Timeline.',
+        steps: [
+          { t: '⌁ Ввід через MCP',
+            d: 'Агент міг прочитати будь-який наслідок дії — і не міг виконати жодної. Він бачив, що флайаут відкритий, але не міг його відкрити; читав повідомлення про помилку валідації, але не міг надрукувати значення, яке її спричиняє.',
+            d2: 'Тепер він може діяти: сім інструментів, які клікають, наводять, тягнуть, крутять колесо, тиснуть клавіші, друкують текст і переносять фокус — справжній ввід платформи, за власним дозволом, і кожна дія лягає і у ваш Timeline, і в його власний.',
+            newsTitle: 'Нове у 12.1.6',
+            news: [
+              { k: 'Вісім нових інструментів, 25 разом', d: 'клік, наведення, перетягування, прокрутка, клавіші, текст, фокус, очікування' },
+              { k: 'Справжній ввід, а не імітація', d: 'ваші обробники працюють як для людини' },
+              { k: 'Доріжка вводу на Timeline', d: 'кожна дія — над тим, що вона спричинила' },
+              { k: 'Маркер над застосунком', d: 'плашка з назвою того, що відбувається' },
+              { k: 'Жодного вдаваного успіху', d: 'неможливу дію відхиляють, назвавши причину' },
+            ] },
+          { img: 'story/i02.png', t: 'Це ваш застосунок, і його клікають', d: 'Жодної події не було підкинуто кнопці. Дія пішла сирою подією платформи через власний input manager Avalonia — тими самими дверима, якими заходить операційна система, — тож ціль знайшов hit testing, обробник спрацював тому, що до нього дійшли, і деплой справді пішов. Фіолетова пігулка — це інструмент, який каже про це вголос: застосунок, що рухається сам, — це полювання на баг, а той, що називає гостя, — це сеанс.' },
+          { img: 'story/i03.png', t: 'Клік — над усім, що він спричинив', d: 'Фокус, натиснення, текст статусу з idle у deploying 65% з MainWindow.OnDeployClick позаду, далі сам Button.Click — усе під одним рядком, який їх пояснює. Набраний текст і акорд клавіш лягають у ту саму доріжку миттю пізніше. Це ваша стрічка, а не лише агентова: коли застосунком керує щось іще, його дії мають стояти над своїми наслідками.' },
+          { img: 'story/i04.png', t: 'Він чекав, поки ви дозволите', d: 'Сервер — один перемикач, ввід — інший. Галочка «Allow input» вмикає сім із двадцяти п’яти інструментів; вона діє з наступного виклику, а не з наступного запуску, тож знята галочка зупиняє агента посеред сеансу, і рядок під нею перестає казати read-only тієї ж миті. Клік запускає ваші обробники, а вони можуть усе, що може ваш застосунок.' },
+          { img: 'story/i05.png', t: 'Які інструменти діють — і що в них уже просили', d: 'Вкладка позначає діючі інструменти знаком ⌁ у тому ж кольорі, що й Timeline, і рахує виклики до кожного. Шістнадцять лише дивляться; два заморожують тимчасовий стан; сім діють. Лічильники — це те, чим ви потім дізнаєтеся, що саме агент зробив, а рядок статусу каже, що ввід дозволено, доки він дозволений.' },
+          { t: 'Відповідь — це вердикт застосунку', d: 'Дія, яка звітувала б лише «клікнув», мало чого варта. Кожна каже, що застосунок із цим зробив: чи хтось це обробив, куди пішов фокус, що відкрилося чи закрилося, який текст змінився. А wait_for — це те, чим агент дізнається, що застосунок уже відреагував, замість спати й сподіватися.',
+            code: [
+              '$ click  {"elementId": 2}',
+              '  Clicked #2 Button #DeployButton at (871, 398). The application handled it.',
+              '  Focus moved from nothing to #2 Button #DeployButton.',
+              '',
+              '$ wait_for  {"query": "deploying"}',
+              '  There after 1 ms.',
+              '  #9 Run #StatusRun  "deploying 65%"',
+            ] },
+          { t: 'Він відмовляє, а не вдає', d: 'Небезпечна відповідь — бадьоре «клікнув» на клік, який нічого не зробив. Ціль перекрита, вимкнена, невидима, нульового розміру або взагалі не прямокутник — відмова своїми словами. Так само і ввід, який тихцем означав би щось інше.',
+            code: [
+              '$ click  {"elementId": 2}',
+              '  #2 Button #DeployButton is at (871, 396), but what is on top there is',
+              '  #14 LightDismissOverlayLayer. A click would go to that, not to this.',
+              '',
+              '$ type_text  {"elementId": 10, "text": "a\\nb"}',
+              '  That string contains a newline or a tab. Those are keys, not text: type',
+              '  the line, then press_key Enter (or Tab).',
+            ] },
+        ] },
       { key: 'a11y', h: '🩻 Інше дерево', sub: 'Дерево, яким ходить скрінрідер, аудит, що читає його за вас, і кожна клавіатурна зупинка, пронумерована просто над застосунком.',
         steps: [
           { t: '🩻 Інше дерево',
@@ -916,7 +1080,7 @@ uk: {
             d2: 'Тепер одне відтворення записує стек за кожною зміною, повільні кадри лягають поруч із тим, що робив застосунок, а кодовий агент може викликати ті самі рушії, якими користуються вкладки — лише на читання, через loopback.',
             newsTitle: 'Нове у 12.1.4',
             news: [
-              { k: 'MCP-ендпойнт', d: 'лише для читання, на loopback — сімнадцять інструментів віддають агенту дерево, властивості, стилі, лейаут, ресурси, проблеми, таймлайн, логи та знімки' },
+              { k: 'MCP-ендпойнт', d: 'лише для читання, на loopback — двадцять п’ять інструментів віддають агенту дерево, властивості, стилі, лейаут, ресурси, проблеми, таймлайн, логи та знімки, а з вашого дозволу — ще й кліки й друкування' },
               { k: 'Вкладка й сторінка налаштувань', d: 'увімкнути ендпойнт, задати порт і побачити, що агент уже запитував' },
               { k: 'Один рядок, щоб зареєструвати', d: 'картка ⚙ дає команду claude mcp add чи codex mcp add — уже з іменем і портом цього застосунку' },
               { k: 'Захоплення причини', d: 'стек викликів за кожною записаною зміною, тож одне відтворення відповідає «хто це змінив» одразу для всіх влучань' },
@@ -943,7 +1107,7 @@ uk: {
               '$ get_element  {"elementId": 2}',
               '  declared at: MainWindow.axaml:309',
             ] },
-          { t: 'Відповіді, яких більше ніхто не дасть', d: 'Хто це змінив — і як виглядає hover для того, хто не має вказівника. П’ятнадцять із сімнадцяти інструментів лише читають; замороження попапів і примусові стани — виняток: вони вимагають окремого дозволу, мають дедлайн, який все повертає, і показують банер у застосунку, поки тривають.',
+          { t: 'Відповіді, яких більше ніхто не дасть', d: 'Хто це змінив — і як виглядає hover для того, хто не має вказівника. Шістнадцять із двадцяти п’яти інструментів лише читають. Замороження попапів вимагає окремого дозволу і все повертає; кліки й друкування — власного, і кожну інжектовану дію позначено на таймлайні.',
             code: [
               '$ get_timeline  {"elementId": 11}',
               '  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11',
@@ -1110,7 +1274,7 @@ uk: {
       { i: '⏱', t: 'Таймлайн', d: 'Routed-події, зміни властивостей, сповіщення VM і зміни фокуса в одній хронологічній стрічці за вашим списком спостереження. Причинні зв’язки з’єднують сповіщення з оновленням від біндінга; кожен запис відкриває повні деталі.' },
     { i: '🕰', t: 'Захоплення причини', d: 'Кожна записана зміна несе стек викликів, що її спричинив, обрізаний до ваших власних кадрів. Відтворіть один раз і прочитайте всіх винуватців по черзі, кожен кадр веде до джерела — без брейкпойнта на кожне влучання. Break next ескалює до дебагера рівно на одну зміну.' },
     { i: '📈', t: 'Смуга Perf', d: 'Повільні кадри й проходи layout потрапляють у ту саму стрічку, що й усе інше, тож затримку видно поруч із тим, що робив застосунок. Повільне міряється проти бюджету, який ваш дисплей насправді витримує, а не проти середнього.' },
-    { i: '🤖', t: 'Дати агентові подивитись (MCP)', d: 'Ендпойнт Model Context Protocol лише для читання на локальному інтерфейсі, вимкнений, доки не попросять: сімнадцять інструментів дають агентові дерево, властивості, стилі, layout, ресурси, проблеми, таймлайн, логи і скріншоти запущеного застосунку.' },
+    { i: '🤖', t: 'Дати агентові подивитись (MCP)', d: 'Ендпойнт Model Context Protocol на локальному інтерфейсі, вимкнений, доки не попросять, і лише для читання, доки ви не скажете інакше: двадцять п’ять інструментів дають агентові дерево, властивості, стилі, layout, ресурси, проблеми, таймлайн, логи і скріншоти запущеного застосунку — а за окремим перемикачем ще й змогу клікати та друкувати в ньому.' },
       { i: '📜', t: 'Перегляд логів', d: 'Помилки біндінгів, layout і система властивостей — навіть без LogToTrace(). З фільтрами, батчингом і захистом від зациклення.' },
       { i: '📊', t: 'Оверлеї рендерера', d: 'Лічильник FPS, графіки часу layout/render та підсвічування dirty-rect — одним перемикачем.' },
       { i: '🕵️', t: 'Джерело кожного значення', d: 'Одразу видно: значення типове, задане вручну, зі стилю, шаблону чи успадковане — з переходом до предка або точного місця в XAML.' },
@@ -1127,7 +1291,7 @@ uk: {
     groups: [
       { t: 'Початок роботи', ids: ['install', 'quickstart'] },
       { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
-      { t: 'Агенти (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpcases'] },
+      { t: 'Агенти (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: 'Довідник', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -1173,7 +1337,7 @@ uk: {
 <li>Натисніть нову комбінацію — вона зберігається в момент натискання. <span class="kbd">Esc</span> скасовує; × повертає типове.</li></ol>
 <div class="shot"><img src="assets/img/docs/settings-card.png" alt="Картка налаштувань із полями захоплення жестів"><span class="cap">Картка: жести, hover-inspect, зворотний відлік hold, stay-on-top, живе дерево, перевірка оновлень.</span></div>
 <h3>Крок 3. Відкрийте порт для агента</h3>
-<p>Сторінка <b>MCP</b> тримає ендпойнт: перемикач, що відкриває й закриває його тут-таки, порт, дозвіл агенту заморожувати попапи — і той єдиний рядок, який реєструє цей застосунок у Claude Code чи Codex, із кнопкою Copy. Вимкнення тут має перевагу над <code>AVA_DEVTOOLS_MCP</code>: закритий порт лишиться закритим і наступного запуску. Див. <a href="#mcpconnect">Під’єднати до Claude Code чи Codex</a>.</p>
+<p>Сторінка <b>MCP</b> тримає ендпойнт: перемикач, що відкриває й закриває його тут-таки, порт, два дозволи — чи можна агентові заморожувати попапи і чи можна йому <a href="#mcpinput">клікати й друкувати</a> — і той єдиний рядок, який реєструє цей застосунок у Claude Code чи Codex, із кнопкою Copy. Вимкнення тут має перевагу над <code>AVA_DEVTOOLS_MCP</code>: закритий порт лишиться закритим і наступного запуску. Див. <a href="#mcpconnect">Під’єднати до Claude Code чи Codex</a>.</p>
 <h3>Крок 2. Приборкайте hover-inspect</h3>
 <p>Ctrl+Shift при наведенні — класичний жест інспекції, а деякі застосунки використовують саме цю комбінацію. Перемкніть її на <b>Alt</b> або вимкніть зовсім; пункт вибору елемента в Ctrl+K завжди показує поточну комбінацію.</p>` },
       { id: 'problems', t: 'Панель Problems', html: `<p>Біндінг падає мовчки, а докази розкидані: тут порожній контрол, там рядок у логу. Вкладка <b>Problems</b> збирає все зламане в один список — насамперед помилки біндінгів — помилки перед попередженнями, кожна зі зрозумілою причиною.</p>
@@ -1441,9 +1605,10 @@ uk: {
 <h3>3D</h3><ul><li>3D-вигляд шарами з текстурами з живого знімка. Тягніть для обертання, колесо — масштаб, клік — вибір у дереві.</li>
 <li>Деталізація: <em>Visual · merged</em> (обгортки згорнуто), <em>Visual · all</em> або <em>Logical</em>. «Reset view» повертає камеру.</li></ul>
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="Пошаровий 3D-вигляд візуальних шарів вікна"><span class="cap">141 шар живого вікна, з обертанням — клік по будь-якій картці вибирає її в дереві.</span></div>
-<h3>Timeline</h3><ul><li>Події, зміни властивостей, сповіщення VM, зміни фокуса й помилки біндінгів в одній стрічці за вашим списком спостереження — з причинними зв’язками, розбором біндінгів та інспектором інстансів. Див. <a href="#timeline">Таймлайн</a>.</li></ul>
+<h3>Timeline</h3><ul><li>Події, зміни властивостей, сповіщення VM, зміни фокуса й помилки біндінгів в одній стрічці за вашим списком спостереження — з причинними зв’язками, розбором біндінгів та інспектором інстансів. Див. <a href="#timeline">Таймлайн</a>.</li>
+<li>Фіолетова смуга <b>⌁ Input</b> несе те, що агент зробив із застосунком — кожен клік, клавішу й драг, які він інжектував, над змінами, що з них вийшли. Див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li></ul>
 <h3>Problems</h3><ul><li>Лише зламане — помилки біндінгів, error-логи — помилки перед попередженнями, кожна з причиною, посиланням reveal у дерево та повним розбором біндінгу. Scan now ловить біндінги, що впали до відкриття DevTools. Див. <a href="#problems">Панель Problems</a>.</li></ul>
-<h3>MCP Server</h3><ul><li>Є, поки ендпойнт слухає, і зникає разом із ним: що саме слухає, на якому порту й під яким іменем, той єдиний рядок, що реєструє застосунок у вашого агента, і кожен інструмент із кількістю зроблених до нього викликів — невдалі рахуються окремо. Перемикач, порт і дозвіл на заморожування — на сторінці MCP у картці ⚙. Див. <a href="#mcp">Хай подивиться агент</a>.</li></ul>
+<h3>MCP Server</h3><ul><li>Є, поки ендпойнт слухає, і зникає разом із ним: що саме слухає, на якому порту й під яким іменем, той єдиний рядок, що реєструє застосунок у вашого агента, і кожен інструмент із кількістю зроблених до нього викликів — невдалі рахуються окремо. Інструменти, що можуть діяти на застосунок, позначено в цьому списку знаком <b>⌁</b>, тож видно, що саме агент міг зробити, не пам'ятаючи імен напам'ять. Перемикач, порт і два дозволи — на сторінці MCP у картці ⚙. Див. <a href="#mcp">Хай подивиться агент</a>.</li></ul>
 <h3>Logs</h3><ul><li>Живі логи Avalonia з Pause та фільтрами за рівнем, областю і текстом. За замовчуванням — Warning. Записи від самого DevTools відкидаються, оновлення батчаться — «зациклення» неможливе.</li>
 <li><code>LogCapture.Publish</code> додає в панель події вашого застосунку — див. <a href="#applogs">Логи застосунку</a>.</li></ul>` },
       { id: 'capture', t: 'Скриншоти та баг-репорти', html: `<p>«Надішли скриншот і XAML-шлях» — тут це один клік: елемент, його bounds і властивості, що відрізняються від типових, їдуть разом із картинкою.</p>
@@ -1468,7 +1633,7 @@ uk: {
 <p>IDE, що вже відкритий, отримує файл у своє вікно — другий екземпляр не запускається ніколи. Власні goto-команди Rider і VS Code ведуть файл у вікно, чий проєкт його містить, тож із проєктами A і B поруч посилання з застосунку, який ви налагоджуєте, ляже в правильне. Visual Studio тримає окремий процес на кожне рішення — DevTools питає кожен запущений екземпляр, чиє рішення містить файл, і веде туди, віддаючи перевагу тому, що налагоджує ваш застосунок. А подвійний клік по посиланню, поки IDE ще стартує, відкриє один екземпляр, не два.</p>
 <h3>Звідки беруться локації</h3>
 <p>XAML-локації дає <code>AvaloniaXamlCreateSourceInfo</code> компілятора (в Avalonia 12 увімкнено в Debug автоматично). C#-типи — в'ю-моделі, обробники подій — знаходяться пошуком по дереву рішення; задайте <code>AVA_DEVTOOLS_SRC_ROOT</code>, якщо автовизначенню потрібна допомога. Скомпільовані стилі Fluent не мають коду на диску — поповер показує дані з рефлексії та посилання «View theme XAML on GitHub» для вашої версії Avalonia.</p>` },
-      { id: 'mcp', t: 'Дати агентові подивитись (MCP)', html: `<p>Цікавий застосунок — той, що <em>вже запущений</em>, зі станом, який пішов не так, просто на екрані. DevTools може передати цей застосунок агентові: <b>лише для читання</b> ендпойнт <a href="https://modelcontextprotocol.io">Model Context Protocol</a>, усередині процесу, на локальному інтерфейсі, вимкнений, доки ви не попросите.</p>
+      { id: 'mcp', t: 'Дати агентові подивитись (MCP)', html: `<p>Цікавий застосунок — той, що <em>вже запущений</em>, зі станом, який пішов не так, просто на екрані. DevTools може передати цей застосунок агентові: ендпойнт <a href="https://modelcontextprotocol.io">Model Context Protocol</a>, усередині процесу, на локальному інтерфейсі, вимкнений, доки ви не попросите — <b>лише для читання</b> як є, а кліки й друкування — за <a href="#mcpinput">другим перемикачем</a>, який вмикаєте ви самі.</p>
 <p>Усередині процесу — у цьому вся суть. Позапроцесний інспектор може лише попросити застосунок описати себе по протоколу; цей <em>і є</em> застосунком, тож той самий виклик, що перелічує контрол, може його відрендерити, прочитати пріоритет, який задав ширину, і процитувати помилку прив'язки, яку він залогував — без жодної межі серіалізації між ними. Кожна вкладка в цій документації — це вигляд над рушієм, якому ніколи не було потрібне вікно, і агент викликає ці рушії напряму. Він читає ті самі відповіді, що й ви.</p>
 <h3>Крок 1. Увімкніть</h3>
 <p>Відкрийте DevTools, відкрийте картку ⚙ і перейдіть на її сторінку <b>MCP</b>: один перемикач запускає й зупиняє ендпойнт, поле поруч задає порт. Поки він увімкнений, є вкладка <b>MCP Server</b>, і рядок згори на ній каже, що саме слухає — <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>. Вибір зберігається для цієї машини й діє і наступного запуску.</p>
@@ -1495,8 +1660,9 @@ uk: {
 <li><b>Зайнятий застосунок так і каже.</b> Якщо UI-потік не відповідає протягом хвилини — піднято модальне вікно або його зупинив дебагер — виклик повертає саме це, замість лишити агента на мертвому сокеті.</li></ul>
 <h3>Що йому можна і чого не можна</h3>
 <ul><li><b>Лише локальний інтерфейс</b>, і це не налаштування: день, коли це прив'яжеться до 0.0.0.0, буде днем, коли допоміжний інструмент стане способом читати чужий екран із сусіднього столу. Заголовок <code>Origin</code> теж перевіряється, тож сторінка в браузері не дістанеться сюди через DNS rebinding.</li>
-<li><b>П’ятнадцять із сімнадцяти інструментів — чисте читання.</b> Ніякого введення не інжектується, жодна властивість застосунку не записується, жоден обробник не запускається. Це вся історія безпеки і причина, чому тут немає підтверджень: підтверджувати нічого.</li>
-<li><b>Два інструменти щось змінюють і потребують окремого дозволу.</b> <code>hold</code> і <code>pin_class</code> морозять тимчасовий UI і форсують псевдокласи — єдиний спосіб для того, хто не має вказівника, побачити стан наведення. Вони вимкнені, доки не скаже інакше галочка <b>Allow freezing</b> на сторінці MCP у картці ⚙ — <code>McpAllowHold</code> або <code>AVA_DEVTOOLS_MCP_HOLD=1</code>, змінюють лише тимчасовий стан UI, кожне утримання має дедлайн, який його звільняє, застосунок показує банер, доки воно триває, і <span class="kbd">Esc</span> у застосунку теж його звільняє.</li>
+<li><b>Шістнадцять із двадцяти п’яти інструментів — чисте читання.</b> Вони не інжектують введення, не записують жодної властивості застосунку і не запускають жодного обробника. Їм не потрібні підтвердження, бо підтверджувати нічого.</li>
+<li><b>Два інструменти морозять тимчасовий стан і потребують окремого дозволу.</b> <code>hold</code> і <code>pin_class</code> тримають попапи відкритими і форсують псевдокласи — єдиний спосіб для того, хто не має вказівника, побачити стан наведення. Вони вимкнені, доки не скаже інакше галочка <b>Allow freezing</b> на сторінці MCP у картці ⚙ — <code>McpAllowHold</code> або <code>AVA_DEVTOOLS_MCP_HOLD=1</code>; змінюють лише тимчасовий стан UI, кожне утримання має дедлайн, який його звільняє, застосунок показує банер, доки воно триває, і <span class="kbd">Esc</span> у застосунку теж його звільняє.</li>
+<li><b>Сім інструментів діють на застосунок — за власним перемикачем.</b> <code>click</code>, <code>hover</code>, <code>drag</code>, <code>scroll</code>, <code>press_key</code>, <code>type_text</code> і <code>focus_element</code> запускають ваші обробники, а ті можуть зробити все, що вміє ваш застосунок, — тож вони чекають на власний дозвіл, а не на дозвіл заморожування. Вимкнені, доки ви не скажете інакше; див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li>
 <li><b>Він віддає те, що взяв.</b> Утримання агента саме звільняє лише те, що агент і зайняв: натисніть <span class="kbd">Shift</span>+<span class="kbd">F12</span> самі після цього — і дедлайн не забере ваше утримання.</li></ul>
 <p class="tip">Постачайте це лише в Debug, як і решту DevTools. Ендпойнт вимкнено у будь-якій збірці, але застосунок, який ніколи не під'єднує DevTools у Release, не зможе випадково його підняти.</p>` },
       { id: 'mcpconnect', t: 'Під’єднати до Claude Code чи Codex', html: `<p>Ендпойнт існує лише поки працює ваш застосунок, тож порядок незмінний: запустіть застосунок, увімкніть сервер, наведіть на нього агента. Реєструється він під іменем <code>&lt;назва збірки&gt;-avadevtools</code> — саме це ви побачите у списку клієнта.</p>
@@ -1504,8 +1670,8 @@ uk: {
 <ol class="steps"><li>Запустіть застосунок і натисніть <span class="kbd">F12</span>.</li>
 <li>Відкрийте сторінку <b>MCP</b> у картці ⚙ і поставте <b>Serve MCP on loopback</b>.</li>
 <li>Скопіюйте блок під <em>Point your agent at it</em> — там уже правильні ім’я та порт.</li></ol>
-<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="Сторінка MCP у картці налаштувань: перемикач, порт і дозвіл на заморожування, а нижче — рядок про те, що слухає"><span class="cap">⚙ → MCP: усе, що ви задаєте, і нічого більше — перемикач, порт, дозвіл на заморожування і рядок про те, що з цього вийшло.</span></div>
-<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="Вкладка MCP Server: що слухає і кожен інструмент із кількістю зроблених до нього викликів"><span class="cap">Вкладка, яка є лише поки є ендпойнт: сімнадцять інструментів і те, що агент справді просив у кожного. Риска — інструмент, якого він не чіпав; бурштинове число містить невдалі виклики.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="Сторінка MCP у картці налаштувань: перемикач, порт і два дозволи, а нижче — рядок про те, що слухає"><span class="cap">⚙ → MCP: усе, що ви задаєте, і нічого більше — перемикач, порт, дозволи на заморожування і на введення, і рядок про те, що з цього вийшло.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="Вкладка MCP Server: що слухає і кожен інструмент із кількістю зроблених до нього викликів"><span class="cap">Вкладка, яка є лише поки є ендпойнт: двадцять п'ять інструментів і те, що агент справді просив у кожного. Риска — інструмент, якого він не чіпав; бурштинове число містить невдалі виклики; позначені ⌁ можуть діяти на застосунок.</span></div>
 <h3>Крок 2a. Claude Code</h3>
 <pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
 <p>Область визначає, кому це дістанеться. <code>--scope local</code> (типово) — цей проєкт і лише вам; <code>--scope project</code> пише <code>.mcp.json</code> у корені репозиторію, тож запис отримають усі, хто працює над застосунком; <code>--scope user</code> — усі проєкти на вашій машині. Пишеться той самий JSON, що показує вкладка:</p>
@@ -1526,7 +1692,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Два застосунки водночас</h3>
 <p>Дайте другому власний порт (поле <b>Port</b> на сторінці MCP у картці ⚙, <code>McpPort</code> або <code>AVA_DEVTOOLS_MCP_PORT</code>) і додайте другим записом. Імена вже різні, тож список інструментів агента лишиться читабельним.</p>
 <p class="tip">Клієнт, запущений раніше за застосунок, зазвичай не бачить інструментів, доки не перез’єднається — <code>/mcp</code> у Claude Code, нова сесія в Codex. Це перез’єднання, а не проблема конфігурації.</p>` },
-      { id: 'mcptools', t: 'Сімнадцять інструментів', html: `<p>Сімнадцять інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
+      { id: 'mcptools', t: 'Двадцять п’ять інструментів', html: `<p>Двадцять п’ять інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
+<p>Шістнадцять лише дивляться. Два морозять тимчасовий стан і чекають на дозвіл заморожування. Сім діють на застосунок і чекають на <a href="#mcpinput">дозвіл на введення</a> — вони в останній таблиці тут.</p>
 <h3>Зорієнтуватись</h3>
 <table>
 <tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
@@ -1568,7 +1735,89 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>hold</code></td><td>Морозить тимчасовий UI вікна, щоб його можна було розглянути: попапи й тултіпи лишаються відкритими, стилі наведення — закріпленими. Потребує дозволу на утримання; звільняється саме.</td><td><code>elementId</code>, <code>stop</code>, <code>seconds</code> (120, макс. 900)</td></tr>
 <tr><td><code>pin_class</code></td><td>Форсує псевдоклас — <code>:pointerover</code>, <code>:pressed</code>, <code>:checked</code>, <code>:disabled</code> — щоб стилі того стану можна було прочитати і зняти. Потребує дозволу на утримання.</td><td><code>elementId</code>, <code>pseudoClass</code>, <code>pin</code></td></tr>
 </table>
-<p>Тимчасовий UI невидимий для дампа дерева, зробленого миттю пізніше, а в агента немає вказівника, щоб тримати меню відкритим. Ці три — те, як він дивиться на частину інтерфейсу, яка існує лише поки з нею взаємодіють.</p>` },
+<p>Тимчасовий UI невидимий для дампа дерева, зробленого миттю пізніше, а в агента немає вказівника, щоб тримати меню відкритим. Ці три — те, як він дивиться на частину інтерфейсу, яка існує лише поки з нею взаємодіють.</p>
+<h3>Діяти</h3>
+<p>Ці сім потребують дозволу на введення, і кожен іде як справжнє платформне введення — див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a> про те, що це означає і від чого воно відмовляється.</p>
+<table>
+<tr><th>Інструмент</th><th>Робить</th><th>Аргументи</th></tr>
+<tr><td><code>click</code></td><td>Клікає елемент там, де клікнула б людина, і каже, що застосунок із цим зробив.</td><td><code>elementId</code>, <code>button</code>, <code>count</code>, <code>modifiers</code>, <code>x</code>, <code>y</code></td></tr>
+<tr><td><code>hover</code></td><td>Наводить вказівник на елемент і лишає його там — працюють власні обробники застосунку, тож тултіп з'явиться за своєю затримкою.</td><td><code>elementId</code>, <code>x</code>, <code>y</code></td></tr>
+<tr><td><code>drag</code></td><td>Натиснути, провести, відпустити — повзунок, сплітер, рядок, який переставляють. Іде з проміжними рухами, бо контроли, що стежать за рухом, ігнорують один стрибок.</td><td><code>elementId</code>, <code>toElementId</code>, <code>dx</code>, <code>dy</code>, <code>modifiers</code></td></tr>
+<tr><td><code>scroll</code></td><td>Крутить колесо над елементом і каже, чи зсув справді змінився.</td><td><code>elementId</code>, <code>lines</code>, <code>horizontal</code>, <code>modifiers</code></td></tr>
+<tr><td><code>press_key</code></td><td>Клавіша або акорд — Enter, Escape, Tab, Ctrl+A. Їх бачать і key bindings, і access keys, і тунельні обробники.</td><td><code>keys</code>, <code>elementId</code>, <code>repeat</code></td></tr>
+<tr><td><code>type_text</code></td><td>Друкує рядок як текстове введення — та сама подія, яку дає IME чи вставка.</td><td><code>text</code>, <code>elementId</code></td></tr>
+<tr><td><code>focus_element</code></td><td>Дає фокус клавіатури без кліку — як зробив би Tab, тільки не йдучи туди пішки.</td><td><code>elementId</code></td></tr>
+</table>
+<h3>Дочекатись результату</h3>
+<table>
+<tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
+<tr><td><code>wait_for</code></td><td>Чекає, поки щось з'явиться чи зникне, і тоді відповідає. Чисте спостереження — без дозволу, і воно нічого не змінює.</td><td><code>query</code>, <code>elementId</code>, <code>gone</code>, <code>timeoutMs</code> (5000, макс. 30000)</td></tr>
+</table>
+<p>Клік, що відкриває діалог, стартує завантаження чи чистить список, завершується вже після виклику, який його спричинив. <code>wait_for</code> — це те, як цей цикл замикається: опитувати <code>get_tree</code> в циклі повільніше, дорожче в токенах і все одно не скаже, <em>коли</em> воно з'явилось.</p>` },
+      { id: 'mcpinput', t: 'Ввід через MCP: клік, текст, перетягування', html: `<p>Читання відповідає на <em>чому воно такої ширини</em> і <em>що зламано</em>. Воно ніколи не відповідає на <em>чи працює ця кнопка</em>. Для цього кнопку треба натиснути — тож за власним перемикачем агент може її натиснути: сім інструментів, які клікають, наводять, тягнуть, крутять колесо, тиснуть клавіші, друкують текст і переносять фокус.</p>
+<h3>Це справжнє введення, а не скорочення</h3>
+<p>Тут ніщо не піднімає подію на контролі. Кожна дія збирається як сира платформна подія і йде крізь власний менеджер введення Avalonia — ті самі двері, крізь які штовхають бекенди macOS, X11 і Windows. Хіт-тест вирішує, у що влучили, кількість кліків береться зі справжніх міток часу, захоплення вказівника й pointer-over поводяться, як для людини, а ваші обробники спрацьовують тому, що до них <em>дійшли</em>, а не тому, що їх викликали.</p>
+<p>Саме тому відповіді можна вірити. Агент, який підняв <code>Click</code> на кнопці, не довів нічого про те, чи міг би користувач у неї клікнути — кнопка може бути під діалогом, вимкненою або три пікселі заввишки. Йти крізь парадні двері означає, що вирішує фреймворк, а не інструмент.</p>
+<h3>Вмикається окремо</h3>
+<p>Дозвіл окремий і від сервера, і від заморожування, бо характер відмов різний: утримання само себе повертає, а клік запускає ваш код. Поставте галочку <b>Allow input (click, type, keys)</b> на сторінці MCP у картці ⚙ — вона діє з наступного виклику, а не з наступного запуску, тож знята галочка зупиняє агента посеред сесії. Або стартуйте одразу так:</p>
+<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span>, McpAllowInput = <span class="k">true</span> });</code></pre>
+<p>чи запустіть із <code>AVA_DEVTOOLS_MCP_INPUT=1</code>. Рядок, який воно друкує, каже, яка половина відкрита:</p>
+<pre><code>MCP server MyApp-avadevtools (input allowed) listening on http://127.0.0.1:5199/</code></pre>
+<p>Коли дозволу немає, діючі інструменти все одно є у списку — агент має знати, що він міг би попросити, — і кожен відповідає тим, як його увімкнути. Усе, що лише дивиться, працює далі.</p>
+<h3>Відповідь — це вирок застосунку</h3>
+<p>Дія, яка повідомляла б лише «клікнуто», мало чого варта. Кожна каже, що застосунок із цим зробив — чи хтось це обробив, куди пішов фокус, що відкрилось або закрилось, який текст змінився, чи зсув прокрутки зрушив:</p>
+<pre><code><span class="k">click</span> {<span class="s">"elementId"</span>: 2}
+
+  Clicked #2 Button #DeployButton at (871, 398). The application handled it.
+  Focus moved from nothing to #2 Button #DeployButton.
+
+<span class="k">wait_for</span> {<span class="s">"query"</span>: <span class="s">"deploying"</span>}
+
+  There after 1 ms.
+  #9 Run #StatusRun  <span class="s">"deploying 65%"</span></code></pre>
+<p>«Ніхто не обробив» — теж відповідь, і зовсім інша, ніж «не дійшло»:</p>
+<pre><code><span class="k">press_key</span> {<span class="s">"keys"</span>: <span class="s">"Ctrl+A"</span>}
+
+  Pressed Ctrl+A, with focus on #10 TextBox #BuildFilter "orbit".
+  Nothing in the application handled it — the input was delivered and no
+  handler took it, which is a real answer: the control may have no handler
+  for this.</code></pre>
+<h3>Воно відмовляє, а не вдає</h3>
+<p>Небезпечна відповідь — бадьоре «клікнуто» на клік, який нічого не зробив. Кожен випадок, який чесно не може статися, відхиляється своїми словами і як помилка:</p>
+<pre><code><span class="k">click</span> {<span class="s">"elementId"</span>: 2}
+
+  #2 Button #DeployButton is at (871, 396), but what is on top there is
+  #14 LightDismissOverlayLayer. A click would go to that, not to this.
+  Something is covering the element — a dialog, a flyout, an overlay.</code></pre>
+<p>Так само — для елемента вимкненого, невидимого, нульового розміру, прокрученого за межі видимості або такого, що взагалі не є прямокутником:</p>
+<pre><code><span class="k">click</span> {<span class="s">"elementId"</span>: 9}
+
+  #9 Run #StatusRun is a text inline: it has no rectangle of its own to
+  click. The element that renders it is #4 TextBlock.</code></pre>
+<p>А введення, яке тихцем означало б інше, відхиляється ще до відправки: перенос рядка — це клавіша, а не текст, і надрукований як текст він вставляє керуючий символ, який приймають лише деякі контроли:</p>
+<pre><code><span class="k">type_text</span> {<span class="s">"elementId"</span>: 10, <span class="s">"text"</span>: <span class="s">"a\\nb"</span>}
+
+  That string contains a newline or a tab. Those are keys, not text: type
+  the line, then press_key Enter (or Tab).</code></pre>
+<h3>Усе зроблене видно на Таймлайні</h3>
+<p>Інжектоване введення йде у власну смугу, <b>⌁ Input</b>, із точкою, куди воно влучило, і елементом, який справді знайшов хіт-тест — а це зазвичай нащадок названого, і це варто бачити:</p>
+<pre><code><span class="k">get_timeline</span> {<span class="s">"lanes"</span>: [<span class="s">"input"</span>]}
+
+  1  15:02:54.246 input  ⌁ click #2 Button #DeployButton
+                           agent click at (871, 398) · hit #3 TextBlock "Deploy to production"
+  3  15:03:11.706 input  ⌁ type "orbit"
+                           agent typed 5 character(s) into #10 TextBox #BuildFilter
+  4  15:03:11.732 input  ⌁ key Ctrl+A
+                           agent pressed Ctrl+A · focus was #10 TextBox #BuildFilter
+ 14  15:04:04.093 input  ⌁ drag #17 Slider #Throttle
+                           agent drag at (485, 200) → (565, 200) · hit #24 Border #TrackBackground</code></pre>
+<p>Ті самі рядки з'являються і у <a href="#timeline">вкладці Timeline</a> перед вами, не лише у власному захопленні агента. У цьому й суть: коли агент працює із застосунком, за яким ви спостерігаєте, його клік має бути <em>над</em> змінами, які він спричинив, інакше події наче беруться нізвідки. Смуга має власний перемикач, тож її так само легко прибрати.</p>
+<p>Поки дія триває, над застосунком стоїть фіолетова позначка з тим, що і над чим зроблено. Вона не ловить кліків, гасне за пару секунд і ховається на час рендеру скриншота — агент, що дивиться на ваше вікно, має знімати ваш застосунок, а не наш оверлей.</p>
+<h3>Чого воно не торкнеться</h3>
+<ul><li><b>Вікно DevTools ніколи не є ціллю.</b> На прохання клікнути щось усередині нього інструмент так і каже і не робить нічого. Інструмент, здатний керувати власними контролами, здатен вимкнути власні перемикачі.</li>
+<li><b>Вказівник операційної системи не рухається.</b> Події доставляються в застосунок, а не на робочий стіл — тож усе, що належить ОС, а не вашому застосунку (нативний файловий діалог, рядок меню macOS, перетягування в інший застосунок), лишається поза досяжністю.</li>
+<li><b>Нічого не повторюється і не вгадується.</b> Один виклик — одна дія; якщо вона не могла статися, про це повідомляють, а не наближають чимось сусіднім.</li></ul>
+<p class="tip"><b>Порада.</b> <code>hover</code> і <code>pin_class</code> — не той самий інструмент. <code>pin_class</code> форсує стилі, щоб стан наведення можна було прочитати і щоб при цьому нічого не сталося; <code>hover</code> — справжній вказівник, тож спрацьовують власні обробники контрола і тултіп з'являється за своєю затримкою. Перший — щоб подивитись, другий — щоб перевірити.</p>` },
       { id: 'mcpcases', t: 'MCP: п\'ять реальних випадків', html: `<p>П'ять сесій проти демозастосунку, дослівно. Кожна відповідь нижче — те, що інструмент справді надрукував. Суть не в тому, що інструменти існують, а в тому, як мало викликів займає справжнє питання.</p>
 <h3>Випадок 1. Рядок «approver» порожній</h3>
 <p>Картка релізу показує <code>status idle · window Fri 16:00 UTC · approver</code> — і далі нічого. Ні винятку, ні червоного, ні рядка в лозі, бо прив'язка, що ні до чого не резолвиться, не є помилкою, про яку застосунок узагалі чує.</p>
@@ -1672,8 +1921,9 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
     McpServer            = <span class="k">true</span>,                               <span class="c">// підняти MCP-ендпойнт лише для читання — типово: false</span>
     McpPort              = 5171,                               <span class="c">// лише на 127.0.0.1 — типово: 5171</span>
     McpAllowHold         = <span class="k">true</span>,                               <span class="c">// дозволити агентові морозити попапи / закріплювати :pointerover — типово: false</span>
+    McpAllowInput        = <span class="k">true</span>,                               <span class="c">// дозволити агентові клікати, друкувати й тягнути — типово: false</span>
 });</code></pre>
-<p>Три опції <code>Mcp*</code> описано в розділі <a href="#mcp">Дати агентові подивитись (MCP)</a>. Усе інше вимкнене або відсутнє, доки його не попросять, а налаштування, збережені користувачем у <a href="#settings">картці ⚙</a>, мають пріоритет над тим, що передав код.</p>` },
+<p>Чотири опції <code>Mcp*</code> описано в розділах <a href="#mcp">Дати агентові подивитись (MCP)</a> і <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>. Усе інше вимкнене або відсутнє, доки його не попросять, а налаштування, збережені користувачем у <a href="#settings">картці ⚙</a>, мають пріоритет над тим, що передав код.</p>` },
       { id: 'env', t: 'Змінні середовища', html: `<table>
 <tr><th>Змінна</th><th>Значення</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>Відкривати DevTools автоматично при завантаженні вікна.</td></tr>
@@ -1684,15 +1934,17 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_UPDATE_CHECK=0</code></td><td>Вимкнути щоденну перевірку нової версії.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP=1</code></td><td>Підняти <a href="#mcp">MCP-ендпойнт</a> лише для читання на 127.0.0.1.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>Порт для нього. Типово 5171.</td></tr>
-<tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Дозволити ще й <code>hold</code> та <code>pin_class</code> — єдині два інструменти, що щось змінюють.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Дозволити ще й <code>hold</code> та <code>pin_class</code> — два інструменти, що морозять тимчасовий стан.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td><td>Дозволити ще й сім інструментів, що <a href="#mcpinput">діють на застосунок</a> — клік, наведення, драг, прокрутка, клавіші, текст, фокус.</td></tr>
 </table>
-<p class="tip">Три змінні <code>MCP</code> — це стартовий стан, а не остаточне слово: перемикачі на сторінці MCP у <a href="#settings">картці ⚙</a> зберігаються для машини й мають перевагу над ними. Порт, який ви закрили в інструменті, лишиться закритим і наступного запуску, хоч би що експортував ваш лаунчер.</p>` },
+<p class="tip">Чотири змінні <code>MCP</code> — це стартовий стан, а не остаточне слово: перемикачі на сторінці MCP у <a href="#settings">картці ⚙</a> зберігаються для машини й мають перевагу над ними. Порт, який ви закрили в інструменті, лишиться закритим і наступного запуску, хоч би що експортував ваш лаунчер.</p>` },
       { id: 'limits', t: 'Обмеження', html: `<ul>
 <li>Лише десктоп — додаткові вікна не підтримуються на мобільних/браузерних платформах.</li>
 <li>DevTools приносить власну тему — тема застосунку, чи її відсутність, не має значення.</li>
 <li>З <code>LiveTree = false</code> дерево знову є знімком: після структурних змін натисніть ↻ Refresh (значення властивостей оновлюються наживо в обох режимах).</li>
 <li>Скріншоти та звіти про ваду подвоюють масштаб <em>вмісту</em> рамок із тінню (BoxShadow) на HiDPI-екранах — особливість шару рендеру Avalonia 12. Знімок самого елемента, а не цілого вікна, зазвичай це обходить.</li>
-<li>MCP-ендпойнт прив'язується лише до 127.0.0.1. Це навмисно і не налаштовується.</li></ul>` },
+<li>MCP-ендпойнт прив'язується лише до 127.0.0.1. Це навмисно і не налаштовується.</li>
+<li>Інжектоване введення доходить до вашого застосунку, а не до робочого стола: вказівник ОС не рухається, тож нативні файлові діалоги, рядок меню macOS і перетягування в інший застосунок лишаються поза досяжністю. Див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li></ul>` },
       { id: 'feedback', t: 'Фідбек', html: `<p>Кнопка <b>Feedback</b> у правому верхньому куті панелі відкриває трекер задач AvaDevTools — повідомте про баг чи попросіть фічу одним кліком. Та сама дія живе у <span class="kbd">Ctrl</span>+<span class="kbd">K</span> як «Send feedback».</p>
 <p>Зручніше в чаті? <a href="https://t.me/avadevtools">Telegram-канал</a> приймає запитання та швидку допомогу.</p>` },
       { id: 'updates', t: 'Сповіщення про оновлення', html: `<p>Панель завжди показує версію, яку ви запустили, — приглушено, поруч із <b>Feedback</b>. Нові версії AvaDevTools приносять нові вкладки й виправлення, але NuGet-залежність сама про них не оголошує, тож коли виходить новіша версія, цей самий напис стає синім і отримує <b>↑</b>.</p>
@@ -1720,13 +1972,51 @@ zh: {
     get: '快速上手', stories: '看实际效果', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.1.5 新特性', docs: '文档 →', notes: '版本历史 →' },
+  wn: { h: '12.1.6 新特性', docs: '文档 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   stories: {
-    h: '功能演示', wn: 'a11y',
+    h: '功能演示', wn: 'input',
     lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
     list: [
+      { key: 'input', h: '⌁ MCP 输入', sub: '智能体可以在你的应用里点击、键入、拖动 —— 真实的平台输入，藏在一道自己的开关之后，做过的每一件事都留在 Timeline 上。',
+        steps: [
+          { t: '⌁ MCP 输入',
+            d: '智能体能读到一个动作的全部后果，却没法做出这个动作。它能看到浮出层是开着的，却打不开它；能读到校验提示，却输入不了触发它的那个值。',
+            d2: '现在它可以操作了：七个工具，点击、悬停、拖动、滚动、按键、输入文本、移动焦点 —— 真实的平台输入，藏在一道自己的许可之后，每个动作都同时落在你的 Timeline 和它自己的那一份上。',
+            newsTitle: '12.1.6 新增',
+            news: [
+              { k: '八个新工具，共二十五个', d: '点击、悬停、拖动、滚动、按键、文本、焦点、等待' },
+              { k: '真实输入，不是模拟', d: '你的处理器和真人按下时一样运行' },
+              { k: 'Timeline 上的输入泳道', d: '每个动作，都在它引起的变化之上' },
+              { k: '应用上的标记', d: '一枚写着正在做什么的小标签' },
+              { k: '不会假装成功', d: '做不到的动作会被拒绝，并说明原因' },
+            ] },
+          { img: 'story/i02.png', t: '这是你的应用，正在被点击', d: '没有任何事件被直接抛给按钮。这个动作是作为原始平台事件、经由 Avalonia 自己的 input manager 送进去的 —— 和操作系统走的是同一道门 —— 于是命中测试决定了打到谁身上，处理器是因为被真的够到才跑起来的，部署也真的开始了。紫色的小药丸就是工具在出声：一个自己动起来的应用是一场找 bug，而一个说得出访客是谁的应用是一次会话。' },
+          { img: 'story/i03.png', t: '点击，就在它引起的一切之上', d: '焦点、按下、状态文本从 idle 变成 deploying 65%（背后是 MainWindow.OnDeployClick），再到 Button.Click 本身 —— 全都排在解释它们的那一行下面。输入的文本和一个组合键片刻之后落进同一条泳道。这是你的信息流，不只是智能体的：当别的东西在驱动你的应用时，它的动作必须出现在自己的后果之上。' },
+          { img: 'story/i04.png', t: '它一直等着你允许', d: '服务器是一道开关，输入是另一道。勾上 Allow input 才会打开二十五个工具里的七个；它从下一次调用起生效，而不是下一次启动，所以取消勾选能在会话中途把智能体拦下来，而下面那行字也会在勾上的那一刻不再说 read-only。点击会跑你的处理器，而你的处理器能做你的应用能做的任何事。' },
+          { img: 'story/i05.png', t: '哪些工具会动手，以及它们已经被问过什么', d: '这个选项卡用 ⌁ 标出会动手的工具，颜色和 Timeline 里的一致，并数出每个工具被调用了多少次。十六个只看；两个冻结瞬时状态；七个动手。计数器是你事后弄清智能体到底做了什么的凭据，而状态行会在输入被允许的这段时间里一直这么写着。' },
+          { t: '回复是应用自己的判词', d: '一个只报「点了」的动作没什么价值。每个动作都会说出应用对它做了什么：有没有人处理、焦点去了哪里、什么打开或关上了、哪段文字变了。而 wait_for 就是智能体用来确认应用已经反应完的东西，而不是睡一会儿并指望。',
+            code: [
+              '$ click  {"elementId": 2}',
+              '  Clicked #2 Button #DeployButton at (871, 398). The application handled it.',
+              '  Focus moved from nothing to #2 Button #DeployButton.',
+              '',
+              '$ wait_for  {"query": "deploying"}',
+              '  There after 1 ms.',
+              '  #9 Run #StatusRun  "deploying 65%"',
+            ] },
+          { t: '它宁可拒绝，也不假装', d: '危险的回复，是对一次什么都没做的点击欢快地答「点了」。目标被遮住、被禁用、不可见、尺寸为零，或者根本不是一个矩形 —— 都会用它自己的话被拒绝。会悄悄变成别的意思的输入，同样如此。',
+            code: [
+              '$ click  {"elementId": 2}',
+              '  #2 Button #DeployButton is at (871, 396), but what is on top there is',
+              '  #14 LightDismissOverlayLayer. A click would go to that, not to this.',
+              '',
+              '$ type_text  {"elementId": 10, "text": "a\\nb"}',
+              '  That string contains a newline or a tab. Those are keys, not text: type',
+              '  the line, then press_key Enter (or Tab).',
+            ] },
+        ] },
       { key: 'a11y', h: '🩻 另一棵树', sub: '屏幕阅读器走的那棵树、替你读它的审计，以及在运行中的应用上给每个键盘停靠点编上的号。',
         steps: [
           { t: '🩻 另一棵树',
@@ -1770,7 +2060,7 @@ zh: {
             d2: '现在，复现一次就会记下每次变化背后的调用栈，慢帧落在应用当时在做的事旁边；编码智能体也能调用选项卡所用的同一批引擎 —— 只读，走回环地址。',
             newsTitle: '12.1.4 新增',
             news: [
-              { k: 'MCP 端点', d: '只读，走回环地址 —— 十七个工具把树、属性、样式、布局、资源、问题、时间线、日志和截图交给编码智能体' },
+              { k: 'MCP 端点', d: '只读，走回环地址 —— 二十五个工具把树、属性、样式、布局、资源、问题、时间线、日志和截图交给编码智能体，你允许的话还能点击和输入' },
               { k: '一个选项卡加一页设置', d: '打开端点、设置端口，并看到智能体到目前为止问过什么' },
               { k: '一行命令就注册好', d: '⚙ 卡片直接给出 claude mcp add 或 codex mcp add 命令，里面已经是这个应用自己的名字和端口' },
               { k: '原因捕获', d: '每条记录下来的变化都带着调用栈，复现一次就一次性回答所有命中的「是谁改的」' },
@@ -1797,7 +2087,7 @@ zh: {
               '$ get_element  {"elementId": 2}',
               '  declared at: MainWindow.axaml:309',
             ] },
-          { t: '别处拿不到的答案', d: '是谁改的，以及对一个没有指针的东西来说 hover 长什么样。十七个工具中有十五个只读；冻住弹出和强制状态是例外 —— 它们需要单独开启，带着会把一切复原的截止时间，并在持续期间于应用中显示横幅。',
+          { t: '别处拿不到的答案', d: '是谁改的，以及对一个没有指针的东西来说 hover 长什么样。二十五个工具中有十六个只读。冻住弹出需要单独开启，并会把一切复原；点击和输入另有自己的开关，而且每一次注入的动作都标在时间线上。',
             code: [
               '$ get_timeline  {"elementId": 11}',
               '  property Run "StatusRun"  Text  idle → deploying 65%  [LocalValue]  #11',
@@ -1964,7 +2254,7 @@ zh: {
       { i: '⏱', t: '时间线', d: '路由事件、属性变化、VM 通知与焦点变化汇入一条按时间排序的流，范围由你的观察列表决定。因果链接把通知与它产生的绑定更新连在一起；每条记录都可展开完整细节。' },
     { i: '🕰', t: '原因捕获', d: '每条被记录的变化都带着引发它的调用栈，并裁剪到你自己的帧。复现一次就能按顺序读完所有「凶手」，每一帧都可跳转源码 —— 不必每命中一次下一个断点。Break next 则只为一次变化升级到调试器。' },
     { i: '📈', t: 'Perf 泳道', d: '慢帧与布局过程归入与其它一切相同的信息流，于是卡顿可以放在「应用当时在做什么」旁边阅读。「慢」以你的显示器实际维持的预算衡量，而不是平均值。' },
-    { i: '🤖', t: '让智能体来看（MCP）', d: '回环上的只读 Model Context Protocol 端点，不索取即关闭：十七个工具把运行中应用的树、属性、样式、布局、资源、问题、时间线、日志与截图交给编码智能体。' },
+    { i: '🤖', t: '让智能体来看（MCP）', d: '回环上的 Model Context Protocol 端点，不索取即关闭，你不点头就一直只读：二十五个工具把运行中应用的树、属性、样式、布局、资源、问题、时间线、日志与截图交给编码智能体 —— 再加上一道自己的开关之后，在里面点击和输入的能力。' },
       { i: '📜', t: '日志查看器', d: '绑定错误、布局与属性系统消息 —— 无需 LogToTrace()。带过滤、批量刷新，杜绝反馈循环。' },
       { i: '📊', t: '渲染器叠加层', d: 'FPS 计数、布局/渲染耗时曲线与脏矩形闪烁，一个开关即可打开。' },
       { i: '🕵️', t: '每个值的来源', d: '一眼看出取值来自默认、手动设置、样式、模板还是继承 —— 并可跳到祖先元素或设置它的那行 XAML。' },
@@ -1981,7 +2271,7 @@ zh: {
     groups: [
       { t: '入门', ids: ['install', 'quickstart'] },
       { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
-      { t: '智能体（MCP）', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpcases'] },
+      { t: '智能体（MCP）', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: '参考', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -2027,7 +2317,7 @@ zh: {
 <li>按下新的组合键 —— 按下即保存。<span class="kbd">Esc</span> 取消；× 恢复默认。</li></ol>
 <div class="shot"><img src="assets/img/docs/settings-card.png" alt="带手势捕获框的设置卡"><span class="cap">设置卡：手势、悬停检查组合键、Hold 倒计时、置顶、实时树、更新检查。</span></div>
 <h3>第 3 步：为智能体打开端口</h3>
-<p><b>MCP</b> 页管着端点：一个当场开关它的开关、端口、是否允许智能体冻结弹出层 —— 以及把这个应用注册到 Claude Code 或 Codex 的那一行命令，带复制按钮。在这里关掉它的优先级高于 <code>AVA_DEVTOOLS_MCP</code>：你关掉的端口，下次启动依然是关的。见<a href="#mcpconnect">接到 Claude Code 或 Codex</a>。</p>
+<p><b>MCP</b> 页管着端点：一个当场开关它的开关、端口、两道许可 —— 是否允许智能体冻结弹出层，以及是否允许它<a href="#mcpinput">点击和输入</a> —— 还有把这个应用注册到 Claude Code 或 Codex 的那一行命令，带复制按钮。在这里关掉它的优先级高于 <code>AVA_DEVTOOLS_MCP</code>：你关掉的端口，下次启动依然是关的。见<a href="#mcpconnect">接到 Claude Code 或 Codex</a>。</p>
 <h3>第 2 步：驯服悬停检查组合键</h3>
 <p>Ctrl+Shift 悬停是经典的检查手势 —— 而有些应用恰好也用这个组合。可把它改为 <b>Alt</b> 或彻底关闭；Ctrl+K 里的拾取条目始终显示当前组合。</p>` },
       { id: 'problems', t: 'Problems 面板', html: `<p>绑定悄无声息地失败，证据却散落各处：这里一个空白控件，那里一行日志。<b>Problems</b> 选项卡把坏掉的东西收进一个列表 —— 绑定失败排在最前 —— 错误在警告之前，每一条都有一句白话原因。</p>
@@ -2295,9 +2585,10 @@ zh: {
 <h3>3D</h3><ul><li>基于实时快照纹理的 3D 分层视图。拖动旋转、滚轮缩放、点击图层即在树中选中。</li>
 <li>粒度：<em>Visual · merged</em>（折叠包装层）、<em>Visual · all</em> 或 <em>Logical</em>。"Reset view" 复位相机。</li></ul>
 <div class="shot"><img src="assets/img/docs/view-3d.png" alt="窗口可视图层的 3D 分层视图"><span class="cap">实时窗口的 141 个图层，可旋转 —— 点击任意图层即在树中选中。</span></div>
-<h3>Timeline（时间线）</h3><ul><li>事件、属性变化、VM 通知、焦点变化与绑定错误汇入一条流，范围由观察列表决定 —— 带因果链接、绑定逐步展开与实例检查器。见<a href="#timeline">时间线</a>。</li></ul>
+<h3>Timeline（时间线）</h3><ul><li>事件、属性变化、VM 通知、焦点变化与绑定错误汇入一条流，范围由观察列表决定 —— 带因果链接、绑定逐步展开与实例检查器。见<a href="#timeline">时间线</a>。</li>
+<li>紫色的 <b>⌁ Input</b> 泳道装着智能体对应用做过的事 —— 它注入的每一次点击、按键和拖动，就排在这些操作引起的变化上方。见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li></ul>
 <h3>Problems（问题）</h3><ul><li>只列坏掉的 —— 绑定失败、error 日志 —— 错误在警告之前，每条带原因、树内 reveal 链接与完整绑定链。Scan now 抓住在 DevTools 打开前就失败的绑定。见 <a href="#problems">Problems 面板</a>。</li></ul>
-<h3>MCP Server</h3><ul><li>端点在听的时候才有这个选项卡，停了就随之消失：在听什么、用哪个端口、以什么名字，把本应用注册给智能体的那一行命令，以及每个工具各自被调用了多少次 —— 失败的另算。启停开关、端口和冻结许可都在 ⚙ 卡片的 MCP 页。见 <a href="#mcp">让智能体看看</a>。</li></ul>
+<h3>MCP Server</h3><ul><li>端点在听的时候才有这个选项卡，停了就随之消失：在听什么、用哪个端口、以什么名字，把本应用注册给智能体的那一行命令，以及每个工具各自被调用了多少次 —— 失败的另算。能对应用动手的工具在列表里标着 <b>⌁</b>，因此不必把名字背下来，也能看清智能体可能做过什么。启停开关、端口和两道许可都在 ⚙ 卡片的 MCP 页。见 <a href="#mcp">让智能体看看</a>。</li></ul>
 <h3>Logs（日志）</h3><ul><li>实时 Avalonia 日志，支持暂停、级别、区域与文本过滤。默认捕获 Warning 及以上。工具自身产生的日志会被丢弃、UI 批量刷新 —— 不会出现反馈循环卡死。</li>
 <li><code>LogCapture.Publish</code> 把应用自己的事件送进此面板 —— 见<a href="#applogs">应用日志接入</a>。</li></ul>` },
       { id: 'capture', t: '截图与缺陷报告', html: `<p>「发我一张截图和 XAML 路径」在这里是一次点击 —— 元素、它的 bounds 和与默认值不同的属性，随图片一起上路。</p>
@@ -2322,7 +2613,7 @@ zh: {
 <p>已经打开的 IDE 会在自己的窗口里收到文件 —— 永远不会启动第二个实例。Rider 和 VS Code 自带的 goto 命令把文件送进包含它的项目所在的窗口：项目 A 和项目 B 并排开着时，来自被调试应用的链接会落进正确的那个。Visual Studio 每个解决方案一个进程 —— DevTools 会询问每个运行中的实例谁的解决方案包含该文件并送到那里，优先选正在调试你应用的那个。IDE 还在启动时连点两次链接，也只会开一个实例，不是两个。</p>
 <h3>位置从哪里来</h3>
 <p>XAML 位置来自编译器的 <code>AvaloniaXamlCreateSourceInfo</code>（Avalonia 12 在 Debug 构建中默认开启）。C# 类型 —— ViewModel、事件处理器 —— 通过在解决方案目录中搜索定位；自动探测不够时设置 <code>AVA_DEVTOOLS_SRC_ROOT</code>。编译进主题程序集的 Fluent 样式在磁盘上没有源码 —— 弹窗会显示反射信息，并给出与你的 Avalonia 版本匹配的 “View theme XAML on GitHub” 链接。</p>` },
-      { id: 'mcp', t: '让智能体来看（MCP）', html: `<p>值得看的应用，是那个<em>已经在运行</em>、出错的状态还留在屏幕上的应用。DevTools 可以把这个应用交给编码智能体：一个<b>只读</b>的 <a href="https://modelcontextprotocol.io">Model Context Protocol</a> 端点，进程内、只监听回环、不主动开启。</p>
+      { id: 'mcp', t: '让智能体来看（MCP）', html: `<p>值得看的应用，是那个<em>已经在运行</em>、出错的状态还留在屏幕上的应用。DevTools 可以把这个应用交给编码智能体：一个 <a href="https://modelcontextprotocol.io">Model Context Protocol</a> 端点，进程内、只监听回环、不主动开启 —— 默认<b>只读</b>，点击与输入在<a href="#mcpinput">第二道开关</a>之后，由你自己打开。</p>
 <p>「进程内」是关键。进程外的检查器只能通过协议请应用描述自己；而这个<em>就是</em>应用本身，所以列出控件的那同一次调用，也能把它渲染出来、读出设定其宽度的优先级、引用它记录的绑定错误 —— 中间没有任何序列化边界。本文档里的每个选项卡都是某个从不需要窗口的引擎之上的一层视图，智能体直接调用那些引擎。它读到的答案和你看到的一模一样。</p>
 <h3>第 1 步。打开它</h3>
 <p>打开 DevTools，打开 ⚙ 卡片并切到它的 <b>MCP</b> 页：一个开关启停端点，旁边的输入框设置端口。开着的时候就有 <b>MCP Server</b> 选项卡，它顶部那行说明当前在听什么 —— <code>● MyApp-avadevtools — listening on http://127.0.0.1:5171/</code>。这个选择按本机保存，下次启动依然生效。</p>
@@ -2349,8 +2640,9 @@ zh: {
 <li><b>繁忙的应用会直说。</b>如果 UI 线程一分钟内没有响应 —— 弹出了模态框，或者被调试器停住了 —— 调用会明确返回这一点，而不是把智能体丢在一个死掉的套接字上。</li></ul>
 <h3>它能做什么、不能做什么</h3>
 <ul><li><b>只监听回环</b>，而且这不是一个配置项：它绑定到 0.0.0.0 的那天，就是一个调试辅助变成隔壁工位读你屏幕的手段的那天。<code>Origin</code> 头同样会检查，因此浏览器页面无法通过 DNS 重绑定摸到它。</li>
-<li><b>十七个工具里有十五个是纯读。</b>不注入任何输入，不写任何应用属性，不运行任何处理器。这就是全部的安全故事，也是这里没有确认流程的原因：没有什么需要确认。</li>
-<li><b>两个工具会改变东西，需要第二道开关。</b><code>hold</code> 和 <code>pin_class</code> 冻结瞬时 UI、强制伪类 —— 这是没有指针的一方查看悬停状态的唯一途径。除非 ⚙ 卡片 MCP 页里的 <b>Allow freezing</b> 勾选框、<code>McpAllowHold</code> 或 <code>AVA_DEVTOOLS_MCP_HOLD=1</code> 另有说法，否则它们是关的；它们只改变瞬时 UI 状态，每次保持都带一个自动释放的期限，保持期间应用会显示横幅，应用里按 <span class="kbd">Esc</span> 同样能释放。</li>
+<li><b>二十五个工具里有十六个是纯读。</b>它们不注入任何输入，不写任何应用属性，不运行任何处理器。它们不需要确认流程，因为没有什么需要确认。</li>
+<li><b>七个工具会对应用动手，各有自己的开关。</b><code>click</code>、<code>hover</code>、<code>drag</code>、<code>scroll</code>、<code>press_key</code>、<code>type_text</code> 和 <code>focus_element</code> 会运行你的处理器，而你的处理器能做你的应用能做的一切 —— 所以它们等的是自己那道许可，而不是冻结那道。不主动开启；见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li>
+<li><b>两个工具冻结瞬时状态，需要第二道开关。</b><code>hold</code> 和 <code>pin_class</code> 让弹出层保持打开、强制伪类 —— 这是没有指针的一方查看悬停状态的唯一途径。除非 ⚙ 卡片 MCP 页里的 <b>Allow freezing</b> 勾选框、<code>McpAllowHold</code> 或 <code>AVA_DEVTOOLS_MCP_HOLD=1</code> 另有说法，否则它们是关的；它们只改变瞬时 UI 状态，每次保持都带一个自动释放的期限，保持期间应用会显示横幅，应用里按 <span class="kbd">Esc</span> 同样能释放。</li>
 <li><b>它只归还自己拿走的。</b>智能体的保持只会自动释放智能体自己发起的那部分：之后你自己按 <span class="kbd">Shift</span>+<span class="kbd">F12</span>，期限不会把你的保持一并撤掉。</li></ul>
 <p class="tip">和 DevTools 的其余部分一样，只在 Debug 里发布。端点在任何构建里都默认关闭，但一个在 Release 中根本不附加 DevTools 的应用，就不可能意外地把它开起来。</p>` },
       { id: 'mcpconnect', t: '接到 Claude Code 或 Codex', html: `<p>端点只在你的应用运行期间存在，所以顺序始终不变：启动应用、打开服务器、把智能体指过去。它注册的名字是 <code>&lt;程序集名&gt;-avadevtools</code> —— 这也是你在客户端列表里会看到的名字。</p>
@@ -2358,8 +2650,8 @@ zh: {
 <ol class="steps"><li>运行你的应用，按 <span class="kbd">F12</span>。</li>
 <li>打开 ⚙ 卡片的 <b>MCP</b> 页，勾上 <b>Serve MCP on loopback</b>。</li>
 <li>复制 <em>Point your agent at it</em> 下面那段 —— 里面已经是正确的名字和端口。</li></ol>
-<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="设置卡片的 MCP 页：开关、端口和冻结许可，下面一行说明当前在听什么"><span class="cap">⚙ → MCP：要设置的都在这里，别的都不在 —— 开关、端口、冻结许可，外加一行结果。</span></div>
-<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="MCP Server 选项卡：在听什么，以及每个工具各被调用了多少次"><span class="cap">端点在，这个选项卡才在：十七个工具，以及智能体对每一个究竟问过多少次。横杠表示从没碰过；琥珀色的数字里含失败调用。</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="设置卡片的 MCP 页：开关、端口和两道许可，下面一行说明当前在听什么"><span class="cap">⚙ → MCP：要设置的都在这里，别的都不在 —— 开关、端口、冻结与输入两道许可，外加一行结果。</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="MCP Server 选项卡：在听什么，以及每个工具各被调用了多少次"><span class="cap">端点在，这个选项卡才在：二十五个工具，以及智能体对每一个究竟问过多少次。横杠表示从没碰过；琥珀色的数字里含失败调用；标着 ⌁ 的能对应用动手。</span></div>
 <h3>第 2a 步。Claude Code</h3>
 <pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
 <p>作用域决定谁能用到它。<code>--scope local</code>（默认）是这个项目、只给你自己；<code>--scope project</code> 会在仓库根目录写一个 <code>.mcp.json</code>，参与这个应用的每个人都拿到同一条配置；<code>--scope user</code> 是这台机器上的所有项目。写进去的就是选项卡里显示的那段 JSON：</p>
@@ -2380,7 +2672,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>同时开着两个应用</h3>
 <p>给第二个应用自己的端口（⚙ 卡片 MCP 页上的 <b>Port</b> 框、<code>McpPort</code>，或 <code>AVA_DEVTOOLS_MCP_PORT</code>），然后作为第二条配置加进去。它们的名字本来就不同，智能体的工具列表依然清楚。</p>
 <p class="tip">比应用先启动的客户端通常要重连之后才看得到工具 —— Claude Code 里的 <code>/mcp</code>，Codex 里开新会话。那是重连问题，不是配置问题。</p>` },
-      { id: 'mcptools', t: '十七个工具', html: `<p>十七个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
+      { id: 'mcptools', t: '二十五个工具', html: `<p>二十五个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
+<p>十六个只看。两个冻结瞬时状态，等冻结许可。七个对应用动手，等<a href="#mcpinput">输入许可</a> —— 它们是这里的最后一张表。</p>
 <h3>先找到方向</h3>
 <table>
 <tr><th>工具</th><th>回答</th><th>参数</th></tr>
@@ -2422,7 +2715,89 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>hold</code></td><td>冻结窗口的瞬时 UI 以便查看：弹出层与工具提示保持打开，悬停样式保持钉住。需要保持开关；会自动释放。</td><td><code>elementId</code>、<code>stop</code>、<code>seconds</code>（默认 120，最大 900）</td></tr>
 <tr><td><code>pin_class</code></td><td>强制某个伪类 —— <code>:pointerover</code>、<code>:pressed</code>、<code>:checked</code>、<code>:disabled</code> —— 以便读取并截取该状态的样式。需要保持开关。</td><td><code>elementId</code>、<code>pseudoClass</code>、<code>pin</code></td></tr>
 </table>
-<p>瞬时 UI 对稍晚一刻拍下的树快照是不可见的，而智能体也没有指针去把菜单撑开。这三个工具，就是它查看那部分「只在有人交互时才存在」的界面的方式。</p>` },
+<p>瞬时 UI 对稍晚一刻拍下的树快照是不可见的，而智能体也没有指针去把菜单撑开。这三个工具，就是它查看那部分「只在有人交互时才存在」的界面的方式。</p>
+<h3>动手</h3>
+<p>这七个需要输入许可，每一个都作为真实的平台输入送进去 —— 那是什么意思、它又会拒绝什么，见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</p>
+<table>
+<tr><th>工具</th><th>做什么</th><th>参数</th></tr>
+<tr><td><code>click</code></td><td>在人会点的地方点一个元素，并说出应用对此做了什么。</td><td><code>elementId</code>、<code>button</code>、<code>count</code>、<code>modifiers</code>、<code>x</code>、<code>y</code></td></tr>
+<tr><td><code>hover</code></td><td>把指针移到元素上并停住 —— 应用自己的悬停处理器会跑，所以工具提示按它自己的延迟出现。</td><td><code>elementId</code>、<code>x</code>、<code>y</code></td></tr>
+<tr><td><code>drag</code></td><td>按下、移动、松开 —— 滑块、分隔条、可重排的行。中间过程会一并送出，因为跟踪移动的控件会忽略单次跳跃。</td><td><code>elementId</code>、<code>toElementId</code>、<code>dx</code>、<code>dy</code>、<code>modifiers</code></td></tr>
+<tr><td><code>scroll</code></td><td>在元素上滚动滚轮，并说出滚动偏移是否真的动了。</td><td><code>elementId</code>、<code>lines</code>、<code>horizontal</code>、<code>modifiers</code></td></tr>
+<tr><td><code>press_key</code></td><td>一个键或组合键 —— Enter、Escape、Tab、Ctrl+A。快捷键绑定、访问键和隧道处理器都能看见它。</td><td><code>keys</code>、<code>elementId</code>、<code>repeat</code></td></tr>
+<tr><td><code>type_text</code></td><td>把字符串作为文本输入敲进去，和输入法或粘贴产生的是同一种事件。</td><td><code>text</code>、<code>elementId</code></td></tr>
+<tr><td><code>focus_element</code></td><td>不点击就给出键盘焦点 —— 像 Tab 会做的那样，但不必一路走过去。</td><td><code>elementId</code></td></tr>
+</table>
+<h3>等结果</h3>
+<table>
+<tr><th>工具</th><th>回答</th><th>参数</th></tr>
+<tr><td><code>wait_for</code></td><td>等到某个东西出现或消失，然后作答。纯观察 —— 不需要许可，也不改变任何东西。</td><td><code>query</code>、<code>elementId</code>、<code>gone</code>、<code>timeoutMs</code>（5000，最大 30000）</td></tr>
+</table>
+<p>打开对话框、发起加载或清空列表的那一次点击，总在引发它的调用之后才完成。<code>wait_for</code> 就是这个环怎么闭合的：循环轮询 <code>get_tree</code> 更慢、更费 token，而且仍然说不出它是<em>什么时候</em>到的。</p>` },
+      { id: 'mcpinput', t: 'MCP 输入：点击、键入、拖动', html: `<p>读能回答<em>它为什么这么宽</em>和<em>哪里坏了</em>。它永远回答不了<em>这个按钮到底能不能用</em>。那得把按钮按下去 —— 所以，在一道自己的开关之后，智能体可以按：七个工具，点击、悬停、拖动、滚动、按键、输入文本、移动焦点。</p>
+<h3>这是真实输入，不是抄近路</h3>
+<p>这里没有任何东西是在控件上直接抛事件。每个动作都构造成原始平台事件，穿过 Avalonia 自己的输入管理器 —— 和 macOS、X11、Windows 后端推进去的是同一扇门。命中测试决定打到谁，点击次数来自真实时间戳，指针捕获与 pointer-over 的表现和对人一样，而你的处理器之所以会跑，是因为输入<em>到达</em>了它们，不是因为被人调用。</p>
+<p>可信的理由正在于此。一个在按钮上抛 <code>Click</code> 的智能体，并没有证明用户点得到这个按钮 —— 它可能压在对话框底下、被禁用，或者只有三个像素高。走正门意味着由框架决定会发生什么，而不是由工具决定。</p>
+<h3>单独打开</h3>
+<p>它和服务器分开、也和冻结许可分开，因为出错的性质不同：保持会自己复原，点击会跑你的代码。在 ⚙ 卡片的 MCP 页勾上 <b>Allow input (click, type, keys)</b> —— 它从下一次调用起生效，而不是下次启动，所以取消勾选能当场把智能体拦下。或者一开始就这样启动：</p>
+<pre><code><span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span>, McpAllowInput = <span class="k">true</span> });</code></pre>
+<p>或用 <code>AVA_DEVTOOLS_MCP_INPUT=1</code> 运行。它打印的那一行会说明开着的是哪一半：</p>
+<pre><code>MCP server MyApp-avadevtools (input allowed) listening on http://127.0.0.1:5199/</code></pre>
+<p>没有许可时，这些动手的工具仍然列在清单里 —— 智能体应当知道自己能要什么 —— 而每一个的回答都会说明怎么打开它。所有只看的部分照常工作。</p>
+<h3>回答是应用给出的判决</h3>
+<p>一个只报「点了」的动作没什么价值。每个动作都会说出应用对此做了什么 —— 有没有人处理它、焦点去了哪里、什么打开或关上了、哪段文本变了、滚动偏移有没有动：</p>
+<pre><code><span class="k">click</span> {<span class="s">"elementId"</span>: 2}
+
+  Clicked #2 Button #DeployButton at (871, 398). The application handled it.
+  Focus moved from nothing to #2 Button #DeployButton.
+
+<span class="k">wait_for</span> {<span class="s">"query"</span>: <span class="s">"deploying"</span>}
+
+  There after 1 ms.
+  #9 Run #StatusRun  <span class="s">"deploying 65%"</span></code></pre>
+<p>「没有人处理」同样是一个回答，而且和「没送到」是两回事：</p>
+<pre><code><span class="k">press_key</span> {<span class="s">"keys"</span>: <span class="s">"Ctrl+A"</span>}
+
+  Pressed Ctrl+A, with focus on #10 TextBox #BuildFilter "orbit".
+  Nothing in the application handled it — the input was delivered and no
+  handler took it, which is a real answer: the control may have no handler
+  for this.</code></pre>
+<h3>它会拒绝，而不是假装</h3>
+<p>危险的回答，是给一次什么也没做的点击回一句轻快的「点了」。每一种诚实地说不可能发生的情况，都用它自己的话作为错误拒绝掉：</p>
+<pre><code><span class="k">click</span> {<span class="s">"elementId"</span>: 2}
+
+  #2 Button #DeployButton is at (871, 396), but what is on top there is
+  #14 LightDismissOverlayLayer. A click would go to that, not to this.
+  Something is covering the element — a dialog, a flyout, an overlay.</code></pre>
+<p>元素被禁用、不可见、尺寸为零、滚出视野，或者压根不是一个矩形，都是一样：</p>
+<pre><code><span class="k">click</span> {<span class="s">"elementId"</span>: 9}
+
+  #9 Run #StatusRun is a text inline: it has no rectangle of its own to
+  click. The element that renders it is #4 TextBlock.</code></pre>
+<p>而会悄悄变成另一回事的输入，在送出之前就被拒绝：换行是键，不是文本，把它当文本敲进去会插入一个只有部分控件接受的控制字符：</p>
+<pre><code><span class="k">type_text</span> {<span class="s">"elementId"</span>: 10, <span class="s">"text"</span>: <span class="s">"a\\nb"</span>}
+
+  That string contains a newline or a tab. Those are keys, not text: type
+  the line, then press_key Enter (or Tab).</code></pre>
+<h3>它做过的一切都在时间线上</h3>
+<p>注入的输入进入自己的泳道 <b>⌁ Input</b>，带着落点，以及命中测试真正找到的那个元素 —— 那通常是被点名元素的子元素，值得一看：</p>
+<pre><code><span class="k">get_timeline</span> {<span class="s">"lanes"</span>: [<span class="s">"input"</span>]}
+
+  1  15:02:54.246 input  ⌁ click #2 Button #DeployButton
+                           agent click at (871, 398) · hit #3 TextBlock "Deploy to production"
+  3  15:03:11.706 input  ⌁ type "orbit"
+                           agent typed 5 character(s) into #10 TextBox #BuildFilter
+  4  15:03:11.732 input  ⌁ key Ctrl+A
+                           agent pressed Ctrl+A · focus was #10 TextBox #BuildFilter
+ 14  15:04:04.093 input  ⌁ drag #17 Slider #Throttle
+                           agent drag at (485, 200) → (565, 200) · hit #24 Border #TrackBackground</code></pre>
+<p>同样的行也出现在你面前的 <a href="#timeline">Timeline 选项卡</a>里，而不只在智能体自己的记录中。这正是要点：当智能体在你正盯着的应用上干活，它的点击必须出现在它引起的属性变化<em>上方</em>，否则那些事件就像凭空冒出来。这条泳道有自己的开关，所以要收起来也一样容易。</p>
+<p>动作进行时，应用上方会有一枚紫色标记，说明对谁做了什么。它不接收点击，几秒后淡出，并且在截图渲染期间隐藏 —— 看着你窗口的智能体，该拍到的是你的应用，不是我们的浮层。</p>
+<h3>它不会碰什么</h3>
+<ul><li><b>DevTools 窗口永远不是目标。</b>被要求点它里面的东西时，工具会照实说明并且什么也不做。一个能驱动自己控件的工具，也能把自己的开关关掉。</li>
+<li><b>操作系统的指针不会移动。</b>事件送进应用，而不是送到桌面上 —— 因此凡是归操作系统而不归你的应用管的（原生文件对话框、macOS 菜单栏、拖到另一个应用），都在它够不到的地方。</li>
+<li><b>不重试，也不猜。</b>一次调用就是一个动作；做不到就如实上报，不会拿相邻的东西凑近似。</li></ul>
+<p class="tip"><b>提示。</b><code>hover</code> 和 <code>pin_class</code> 不是同一个工具。<code>pin_class</code> 强制样式，让悬停状态可以在什么都不发生的情况下被读取；<code>hover</code> 是真的指针，控件自己的处理器会跑，工具提示按自己的延迟出现。前者用来看，后者用来试。</p>` },
       { id: 'mcpcases', t: 'MCP：五个真实案例', html: `<p>对示例应用的五次会话，原样照录。下面每一条回复都是工具真实打印出来的。重点不在于这些工具存在，而在于一个真实问题只需要这么少的几次调用。</p>
 <h3>案例 1。approver 那一行是空的</h3>
 <p>发布卡片显示 <code>status idle · window Fri 16:00 UTC · approver</code> —— 然后就没了。没有异常、没有红色、日志里也没有一行，因为「解析不到任何东西」的绑定，压根不是应用会听说的错误。</p>
@@ -2526,8 +2901,9 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
     McpServer            = <span class="k">true</span>,                               <span class="c">// 开启只读 MCP 端点 —— 默认 false</span>
     McpPort              = 5171,                               <span class="c">// 仅 127.0.0.1 —— 默认 5171</span>
     McpAllowHold         = <span class="k">true</span>,                               <span class="c">// 允许智能体冻结弹出层 / 钉住 :pointerover —— 默认 false</span>
+    McpAllowInput        = <span class="k">true</span>,                               <span class="c">// 允许智能体点击、输入和拖动 —— 默认 false</span>
 });</code></pre>
-<p>三个 <code>Mcp*</code> 选项详见 <a href="#mcp">让智能体来看（MCP）</a>。其余一切不索取即关闭或不存在；用户在 <a href="#settings">⚙ 设置卡</a>里保存的选择优先于代码传入的值。</p>` },
+<p>四个 <code>Mcp*</code> 选项详见 <a href="#mcp">让智能体来看（MCP）</a>与<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。其余一切不索取即关闭或不存在；用户在 <a href="#settings">⚙ 设置卡</a>里保存的选择优先于代码传入的值。</p>` },
       { id: 'env', t: '环境变量', html: `<table>
 <tr><th>变量</th><th>含义</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>窗口加载时自动打开 DevTools。</td></tr>
@@ -2538,15 +2914,17 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_UPDATE_CHECK=0</code></td><td>关闭每日一次的新版本检查。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP=1</code></td><td>在 127.0.0.1 上开启只读 <a href="#mcp">MCP 端点</a>。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>它使用的端口，默认 5171。</td></tr>
-<tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>额外允许 <code>hold</code> 与 <code>pin_class</code> —— 仅有的两个会改变东西的工具。</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>额外允许 <code>hold</code> 与 <code>pin_class</code> —— 两个冻结瞬时状态的工具。</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td><td>额外允许七个<a href="#mcpinput">对应用动手</a>的工具 —— 点击、悬停、拖动、滚动、按键、文本、焦点。</td></tr>
 </table>
-<p class="tip">这三个 <code>MCP</code> 变量只是起始状态，不是最终决定：<a href="#settings">⚙ 卡片</a> MCP 页里的开关按机器保存，并且优先于它们。你在工具里关掉的端口，下次启动依然是关的，无论启动脚本导出了什么。</p>` },
+<p class="tip">这四个 <code>MCP</code> 变量只是起始状态，不是最终决定：<a href="#settings">⚙ 卡片</a> MCP 页里的开关按机器保存，并且优先于它们。你在工具里关掉的端口，下次启动依然是关的，无论启动脚本导出了什么。</p>` },
       { id: 'limits', t: '限制', html: `<ul>
 <li>仅桌面端 —— 移动/浏览器平台不支持辅助窗口。</li>
 <li>DevTools 自带主题 —— 应用用什么主题、甚至没有主题，都不影响它。</li>
 <li>设为 <code>LiveTree = false</code> 后树重新变回快照：结构变化后请点 ↻ Refresh（两种模式下属性值都是实时更新的）。</li>
 <li>在 HiDPI 屏幕上，截图与缺陷报告会把带 BoxShadow 的边框<em>内容</em>放大一倍 —— 这是 Avalonia 12 渲染层的一个特性。改为截取元素而不是整扇窗口通常可以绕开。</li>
-<li>MCP 端点只绑定 127.0.0.1。这是刻意为之，且不可配置。</li></ul>` },
+<li>MCP 端点只绑定 127.0.0.1。这是刻意为之，且不可配置。</li>
+<li>注入的输入到达的是你的应用，不是桌面：操作系统的指针不会移动，所以原生文件对话框、macOS 菜单栏以及拖到另一个应用都在它够不到的地方。见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li></ul>` },
       { id: 'feedback', t: '反馈', html: `<p>工具栏右上角的 <b>Feedback</b> 按钮打开 AvaDevTools 的问题跟踪器 —— 一键报告缺陷或请求功能。同一动作也在 <span class="kbd">Ctrl</span>+<span class="kbd">K</span> 里，叫 “Send feedback”。</p>
 <p>更喜欢聊天？<a href="https://t.me/avadevtools">Telegram 频道</a>接受提问和快速帮助。</p>` },
       { id: 'updates', t: '更新通知', html: `<p>工具栏上 <b>Feedback</b> 旁边始终以淡色显示你正在运行的版本号。AvaDevTools 的新版本带来新的面板和修复，但 NuGet 依赖不会自己宣布它们 —— 所以有更新的版本发布时，同一个版本号会变成蓝色并长出一个 <b>↑</b>。</p>
