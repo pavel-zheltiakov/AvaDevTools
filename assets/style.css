@@ -185,6 +185,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .story-sticky.with-head .story-step{justify-content:flex-start}
 .story-sticky.with-head .story-shot{height:100%;min-height:0}
 .story-sticky.with-head .story-shot img{max-height:100%}
+/* The slide starts where the text starts. Centred in a full-height stage, a short slide — the
+   release card, a transcript — hung half a screen below the paragraph it belongs to, and the
+   two read as different sections of the page rather than as one thing said twice. */
+.story-sticky.with-head .story-shot > *{top:0;transform:translate(-50%,0) scale(.965)}
+.story-sticky.with-head .story-shot > .on{transform:translate(-50%,0) scale(1)}
 .story-track-head{padding:14px 0 0}
 .story-track-head .sec{margin-bottom:0}
 .story-track-foot{padding:10px 0 14px;font-size:14px}
