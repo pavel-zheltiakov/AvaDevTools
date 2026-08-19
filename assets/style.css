@@ -176,15 +176,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
    sticky panel, so both ride with the slides for the whole story. Content is
    top-anchored so caption, step text and slide read as one block. */
 #whats-new{padding:0}
-.story-sticky.with-head{top:59px;height:calc(100vh - 59px);flex-direction:column;align-items:stretch;justify-content:center;gap:10px}
-/* Caption pinned at the top, the slide centred in what is left. Top-anchoring both read as
-   one block on a laptop, but a short slide — a transcript, a small card — left most of a tall
-   window empty below it, which looks like a page that failed to load rather than a design. */
-.story-sticky.with-head .story-grid{flex:0 1 auto;min-height:0;align-content:center;align-items:center}
+.story-sticky.with-head{top:59px;height:calc(100vh - 59px);flex-direction:column;align-items:stretch;justify-content:flex-start;gap:10px}
+/* Caption at the top, the slide filling everything under it. The stage is the panel rather
+   than a box floating in it: a short slide — a card, a transcript — centres inside a stage that
+   is already the right size, instead of pushing a hole between the caption and the text. */
+.story-sticky.with-head .story-grid{flex:1 1 auto;min-height:0;align-content:stretch;align-items:stretch}
 .story-sticky.with-head .story-text{min-height:0}
-.story-sticky.with-head .story-step{justify-content:center}
-.story-sticky.with-head .story-shot{height:auto;min-height:min(46vh,400px)}
-.story-sticky.with-head .story-shot img{max-height:78vh}
+.story-sticky.with-head .story-step{justify-content:flex-start}
+.story-sticky.with-head .story-shot{height:100%;min-height:0}
+.story-sticky.with-head .story-shot img{max-height:100%}
 .story-track-head{padding:14px 0 0}
 .story-track-head .sec{margin-bottom:0}
 .story-track-foot{padding:10px 0 14px;font-size:14px}
