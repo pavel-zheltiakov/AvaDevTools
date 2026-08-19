@@ -3,9 +3,9 @@
 // whose tag already exists on GitHub is ignored, so this never duplicates or
 // overrides a published release. Updated each release round with RELEASE_NOTES.md.
 window.LOCAL_RELEASES = [{
-  tag_name: 'v12.1.6',
-  name: 'AvaDevTools 12.1.6',
-  published_at: '2026-08-18T00:00:00Z',
+  tag_name: 'v12.1.7',
+  name: 'AvaDevTools 12.1.7',
+  published_at: '2026-08-19T00:00:00Z',
   html_url: 'https://github.com/pavel-zheltiakov/AvaDevTools/releases',
-  body: "An agent could read the application, not touch it. This release adds input over MCP.\n\n## New Features\n\n- **Eight new tools, twenty-five in all** \u2014 click, hover, drag, scroll, keys, text, focus, wait.\n- **Real input, not simulated** \u2014 your handlers run as for a person.\n- **An input lane on the Timeline** \u2014 every action, above what it caused.\n- **A marker over the application** \u2014 a pill naming what is happening.\n\n## Changes\n\n- **No pretend success** \u2014 an impossible action is refused, with the reason.\n- **The acting tools are marked** \u2014 the tool list says which ones can act.\n- **The handshake says what is allowed** \u2014 before the agent's first call.\n\nDocs: https://pavel-zheltiakov.github.io/AvaDevTools/docs.html\n",
+  body: "Keep the repro: record what you do, play it back later.\n\n## New Features\n\n- **Session tab** \u2014 records your clicks and typing, plays them back. Agents can do the same over MCP.\n- **Checks** \u2014 mark what should be true; the build server replays and fails when it isn't.\n\n## Bug Fixes\n\n- **Fixed the 3D view** \u2014 layers sat in the wrong place, text read mirrored.\n- **Clicks from the tool no longer miss** \u2014 they landed on nothing right after the screen changed.\n- **Dragging starts where you pressed** \u2014 sliders ended up at the wrong value.\n- **Search no longer finds our own marker** \u2014 the label the tool draws over your app.\n\nDocs: https://pavel-zheltiakov.github.io/AvaDevTools/docs.html\n",
 }];

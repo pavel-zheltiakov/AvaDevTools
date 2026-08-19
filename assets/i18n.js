@@ -12,13 +12,40 @@ en: {
     get: 'Get started', stories: 'See it in action', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.1.6", docs: 'Documentation →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.1.7", docs: 'Documentation →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   stories: {
-    h: 'Stories', wn: 'input',
+    h: 'Stories', wn: 'repro',
     lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
     list: [
+      { key: 'repro', h: '⏺ Keep the repro', sub: 'Record what you did, freeze what should be true, and replay it later — in the window, or on the build server with nobody watching.',
+        steps: [
+          { t: '⏺ Keep the repro',
+            d: 'A bug six steps deep is reproducible for exactly as long as somebody keeps performing the six steps. Handed to a teammate it becomes a paragraph of instructions; handed to CI it becomes nothing at all.',
+            d2: 'So the session becomes the artefact. Everything the application receives is written down while you work — yours and an agent’s alike — checked against what you say should be true, and replayed later through the same real input.',
+            newsTitle: 'New in 12.1.7',
+            news: [
+              { k: 'Session tab', d: 'records your clicks and typing, plays them back' },
+              { k: 'Checks', d: 'mark what should be true, while you record' },
+              { k: 'Replay in CI', d: 'the build server runs it and fails when the app breaks' },
+              { k: 'Agents too', d: 'record and replay over MCP' },
+              { k: 'Fixed the 3D view', d: 'layers sat in the wrong place, text read mirrored' },
+            ] },
+          { img: 'story/r02.png', t: 'It writes itself down while you work', d: 'Nothing was configured and no selector was typed by hand. The list is what the application actually received — a click on the deploy button, a drag of the throttle, the word put into the filter — each named the way you named the control, with the second it arrived. An agent’s actions land in the same list: since 12.1.6 both arrive as the same platform input, so a session does not care whose hand it was.' },
+          { img: 'story/r03.png', t: 'A check is a fact you froze', d: 'A recording with no expectation is a macro: it proves the steps ran, not that they worked. Select an element, press ✓, and the menu is built out of that element as it stands right now — every line already carrying the value it would assert. You choose what matters; the value is read for you while it is still on screen, which is the one moment it cannot be wrong.' },
+          { img: 'story/r04.png', t: 'Replay: the same input, in the same order', d: 'Six steps, green. The three actions went in as real platform input through the path 12.1.6 built, the check re-read the property through the formatter the Properties pane reads through, and the last two — nothing new in Problems, no new binding error — were added without being asked for. Replay flat out, at the speed it was recorded, four times that, or one step per press of Next.' },
+          { img: 'story/r05.png', t: 'And when it diverges, it says why', d: 'Somebody disabled the button between the recording and now. The replay does not report a click it never performed: it stops at step 1 of 6, gives the reason in the application’s own terms, writes a screenshot of the moment beside the session file, and selects the element in the tree. The state that failed is still on screen — which is the whole reason to replay in the window rather than in CI.' },
+          { t: 'The same file, on the build machine', d: 'A session is JSON at a path you chose, and it belongs in the repository beside the bug it reproduces. On a build machine the application replays it on start and exits with the answer — 0 replayed, 1 diverged, 2 the file itself was the problem — printing the PASS/FAIL lines the self-tests have printed since 12.1.0. A CI step that greps for FAIL has nothing new to learn.',
+            code: [
+              '$ AVA_DEVTOOLS_REPLAY=repro/filter-loses-its-text.json ./MyApp',
+              '  REPLAY PASS 1. click Button #DeployButton',
+              '  REPLAY PASS 2. drag Slider #Throttle by 60, 0',
+              '  REPLAY FAIL 3. ✓ TextBox #BuildFilter.Text is orbit',
+              '  REPLAY      Text is , and the session expected orbit.',
+              '  REPLAY 2 pass, 1 fail  (filter-loses-its-text.json)',
+            ] },
+        ] },
       { key: 'input', h: '⌁ Input over MCP', sub: 'An agent can click, type and drag your application — real platform input, behind a switch of its own, with everything it did on the Timeline.',
         steps: [
           { t: '⌁ Input over MCP',
@@ -273,6 +300,7 @@ en: {
   feat: {
     h: 'Everything you expect from DevTools', sub: 'Attach once, press F12 in any window.',
     cards: [
+      { i: '⏺', t: 'Keep the repro', d: 'Record what the application receives — yours and an agent’s alike — freeze what should be true while it still is, and replay it later: in the window at any pace, or on the build server, where it exits non-zero at the first divergence.' },
       { i: '🌳', t: 'Live smart tree', d: 'A tree that reads like XAML and follows the application live: structural changes splice in as they happen and flash, with a pause button for reading. Syntax colors, code-style folding, a compact pick view, hide, focus, scope and search.' },
       { i: '🪟', t: 'All windows, one DevTools', d: 'The tree is rooted at the application — every window is a top-level node, appearing and disappearing live. F12 anywhere focuses the same DevTools; scope gives one window the whole tree.' },
       { i: '🎯', t: 'Value tracking', d: 'Track any property across the whole tree: same value = same color, null in its own bucket, a live legend with counts — and "Fold to changes" shows every boundary at once.' },
@@ -310,7 +338,7 @@ en: {
     contents: 'Contents',
     groups: [
       { t: 'Getting started', ids: ['install', 'quickstart'] },
-      { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
+      { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
       { t: 'Agents (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: 'Reference', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -607,6 +635,32 @@ en: {
 <h3>What "slow" means here</h3>
 <p>Slow is measured against the budget the display is actually keeping — the <em>median</em> of recent intervals, never a mean, so one 300 ms stall cannot redefine normal. The sparkline is pinned to three fixed budgets for the same reason: a calm application should look calm, not auto-scaled into drama.</p>
 <p class="tip">Arming the meter keeps the render loop ticking, so a fully idle application will not idle quite as deeply. That is on the tooltip rather than buried: measuring costs something, and pretending otherwise would make the numbers a lie.</p>` },
+      { id: 'session', t: 'Keep the repro: record, check, replay', html: `<p>A bug six steps deep is reproducible for exactly as long as you keep performing the six steps. The <b>Session</b> tab writes them down instead — everything the application receives, yours and an agent's alike — freezes what should be true while it still is, and replays the lot later: in the window, or on a build machine with nobody watching.</p>
+<h3>Step 1. Record</h3>
+<ol class="steps"><li>Open the <b>Session</b> tab and press <b>⏺ Record</b>.</li>
+<li>Use the application. Clicks, drags, scrolls, keys, typed text and focus changes join the list as they happen, each with the second it arrived.</li>
+<li>Press <b>■ Stop</b>.</li></ol>
+<p>A step names its element the way you named it: <code>x:Name</code> first, then the type plus the text it shows, then the path — all of them kept, so a replay can say which one it matched on. A press also keeps <em>where</em> inside the element it landed: on a button that is a detail, on a slider it is the whole gesture.</p>
+<div class="shot"><img src="assets/img/docs/session-record.png" alt="The Session tab filling up while the application is used"><span class="cap">Recording. What the application received, in order, with the moment each one arrived.</span></div>
+<h3>Step 2. Freeze what should be true</h3>
+<ol class="steps"><li>While recording, select an element in the tree.</li>
+<li>Press <b>✓ Check…</b> — the menu is built out of that element right now: it exists, it is gone, or one property holds the value it holds at this moment.</li>
+<li>Pick one and it goes into the session as a step.</li></ol>
+<p>Two checks are added without being asked for, because their absence is what people forget: nothing new in <a href="#problems">Problems</a>, and no new binding error.</p>
+<div class="shot"><img src="assets/img/docs/session-replay.png" alt="A replayed session with every step green"><span class="cap">A replay that passed: three actions, the check written while the value was on screen, and the two that come for free.</span></div>
+<h3>Step 3. Replay</h3>
+<ol class="steps"><li>Press <b>▶ Replay</b> and choose the pace: flat out, at the speed it was recorded, four times that, or one step per press of <b>Next</b>.</li>
+<li>Every step goes in as real input, by the same path an agent's click takes — so a step is refused for the same honest reasons: covered, disabled, gone.</li>
+<li>At the first divergence the run stops, names the step and the reason, writes a screenshot of the moment beside the session file, and selects the failed element in the tree.</li></ol>
+<div class="shot"><img src="assets/img/docs/session-diverged.png" alt="A replay stopped at the first divergence, with the reason"><span class="cap">The application moved between the recording and now: the button is disabled, so the click is refused instead of being reported as done.</span></div>
+<h3>Step 4. Keep it, and run it in CI</h3>
+<p>Save writes the session as JSON at the path in the box — a file that belongs in the repository beside the bug it reproduces. Open loads one back.</p>
+<p>On a build machine, hand it to the application on start:</p>
+<pre><code>AVA_DEVTOOLS_REPLAY=repro/deploy-stays-disabled.json ./MyApp</code></pre>
+<p>It replays once the application is up, prints a PASS/FAIL line per step — the same lines the self-tests print — and exits 0 when everything replayed, 1 at a divergence, 2 when the file itself was the problem. No test project in between.</p>
+<h3>Over MCP</h3>
+<p>An agent builds the same artefact with <code>record_session</code>, <code>check_that</code> and <code>replay_session</code>: record while it works, state its expectations as it goes, and leave behind a file a person can run. <code>replay_session</code> acts on the application, so it waits on <a href="#mcpinput">the input permission</a> like the rest.</p>
+<p class="tip">Text typed into a masked box records <em>that</em> text was typed and never what it was — and replay refuses that step rather than sending something wrong.</p>` },
       { id: 'tabs', t: 'Tabs', html: `<h3>Properties</h3>
 <ul><li>Styled, direct, attached (grouped under 📎 owners) and plain CLR properties.</li>
 <li>Hover a row for <b>⊙ track</b> and <b>📌 pin</b> — see <a href="#tracking">Value tracking &amp; pinned properties</a>.</li>
@@ -623,14 +677,15 @@ en: {
 <li><b>📌 Pin states</b> — force <code>:disabled</code>, <code>:focus</code> or any custom pseudo-class the element's styles react to, without flipping app logic. See <a href="#hold">❄ Hold the moment</a>.</li>
 <li>file:line links for the element and each style; ⟨⟩/▤/{} chips open code previews.</li></ul>
 <h3>3D</h3><ul><li>Exploded 3D view textured from a live snapshot. Drag to orbit, wheel to zoom, click a card to select in the tree.</li>
-<li>Granularity: <em>Visual · merged</em> (wrappers collapsed), <em>Visual · all</em>, or <em>Logical</em>. "Reset view" restores the camera.</li></ul>
-<div class="shot"><img src="assets/img/docs/view-3d.png" alt="The exploded 3D view of the window's visual layers"><span class="cap">141 layers of the live window, orbitable — click any card to select it in the tree.</span></div>
+<li>Granularity: <em>Visual · merged</em> (wrappers collapsed), <em>Visual · all</em>, or <em>Logical</em>. "Reset view" restores the camera.</li><li><b>Own paint</b> textures every card with only the pixels no card in front of it covers, so a parent stops repeating the picture of its children; <b>Depth</b> spreads the stack, <b>Opacity</b> fades the far end of it.</li></ul>
+<div class="shot"><img src="assets/img/docs/view-3d.png" alt="The exploded 3D view of the window's visual layers"><span class="cap">158 layers of the live window, orbitable — click any card to select it in the tree.</span></div>
 <h3>Timeline</h3><ul><li>Events, property changes, VM notifies, focus changes and binding errors in one feed, scoped to a watchlist — with cause links, a binding walk-through and the instance inspector. See <a href="#timeline">Timeline</a>.</li>
 <li>The violet <b>⌁ Input</b> lane carries what an agent did to the application — every click, key and drag it injected, above the changes they caused. See <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li></ul>
 <h3>Problems</h3><ul><li>Only what is broken — binding failures, error logs — errors before warnings, each with a plain reason, a reveal-in-tree link and the full binding walk. Scan now catches bindings that failed before DevTools opened. See <a href="#problems">Problems pane</a>.</li></ul>
 <h3>MCP Server</h3><ul><li>There while the endpoint is listening, gone when it is not: what is listening, on which port and under which name, the one line that registers this application with your agent, and every tool with the number of calls an agent has made to it — failures counted apart. The tools that can act on the application are marked <b>⌁</b> in that list, so what an agent could have done to it is readable without knowing the names by heart. The switch, the port and the two permissions are on the ⚙ card's MCP page. See <a href="#mcp">Let an agent look</a>.</li></ul>
 <h3>Logs</h3><ul><li>Live Avalonia logger output with Pause, level, area and text filters. Captures at Warning by default. Entries produced by the DevTools UI itself are dropped and appends are batched — verbose logging can't freeze the tool.</li>
-<li><code>LogCapture.Publish</code> feeds the pane the application's own events — see <a href="#applogs">App log feed</a>.</li></ul>` },
+<li><code>LogCapture.Publish</code> feeds the pane the application's own events — see <a href="#applogs">App log feed</a>.</li></ul>
+<h3>Session</h3><ul><li>Record what the application receives, freeze what should be true while it still is, and replay it — in the window at four paces, or headless on a build machine. The first divergence stops the run with the reason, a screenshot and the element selected in the tree. See <a href="#session">Keep the repro: record, check, replay</a>.</li></ul>` },
       { id: 'capture', t: 'Screenshots & bug reports', html: `<p>"Can you send me a screenshot and the XAML path?" is one click here — the element, its bounds and the properties that differ from defaults travel together with the picture.</p>
 <h3>Step 1. Choose what to copy</h3>
 <p>The <b>📷 toolbar button</b> is a two-click chooser — <em>Copy screenshot</em> or <em>Copy report (screenshot + XAML)</em> — capturing the selected element or the whole window. The same actions live in the tree context menu under <b>Copy ▸</b>: <b>Path</b> (<span class="kbd">Ctrl+C</span>), <b>As XAML</b> (<span class="kbd">Ctrl+Shift+C</span>), <b>Screenshot</b> and <b>As bug report</b>.</p>
@@ -712,8 +767,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Two applications at once</h3>
 <p>Give the second one its own port (the <b>Port</b> box on the ⚙ card's MCP page, <code>McpPort</code>, or <code>AVA_DEVTOOLS_MCP_PORT</code>) and add it as a second entry. Their names differ already, so the agent's tool list stays readable.</p>
 <p class="tip">A client that started before your application usually shows no tools until it reconnects — <code>/mcp</code> in Claude Code, a new session in Codex. That is a reconnect, not a config problem.</p>` },
-      { id: 'mcptools', t: 'The twenty-five tools', html: `<p>Twenty-five tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
-<p>Sixteen only look. Two freeze transient state and wait on the freeze permission. Seven act on the application and wait on <a href="#mcpinput">the input permission</a> — they are the last table here.</p>
+      { id: 'mcptools', t: 'The twenty-eight tools', html: `<p>Twenty-eight tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
+<p>Eighteen only look. Two freeze transient state and wait on the freeze permission. Eight act on the application and wait on <a href="#mcpinput">the input permission</a> — the seven that inject input, and the one that replays a whole session of it.</p>
 <h3>Finding your way around</h3>
 <table>
 <tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
@@ -773,7 +828,15 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
 <tr><td><code>wait_for</code></td><td>Waits until something appears or disappears, then answers. Pure observation — no opt-in, and it changes nothing.</td><td><code>query</code>, <code>elementId</code>, <code>gone</code>, <code>timeoutMs</code> (5000, max 30000)</td></tr>
 </table>
-<p>A click that opens a dialog, starts a load or clears a list finishes some time after the call that caused it. <code>wait_for</code> is how that loop closes — polling <code>get_tree</code> in a loop is slower, costs more tokens and still cannot tell you <em>when</em> it arrived.</p>` },
+<p>A click that opens a dialog, starts a load or clears a list finishes some time after the call that caused it. <code>wait_for</code> is how that loop closes — polling <code>get_tree</code> in a loop is slower, costs more tokens and still cannot tell you <em>when</em> it arrived.</p>
+<h3>Keeping the repro</h3>
+<table>
+<tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
+<tr><td><code>record_session</code></td><td>Starts writing down everything the application receives — the agent's own calls, and a developer's clicks in the window beside it. Stop it and the session comes back as steps, written to a path when one is given. Watching only: it needs no permission.</td><td><code>stop</code>, <code>name</code>, <code>path</code></td></tr>
+<tr><td><code>check_that</code></td><td>States something that should be true, into the recording that is running. With no expected value it freezes what the property says right now.</td><td><code>elementId</code>, <code>check</code>, <code>property</code>, <code>expect</code></td></tr>
+<tr><td><code>replay_session</code></td><td>Runs a recorded session against the application again and reports the first step that diverged, with the reason. Acts, so it waits on the input permission.</td><td><code>path</code>, <code>json</code></td></tr>
+</table>
+<p>The three together are how an agent leaves behind something a person can run — see <a href="#session">Keep the repro: record, check, replay</a>.</p>` },
       { id: 'mcpinput', t: 'Input over MCP: click, type, drag', html: `<p>Reading answers <em>why is it that wide</em> and <em>what is broken</em>. It never answers <em>does the button work</em>. For that the button has to be pressed — so, behind a switch of its own, an agent can press it: seven tools that click, hover, drag, scroll, press keys, type text and move focus.</p>
 <h3>It is real input, not a shortcut</h3>
 <p>Nothing here raises an event at a control. Each action is built as a raw platform event and pushed through Avalonia's own input manager — the same door the macOS, X11 and Windows backends push through. Hit testing decides what is hit, the click count comes from real timestamps, pointer capture and pointer-over behave as they do for a person, and your handlers run because they were <em>reached</em>, not because they were called.</p>
@@ -956,6 +1019,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>Port for it. Default 5171.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Also allow <code>hold</code> and <code>pin_class</code> — the two tools that freeze transient state.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td><td>Also allow the seven tools that <a href="#mcpinput">act on the application</a> — click, hover, drag, scroll, keys, typed text, focus.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_REPLAY=repro.json</code></td><td>Replay that <a href="#session">session</a> on start, print a PASS/FAIL line per step and exit with the answer.</td></tr>
 </table>
 <p class="tip">The four <code>MCP</code> variables are a starting state, not the last word: the switches on the <a href="#settings">⚙ card</a>'s MCP page are saved per machine and win over them. A port you closed in the tool stays closed on the next run, whatever the launcher exports.</p>` },
       { id: 'limits', t: 'Limitations', html: `<ul>
@@ -964,7 +1028,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <li>With <code>LiveTree = false</code> the tree is a snapshot again — use ↻ Refresh after structural changes (property values update live either way).</li>
 <li>Screenshots and bug reports double-scale the <em>contents</em> of box-shadowed borders on HiDPI displays — a render-layer quirk of Avalonia 12. Capturing the element rather than the whole window usually sidesteps it.</li>
 <li>The MCP endpoint binds to 127.0.0.1 only. That is deliberate and not configurable.</li>
-<li>Injected input reaches your application, not the desktop: the OS pointer never moves, so native file dialogs, the macOS menu bar and drag-and-drop to another application are out of its reach. See <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li></ul>` },
+<li>Injected input reaches your application, not the desktop: the OS pointer never moves, so native file dialogs, the macOS menu bar and drag-and-drop to another application are out of its reach. See <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li><li>A recording keeps that text was typed into a masked box, never what was typed — replay refuses such a step rather than sending something wrong. See <a href="#session">Keep the repro</a>.</li></ul>` },
       { id: 'feedback', t: 'Feedback', html: `<p>The <b>Feedback</b> button in the toolbar's top-right corner opens the AvaDevTools issue tracker — report a bug or ask for a feature in one click. The same action lives in <span class="kbd">Ctrl</span>+<span class="kbd">K</span> as "Send feedback".</p>
 <p>Prefer chat? The <a href="https://t.me/avadevtools">Telegram channel</a> takes questions and quick help.</p>` },
       { id: 'updates', t: 'Update notifications', html: `<p>The toolbar always shows the version you are running, dimmed, next to <b>Feedback</b>. New AvaDevTools versions bring new panes and fixes, but a NuGet dependency never announces them on its own — so when a newer version is published, that same label turns blue and grows an <b>↑</b>.</p>
@@ -992,13 +1056,40 @@ uk: {
     get: 'Почати', stories: 'Подивитися в дії', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.1.6', docs: 'Документація →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.1.7', docs: 'Документація →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   stories: {
-    h: 'Історії', wn: 'input',
+    h: 'Історії', wn: 'repro',
     lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
     list: [
+      { key: 'repro', h: '⏺ Збережи відтворення', sub: 'Запиши, що ти робив, заморозь те, що має бути правдою, і відтвори це пізніше — у вікні або на білд-машині, де ніхто не дивиться.',
+        steps: [
+          { t: '⏺ Збережи відтворення',
+            d: 'Ваду на шість кроків углиб можна відтворити рівно доти, доки хтось виконує ті шість кроків. Передана колезі, вона стає абзацом інструкцій; передана CI — не стає нічим.',
+            d2: 'Тож артефактом стає сама сесія. Усе, що отримує застосунок, записується просто під час роботи — і ваше, і агентове — звіряється з тим, що ви назвали правильним, і пізніше відтворюється тим самим справжнім введенням.',
+            newsTitle: 'Нове у 12.1.7',
+            news: [
+              { k: 'Вкладка Session', d: 'записує ваші кліки й набирання, потім відтворює їх' },
+              { k: 'Перевірки', d: 'позначте, що має бути правдою, поки записуєте' },
+              { k: 'Відтворення в CI', d: 'білд-машина запускає сесію і падає, коли падає застосунок' },
+              { k: 'Агенти теж', d: 'запис і відтворення через MCP' },
+              { k: 'Полагоджено 3D-вигляд', d: 'шари стояли не там, текст читався дзеркально' },
+            ] },
+          { img: 'story/r02.png', t: 'Вона записує себе, поки ви працюєте', d: 'Нічого не налаштовували і жодного селектора не писали руками. У списку — те, що застосунок справді отримав: клік по кнопці розгортання, перетягування тротлу, слово, введене у фільтр — кожен крок названий так, як ви назвали контрол, із секундою, коли він прийшов. Дії агента лягають у той самий список: із 12.1.6 обидва приходять як те саме платформне введення, тож сесії байдуже, чия це була рука.' },
+          { img: 'story/r03.png', t: 'Перевірка — це заморожений факт', d: 'Запис без очікування — це макрос: він доводить, що кроки виконались, а не що вони спрацювали. Виберіть елемент, натисніть ✓ — і меню будується з цього елемента таким, яким він є зараз: кожен рядок уже несе значення, яке він стверджуватиме. Ви обираєте, що важливо; значення читається за вас, поки воно ще на екрані — єдина мить, коли воно не може бути хибним.' },
+          { img: 'story/r04.png', t: 'Відтворення: те саме введення, у тому самому порядку', d: 'Шість кроків, зелено. Три дії зайшли справжнім платформним введенням тим шляхом, який збудувала 12.1.6, перевірка перечитала властивість тим самим форматером, крізь який дивиться панель Properties, а два останні — нічого нового в Problems і жодної нової помилки прив’язки — додались без прохання. Темп: наввипередки, як записувалось, учетверо швидше або по кроку на натиск Next.' },
+          { img: 'story/r05.png', t: 'А коли розходиться — каже чому', d: 'Хтось вимкнув кнопку між записом і зараз. Відтворення не звітує про клік, якого не робило: воно спиняється на кроці 1 з 6, називає причину словами застосунку, пише знімок тієї миті поруч із файлом сесії й вибирає елемент у дереві. Стан, що впав, ще на екрані — і саме заради цього відтворюють у вікні, а не в CI.' },
+          { t: 'Той самий файл, на білд-машині', d: 'Сесія — це JSON за шляхом, який ви обрали, і його місце в репозиторії поруч із вадою, яку він відтворює. На білд-машині застосунок відтворює її на старті й виходить із відповіддю — 0 відтворено, 1 розійшлось, 2 проблема в самому файлі — друкуючи ті самі рядки PASS/FAIL, які самотести друкують із 12.1.0. Крок CI, що шукає FAIL, не мусить вчити нічого нового.',
+            code: [
+              '$ AVA_DEVTOOLS_REPLAY=repro/filter-loses-its-text.json ./MyApp',
+              '  REPLAY PASS 1. click Button #DeployButton',
+              '  REPLAY PASS 2. drag Slider #Throttle by 60, 0',
+              '  REPLAY FAIL 3. ✓ TextBox #BuildFilter.Text is orbit',
+              '  REPLAY      Text is , and the session expected orbit.',
+              '  REPLAY 2 pass, 1 fail  (filter-loses-its-text.json)',
+            ] },
+        ] },
       { key: 'input', h: '⌁ Ввід через MCP', sub: 'Агент може клікати, вводити текст і перетягувати у вашому застосунку — справжній ввід платформи, за власним перемикачем, і все зроблене видно на Timeline.',
         steps: [
           { t: '⌁ Ввід через MCP',
@@ -1253,6 +1344,7 @@ uk: {
   feat: {
     h: 'Усе, що очікуєш від DevTools', sub: 'Підключіть один раз і натискайте F12 у будь-якому вікні.',
     cards: [
+      { i: '⏺', t: 'Збережи відтворення', d: 'Запишіть, що отримує застосунок — ваше й агентове однаково — заморозьте те, що має бути правдою, поки воно нею є, і відтворіть пізніше: у вікні в будь-якому темпі або на білд-сервері, де воно виходить з ненульовим кодом на першому розходженні.' },
       { i: '🌳', t: 'Живе розумне дерево', d: 'Дерево, що читається як XAML і живе разом із застосунком: структурні зміни вплітаються щойно стаються і спалахують, а кнопка паузи дає спокійно читати. Підсвічування синтаксису, згортання як у редакторі, компактний вигляд після вибору, hide, focus, scope і пошук.' },
       { i: '🪟', t: 'Усі вікна — один DevTools', d: 'Корінь дерева — застосунок: кожне вікно є вузлом верхнього рівня і з’являється та зникає наживо. F12 будь-де фокусує той самий DevTools; scope віддає одному вікну все дерево.' },
       { i: '🎯', t: 'Трекінг значень', d: 'Відстежуйте будь-яку властивість по всьому дереву: однакове значення = однаковий колір, null у власній групі, жива легенда з лічильниками — а «Fold to changes» показує всі межі одразу.' },
@@ -1290,7 +1382,7 @@ uk: {
     contents: 'Зміст',
     groups: [
       { t: 'Початок роботи', ids: ['install', 'quickstart'] },
-      { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
+      { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
       { t: 'Агенти (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: 'Довідник', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -1587,6 +1679,32 @@ uk: {
 <h3>Що тут означає «повільно»</h3>
 <p>Повільне міряється проти бюджету, який дисплей насправді витримує — <em>медіани</em> нещодавніх інтервалів, ніколи не середнього, щоб одна затримка в 300 мс не перевизначила норму. Спарклайн прив'язаний до трьох фіксованих бюджетів з тієї ж причини: спокійний застосунок має виглядати спокійно, а не бути автомасштабованим у драму.</p>
 <p class="tip">Зведений лічильник тримає цикл рендеру живим, тож абсолютно простійний застосунок простоюватиме не так глибоко. Це написано в підказці, а не сховане: вимірювання щось коштує, і вдавати інше означало б зробити числа брехнею.</p>` },
+      { id: 'session', t: 'Збережи відтворення: запис, перевірка, відтворення', html: `<p>Ваду на шість кроків углиб можна відтворити рівно доти, доки ви виконуєте ті шість кроків. Вкладка <b>Session</b> натомість їх записує — усе, що отримує застосунок, ваше й агентове однаково — заморожує те, що має бути правдою, поки воно нею є, і пізніше відтворює все разом: у вікні або на білд-машині, де ніхто не дивиться.</p>
+<h3>Крок 1. Запис</h3>
+<ol class="steps"><li>Відкрийте вкладку <b>Session</b> і натисніть <b>⏺ Record</b>.</li>
+<li>Користуйтесь застосунком. Кліки, перетягування, прокрутки, клавіші, набраний текст і зміни фокусу лягають у список у міру того, як стаються — кожен із секундою, коли прийшов.</li>
+<li>Натисніть <b>■ Stop</b>.</li></ol>
+<p>Крок називає свій елемент так, як його назвали ви: спершу <code>x:Name</code>, далі тип плюс видимий текст, далі шлях — і все це зберігається, тож відтворення може сказати, за чим саме воно збіглося. Натиск також зберігає, <em>де</em> всередині елемента він стався: на кнопці це дрібниця, на повзунку це весь жест.</p>
+<div class="shot"><img src="assets/img/docs/session-record.png" alt="Вкладка Session наповнюється, поки застосунком користуються"><span class="cap">Запис. Що застосунок отримав, по порядку, з миттю кожної події.</span></div>
+<h3>Крок 2. Заморозьте те, що має бути правдою</h3>
+<ol class="steps"><li>Під час запису виберіть елемент у дереві.</li>
+<li>Натисніть <b>✓ Check…</b> — меню будується з цього елемента просто зараз: він існує, він зник, або одна властивість тримає значення, яке тримає цієї миті.</li>
+<li>Оберіть рядок — і він стає кроком сесії.</li></ol>
+<p>Дві перевірки додаються без прохання, бо саме про них забувають: нічого нового в <a href="#problems">Problems</a> і жодної нової помилки прив'язки.</p>
+<div class="shot"><img src="assets/img/docs/session-replay.png" alt="Відтворена сесія, де всі кроки зелені"><span class="cap">Відтворення, що пройшло: три дії, перевірка, написана поки значення було на екрані, і дві безкоштовні.</span></div>
+<h3>Крок 3. Відтворення</h3>
+<ol class="steps"><li>Натисніть <b>▶ Replay</b> й оберіть темп: наввипередки, як записувалось, учетверо швидше або по кроку на натиск <b>Next</b>.</li>
+<li>Кожен крок заходить справжнім введенням, тим самим шляхом, що й клік агента — тож крок відхиляється з тих самих чесних причин: перекрито, вимкнено, зникло.</li>
+<li>На першому розходженні прогін спиняється, називає крок і причину, пише знімок тієї миті поруч із файлом сесії й вибирає елемент, що впав, у дереві.</li></ol>
+<div class="shot"><img src="assets/img/docs/session-diverged.png" alt="Відтворення спинилось на першому розходженні, з причиною"><span class="cap">Застосунок змінився між записом і зараз: кнопка вимкнена, тож клік відхилено, а не зараховано як зроблений.</span></div>
+<h3>Крок 4. Збережіть і запустіть у CI</h3>
+<p>Save пише сесію як JSON за шляхом із поля — файл, чиє місце в репозиторії поруч із вадою, яку він відтворює. Open завантажує її назад.</p>
+<p>На білд-машині віддайте її застосунку на старті:</p>
+<pre><code>AVA_DEVTOOLS_REPLAY=repro/deploy-stays-disabled.json ./MyApp</code></pre>
+<p>Вона відтворюється, щойно застосунок піднявся, друкує рядок PASS/FAIL на кожен крок — ті самі рядки, що й самотести — і виходить із 0, коли все відтворилось, 1 на розходженні, 2 коли проблема в самому файлі. Без тестового проєкту посередині.</p>
+<h3>Через MCP</h3>
+<p>Агент будує той самий артефакт через <code>record_session</code>, <code>check_that</code> і <code>replay_session</code>: записує, поки працює, дорогою проговорює очікування і лишає по собі файл, який може запустити людина. <code>replay_session</code> діє на застосунок, тож чекає на <a href="#mcpinput">дозвіл на введення</a>, як і решта.</p>
+<p class="tip">Текст, набраний у полі з маскою, записується як факт набирання і ніколи як його зміст — а відтворення відхиляє такий крок, замість надсилати щось хибне.</p>` },
       { id: 'tabs', t: 'Вкладки', html: `<h3>Properties</h3>
 <ul><li>Styled-, direct-, attached- (згруповані під 📎 власниками) та звичайні CLR-властивості.</li>
 <li>Наведіть курсор на рядок — <b>⊙ track</b> і <b>📌 pin</b>: див. <a href="#tracking">Трекінг значень і закріплені властивості</a>.</li>
@@ -1603,14 +1721,15 @@ uk: {
 <li><b>📌 Pin states</b> — форсуйте <code>:disabled</code>, <code>:focus</code> чи будь-який кастомний псевдоклас, на який реагують стилі елемента, без зміни логіки застосунку. Див. <a href="#hold">❄ Hold the moment</a>.</li>
 <li>Посилання file:line для елемента і кожного стилю; чипи ⟨⟩/▤/{} відкривають прев'ю коду.</li></ul>
 <h3>3D</h3><ul><li>3D-вигляд шарами з текстурами з живого знімка. Тягніть для обертання, колесо — масштаб, клік — вибір у дереві.</li>
-<li>Деталізація: <em>Visual · merged</em> (обгортки згорнуто), <em>Visual · all</em> або <em>Logical</em>. «Reset view» повертає камеру.</li></ul>
-<div class="shot"><img src="assets/img/docs/view-3d.png" alt="Пошаровий 3D-вигляд візуальних шарів вікна"><span class="cap">141 шар живого вікна, з обертанням — клік по будь-якій картці вибирає її в дереві.</span></div>
+<li>Деталізація: <em>Visual · merged</em> (обгортки згорнуто), <em>Visual · all</em> або <em>Logical</em>. «Reset view» повертає камеру.</li><li><b>Own paint</b> текстурує кожну картку лише тими пікселями, яких не закриває жодна картка попереду, тож батько перестає повторювати картинку своїх дітей; <b>Depth</b> розсуває стос, <b>Opacity</b> гасить його дальній кінець.</li></ul>
+<div class="shot"><img src="assets/img/docs/view-3d.png" alt="Пошаровий 3D-вигляд візуальних шарів вікна"><span class="cap">158 шар живого вікна, з обертанням — клік по будь-якій картці вибирає її в дереві.</span></div>
 <h3>Timeline</h3><ul><li>Події, зміни властивостей, сповіщення VM, зміни фокуса й помилки біндінгів в одній стрічці за вашим списком спостереження — з причинними зв’язками, розбором біндінгів та інспектором інстансів. Див. <a href="#timeline">Таймлайн</a>.</li>
 <li>Фіолетова смуга <b>⌁ Input</b> несе те, що агент зробив із застосунком — кожен клік, клавішу й драг, які він інжектував, над змінами, що з них вийшли. Див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li></ul>
 <h3>Problems</h3><ul><li>Лише зламане — помилки біндінгів, error-логи — помилки перед попередженнями, кожна з причиною, посиланням reveal у дерево та повним розбором біндінгу. Scan now ловить біндінги, що впали до відкриття DevTools. Див. <a href="#problems">Панель Problems</a>.</li></ul>
 <h3>MCP Server</h3><ul><li>Є, поки ендпойнт слухає, і зникає разом із ним: що саме слухає, на якому порту й під яким іменем, той єдиний рядок, що реєструє застосунок у вашого агента, і кожен інструмент із кількістю зроблених до нього викликів — невдалі рахуються окремо. Інструменти, що можуть діяти на застосунок, позначено в цьому списку знаком <b>⌁</b>, тож видно, що саме агент міг зробити, не пам'ятаючи імен напам'ять. Перемикач, порт і два дозволи — на сторінці MCP у картці ⚙. Див. <a href="#mcp">Хай подивиться агент</a>.</li></ul>
 <h3>Logs</h3><ul><li>Живі логи Avalonia з Pause та фільтрами за рівнем, областю і текстом. За замовчуванням — Warning. Записи від самого DevTools відкидаються, оновлення батчаться — «зациклення» неможливе.</li>
-<li><code>LogCapture.Publish</code> додає в панель події вашого застосунку — див. <a href="#applogs">Логи застосунку</a>.</li></ul>` },
+<li><code>LogCapture.Publish</code> додає в панель події вашого застосунку — див. <a href="#applogs">Логи застосунку</a>.</li></ul>
+<h3>Session</h3><ul><li>Записує, що отримує застосунок, заморожує те, що має бути правдою, поки воно нею є, і відтворює це — у вікні в чотирьох темпах або без вікна на білд-машині. Перше розходження спиняє прогін із причиною, знімком і вибраним у дереві елементом. Див. <a href="#session">Збережи відтворення: запис, перевірка, відтворення</a>.</li></ul>` },
       { id: 'capture', t: 'Скриншоти та баг-репорти', html: `<p>«Надішли скриншот і XAML-шлях» — тут це один клік: елемент, його bounds і властивості, що відрізняються від типових, їдуть разом із картинкою.</p>
 <h3>Крок 1. Оберіть, що копіювати</h3>
 <p><b>Кнопка 📷 на панелі</b> — вибір у два кліки: <em>Copy screenshot</em> або <em>Copy report (screenshot + XAML)</em> — для вибраного елемента чи всього вікна. Ті самі дії живуть у контекстному меню дерева під <b>Copy ▸</b>: <b>Path</b> (<span class="kbd">Ctrl+C</span>), <b>As XAML</b> (<span class="kbd">Ctrl+Shift+C</span>), <b>Screenshot</b> і <b>As bug report</b>.</p>
@@ -1692,8 +1811,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Два застосунки водночас</h3>
 <p>Дайте другому власний порт (поле <b>Port</b> на сторінці MCP у картці ⚙, <code>McpPort</code> або <code>AVA_DEVTOOLS_MCP_PORT</code>) і додайте другим записом. Імена вже різні, тож список інструментів агента лишиться читабельним.</p>
 <p class="tip">Клієнт, запущений раніше за застосунок, зазвичай не бачить інструментів, доки не перез’єднається — <code>/mcp</code> у Claude Code, нова сесія в Codex. Це перез’єднання, а не проблема конфігурації.</p>` },
-      { id: 'mcptools', t: 'Двадцять п’ять інструментів', html: `<p>Двадцять п’ять інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
-<p>Шістнадцять лише дивляться. Два морозять тимчасовий стан і чекають на дозвіл заморожування. Сім діють на застосунок і чекають на <a href="#mcpinput">дозвіл на введення</a> — вони в останній таблиці тут.</p>
+      { id: 'mcptools', t: 'Двадцять вісім інструментів', html: `<p>Двадцять вісім інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
+<p>Вісімнадцять лише дивляться. Два морозять тимчасовий стан і чекають на дозвіл заморожування. Вісім діють на застосунок і чекають на <a href="#mcpinput">дозвіл на введення</a> — сім, що надсилають введення, і один, що відтворює цілу сесію з нього.</p>
 <h3>Зорієнтуватись</h3>
 <table>
 <tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
@@ -1753,7 +1872,15 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
 <tr><td><code>wait_for</code></td><td>Чекає, поки щось з'явиться чи зникне, і тоді відповідає. Чисте спостереження — без дозволу, і воно нічого не змінює.</td><td><code>query</code>, <code>elementId</code>, <code>gone</code>, <code>timeoutMs</code> (5000, макс. 30000)</td></tr>
 </table>
-<p>Клік, що відкриває діалог, стартує завантаження чи чистить список, завершується вже після виклику, який його спричинив. <code>wait_for</code> — це те, як цей цикл замикається: опитувати <code>get_tree</code> в циклі повільніше, дорожче в токенах і все одно не скаже, <em>коли</em> воно з'явилось.</p>` },
+<p>Клік, що відкриває діалог, стартує завантаження чи чистить список, завершується вже після виклику, який його спричинив. <code>wait_for</code> — це те, як цей цикл замикається: опитувати <code>get_tree</code> в циклі повільніше, дорожче в токенах і все одно не скаже, <em>коли</em> воно з'явилось.</p>
+<h3>Зберегти відтворення</h3>
+<table>
+<tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
+<tr><td><code>record_session</code></td><td>Починає записувати все, що отримує застосунок — і власні виклики агента, і кліки розробника у вікні поруч. Зупиніть — і сесія повертається кроками, записана за шляхом, якщо його дали. Лише спостерігає: дозволу не потребує.</td><td><code>stop</code>, <code>name</code>, <code>path</code></td></tr>
+<tr><td><code>check_that</code></td><td>Проговорює те, що має бути правдою, у запис, який іде. Без очікуваного значення заморожує те, що властивість каже просто зараз.</td><td><code>elementId</code>, <code>check</code>, <code>property</code>, <code>expect</code></td></tr>
+<tr><td><code>replay_session</code></td><td>Знову проганяє записану сесію по застосунку і звітує про перший крок, що розійшовся, із причиною. Діє, тож чекає на дозвіл на введення.</td><td><code>path</code>, <code>json</code></td></tr>
+</table>
+<p>Утрьох вони і є те, як агент лишає по собі щось, що може запустити людина — див. <a href="#session">Збережи відтворення: запис, перевірка, відтворення</a>.</p>` },
       { id: 'mcpinput', t: 'Ввід через MCP: клік, текст, перетягування', html: `<p>Читання відповідає на <em>чому воно такої ширини</em> і <em>що зламано</em>. Воно ніколи не відповідає на <em>чи працює ця кнопка</em>. Для цього кнопку треба натиснути — тож за власним перемикачем агент може її натиснути: сім інструментів, які клікають, наводять, тягнуть, крутять колесо, тиснуть клавіші, друкують текст і переносять фокус.</p>
 <h3>Це справжнє введення, а не скорочення</h3>
 <p>Тут ніщо не піднімає подію на контролі. Кожна дія збирається як сира платформна подія і йде крізь власний менеджер введення Avalonia — ті самі двері, крізь які штовхають бекенди macOS, X11 і Windows. Хіт-тест вирішує, у що влучили, кількість кліків береться зі справжніх міток часу, захоплення вказівника й pointer-over поводяться, як для людини, а ваші обробники спрацьовують тому, що до них <em>дійшли</em>, а не тому, що їх викликали.</p>
@@ -1936,6 +2063,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>Порт для нього. Типово 5171.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Дозволити ще й <code>hold</code> та <code>pin_class</code> — два інструменти, що морозять тимчасовий стан.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td><td>Дозволити ще й сім інструментів, що <a href="#mcpinput">діють на застосунок</a> — клік, наведення, драг, прокрутка, клавіші, текст, фокус.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_REPLAY=repro.json</code></td><td>Відтворити цю <a href="#session">сесію</a> на старті, надрукувати рядок PASS/FAIL на кожен крок і вийти з відповіддю.</td></tr>
 </table>
 <p class="tip">Чотири змінні <code>MCP</code> — це стартовий стан, а не остаточне слово: перемикачі на сторінці MCP у <a href="#settings">картці ⚙</a> зберігаються для машини й мають перевагу над ними. Порт, який ви закрили в інструменті, лишиться закритим і наступного запуску, хоч би що експортував ваш лаунчер.</p>` },
       { id: 'limits', t: 'Обмеження', html: `<ul>
@@ -1944,7 +2072,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <li>З <code>LiveTree = false</code> дерево знову є знімком: після структурних змін натисніть ↻ Refresh (значення властивостей оновлюються наживо в обох режимах).</li>
 <li>Скріншоти та звіти про ваду подвоюють масштаб <em>вмісту</em> рамок із тінню (BoxShadow) на HiDPI-екранах — особливість шару рендеру Avalonia 12. Знімок самого елемента, а не цілого вікна, зазвичай це обходить.</li>
 <li>MCP-ендпойнт прив'язується лише до 127.0.0.1. Це навмисно і не налаштовується.</li>
-<li>Інжектоване введення доходить до вашого застосунку, а не до робочого стола: вказівник ОС не рухається, тож нативні файлові діалоги, рядок меню macOS і перетягування в інший застосунок лишаються поза досяжністю. Див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li></ul>` },
+<li>Інжектоване введення доходить до вашого застосунку, а не до робочого стола: вказівник ОС не рухається, тож нативні файлові діалоги, рядок меню macOS і перетягування в інший застосунок лишаються поза досяжністю. Див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li><li>Запис зберігає факт, що текст набрали в поле з маскою, і ніколи — сам текст: відтворення відхиляє такий крок, замість надсилати щось хибне. Див. <a href="#session">Збережи відтворення</a>.</li></ul>` },
       { id: 'feedback', t: 'Фідбек', html: `<p>Кнопка <b>Feedback</b> у правому верхньому куті панелі відкриває трекер задач AvaDevTools — повідомте про баг чи попросіть фічу одним кліком. Та сама дія живе у <span class="kbd">Ctrl</span>+<span class="kbd">K</span> як «Send feedback».</p>
 <p>Зручніше в чаті? <a href="https://t.me/avadevtools">Telegram-канал</a> приймає запитання та швидку допомогу.</p>` },
       { id: 'updates', t: 'Сповіщення про оновлення', html: `<p>Панель завжди показує версію, яку ви запустили, — приглушено, поруч із <b>Feedback</b>. Нові версії AvaDevTools приносять нові вкладки й виправлення, але NuGet-залежність сама про них не оголошує, тож коли виходить новіша версія, цей самий напис стає синім і отримує <b>↑</b>.</p>
@@ -1972,13 +2100,40 @@ zh: {
     get: '快速上手', stories: '看实际效果', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.1.6 新特性', docs: '文档 →', notes: '版本历史 →' },
+  wn: { h: '12.1.7 新特性', docs: '文档 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   stories: {
-    h: '功能演示', wn: 'input',
+    h: '功能演示', wn: 'repro',
     lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
     list: [
+      { key: 'repro', h: '⏺ 把复现留下来', sub: '把你做过的记下来，把该成立的冻住，之后再重放 —— 在窗口里，或者在没人看着的构建机上。',
+        steps: [
+          { t: '⏺ 把复现留下来',
+            d: '六步之深的 bug，只在有人愿意一遍遍走那六步时才是可复现的。交给同事，它变成一段说明文字；交给 CI，它什么都不是。',
+            d2: '于是会话本身成了那件产物。应用收到的一切都在你工作时被记下来 —— 你的和智能体的一样 —— 与你说的"应该成立"对照，之后用同一套真实输入重放。',
+            newsTitle: '12.1.7 新特性',
+            news: [
+              { k: 'Session 选项卡', d: '记录你的点击与输入，再放回去' },
+              { k: '检查', d: '录制时顺手标出什么应该成立' },
+              { k: 'CI 里重放', d: '构建机跑一遍，应用坏了它就红' },
+              { k: '智能体也一样', d: '通过 MCP 录制与重放' },
+              { k: '修好了 3D 视图', d: '图层位置不对，文字读起来是镜像的' },
+            ] },
+          { img: 'story/r02.png', t: '你在工作，它自己把过程写下来', d: '没有配置，也没有手写任何选择器。列表里是应用真正收到的东西 —— 点了部署按钮、拖了节流滑块、往过滤框里敲的那个词 —— 每一步都按你给控件起的名字命名，并带着它到达的那一秒。智能体的动作落在同一个列表里：自 12.1.6 起两者都是同一种平台输入，所以会话并不在意那是谁的手。' },
+          { img: 'story/r03.png', t: '一个检查，就是被冻住的事实', d: '没有期望的录制只是宏：它证明步骤跑过了，证明不了它们奏效。选中元素，按 ✓，菜单就用此刻的这个元素现搭出来 —— 每一行都已经带着它将要断言的值。你只挑什么重要；值是替你读的，趁它还在屏幕上，那是它唯一不可能出错的时刻。' },
+          { img: 'story/r04.png', t: '重放：同样的输入，同样的顺序', d: '六步，全绿。三个动作沿 12.1.6 建好的那条路作为真实平台输入进去，检查用 Properties 面板所用的同一个格式化器重新读了一遍属性，最后两个 —— Problems 里没有新东西、没有新的绑定错误 —— 是不用你开口就加上的。节奏随你：全速、按录制时的速度、四倍速，或者按一次 Next 走一步。' },
+          { img: 'story/r05.png', t: '一旦分岔，它会说出为什么', d: '在录制与现在之间，有人把按钮禁用了。重放不会汇报一次它没做成的点击：它停在第 1 步（共 6 步），用应用自己的说法给出原因，把那一刻的截图写在会话文件旁边，并在树里选中该元素。出问题的状态还在屏幕上 —— 这正是要在窗口里重放而不是只在 CI 里重放的全部理由。' },
+          { t: '同一个文件，放到构建机上', d: '会话就是你选定路径上的一份 JSON，它该待在仓库里，紧挨着它复现的那个 bug。构建机上，应用在启动时重放它并以答案退出 —— 0 全部重放，1 出现分岔，2 文件本身有问题 —— 打印的正是自 12.1.0 起自测就在打印的 PASS/FAIL 行。一个 grep FAIL 的 CI 步骤不需要学任何新东西。',
+            code: [
+              '$ AVA_DEVTOOLS_REPLAY=repro/filter-loses-its-text.json ./MyApp',
+              '  REPLAY PASS 1. click Button #DeployButton',
+              '  REPLAY PASS 2. drag Slider #Throttle by 60, 0',
+              '  REPLAY FAIL 3. ✓ TextBox #BuildFilter.Text is orbit',
+              '  REPLAY      Text is , and the session expected orbit.',
+              '  REPLAY 2 pass, 1 fail  (filter-loses-its-text.json)',
+            ] },
+        ] },
       { key: 'input', h: '⌁ MCP 输入', sub: '智能体可以在你的应用里点击、键入、拖动 —— 真实的平台输入，藏在一道自己的开关之后，做过的每一件事都留在 Timeline 上。',
         steps: [
           { t: '⌁ MCP 输入',
@@ -2233,6 +2388,7 @@ zh: {
   feat: {
     h: 'DevTools 应有的一切', sub: '接入一次，在任意窗口按 F12。',
     cards: [
+      { i: '⏺', t: '把复现留下来', d: '记录应用收到的一切 —— 你的和智能体的一样 —— 趁"该成立的"还成立时把它冻住，之后再重放：在窗口里任选节奏，或在构建服务器上，遇到第一处分岔就以非零码退出。' },
       { i: '🌳', t: '实时智能树', d: '像 XAML 一样的树，并实时跟随应用：结构变化即时拼入并闪烁提示，暂停按钮让你安心细读。语法着色、代码式折叠、拾取后的紧凑视图、隐藏、Focus、Scope 与搜索。' },
       { i: '🪟', t: '所有窗口，一个 DevTools', d: '树以应用为根 —— 每个窗口都是顶层节点，实时出现与消失。任意窗口按 F12 都聚焦同一个 DevTools；Scope 让单个窗口拥有整棵树。' },
       { i: '🎯', t: '值追踪', d: '在整棵树上追踪任意属性：相同值 = 相同颜色，null 独立分组，实时图例带计数 ——「Fold to changes」一次显示所有边界。' },
@@ -2270,7 +2426,7 @@ zh: {
     contents: '目录',
     groups: [
       { t: '入门', ids: ['install', 'quickstart'] },
-      { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'tabs', 'capture', 'source'] },
+      { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
       { t: '智能体（MCP）', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: '参考', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -2567,6 +2723,32 @@ zh: {
 <h3>这里的「慢」是什么意思</h3>
 <p>慢是相对于显示器实际维持的预算来衡量的 —— 取最近间隔的<em>中位数</em>，绝不用平均值，这样一次 300 毫秒的卡顿就无法重新定义「正常」。迷你折线固定在三档预算上也是同一个理由：平静的应用应当看起来平静，而不是被自动缩放成一场大戏。</p>
 <p class="tip">开启计量会让渲染循环保持跳动，因此完全空闲的应用不会闲得那么彻底。这一点写在提示里而不是埋起来：测量本身有代价，假装没有就会让这些数字变成谎言。</p>` },
+      { id: 'session', t: '把复现留下来：录制、检查、重放', html: `<p>六步之深的 bug，只在你愿意一遍遍走那六步时才是可复现的。<b>Session</b> 选项卡替你把它们记下来 —— 应用收到的一切，你的和智能体的一样 —— 趁"该成立的"还成立时把它冻住，之后再整段重放：在窗口里，或者在没人看着的构建机上。</p>
+<h3>第 1 步：录制</h3>
+<ol class="steps"><li>打开 <b>Session</b> 选项卡，按 <b>⏺ Record</b>。</li>
+<li>照常用应用。点击、拖拽、滚动、按键、输入的文本和焦点变化会随着发生逐条进入列表，各自带着到达的那一秒。</li>
+<li>按 <b>■ Stop</b>。</li></ol>
+<p>一个步骤按你给它起的名字来称呼它的元素：先 <code>x:Name</code>，再是类型加它显示的文本，再是路径 —— 全都保留，所以重放能说出自己是按哪一个匹配上的。按下还会保留它落在元素内部的<em>位置</em>：在按钮上这是细节，在滑块上这就是整个手势。</p>
+<div class="shot"><img src="assets/img/docs/session-record.png" alt="有人在用应用，Session 选项卡正在填满"><span class="cap">录制中。应用收到了什么，按顺序，各自带着到达的时刻。</span></div>
+<h3>第 2 步：把该成立的冻住</h3>
+<ol class="steps"><li>录制时，在树里选中一个元素。</li>
+<li>按 <b>✓ Check…</b> —— 菜单就用此刻的这个元素搭出来：它存在、它已消失，或某个属性正持有它此刻持有的值。</li>
+<li>挑一条，它就作为一个步骤进入会话。</li></ol>
+<p>有两个检查是不用你开口就加上的，因为人们忘掉的正是它们：<a href="#problems">Problems</a> 里没有新东西，以及没有新的绑定错误。</p>
+<div class="shot"><img src="assets/img/docs/session-replay.png" alt="一次全绿的会话重放"><span class="cap">通过的重放：三个动作，一条趁值还在屏幕上写下的检查，加上两条白送的。</span></div>
+<h3>第 3 步：重放</h3>
+<ol class="steps"><li>按 <b>▶ Replay</b>，选节奏：全速、按录制时的速度、四倍速，或按一次 <b>Next</b> 走一步。</li>
+<li>每一步都作为真实输入进入，走的是智能体点击所走的同一条路 —— 所以一个步骤会因同样诚实的理由被拒绝：被遮住、被禁用、不见了。</li>
+<li>第一处分岔就停下，说出是哪一步、为什么，把那一刻的截图写在会话文件旁边，并在树里选中失败的元素。</li></ol>
+<div class="shot"><img src="assets/img/docs/session-diverged.png" alt="重放停在第一处分岔，并给出原因"><span class="cap">录制与现在之间，应用变了：按钮被禁用，于是这次点击被拒绝，而不是被算作做到了。</span></div>
+<h3>第 4 步：留住它，并在 CI 里跑</h3>
+<p>Save 把会话按框里的路径写成 JSON —— 这份文件该待在仓库里，紧挨着它复现的那个 bug。Open 再把它读回来。</p>
+<p>在构建机上，启动时把它交给应用：</p>
+<pre><code>AVA_DEVTOOLS_REPLAY=repro/deploy-stays-disabled.json ./MyApp</code></pre>
+<p>应用起来之后它就重放，每步打印一行 PASS/FAIL —— 与自测打印的是同样的行 —— 全部重放完退出 0，出现分岔退出 1，文件本身有问题退出 2。中间不需要一个测试项目。</p>
+<h3>通过 MCP</h3>
+<p>智能体用 <code>record_session</code>、<code>check_that</code> 和 <code>replay_session</code> 造出同一件产物：一边干活一边录，顺路把期望说出来，最后留下一个人能直接跑的文件。<code>replay_session</code> 会对应用动手，所以和其余动手的工具一样要等<a href="#mcpinput">输入许可</a>。</p>
+<p class="tip">敲进掩码输入框的文本，只记下"敲了文本"这件事，绝不记下敲的是什么 —— 重放会拒绝这一步，而不是送出一个错的东西。</p>` },
       { id: 'tabs', t: '选项卡', html: `<h3>Properties（属性）</h3>
 <ul><li>Styled、direct、attached（按 📎 所有者分组）以及普通 CLR 属性。</li>
 <li>悬停属性行可见 <b>⊙ track</b> 与 <b>📌 pin</b> —— 见<a href="#tracking">值追踪与置顶属性</a>。</li>
@@ -2583,14 +2765,15 @@ zh: {
 <li><b>📌 Pin states</b> —— 无需改动应用逻辑即可强制 <code>:disabled</code>、<code>:focus</code> 或元素样式响应的任意自定义伪类。见 <a href="#hold">❄ 定格瞬间</a>。</li>
 <li>元素与每个样式都有 file:line 链接；⟨⟩/▤/{} 徽章可打开代码预览。</li></ul>
 <h3>3D</h3><ul><li>基于实时快照纹理的 3D 分层视图。拖动旋转、滚轮缩放、点击图层即在树中选中。</li>
-<li>粒度：<em>Visual · merged</em>（折叠包装层）、<em>Visual · all</em> 或 <em>Logical</em>。"Reset view" 复位相机。</li></ul>
-<div class="shot"><img src="assets/img/docs/view-3d.png" alt="窗口可视图层的 3D 分层视图"><span class="cap">实时窗口的 141 个图层，可旋转 —— 点击任意图层即在树中选中。</span></div>
+<li>粒度：<em>Visual · merged</em>（折叠包装层）、<em>Visual · all</em> 或 <em>Logical</em>。"Reset view" 复位相机。</li><li><b>Own paint</b> 只用前面没有任何图层遮住的那些像素给每张卡片贴图，于是父元素不再重复画它孩子的画面；<b>Depth</b> 撑开整叠，<b>Opacity</b> 让远端淡下去。</li></ul>
+<div class="shot"><img src="assets/img/docs/view-3d.png" alt="窗口可视图层的 3D 分层视图"><span class="cap">实时窗口的 158 个图层，可旋转 —— 点击任意图层即在树中选中。</span></div>
 <h3>Timeline（时间线）</h3><ul><li>事件、属性变化、VM 通知、焦点变化与绑定错误汇入一条流，范围由观察列表决定 —— 带因果链接、绑定逐步展开与实例检查器。见<a href="#timeline">时间线</a>。</li>
 <li>紫色的 <b>⌁ Input</b> 泳道装着智能体对应用做过的事 —— 它注入的每一次点击、按键和拖动，就排在这些操作引起的变化上方。见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li></ul>
 <h3>Problems（问题）</h3><ul><li>只列坏掉的 —— 绑定失败、error 日志 —— 错误在警告之前，每条带原因、树内 reveal 链接与完整绑定链。Scan now 抓住在 DevTools 打开前就失败的绑定。见 <a href="#problems">Problems 面板</a>。</li></ul>
 <h3>MCP Server</h3><ul><li>端点在听的时候才有这个选项卡，停了就随之消失：在听什么、用哪个端口、以什么名字，把本应用注册给智能体的那一行命令，以及每个工具各自被调用了多少次 —— 失败的另算。能对应用动手的工具在列表里标着 <b>⌁</b>，因此不必把名字背下来，也能看清智能体可能做过什么。启停开关、端口和两道许可都在 ⚙ 卡片的 MCP 页。见 <a href="#mcp">让智能体看看</a>。</li></ul>
 <h3>Logs（日志）</h3><ul><li>实时 Avalonia 日志，支持暂停、级别、区域与文本过滤。默认捕获 Warning 及以上。工具自身产生的日志会被丢弃、UI 批量刷新 —— 不会出现反馈循环卡死。</li>
-<li><code>LogCapture.Publish</code> 把应用自己的事件送进此面板 —— 见<a href="#applogs">应用日志接入</a>。</li></ul>` },
+<li><code>LogCapture.Publish</code> 把应用自己的事件送进此面板 —— 见<a href="#applogs">应用日志接入</a>。</li></ul>
+<h3>Session</h3><ul><li>记录应用收到的东西，趁"该成立的"还成立时把它冻住，然后重放 —— 在窗口里有四种节奏，或在构建机上无窗口运行。第一处分岔会停下整次运行，给出原因、截图，并在树里选中该元素。见<a href="#session">把复现留下来：录制、检查、重放</a>。</li></ul>` },
       { id: 'capture', t: '截图与缺陷报告', html: `<p>「发我一张截图和 XAML 路径」在这里是一次点击 —— 元素、它的 bounds 和与默认值不同的属性，随图片一起上路。</p>
 <h3>第 1 步：选择要复制的内容</h3>
 <p><b>📷 工具栏按钮</b>两次点击即可 —— <em>Copy screenshot</em> 或 <em>Copy report (screenshot + XAML)</em> —— 捕获选中元素或整个窗口。同样的操作也在树右键菜单的 <b>Copy ▸</b> 下：<b>Path</b>（<span class="kbd">Ctrl+C</span>）、<b>As XAML</b>（<span class="kbd">Ctrl+Shift+C</span>）、<b>Screenshot</b> 与 <b>As bug report</b>。</p>
@@ -2672,8 +2855,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>同时开着两个应用</h3>
 <p>给第二个应用自己的端口（⚙ 卡片 MCP 页上的 <b>Port</b> 框、<code>McpPort</code>，或 <code>AVA_DEVTOOLS_MCP_PORT</code>），然后作为第二条配置加进去。它们的名字本来就不同，智能体的工具列表依然清楚。</p>
 <p class="tip">比应用先启动的客户端通常要重连之后才看得到工具 —— Claude Code 里的 <code>/mcp</code>，Codex 里开新会话。那是重连问题，不是配置问题。</p>` },
-      { id: 'mcptools', t: '二十五个工具', html: `<p>二十五个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
-<p>十六个只看。两个冻结瞬时状态，等冻结许可。七个对应用动手，等<a href="#mcpinput">输入许可</a> —— 它们是这里的最后一张表。</p>
+      { id: 'mcptools', t: '二十八个工具', html: `<p>二十八个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
+<p>十八个只看。两个冻结瞬时状态，等冻结许可。八个对应用动手，等<a href="#mcpinput">输入许可</a> —— 七个注入输入，一个把整段会话重放一遍。</p>
 <h3>先找到方向</h3>
 <table>
 <tr><th>工具</th><th>回答</th><th>参数</th></tr>
@@ -2733,7 +2916,15 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><th>工具</th><th>回答</th><th>参数</th></tr>
 <tr><td><code>wait_for</code></td><td>等到某个东西出现或消失，然后作答。纯观察 —— 不需要许可，也不改变任何东西。</td><td><code>query</code>、<code>elementId</code>、<code>gone</code>、<code>timeoutMs</code>（5000，最大 30000）</td></tr>
 </table>
-<p>打开对话框、发起加载或清空列表的那一次点击，总在引发它的调用之后才完成。<code>wait_for</code> 就是这个环怎么闭合的：循环轮询 <code>get_tree</code> 更慢、更费 token，而且仍然说不出它是<em>什么时候</em>到的。</p>` },
+<p>打开对话框、发起加载或清空列表的那一次点击，总在引发它的调用之后才完成。<code>wait_for</code> 就是这个环怎么闭合的：循环轮询 <code>get_tree</code> 更慢、更费 token，而且仍然说不出它是<em>什么时候</em>到的。</p>
+<h3>把复现留下来</h3>
+<table>
+<tr><th>工具</th><th>回答</th><th>参数</th></tr>
+<tr><td><code>record_session</code></td><td>开始记录应用收到的一切 —— 智能体自己的调用，以及旁边窗口里开发者的点击。停下来，会话就以步骤的形式返回；给了路径就写到那里。只是旁观：不需要许可。</td><td><code>stop</code>、<code>name</code>、<code>path</code></td></tr>
+<tr><td><code>check_that</code></td><td>把一件"应该成立"的事说进正在进行的录制里。不给期望值时，就把属性此刻说的话冻住。</td><td><code>elementId</code>、<code>check</code>、<code>property</code>、<code>expect</code></td></tr>
+<tr><td><code>replay_session</code></td><td>把录好的会话再对应用跑一遍，报出第一处分岔的步骤和原因。会动手，所以要等输入许可。</td><td><code>path</code>、<code>json</code></td></tr>
+</table>
+<p>这三个加在一起，就是智能体如何留下一份人能直接跑的东西 —— 见<a href="#session">把复现留下来：录制、检查、重放</a>。</p>` },
       { id: 'mcpinput', t: 'MCP 输入：点击、键入、拖动', html: `<p>读能回答<em>它为什么这么宽</em>和<em>哪里坏了</em>。它永远回答不了<em>这个按钮到底能不能用</em>。那得把按钮按下去 —— 所以，在一道自己的开关之后，智能体可以按：七个工具，点击、悬停、拖动、滚动、按键、输入文本、移动焦点。</p>
 <h3>这是真实输入，不是抄近路</h3>
 <p>这里没有任何东西是在控件上直接抛事件。每个动作都构造成原始平台事件，穿过 Avalonia 自己的输入管理器 —— 和 macOS、X11、Windows 后端推进去的是同一扇门。命中测试决定打到谁，点击次数来自真实时间戳，指针捕获与 pointer-over 的表现和对人一样，而你的处理器之所以会跑，是因为输入<em>到达</em>了它们，不是因为被人调用。</p>
@@ -2916,6 +3107,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>它使用的端口，默认 5171。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>额外允许 <code>hold</code> 与 <code>pin_class</code> —— 两个冻结瞬时状态的工具。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td><td>额外允许七个<a href="#mcpinput">对应用动手</a>的工具 —— 点击、悬停、拖动、滚动、按键、文本、焦点。</td></tr>
+<tr><td><code>AVA_DEVTOOLS_REPLAY=repro.json</code></td><td>启动时重放这个<a href="#session">会话</a>，每步打印一行 PASS/FAIL，并以答案作为退出码。</td></tr>
 </table>
 <p class="tip">这四个 <code>MCP</code> 变量只是起始状态，不是最终决定：<a href="#settings">⚙ 卡片</a> MCP 页里的开关按机器保存，并且优先于它们。你在工具里关掉的端口，下次启动依然是关的，无论启动脚本导出了什么。</p>` },
       { id: 'limits', t: '限制', html: `<ul>
@@ -2924,7 +3116,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <li>设为 <code>LiveTree = false</code> 后树重新变回快照：结构变化后请点 ↻ Refresh（两种模式下属性值都是实时更新的）。</li>
 <li>在 HiDPI 屏幕上，截图与缺陷报告会把带 BoxShadow 的边框<em>内容</em>放大一倍 —— 这是 Avalonia 12 渲染层的一个特性。改为截取元素而不是整扇窗口通常可以绕开。</li>
 <li>MCP 端点只绑定 127.0.0.1。这是刻意为之，且不可配置。</li>
-<li>注入的输入到达的是你的应用，不是桌面：操作系统的指针不会移动，所以原生文件对话框、macOS 菜单栏以及拖到另一个应用都在它够不到的地方。见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li></ul>` },
+<li>注入的输入到达的是你的应用，不是桌面：操作系统的指针不会移动，所以原生文件对话框、macOS 菜单栏以及拖到另一个应用都在它够不到的地方。见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li><li>录制只记下"文本被敲进了掩码输入框"，绝不记下敲的是什么 —— 重放会拒绝这一步，而不是送出一个错的东西。见<a href="#session">把复现留下来</a>。</li></ul>` },
       { id: 'feedback', t: '反馈', html: `<p>工具栏右上角的 <b>Feedback</b> 按钮打开 AvaDevTools 的问题跟踪器 —— 一键报告缺陷或请求功能。同一动作也在 <span class="kbd">Ctrl</span>+<span class="kbd">K</span> 里，叫 “Send feedback”。</p>
 <p>更喜欢聊天？<a href="https://t.me/avadevtools">Telegram 频道</a>接受提问和快速帮助。</p>` },
       { id: 'updates', t: '更新通知', html: `<p>工具栏上 <b>Feedback</b> 旁边始终以淡色显示你正在运行的版本号。AvaDevTools 的新版本带来新的面板和修复，但 NuGet 依赖不会自己宣布它们 —— 所以有更新的版本发布时，同一个版本号会变成蓝色并长出一个 <b>↑</b>。</p>

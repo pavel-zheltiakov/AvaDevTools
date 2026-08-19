@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "version": "12.1.6",
+  "version": "12.1.7",
   "notesUrl": "https://pavel-zheltiakov.github.io/AvaDevTools/releases.html",
   "notes": [
     {
       "kind": "p",
-      "text": "An agent could read the application, not touch it. This release adds input over MCP."
+      "text": "Keep the repro: record what you do, play it back later."
     },
     {
       "kind": "h1",
@@ -13,35 +13,31 @@
     },
     {
       "kind": "bullet",
-      "text": "Eight new tools, twenty-five in all \u2014 click, hover, drag, scroll, keys, text, focus, wait."
+      "text": "Session tab \u2014 records your clicks and typing, plays them back. Agents can do the same over MCP."
     },
     {
       "kind": "bullet",
-      "text": "Real input, not simulated \u2014 your handlers run as for a person."
-    },
-    {
-      "kind": "bullet",
-      "text": "An input lane on the Timeline \u2014 every action, above what it caused."
-    },
-    {
-      "kind": "bullet",
-      "text": "A marker over the application \u2014 a pill naming what is happening."
+      "text": "Checks \u2014 mark what should be true; the build server replays and fails when it isn't."
     },
     {
       "kind": "h1",
-      "text": "Changes"
+      "text": "Bug Fixes"
     },
     {
       "kind": "bullet",
-      "text": "No pretend success \u2014 an impossible action is refused, with the reason."
+      "text": "Fixed the 3D view \u2014 layers sat in the wrong place, text read mirrored."
     },
     {
       "kind": "bullet",
-      "text": "The acting tools are marked \u2014 the tool list says which ones can act."
+      "text": "Clicks from the tool no longer miss \u2014 they landed on nothing right after the screen changed."
     },
     {
       "kind": "bullet",
-      "text": "The handshake says what is allowed \u2014 before the agent's first call."
+      "text": "Dragging starts where you pressed \u2014 sliders ended up at the wrong value."
+    },
+    {
+      "kind": "bullet",
+      "text": "Search no longer finds our own marker \u2014 the label the tool draws over your app."
     }
   ]
 }
