@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "version": "12.1.7",
+  "version": "12.1.8",
   "notesUrl": "https://pavel-zheltiakov.github.io/AvaDevTools/releases.html",
   "notes": [
     {
       "kind": "p",
-      "text": "Keep the repro: record what you do, play it back later."
+      "text": "It only looks right in your conditions \u2014 so check it in the others."
     },
     {
       "kind": "h1",
@@ -13,11 +13,59 @@
     },
     {
       "kind": "bullet",
-      "text": "Session tab \u2014 records your clicks and typing, plays them back. Agents can do the same over MCP."
+      "text": "Variants tab \u2014 read your app under another theme, size, direction or language."
+    },
+    {
+      "kind": "sub",
+      "text": "Only what got worse \u2014 a choice you made is never reported back at you."
+    },
+    {
+      "kind": "sub",
+      "text": "Findings you can act on \u2014 cut off, pushed off screen, contrast lost, text that stayed small."
+    },
+    {
+      "kind": "sub",
+      "text": "Three ways to read it \u2014 by variant, as a table, or one at a time."
+    },
+    {
+      "kind": "sub",
+      "text": "Save as PDF \u2014 the whole run as a document, pictures and all."
+    },
+    {
+      "kind": "sub",
+      "text": "Every axis explains itself \u2014 what it varies, and three of its values."
+    },
+    {
+      "kind": "sub",
+      "text": "Your list, per project \u2014 remembered against that application, not the next one."
+    },
+    {
+      "kind": "sub",
+      "text": "Axes of your own \u2014 your tenant's colours, your density, your hardware profile."
+    },
+    {
+      "kind": "sub",
+      "text": "A Language axis \u2014 declare your cultures; right-to-left comes with them."
+    },
+    {
+      "kind": "sub",
+      "text": "Nothing left behind \u2014 every change put back, even when a check throws."
+    },
+    {
+      "kind": "sub",
+      "text": "run_variants over MCP \u2014 an agent names an axis and its values."
+    },
+    {
+      "kind": "h1",
+      "text": "Changes"
     },
     {
       "kind": "bullet",
-      "text": "Checks \u2014 mark what should be true; the build server replays and fails when it isn't."
+      "text": "An agent's findings now reach your open Problems tab, not a list only it could see."
+    },
+    {
+      "kind": "bullet",
+      "text": "The MCP tool list marks every tool that can change your app, not just the input ones."
     },
     {
       "kind": "h1",
@@ -25,19 +73,7 @@
     },
     {
       "kind": "bullet",
-      "text": "Fixed the 3D view \u2014 layers sat in the wrong place, text read mirrored."
-    },
-    {
-      "kind": "bullet",
-      "text": "Clicks from the tool no longer miss \u2014 they landed on nothing right after the screen changed."
-    },
-    {
-      "kind": "bullet",
-      "text": "Dragging starts where you pressed \u2014 sliders ended up at the wrong value."
-    },
-    {
-      "kind": "bullet",
-      "text": "Search no longer finds our own marker \u2014 the label the tool draws over your app."
+      "text": "The highlight's size chip was drawn off the top edge on a scaled canvas."
     }
   ]
 }

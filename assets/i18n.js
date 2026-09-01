@@ -12,13 +12,37 @@ en: {
     get: 'Get started', stories: 'See it in action', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.1.7", docs: 'Documentation →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.1.8", docs: 'Documentation →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   stories: {
-    h: 'Stories', wn: 'repro',
+    h: 'Stories', wn: 'conditions',
     lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
     list: [
+      { key: 'conditions', h: '◐ It only looks right in your conditions', sub: 'Your theme, your text size, your window width. Read it again in somebody else’s — and hear only what got worse.',
+        steps: [
+          { t: '◐ It only looks right in your conditions',
+            d: 'Everything DevTools has told you so far was measured in one place: your theme, your text size, your window width, your reading direction. That is one point in the space your application has to work across — and it is the one point where the bugs are not.',
+            d2: 'So the tab moves your chair. Pick a property, pick a value, press Add — theme, text scale, window size, text direction, language, and any axis your application cares to register — one at a time, each applied to the real application and taken back off it — reporting only what got <i>worse</i>, because a tool that lists what was always true is a tool you scroll past.',
+            newsTitle: 'New in 12.1.8',
+            news: [
+              { k: 'Variants tab', d: 'another theme, text size, window size, direction, language \u2014 or an axis of your own. Only what got worse, read three ways, and saved as a PDF.' },
+            ] },
+          { img: 'story/c02.png', t: 'Axis, value, Add', d: 'The property is the thing on screen, not the value \u2014 <b>Theme</b>, <b>Text scale</b>, <b>Window size</b>, <b>Text direction</b>, <b>Language</b>, each with a sentence saying what moves when it does and a list of values worth trying. Pick one, press Add, and it joins the run; type the one that is not on the list and it joins too, so a window size is 1024x768 or the wall display you actually ship on. Every name in the dropdown carries a line saying what that property varies and three of the values it varies it at, and every row on the list wears a <b>?</b> carrying the same \u2014 which matters most for the axes your own application registers, where a name like <b>Console profile</b> tells a reader nothing on its own. Nothing has to be filled in first: it opens with one value on each axis already there, because the value is in pressing the button. What you build is remembered against that application, so a different project does not hand you the last one\u2019s answers. Each variant is a reversible change to the circumstances rather than to the application \u2014 the variant your windows are asked to draw in, the font sizes the theme hands out, the window\u2019s size, the direction text runs, the culture it looks its strings up in.' },
+          { img: 'story/c04.png', t: 'Only what got worse', d: 'Six problems across four variants — and the list that asked for them has folded away, because reading a run is not the same afternoon as building one. Under the buttons the tab says what a run reads: the window it is attached to, and in it whatever was on screen when Run was pressed. What stands in its place is the same rows, marked: light and right-to-left came back clean and say so with a tick, 200% got worse without costing anybody a word, and 360 px is the cross. A tick is the whole report for a value that came through clean, and a variant that never ran is marked differently again — the distinction the tab exists to keep. Press a mark and its findings open under that row — no heading over them, because the property is on the row and the value is in the chip you pressed — gathered by what kind of thing they are rather than repeated per element: two labels cut off, three headings pushed off the edge with nothing to scroll them back. Each carries a picture of that control as it looked under the variant, taken during the run because a moment later the application is back to normal — and where the label was squeezed to half a pixel, a picture of the place it should have been.' },
+          { img: 'story/c06.png', t: 'The same run, gathered', d: 'One run, three readings, and none of them is a summary of the others. This is the <b>table</b>: variant, problem, and the elements it happened to. The variant is printed where it changes and the kind of problem where it changes, so what you scan down the middle of the page is a list of distinct problems rather than the same paragraph three times \u2014 one problem that three elements share is one row wearing <b>\u00d73</b>, with the three of them in the column beside it. And notice what is <i>not</i> here: no Check variants, no picker, no line about what the next run would read. A report is a thing to read, and the only way off the page is <b>\u2190 Back</b>.' },
+          { img: 'story/c07.png', t: 'One at a time, at the size it happened', d: 'The reading the pictures are for. <b>\u2039 2 / 6 \u203a</b> over it: which of how many, the value it came from, the sentence, the element \u2014 and the screenshot filling the pane rather than sitting at life size, up to four times, in square pixels rather than smoothed. Half of these are four pixels of a clipped descender, and a 90-pixel picture in the middle of an empty pane is a report with the evidence left out. The arrows stop at both ends rather than starting again, so you can tell when you have seen them all. And <b>Save as PDF</b> takes the whole run out of the tab \u2014 what was checked, what refused and why, every problem as a table, then each one again with its picture \u2014 for the reviewer on the pull request and the designer who has to agree the layout is wrong, neither of whom can press the button.' },
+          { img: 'story/c05.png', t: 'In the pane you already keep open', d: 'A bug found under a variant is not a different kind of bug — it is one found somewhere you were not standing. The findings land in Problems under <b>Variants</b>, with the variant written into the sentence, ranked with everything else that is wrong with the application, and clicking through to the element like every other row there. Fix one and run again: the rows the run no longer finds leave with it.' },
+          { t: 'And the application is exactly where you left it',
+            d: 'Every change is recorded at the moment it is made and released in a finally — the restore-ledger discipline ❄ Hold has used since 12.1.0 — and one restore failing does not strand the ones queued behind it. The self-tests assert the application is identical afterwards, down to the resource dictionary the text scale shadows. An agent gets the same run behind a permission of its own: it writes your application’s properties, so your handlers run, and it presses nothing.',
+            code: [
+              '$ run_variants  {\"axis\": \"size\", \"values\": [\"360x640\", \"1024x768\"]}',
+              '  Window size · 360 × 640   — 5 findings',
+              '      error #2 TextBlock “RECENT BUILDS”  text is cut off here',
+              '            and reads in full at the baseline',
+              '  Window size · 1024 × 768  — nothing changed for the worse',
+            ] },
+        ] },
       { key: 'repro', h: '⏺ Keep the repro', sub: 'Record what you did, freeze what should be true, and replay it later — in the window, or on the build server with nobody watching.',
         steps: [
           { t: '⏺ Keep the repro',
@@ -300,6 +324,7 @@ en: {
   feat: {
     h: 'Everything you expect from DevTools', sub: 'Attach once, press F12 in any window.',
     cards: [
+      { i: '◐', t: 'It only looks right in your conditions', d: 'Pick a property, pick a value, press Add \u2014 theme, text scale, window size, text direction, language \u2014 and read the application again at every value on the list, hearing only what got worse: text cut off, content pushed off the window, contrast lost, text that did not get bigger when the reader turned it up. Presets from a phone column to 4K, or type the size you actually ship on. An application can register axes of its own. Everything is put back exactly as it was found.' },
       { i: '⏺', t: 'Keep the repro', d: 'Record what the application receives — yours and an agent’s alike — freeze what should be true while it still is, and replay it later: in the window at any pace, or on the build server, where it exits non-zero at the first divergence.' },
       { i: '🌳', t: 'Live smart tree', d: 'A tree that reads like XAML and follows the application live: structural changes splice in as they happen and flash, with a pause button for reading. Syntax colors, code-style folding, a compact pick view, hide, focus, scope and search.' },
       { i: '🪟', t: 'All windows, one DevTools', d: 'The tree is rooted at the application — every window is a top-level node, appearing and disappearing live. F12 anywhere focuses the same DevTools; scope gives one window the whole tree.' },
@@ -322,7 +347,7 @@ en: {
       { i: '⏱', t: 'Timeline', d: 'Routed events, property changes, VM notifies and focus changes in one chronological feed, scoped to a watchlist you control. Cause links connect a notify to the bound update it produced; every entry opens full details.' },
     { i: '🕰', t: 'Cause capture', d: 'Every recorded change carries the call stack that caused it, trimmed to your own frames. Reproduce once and read all the culprits in order, each frame linking to its source — no breakpoint per hit. Break next escalates to the debugger for exactly one change.' },
     { i: '📈', t: 'Perf lane', d: 'Slow frames and layout passes filed into the same feed as everything else, so a stall is readable next to what the app was doing. Slow is measured against the budget your display actually keeps, never an average.' },
-    { i: '🤖', t: 'Let an agent look (MCP)', d: 'A Model Context Protocol endpoint on loopback, off unless asked for and read-only until you say otherwise: twenty-five tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots of the running application — and, behind a switch of its own, the ability to click and type in it.' },
+    { i: '🤖', t: 'Let an agent look (MCP)', d: 'A Model Context Protocol endpoint on loopback, off unless asked for and read-only until you say otherwise: twenty-nine tools hand a coding agent the tree, properties, styles, layout, resources, problems, timeline, logs and screenshots of the running application — and, behind a switch of its own, the ability to click and type in it.' },
       { i: '📜', t: 'Log viewer', d: 'Binding errors, layout and property-system messages — even without LogToTrace(). Filtered, batched and feedback-loop safe.' },
       { i: '📊', t: 'Renderer overlays', d: 'FPS meter, layout/render time graphs and dirty-rect flashing on the inspected window, one toggle away.' },
       { i: '🕵️', t: 'Source of every value', d: 'See whether a value is default, set by hand, styled, templated or inherited — and jump to the ancestor or the exact XAML that set it.' },
@@ -338,7 +363,7 @@ en: {
     contents: 'Contents',
     groups: [
       { t: 'Getting started', ids: ['install', 'quickstart'] },
-      { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
+      { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
       { t: 'Agents (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: 'Reference', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -387,7 +412,7 @@ en: {
 <h3>Step 2. Tame the hover-inspect chord</h3>
 <p>Ctrl+Shift hover is the classic inspect gesture — and some applications use exactly that chord themselves. Switch it to <b>Alt</b>, or off entirely; the Ctrl+K entry for picking always shows the current chord.</p>
 <h3>Step 3. Open the port for an agent</h3>
-<p>The <b>MCP</b> page carries the endpoint: a switch that opens and closes it there and then, the port, the two permissions — whether an agent may freeze popups, and whether it may <a href="#mcpinput">click and type</a> — and the one line that registers this application with Claude Code or Codex, with a Copy button. Turning it off here outranks <code>AVA_DEVTOOLS_MCP</code>: a port you closed stays closed on the next run. See <a href="#mcpconnect">Connect it to Claude Code or Codex</a>.</p>` },
+<p>The <b>MCP</b> page carries the endpoint: a switch that opens and closes it there and then, the port, the three permissions — whether an agent may freeze popups, whether it may <a href="#conditions">read the application under other variants</a>, and whether it may <a href="#mcpinput">click and type</a> — and the one line that registers this application with Claude Code or Codex, with a Copy button. Turning it off here outranks <code>AVA_DEVTOOLS_MCP</code>: a port you closed stays closed on the next run. See <a href="#mcpconnect">Connect it to Claude Code or Codex</a>.</p>` },
       { id: 'problems', t: 'Problems pane', html: `<p>A binding fails silently and the evidence is scattered: an empty control here, a log line there. The <b>Problems</b> tab collects what is broken in one list — binding failures first of all — errors before warnings, each with a plain-language reason.</p>
 <h3>Step 1. Problems arrive on their own</h3>
 <p>Binding errors and error-level app logs land in the list the moment they are logged; repeats collapse into one row with a ×N counter instead of flooding the list.</p>
@@ -427,6 +452,75 @@ en: {
 <h3>Step 4. Contrast, measured rather than eyeballed</h3>
 <p>Text contrast is computed the way WCAG 2.1 defines it: relative luminance, 4.5:1 for body text and 3:1 for large text, with the translucent layers behind the text composited first — a half-transparent panel over a dark window is a different colour than either. Gradients, images and tiles are not measured at all rather than measured badly: a gradient has as many contrast ratios as it has pixels, and reporting one of them as though it were the answer would be worse than staying quiet.</p>
 <p class="tip"><b>Tip.</b> All of it reaches an agent with no new surface to learn: <code>get_tree</code> takes <code>mode: "accessibility"</code>, <code>get_problems</code> reports the audit as another category, and <code>get_tab_order</code> presses Tab through the window and says where focus actually went. See <a href="#mcptools">the tools</a>.</p>` },
+      { id: 'conditions', t: 'It only looks right in your conditions', html: `<p>Everything DevTools has told you so far was measured in one place: your theme, your text size, your window width, your reading direction. That is one point in the space your application actually has to work across — and it is the one point where the bugs are not. The light-theme contrast failure, the label that clips when a reader turns text up, the row that falls off a narrow window: each is invisible from your chair and obvious from somebody else's.</p>
+<p>The <b>Variants</b> tab moves your chair. Pick a property, pick a value, press <b>Add</b> — and the list you build is the run. Press <b>Check variants</b> and the application is read again at every value on it and put back exactly as it was found — and the list folds away, because building a run and reading one are two different afternoons. The list is remembered against <em>that application</em>, so tomorrow's run is the one you care about rather than the one it shipped with — and opening a different project does not hand you the last one's answers.</p>
+<div class="shot"><img src="assets/img/docs/conditions-run.png" alt="The Variants tab before a run: an axis picker, a value picker and an Add button, above the list of variants to run"><span class="cap">Vary <b>Window size</b>, pick a value, press Add. Every name in the dropdown carries a line saying what that property varies and a few of the values it varies it at — three of them, so an axis with thirty languages answers the question instead of reciting a catalogue — and every property on the list wears a <b>?</b> carrying the same. The box beside the value picker takes the size that is not on the list, and what you have added sits under the axis it belongs to. Under the button is what a run will read.</span></div>
+<h3>Exactly which views are checked</h3>
+<p>An application has more views than are ever on screen at once, so it is worth being precise about which ones a run reads. It reads <b>every open window</b> of the application this DevTools session is attached to — the tab names them under the button — and inside those windows, <b>the controls that exist at the moment you press it</b>. That is the live visual tree, not your XAML: a view is read if it has been built, and not otherwise.</p>
+<p>Which means these are <em>not</em> checked, and the report says nothing at all about them:</p>
+<ul>
+<li><b>A tab page you have not selected.</b> An unselected <b>TabItem</b>'s content is not in the tree yet — a run sees only the tab that happens to be open. This is the one that catches people out.</li>
+<li><b>A page you have not navigated to</b>, and a window you have not opened.</li>
+<li><b>A dialog, flyout or menu that is not showing.</b> An open popup lives in a top level of its own and is not read either.</li>
+<li><b>Rows a virtualised list has not realised</b> — the ones scrolled out of view do not exist as controls.</li>
+</ul>
+<p>None of that is guessed at or reported as a pass: a view nobody looked at simply does not appear. Put it on screen and check again, and it is in the next report. This is why the line under the button names the windows it will read — what it lists is what you are getting an answer about.</p>
+<p><b>And what is measured in them.</b> The text checks read every <b>TextBlock</b> and <b>TextBox</b> that carries text — that is what "over 46 pieces of text" counts in the banner — because the axes that ship change how text is sized, coloured and placed. The <a href="#a11y">accessibility</a> comparison runs over the whole tree, so a finding about focus or a missing name can be about any control, text or not.</p>
+<p class="tip"><b>Tip.</b> For a tabbed or navigated application, check one screen at a time: open the view, press Check variants, fix what it found, then move to the next. A run is an answer about the screen in front of you, not about the application in the abstract.</p>
+<table>
+<tr><th>Axis</th><th>Values</th><th>What changes, and what it catches</th></tr>
+<tr><td>Theme</td><td>Light, Dark</td><td>The variant your top levels are asked to draw in — where the text that disappears into its background in the theme nobody on the team runs has been waiting.</td></tr>
+<tr><td>Text scale</td><td>125, 150, 200, 300%, or type one</td><td>Every font-size resource the theme hands out, scaled the way an operating system's accessibility setting delivers it. Labels that clip, rows that collide, and text that ignores the setting entirely.</td></tr>
+<tr><td>Window size</td><td>Narrow 360 × 640 through 4K, or type 1024x768</td><td>The size of your windows. Content pushed off the edge with nothing to scroll it back, and the layout that only works at the size you built it at.</td></tr>
+<tr><td>Text direction</td><td>Right to left, Left to right</td><td>Flow direction — the half of mirroring you do not get for free.</td></tr>
+<tr><td>Language</td><td>Yours first, then two dozen more, or type any culture</td><td>The culture your strings are looked up in, and the right-to-left flip that comes with Arabic and Hebrew. Every box that was measured with the English string in it. Needs two lines from you — see below.</td></tr>
+</table>
+<h3>Only what got worse</h3>
+<p>This is the part that makes the pane worth opening. An ellipsis is not a bug — if you set <b>TextTrimming</b> you asked for it. Small text is not a bug. So nothing is reported for being <em>true</em>; a finding is a <em>difference</em> from your application as it stands right now:</p>
+<ul>
+<li><b>Text cut off</b> — reads in full at the baseline, truncated here. Read off the text layout's own report of a line it had to collapse, not guessed from a width comparison.</li>
+<li><b>Pushed outside the window</b> — on screen at the baseline, past the edge here, with nothing scrollable in between. Anything inside a scroll viewer is skipped, because content outside a viewport is what one is for.</li>
+<li><b>Text too faint to read</b> — the contrast passes at the baseline and fails here, measured the way <a href="#a11y">the accessibility audit</a> measures it. The ratio is in the explanation rather than in the heading: a number is not a symptom, and a heading with a measurement in it makes every element a category of one.</li>
+<li><b>Text that did not get bigger</b> — the reader turned text up and this did not move. Its size is written on the control itself or in a style rather than taken from the theme, so it stays that size whatever the reader sets. Reported once, carrying the count, the sizes, what the rest of the text went to, and how many more rows it speaks for: an application that pins font sizes pins most of them, and thirty-eight copies of one sentence is a wall rather than a report.</li>
+</ul>
+<div class="shot"><img src="assets/img/docs/conditions-report.png" alt="After a run: one line per property with its values marked, and the findings of the open one standing under its own row"><span class="cap">After the run the list is gone and the run stands in its place — and so do the run's own controls, because a report is a thing to read and the only way off the page is <b>← Back</b>. This is <b>By variant</b>, the first of three readings: one line per property, its values marked — <b>✓</b> clean, <b>!</b> worse but nothing lost, <b>✕</b> content lost, <b>–</b> never ran at all — with the key to those four printed under the rows rather than left to a hover. Press a mark and that value’s findings open <b>under its own row</b>, tied to it by a rule in the colour the chip is lit in; press it again and they fold away. Nothing heads them, because the property is on the row above and the value is in the chip: a heading would be the two words you just pressed, said again. The banner carries the count and the line under it says what the run read; the first line of the findings says what that property varies — the sentence that matters most for the axes your own application registers, where the name alone tells a reader nothing. Findings are gathered by kind rather than repeated per element: the heading names the symptom in ordinary words, the sentence under it says why that is a problem, and each row carries the control and a picture of it <b>as it was under the variant</b> — taken during the run, because a moment later the application is back to normal. Where the rows have numbers of their own — three labels failing contrast at three different ratios — that sentence stays on the <b>?</b> and on each row instead, because one element’s measurement is not a claim about the others.</span></div>
+<p>Findings land in the <a href="#problems">Problems pane</a> under <b>Variants</b>, with the variant in the sentence, and click through to the element like every other row there.</p>
+<h3>Three ways to read it</h3>
+<p>One run, three readings, and none of them is a summary of the others. <b>By variant</b> is the shape of the run — the picture above — and answers which circumstance your application is worst in. <b>Table</b> is the shape of the work, and answers how much of it there is. <b>One at a time</b> is the shape of a single problem, and answers the one question the other two cannot: what it actually looked like. Whichever you leave it on is the one it opens on next time.</p>
+<div class="shot"><img src="assets/img/docs/conditions-table.png" alt="The table reading: three columns — the variant, the problem, and the elements it happened to"><span class="cap"><b>Variant</b>, <b>problem</b>, <b>items</b>. The variant is printed where it changes and the kind of problem where it changes, so what you scan down the middle of the page is a list of distinct problems rather than the same sentence three times — one problem that three elements share is one row wearing <b>×3</b>, with the three of them in the column beside it. Two findings that merely share a heading — text too faint, at three different ratios — stay separate, because each keeps the measurement that is the whole of what it has to say. Press a heading and that problem opens on its own.</span></div>
+<div class="shot"><img src="assets/img/docs/conditions-detail.png" alt="One problem at a time: a counter, two arrows, the sentence, and the screenshot filling the pane"><span class="cap">One problem, with <b>‹ 2 / 6 ›</b> over it: which of how many, the value it came from, the sentence, the element, and the picture. The picture fills the pane rather than sitting at life size — up to four times, in square pixels rather than smoothed, because half of these are four pixels of a clipped descender and a 90-pixel screenshot in the middle of an empty pane is a report with the evidence left out. <b>−</b> and <b>+</b> go closer, <b>Life size</b> goes back to what the user saw. The arrows stop at both ends rather than starting again, so you can tell when you have seen them all. The one kind of finding that is never photographed — text that kept its size while everything around it grew, which photographs as ordinary text — says so where the picture would be, rather than leaving a hole that reads as a photograph that failed.</span></div>
+<h3>Out of the tab, as a document</h3>
+<p>Most of the people who have to act on these findings cannot press the button: the reviewer on the pull request, the designer asked whether the Arabic layout is meant to look like that, the accessibility audit next quarter. <b>Save as PDF…</b> writes the whole run out for them — what was checked, what refused and why, every problem as a table, then each one again with its screenshot. The pictures are the point: they exist only while the variant is applied, so carrying them out is not a convenience but the only moment they can be carried.</p>
+<p class="tip"><b>Tip.</b> The PDF costs the package nothing — it is written by hand out of what the framework already ships, so AvaDevTools still references nothing but Avalonia.</p>
+<h3>Your app's languages</h3>
+<p>Language is the axis that finds a bug on nearly every screen it is pointed at, and the one no tool can apply on its own: setting a culture is easy and changes nothing, because only your application knows how its strings are looked up. So you supply both halves — the cultures you ship, and the one call that makes your screens re-read — and the axis does the rest, including the right-to-left flip that comes with Arabic and Hebrew whether the app remembered it or not.</p>
+<pre><code>var options = <span class="k">new</span> DevToolsOptions();
+options.Languages.Add(<span class="s">"en-GB"</span>);
+options.Languages.Add(<span class="s">"de-DE"</span>);
+options.Languages.Add(<span class="s">"ar-SA"</span>);
+options.ApplyLanguage = culture =&gt; Strings.Reload(culture);
+<span class="k">this</span>.AttachAvaDevTools(options);</code></pre>
+<p>Your languages come first in the picker, because they are the ones whose strings change; two dozen more follow — the ones that cost a layout something, from German compounds to right-to-left to Thai — and any culture at all can be typed. Declaring no languages leaves the axis off the tab. Declaring them without <b>ApplyLanguage</b> puts it there and makes it refuse, with a reason — the honest answer, and better than a clean pass in a language the screen never rendered.</p>
+<h3>Axes of your own</h3>
+<p>The axes that ship are the properties true of every Avalonia application. The ones your application actually breaks under are usually its own: the tenant whose brand colour lands on top of the background, the density a table stops being readable at, the hardware profile half your users are on. An axis is a property with values — name it, say in one sentence what varying it changes, list the values worth trying, and register it on <b>DevToolsOptions.ExtraAxes</b> before attaching. It appears in the tab with a picker of its own and answers to its axis name over MCP.</p>
+<pre><code>sealed class TenantAxis : VariantAxis
+{
+    public override string Id =&gt; "tenant";
+    public override string Name =&gt; "Tenant";
+    public override string Varies =&gt; "whose branding this is painted in";
+
+    public override IReadOnlyList&lt;VariantChoice&gt; Suggested { get; } = new[]
+    {
+        new VariantChoice("meridian", "Meridian", () =&gt; new Painted(Colors.Teal)),
+        new VariantChoice("orbit", "Orbit", () =&gt; new Painted(Colors.Crimson)),
+    };
+}</code></pre>
+<p>Each value builds a <b>Variant</b> — the thing that applies, confirms and puts back. Override <b>TypedHint</b> and <b>TryParse</b> and the axis takes values typed by hand too, which is how window size takes 1024x768 and text scale takes 175.</p>
+<p>Two things the matrix asks of an implementation. Record the undo at the moment you make the change, never afterwards — the ledger is released in a <code>finally</code>, and a change with no undo written down is a change the developer keeps. And return <code>false</code> with a reason when the change cannot honestly be made, rather than reporting a pass you never measured. There is also <b>TryConfirm</b>, asked once the layout has caught up, for the case where setting a property succeeds and changes nothing — the difference between "nothing broke" and "nothing happened".</p>
+<h3>Nothing is left behind</h3>
+<p>Every change is recorded as it is made and released in a <code>finally</code> — the same restore-ledger discipline <a href="#hold">❄ Hold</a> has used since 12.1.0, and one restore failing does not strand the ones queued behind it. The self-tests assert the application is identical afterwards, down to the resource dictionary the text scale shadows.</p>
+<p>A variant that cannot be applied honestly refuses and says why — an embedded top level has no window to resize, a window held at its minimum will not go narrower — because a column of zero findings reads exactly like a pass.</p>
+<p class="tip">One axis at a time, not every combination: five axes with two values each is more passes to sit through than anybody does twice, and the bug that needs dark <em>and</em> right-to-left <em>and</em> 200% simultaneously is rarer than the patience to find it.</p>` },
       { id: 'palette', t: 'Ctrl+K: find anything', html: `<p>You rarely know the type or the name of the thing you are chasing — you know the words it shows on screen. Press <span class="kbd">Ctrl</span>+<span class="kbd">K</span> (or <span class="kbd">⌘</span>+<span class="kbd">K</span>) in DevTools: one search over everything, categorized as you type. Every row carries a colored type icon in the vocabulary the rest of DevTools already speaks — the tree's element glyphs, <code>◈</code> for resources, <code>◆</code> for properties, the menu icons for actions — so what a hit is reads before its text does.</p>
 <h3>An empty query is the actions menu</h3>
 <div class="shot"><img src="assets/img/docs/palette-actions.png" alt="Ctrl+K with an empty query: every DevTools action listed with its icon and a hint"><span class="cap">Every DevTools command in one list — the palette doubles as the discoverability menu.</span></div>
@@ -682,10 +776,11 @@ en: {
 <h3>Timeline</h3><ul><li>Events, property changes, VM notifies, focus changes and binding errors in one feed, scoped to a watchlist — with cause links, a binding walk-through and the instance inspector. See <a href="#timeline">Timeline</a>.</li>
 <li>The violet <b>⌁ Input</b> lane carries what an agent did to the application — every click, key and drag it injected, above the changes they caused. See <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li></ul>
 <h3>Problems</h3><ul><li>Only what is broken — binding failures, error logs — errors before warnings, each with a plain reason, a reveal-in-tree link and the full binding walk. Scan now catches bindings that failed before DevTools opened. See <a href="#problems">Problems pane</a>.</li></ul>
-<h3>MCP Server</h3><ul><li>There while the endpoint is listening, gone when it is not: what is listening, on which port and under which name, the one line that registers this application with your agent, and every tool with the number of calls an agent has made to it — failures counted apart. The tools that can act on the application are marked <b>⌁</b> in that list, so what an agent could have done to it is readable without knowing the names by heart. The switch, the port and the two permissions are on the ⚙ card's MCP page. See <a href="#mcp">Let an agent look</a>.</li></ul>
+<h3>MCP Server</h3><ul><li>There while the endpoint is listening, gone when it is not: what is listening, on which port and under which name, the one line that registers this application with your agent, and every tool with the number of calls an agent has made to it — failures counted apart. Every tool that writes to the application — the ones that click and type, the ones that freeze, the one that varies the circumstances — is marked <b>⌁</b> in that list, so what an agent could have done to it is readable without knowing the names by heart. The switch, the port and the three permissions are on the ⚙ card's MCP page. See <a href="#mcp">Let an agent look</a>.</li></ul>
 <h3>Logs</h3><ul><li>Live Avalonia logger output with Pause, level, area and text filters. Captures at Warning by default. Entries produced by the DevTools UI itself are dropped and appends are batched — verbose logging can't freeze the tool.</li>
 <li><code>LogCapture.Publish</code> feeds the pane the application's own events — see <a href="#applogs">App log feed</a>.</li></ul>
-<h3>Session</h3><ul><li>Record what the application receives, freeze what should be true while it still is, and replay it — in the window at four paces, or headless on a build machine. The first divergence stops the run with the reason, a screenshot and the element selected in the tree. See <a href="#session">Keep the repro: record, check, replay</a>.</li></ul>` },
+<h3>Session</h3><ul><li>Record what the application receives, freeze what should be true while it still is, and replay it — in the window at four paces, or headless on a build machine. The first divergence stops the run with the reason, a screenshot and the element selected in the tree. See <a href="#session">Keep the repro: record, check, replay</a>.</li></ul>
+<h3>Variants</h3><ul><li>Pick a property, pick a value, press Add — theme, text scale, window size, text direction, language — then press <b>Check variants</b> and the application is read again at every value on the list, reporting only what got worse and putting everything back. Every axis says what it varies and names a few of its values; the list is remembered against that application, and an application can register axes of its own.</li><li>Read the result three ways — by variant, as a table of variant, problem and the elements it happened to, or one problem at a time with its screenshot filling the pane — and <b>Save as PDF</b> takes the whole run out of the tab, pictures and all. Findings join the Problems pane under <b>Variants</b>. See <a href="#conditions">It only looks right in your conditions</a>.</li></ul>` },
       { id: 'capture', t: 'Screenshots & bug reports', html: `<p>"Can you send me a screenshot and the XAML path?" is one click here — the element, its bounds and the properties that differ from defaults travel together with the picture.</p>
 <h3>Step 1. Choose what to copy</h3>
 <p>The <b>📷 toolbar button</b> is a two-click chooser — <em>Copy screenshot</em> or <em>Copy report (screenshot + XAML)</em> — capturing the selected element or the whole window. The same actions live in the tree context menu under <b>Copy ▸</b>: <b>Path</b> (<span class="kbd">Ctrl+C</span>), <b>As XAML</b> (<span class="kbd">Ctrl+Shift+C</span>), <b>Screenshot</b> and <b>As bug report</b>.</p>
@@ -735,9 +830,10 @@ en: {
 <li><b>A busy application says so.</b> If the UI thread does not answer within a minute — a modal dialog is up, or a debugger has it stopped — the call comes back saying exactly that, instead of leaving the agent on a dead socket.</li></ul>
 <h3>What it may and may not do</h3>
 <ul><li><b>Loopback only</b>, and not as a configuration knob: the day this binds to 0.0.0.0 is the day a debugging aid becomes a way to read someone's screen from the next desk. The <code>Origin</code> header is checked too, so a page in a browser cannot reach it through DNS rebinding.</li>
-<li><b>Sixteen of the twenty-five tools are pure reads.</b> They inject no input, write no application property and run no handler. Nothing about them needs a confirmation flow, because there is nothing to confirm.</li>
+<li><b>Eighteen of the twenty-nine tools are pure reads.</b> They inject no input, write no application property and run no handler. Nothing about them needs a confirmation flow, because there is nothing to confirm.</li>
 <li><b>Two tools freeze transient state, and need a second opt-in.</b> <code>hold</code> and <code>pin_class</code> hold popups open and force pseudo-classes — the only way something with no pointer can look at a hover state. They are off unless the <b>Allow freezing</b> checkbox on the ⚙ card's MCP page — <code>McpAllowHold</code>, or <code>AVA_DEVTOOLS_MCP_HOLD=1</code> — says otherwise, they change transient UI state and nothing else, every hold carries a deadline that releases it, the application shows a banner while one lasts, and <span class="kbd">Esc</span> in the application releases it too.</li>
-<li><b>Seven tools act on the application, behind a switch of their own.</b> <code>click</code>, <code>hover</code>, <code>drag</code>, <code>scroll</code>, <code>press_key</code>, <code>type_text</code> and <code>focus_element</code> run your handlers, which can do whatever your application can do — so they wait on their own permission, not on the freeze one. Off unless you say otherwise; see <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li>
+<li><b>One tool reads the application under other variants, and waits on a permission of its own.</b> <code>run_variants</code> writes the application’s own properties while it looks — the theme variant, the font sizes the theme hands out, a window’s size, the flow direction, the thread's culture — so your handlers run, and puts every one of them back in a <code>finally</code>, including when a check throws. No input is injected and nothing is pressed, which is why it waits on neither the freeze switch nor the input one but on <b>Allow other variants</b> — <code>McpAllowVariants</code>, or <code>AVA_DEVTOOLS_MCP_VARIANTS=1</code>. What it finds is filed into the developer’s Problems pane as it runs; see <a href="#conditions">It only looks right in your conditions</a>.</li>
+<li><b>Eight tools act on the application, behind a switch of their own.</b> <code>click</code>, <code>hover</code>, <code>drag</code>, <code>scroll</code>, <code>press_key</code>, <code>type_text</code> and <code>focus_element</code> run your handlers, which can do whatever your application can do, and <code>replay_session</code> runs a whole recorded session of them — so they wait on their own permission, not on the freeze one. Off unless you say otherwise; see <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li>
 <li><b>It releases what it took.</b> An agent's hold auto-releases only what the agent engaged: press <span class="kbd">Shift</span>+<span class="kbd">F12</span> yourself afterwards and the deadline will not take your hold away.</li></ul>
 <p class="tip">Ship it Debug-only, like the rest of DevTools. The endpoint is off by default in every build, but an application that never attaches DevTools in Release cannot serve one by accident.</p>` },
       { id: 'mcpconnect', t: 'Connect it to Claude Code or Codex', html: `<p>The endpoint exists only while your application runs, so the order never changes: start the app, turn the server on, point the agent at it. The name it registers under is <code>&lt;assembly name&gt;-avadevtools</code> — that is what you will see in the client's own list.</p>
@@ -745,8 +841,8 @@ en: {
 <ol class="steps"><li>Run your app and press <span class="kbd">F12</span>.</li>
 <li>Open the ⚙ card's <b>MCP</b> page and tick <b>Serve MCP on loopback</b>.</li>
 <li>Copy the block under <em>Point your agent at it</em> — it already carries the right name and port.</li></ol>
-<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="The settings card MCP page: the switch, the port and the two permissions, with the line below saying what is listening"><span class="cap">⚙ → MCP: everything you set, and nothing else — the switch, the port, the freeze and input permissions, and a line saying what came of them.</span></div>
-<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="The MCP Server tab: what is listening, and every tool with the number of calls made to it"><span class="cap">The tab, which is there only while the endpoint is: twenty-five tools, and what an agent has actually asked of each. A dash is a tool it has never touched; an amber number had failures in it; the ⌁ ones can act on the application.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="The settings card MCP page: the switch, the port and the three permissions, with the line below saying what is listening"><span class="cap">⚙ → MCP: everything you set, and nothing else — the switch, the port, the freeze, variants and input permissions, and a line saying what came of them.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="The MCP Server tab: what is listening, and every tool with the number of calls made to it"><span class="cap">The tab, which is there only while the endpoint is: twenty-nine tools, and what an agent has actually asked of each. A dash is a tool it has never touched; an amber number had failures in it; the ⌁ ones write to the application, and an unmarked name only ever reads.</span></div>
 <h3>Step 2a. Claude Code</h3>
 <pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
 <p>The scope decides who gets it. <code>--scope local</code> (the default) is this project, for you; <code>--scope project</code> writes a <code>.mcp.json</code> in the repository root so everyone working on the application gets the same entry; <code>--scope user</code> is every project on your machine. What it writes is the same JSON the tab shows:</p>
@@ -767,8 +863,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Two applications at once</h3>
 <p>Give the second one its own port (the <b>Port</b> box on the ⚙ card's MCP page, <code>McpPort</code>, or <code>AVA_DEVTOOLS_MCP_PORT</code>) and add it as a second entry. Their names differ already, so the agent's tool list stays readable.</p>
 <p class="tip">A client that started before your application usually shows no tools until it reconnects — <code>/mcp</code> in Claude Code, a new session in Codex. That is a reconnect, not a config problem.</p>` },
-      { id: 'mcptools', t: 'The twenty-eight tools', html: `<p>Twenty-eight tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
-<p>Eighteen only look. Two freeze transient state and wait on the freeze permission. Eight act on the application and wait on <a href="#mcpinput">the input permission</a> — the seven that inject input, and the one that replays a whole session of it.</p>
+      { id: 'mcptools', t: 'The twenty-nine tools', html: `<p>Twenty-nine tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
+<p>Eighteen only look. Two freeze transient state and wait on the freeze permission. One reads the application under other variants and waits on a permission of its own. Eight act on the application and wait on <a href="#mcpinput">the input permission</a> — the seven that inject input, and the one that replays a whole session of it.</p>
 <h3>Finding your way around</h3>
 <table>
 <tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
@@ -836,7 +932,13 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>check_that</code></td><td>States something that should be true, into the recording that is running. With no expected value it freezes what the property says right now.</td><td><code>elementId</code>, <code>check</code>, <code>property</code>, <code>expect</code></td></tr>
 <tr><td><code>replay_session</code></td><td>Runs a recorded session against the application again and reports the first step that diverged, with the reason. Acts, so it waits on the input permission.</td><td><code>path</code>, <code>json</code></td></tr>
 </table>
-<p>The three together are how an agent leaves behind something a person can run — see <a href="#session">Keep the repro: record, check, replay</a>.</p>` },
+<p>The three together are how an agent leaves behind something a person can run — see <a href="#session">Keep the repro: record, check, replay</a>.</p>
+<h3>Reading it under other variants</h3>
+<table>
+<tr><th>Tool</th><th>Answers</th><th>Arguments</th></tr>
+<tr><td><code>run_variants</code></td><td>Reads the application again at one value of one property — or at one value of every property, if you name none — and reports only what got worse. Writes the application's own properties while it looks and puts every one back, so it waits on a permission of its own — no input is injected and nothing is pressed. An axis nobody has is answered with the list of axes and the values each offers.</td><td><code>axis</code>: theme / text / size / direction / language, or one this app registered. <code>values</code>: ["200"], ["1024x768"], ["de-DE"]</td></tr>
+</table>
+<p>One call covers the questions a screenshot cannot answer — see <a href="#conditions">It only looks right in your conditions</a>. What it finds is filed into the developer's Problems pane at the same time: an agent's run is not a private conversation about somebody's application.</p>` },
       { id: 'mcpinput', t: 'Input over MCP: click, type, drag', html: `<p>Reading answers <em>why is it that wide</em> and <em>what is broken</em>. It never answers <em>does the button work</em>. For that the button has to be pressed — so, behind a switch of its own, an agent can press it: seven tools that click, hover, drag, scroll, press keys, type text and move focus.</p>
 <h3>It is real input, not a shortcut</h3>
 <p>Nothing here raises an event at a control. Each action is built as a raw platform event and pushed through Avalonia's own input manager — the same door the macOS, X11 and Windows backends push through. Hit testing decides what is hit, the click count comes from real timestamps, pointer capture and pointer-over behave as they do for a person, and your handlers run because they were <em>reached</em>, not because they were called.</p>
@@ -1005,8 +1107,9 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
     McpPort              = 5171,                               <span class="c">// on 127.0.0.1 only — default: 5171</span>
     McpAllowHold         = <span class="k">true</span>,                               <span class="c">// let an agent freeze popups / pin :pointerover — default: false</span>
     McpAllowInput        = <span class="k">true</span>,                               <span class="c">// let an agent click, type and drag — default: false</span>
+    McpAllowVariants     = <span class="k">true</span>,                             <span class="c">// let an agent read it under other variants — default: false</span>
 });</code></pre>
-<p>The four <code>Mcp*</code> options are described in <a href="#mcp">Let an agent look (MCP)</a> and <a href="#mcpinput">Input over MCP: click, type, drag</a>. Everything else is off or absent unless asked for, and the settings a user saves in the <a href="#settings">⚙ card</a> win over what the code passes here.</p>` },
+<p>The five <code>Mcp*</code> options are described in <a href="#mcp">Let an agent look (MCP)</a> and <a href="#mcpinput">Input over MCP: click, type, drag</a> and <a href="#conditions">It only looks right in your conditions</a>. Everything else is off or absent unless asked for, and the settings a user saves in the <a href="#settings">⚙ card</a> win over what the code passes here.</p>` },
       { id: 'env', t: 'Environment variables', html: `<table>
 <tr><th>Variable</th><th>Meaning</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>Open DevTools automatically when a window loads.</td></tr>
@@ -1019,16 +1122,18 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>Port for it. Default 5171.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Also allow <code>hold</code> and <code>pin_class</code> — the two tools that freeze transient state.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td><td>Also allow the seven tools that <a href="#mcpinput">act on the application</a> — click, hover, drag, scroll, keys, typed text, focus.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_VARIANTS=1</code></td><td>Also allow <code>run_variants</code> — reading the application <a href="#conditions">under other variants</a> and putting it back.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_REPLAY=repro.json</code></td><td>Replay that <a href="#session">session</a> on start, print a PASS/FAIL line per step and exit with the answer.</td></tr>
 </table>
-<p class="tip">The four <code>MCP</code> variables are a starting state, not the last word: the switches on the <a href="#settings">⚙ card</a>'s MCP page are saved per machine and win over them. A port you closed in the tool stays closed on the next run, whatever the launcher exports.</p>` },
+<p class="tip">The five <code>MCP</code> variables are a starting state, not the last word: the switches on the <a href="#settings">⚙ card</a>'s MCP page are saved per machine and win over them. A port you closed in the tool stays closed on the next run, whatever the launcher exports.</p>` },
       { id: 'limits', t: 'Limitations', html: `<ul>
 <li>Desktop only — secondary windows are not supported on mobile/browser targets.</li>
 <li>DevTools brings its own theme — the application's theme, or its absence, does not matter.</li>
 <li>With <code>LiveTree = false</code> the tree is a snapshot again — use ↻ Refresh after structural changes (property values update live either way).</li>
 <li>Screenshots and bug reports double-scale the <em>contents</em> of box-shadowed borders on HiDPI displays — a render-layer quirk of Avalonia 12. Capturing the element rather than the whole window usually sidesteps it.</li>
 <li>The MCP endpoint binds to 127.0.0.1 only. That is deliberate and not configurable.</li>
-<li>Injected input reaches your application, not the desktop: the OS pointer never moves, so native file dialogs, the macOS menu bar and drag-and-drop to another application are out of its reach. See <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li><li>A recording keeps that text was typed into a masked box, never what was typed — replay refuses such a step rather than sending something wrong. See <a href="#session">Keep the repro</a>.</li></ul>` },
+<li>Injected input reaches your application, not the desktop: the OS pointer never moves, so native file dialogs, the macOS menu bar and drag-and-drop to another application are out of its reach. See <a href="#mcpinput">Input over MCP: click, type, drag</a>.</li><li>A recording keeps that text was typed into a masked box, never what was typed — replay refuses such a step rather than sending something wrong. See <a href="#session">Keep the repro</a>.</li>
+<li>The <a href="#conditions">text-scale axis</a> moves what the theme sizes, so text with its size written on the element or its style does not move — that is reported as a finding rather than worked around. Its checks read text, so a control whose problem is not textual is outside what one run can see.</li></ul>` },
       { id: 'feedback', t: 'Feedback', html: `<p>The <b>Feedback</b> button in the toolbar's top-right corner opens the AvaDevTools issue tracker — report a bug or ask for a feature in one click. The same action lives in <span class="kbd">Ctrl</span>+<span class="kbd">K</span> as "Send feedback".</p>
 <p>Prefer chat? The <a href="https://t.me/avadevtools">Telegram channel</a> takes questions and quick help.</p>` },
       { id: 'updates', t: 'Update notifications', html: `<p>The toolbar always shows the version you are running, dimmed, next to <b>Feedback</b>. New AvaDevTools versions bring new panes and fixes, but a NuGet dependency never announces them on its own — so when a newer version is published, that same label turns blue and grows an <b>↑</b>.</p>
@@ -1056,13 +1161,37 @@ uk: {
     get: 'Почати', stories: 'Подивитися в дії', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.1.7', docs: 'Документація →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.1.8', docs: 'Документація →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   stories: {
-    h: 'Історії', wn: 'repro',
+    h: 'Історії', wn: 'conditions',
     lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
     list: [
+      { key: 'conditions', h: '◐ Воно виглядає правильно лише у ваших умовах', sub: 'Ваша тема, ваш розмір тексту, ваша ширина вікна. Прочитайте його знову в чужих — і почуйте лише те, що стало гірше.',
+        steps: [
+          { t: '◐ Воно виглядає правильно лише у ваших умовах',
+            d: 'Усе, що DevTools казав вам досі, було виміряне в одному місці: ваша тема, ваш розмір тексту, ваша ширина вікна, ваш напрямок читання. Це одна точка простору, в якому має працювати ваш застосунок, — і саме в ній багів немає.',
+            d2: 'Тож вкладка пересуває ваше крісло. Оберіть властивість, оберіть значення, натисніть Add — тема, масштаб тексту, розмір вікна, напрямок тексту, мова, і скільки завгодно осей, які зареєструє ваш застосунок — по одній за раз, кожна застосована до справжнього застосунку і знята з нього — зі звітом лише про те, що стало <i>гірше</i>, бо інструмент, який перелічує те, що завжди було правдою, — це інструмент, який гортають далі.',
+            newsTitle: 'Нове у 12.1.8',
+            news: [
+              { k: 'Вкладка Variants', d: 'інша тема, розмір тексту, розмір вікна, напрямок, мова \u2014 або ваша власна вісь. Лише те, що стало гірше, у трьох способах прочитання і збережене в PDF.' },
+            ] },
+          { img: 'story/c02.png', t: 'Вісь, значення, Add', d: 'На екрані — властивість, а не значення: <b>Theme</b>, <b>Text scale</b>, <b>Window size</b>, <b>Text direction</b>, <b>Language</b>, кожна з реченням про те, що саме змінюється, і зі списком значень, які варто спробувати. Оберіть одне, натисніть Add — і воно приєднається до запуску; наберіть те, якого немає в списку, — приєднається так само, тож розмір вікна — це 1024x768 або та панель, на якій ви справді працюєте. Кожна назва у випадному списку несе рядок про те, що ця властивість змінює, і три значення, на яких вона це робить, а кожен рядок списку носить <b>?</b> із тим самим \u2014 і найпотрібніше це для осей, які реєструє ваш власний застосунок: назва на кшталт <b>Console profile</b> сама по собі не каже читачеві нічого. Заповнювати нічого не треба: вкладка відкривається з одним значенням на кожній осі, бо цінність у тому, щоб натиснути кнопку. Зібране запам&#39;ятовується саме для цього застосунку, тож інший проєкт не підсуне вам відповіді попереднього. Кожен варіант — оборотна зміна обставин, а не застосунку: варіант, у якому вікна просять себе намалювати, розміри шрифтів, які видає тема, розмір вікна, напрямок тексту, культура, в якій шукаються рядки.' },
+          { img: 'story/c04.png', t: 'Лише те, що стало гірше', d: 'Шість проблем на чотирьох варіантах — а список, який їх замовив, згорнувся: читати запуск і збирати його — це різні заняття. Під кнопками вкладка каже, що саме читає запуск: вікно, до якого вона приєднана, і в ньому те, що було на екрані в мить натискання Run. На його місці стоять ті самі рядки, але з позначками: світла тема і справа-наліво повернулися чистими й кажуть про це галочкою, на 200% стало гірше, але жодного слова не втрачено, а 360 px — це хрестик. Галочка і є цілим звітом для значення, яке пройшло чисто; варіант, який не запускався, позначено інакше — саме цю різницю вкладка й береже. Натисніть позначку — і під нею відкриються знахідки, згруповані за видом, а не повторені під кожним елементом: два підписи обрізано, три заголовки виштовхнуто за край, і нічим прокрутити їх назад. У кожної є зображення того контрола таким, яким він був під варіантом (знімок робиться під час запуску, бо за мить застосунок уже повернуто), а там, де підпис стиснуло до половини пікселя, — зображення місця, де він мав бути.' },
+          { img: 'story/c06.png', t: 'Той самий запуск, згрупований', d: 'Один запуск, три способи прочитання, і жоден із них не є переказом інших. Це <b>таблиця</b>: варіант, проблема і елементи, з якими вона сталася. Варіант друкується там, де він змінюється, і вид проблеми \u2014 там, де змінюється він, тож посередині сторінки ви проглядаєте список різних проблем, а не той самий абзац тричі: одна проблема, спільна для трьох елементів, \u2014 це один рядок із <b>\u00d73</b>, а всі три стоять у колонці поруч. І зверніть увагу, чого тут <i>немає</i>: ані Check variants, ані списку, ані рядка про те, що читатиме наступний запуск. Звіт \u2014 це те, що читають, і єдиний вихід зі сторінки \u2014 <b>\u2190 Back</b>.' },
+          { img: 'story/c07.png', t: 'По одній за раз, у розмірі, в якому це сталося', d: 'Саме заради цього способу й робилися зображення. Згори <b>\u2039 2 / 6 \u203a</b>: котра з якої кількості, значення, з якого вона взялася, речення, елемент \u2014 і знімок, що заповнює панель, а не сидить у натуральну величину: до чотирьох разів, квадратними пікселями, а не згладжено. Половина цих випадків \u2014 чотири пікселі обрізаного хвостика літери, а 90-піксельний знімок посеред порожньої панелі \u2014 це звіт без доказів. Стрілки зупиняються на обох кінцях, а не починають спочатку, тож видно, коли ви побачили все. А <b>Save as PDF</b> виносить увесь запуск за межі вкладки \u2014 що перевірено, що відмовилося і чому, кожна проблема таблицею, а тоді кожна ще раз зі своїм зображенням \u2014 для рецензента в pull request і дизайнера, який має погодитися, що верстка неправильна: ані той, ані інший кнопки натиснути не можуть.' },
+          { img: 'story/c05.png', t: 'У панелі, яку ви й так тримаєте відкритою', d: 'Баг, знайдений під варіантом, — не інший вид бага, це баг, знайдений там, де ви не стояли. Знахідки потрапляють у Problems під <b>Variants</b>, з варіантом, вписаним у речення, впорядковані разом з усім іншим, що не так із застосунком, і клікаються до елемента, як і кожен інший рядок там. Полагодьте одну й запустіть знову: рядки, яких запуск більше не знаходить, ідуть разом із ним.' },
+          { t: 'А застосунок — рівно там, де ви його лишили',
+            d: 'Кожна зміна записується в момент, коли її роблять, і звільняється у finally — дисципліна реєстру відновлення, якою ❄ Hold користується з 12.1.0, — і збій одного відновлення не лишає покинутими ті, що за ним у черзі. Самотести стверджують, що застосунок після цього ідентичний, аж до словника ресурсів, який затінює масштаб тексту. Агент отримує той самий запуск за власним дозволом: він пише властивості вашого застосунку, тож ваші обробники виконуються, і він нічого не натискає.',
+            code: [
+              '$ run_variants  {\"axis\": \"size\", \"values\": [\"360x640\", \"1024x768\"]}',
+              '  Window size · 360 × 640   — 5 findings',
+              '      error #2 TextBlock “RECENT BUILDS”  text is cut off here',
+              '            and reads in full at the baseline',
+              '  Window size · 1024 × 768  — nothing changed for the worse',
+            ] },
+        ] },
       { key: 'repro', h: '⏺ Збережи відтворення', sub: 'Запиши, що ти робив, заморозь те, що має бути правдою, і відтвори це пізніше — у вікні або на білд-машині, де ніхто не дивиться.',
         steps: [
           { t: '⏺ Збережи відтворення',
@@ -1344,6 +1473,7 @@ uk: {
   feat: {
     h: 'Усе, що очікуєш від DevTools', sub: 'Підключіть один раз і натискайте F12 у будь-якому вікні.',
     cards: [
+      { i: '◐', t: 'Воно виглядає правильно лише у ваших умовах', d: 'Оберіть властивість, оберіть значення, натисніть Add — тема, масштаб тексту, розмір вікна, напрямок тексту, мова — і прочитайте застосунок знову на кожному значенні зі списку, чуючи лише те, що стало гірше: обрізаний текст, вміст, виштовхнутий за межі вікна, втрачений контраст, текст, який не побільшав, коли читач збільшив шрифт. Пресети від телефонної колонки до 4K — або наберіть той розмір, на якому ви справді працюєте. Застосунок може зареєструвати власні осі. Усе повертається рівно таким, яким його знайшли.' },
       { i: '⏺', t: 'Збережи відтворення', d: 'Запишіть, що отримує застосунок — ваше й агентове однаково — заморозьте те, що має бути правдою, поки воно нею є, і відтворіть пізніше: у вікні в будь-якому темпі або на білд-сервері, де воно виходить з ненульовим кодом на першому розходженні.' },
       { i: '🌳', t: 'Живе розумне дерево', d: 'Дерево, що читається як XAML і живе разом із застосунком: структурні зміни вплітаються щойно стаються і спалахують, а кнопка паузи дає спокійно читати. Підсвічування синтаксису, згортання як у редакторі, компактний вигляд після вибору, hide, focus, scope і пошук.' },
       { i: '🪟', t: 'Усі вікна — один DevTools', d: 'Корінь дерева — застосунок: кожне вікно є вузлом верхнього рівня і з’являється та зникає наживо. F12 будь-де фокусує той самий DevTools; scope віддає одному вікну все дерево.' },
@@ -1366,7 +1496,7 @@ uk: {
       { i: '⏱', t: 'Таймлайн', d: 'Routed-події, зміни властивостей, сповіщення VM і зміни фокуса в одній хронологічній стрічці за вашим списком спостереження. Причинні зв’язки з’єднують сповіщення з оновленням від біндінга; кожен запис відкриває повні деталі.' },
     { i: '🕰', t: 'Захоплення причини', d: 'Кожна записана зміна несе стек викликів, що її спричинив, обрізаний до ваших власних кадрів. Відтворіть один раз і прочитайте всіх винуватців по черзі, кожен кадр веде до джерела — без брейкпойнта на кожне влучання. Break next ескалює до дебагера рівно на одну зміну.' },
     { i: '📈', t: 'Смуга Perf', d: 'Повільні кадри й проходи layout потрапляють у ту саму стрічку, що й усе інше, тож затримку видно поруч із тим, що робив застосунок. Повільне міряється проти бюджету, який ваш дисплей насправді витримує, а не проти середнього.' },
-    { i: '🤖', t: 'Дати агентові подивитись (MCP)', d: 'Ендпойнт Model Context Protocol на локальному інтерфейсі, вимкнений, доки не попросять, і лише для читання, доки ви не скажете інакше: двадцять п’ять інструментів дають агентові дерево, властивості, стилі, layout, ресурси, проблеми, таймлайн, логи і скріншоти запущеного застосунку — а за окремим перемикачем ще й змогу клікати та друкувати в ньому.' },
+    { i: '🤖', t: 'Дати агентові подивитись (MCP)', d: 'Ендпойнт Model Context Protocol на локальному інтерфейсі, вимкнений, доки не попросять, і лише для читання, доки ви не скажете інакше: двадцять дев’ять інструментів дають агентові дерево, властивості, стилі, layout, ресурси, проблеми, таймлайн, логи і скріншоти запущеного застосунку — а за окремим перемикачем ще й змогу клікати та друкувати в ньому.' },
       { i: '📜', t: 'Перегляд логів', d: 'Помилки біндінгів, layout і система властивостей — навіть без LogToTrace(). З фільтрами, батчингом і захистом від зациклення.' },
       { i: '📊', t: 'Оверлеї рендерера', d: 'Лічильник FPS, графіки часу layout/render та підсвічування dirty-rect — одним перемикачем.' },
       { i: '🕵️', t: 'Джерело кожного значення', d: 'Одразу видно: значення типове, задане вручну, зі стилю, шаблону чи успадковане — з переходом до предка або точного місця в XAML.' },
@@ -1382,7 +1512,7 @@ uk: {
     contents: 'Зміст',
     groups: [
       { t: 'Початок роботи', ids: ['install', 'quickstart'] },
-      { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
+      { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
       { t: 'Агенти (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: 'Довідник', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -1429,7 +1559,7 @@ uk: {
 <li>Натисніть нову комбінацію — вона зберігається в момент натискання. <span class="kbd">Esc</span> скасовує; × повертає типове.</li></ol>
 <div class="shot"><img src="assets/img/docs/settings-card.png" alt="Картка налаштувань із полями захоплення жестів"><span class="cap">Картка: жести, hover-inspect, зворотний відлік hold, stay-on-top, живе дерево, перевірка оновлень.</span></div>
 <h3>Крок 3. Відкрийте порт для агента</h3>
-<p>Сторінка <b>MCP</b> тримає ендпойнт: перемикач, що відкриває й закриває його тут-таки, порт, два дозволи — чи можна агентові заморожувати попапи і чи можна йому <a href="#mcpinput">клікати й друкувати</a> — і той єдиний рядок, який реєструє цей застосунок у Claude Code чи Codex, із кнопкою Copy. Вимкнення тут має перевагу над <code>AVA_DEVTOOLS_MCP</code>: закритий порт лишиться закритим і наступного запуску. Див. <a href="#mcpconnect">Під’єднати до Claude Code чи Codex</a>.</p>
+<p>Сторінка <b>MCP</b> тримає ендпойнт: перемикач, що відкриває й закриває його тут-таки, порт, три дозволи — чи можна агентові заморожувати попапи, чи можна <a href="#conditions">читати застосунок в інших варіантах</a> і чи можна йому <a href="#mcpinput">клікати й друкувати</a> — і той єдиний рядок, який реєструє цей застосунок у Claude Code чи Codex, із кнопкою Copy. Вимкнення тут має перевагу над <code>AVA_DEVTOOLS_MCP</code>: закритий порт лишиться закритим і наступного запуску. Див. <a href="#mcpconnect">Під’єднати до Claude Code чи Codex</a>.</p>
 <h3>Крок 2. Приборкайте hover-inspect</h3>
 <p>Ctrl+Shift при наведенні — класичний жест інспекції, а деякі застосунки використовують саме цю комбінацію. Перемкніть її на <b>Alt</b> або вимкніть зовсім; пункт вибору елемента в Ctrl+K завжди показує поточну комбінацію.</p>` },
       { id: 'problems', t: 'Панель Problems', html: `<p>Біндінг падає мовчки, а докази розкидані: тут порожній контрол, там рядок у логу. Вкладка <b>Problems</b> збирає все зламане в один список — насамперед помилки біндінгів — помилки перед попередженнями, кожна зі зрозумілою причиною.</p>
@@ -1471,6 +1601,75 @@ uk: {
 <h3>Крок 4. Контраст, виміряний, а не прикинутий на око</h3>
 <p>Контраст тексту рахується так, як його визначає WCAG 2.1: відносна яскравість, 4.5:1 для звичайного тексту і 3:1 для великого, з попереднім накладанням напівпрозорих шарів під текстом — напівпрозора панель над темним вікном має інший колір, ніж будь-яка з них. Градієнти, зображення й плитки не міряються взагалі, замість того щоб міряти погано: у градієнта стільки коефіцієнтів контрасту, скільки пікселів, і видати один із них за відповідь було б гірше, ніж промовчати.</p>
 <p class="tip"><b>Порада.</b> Усе це доходить до агента без жодної нової поверхні: <code>get_tree</code> приймає <code>mode: "accessibility"</code>, <code>get_problems</code> віддає аудит як ще одну категорію, а <code>get_tab_order</code> натискає Tab крізь вікно і каже, куди фокус пішов насправді. Див. <a href="#mcptools">інструменти</a>.</p>` },
+      { id: 'conditions', t: 'Воно виглядає правильно лише у ваших умовах', html: `<p>Усе, що DevTools казав вам досі, було виміряне в одному місці: ваша тема, ваш розмір тексту, ваша ширина вікна, ваш напрямок читання. Це одна точка простору, в якому ваш застосунок насправді має працювати, — і саме в цій точці багів немає. Провал контрасту у світлій темі, підпис, що обрізається, коли читач збільшує текст, рядок, що падає за край вузького вікна: кожен із них невидимий з вашого крісла й очевидний з чужого.</p>
+<p>Вкладка <b>Variants</b> пересуває ваше крісло. Оберіть властивість, оберіть значення, натисніть <b>Add</b> — і список, який ви зібрали, і є запуском. Натисніть <b>Check variants</b>, і застосунок буде прочитано знову на кожному значенні зі списку й повернуто рівно таким, яким його знайшли, — а список згорнеться, бо зібрати запуск і прочитати його — це два різні заняття. Список запам’ятовується саме для <em>цього застосунку</em>, тож завтра на вас чекає той запуск, який вам потрібен, а не той, з яким усе постачалося, — і інший проєкт не підсуне вам відповіді попереднього.</p>
+<div class="shot"><img src="assets/img/docs/conditions-run.png" alt="Вкладка Variants до запуску: вибір осі, вибір значення і кнопка Add, а під ними — список варіантів для запуску"><span class="cap">Vary <b>Window size</b>, обрати значення, натиснути Add. Кожна назва у випадному списку несе рядок про те, що ця властивість змінює, і три значення, на яких вона це робить — трьох досить, щоб вісь із тридцятьма мовами відповіла на питання, а не зачитала каталог, — і кожен рядок списку носить <b>?</b> із тим самим. Поле поруч зі значеннями приймає розмір, якого в списку немає, а додане стоїть під тією віссю, якій належить. Під кнопкою — те, що запуск читатиме.</span></div>
+<h3>Які саме view перевіряються</h3>
+<p>У застосунку більше view, ніж будь-коли буває на екрані одночасно, тож варто сказати точно, які з них читає запуск. Він читає <b>кожне відкрите вікно</b> застосунку, до якого приєднано цю сесію DevTools — вкладка називає їх під кнопкою, — а всередині цих вікон <b>ті контроли, які існують у мить, коли ви її натискаєте</b>. Це живе візуальне дерево, а не ваш XAML: view читається, якщо його вже побудовано, і не читається інакше.</p>
+<p>Отже, оце <em>не</em> перевіряється, і звіт про це не каже нічого:</p>
+<ul>
+<li><b>Вкладка, яку ви не обрали.</b> Вміст невибраного <b>TabItem</b> ще не в дереві — запуск бачить лише ту вкладку, яка випадково відкрита. Саме на цьому спотикаються найчастіше.</li>
+<li><b>Сторінка, на яку ви не перейшли</b>, і вікно, якого ви не відкрили.</li>
+<li><b>Діалог, флайаут чи меню, яких не видно.</b> Відкритий попап живе у власному top level і теж не читається.</li>
+<li><b>Рядки, яких віртуалізований список ще не створив</b> — ті, що прокручені за межі видимого, не існують як контроли.</li>
+</ul>
+<p>Нічого з цього не вгадується і не подається як «пройдено»: view, на яке ніхто не дивився, просто не з’являється у звіті. Покажіть його на екрані, перевірте ще раз — і воно буде в наступному. Саме тому рядок під кнопкою називає вікна, які буде прочитано: перелічене там — це те, про що ви отримуєте відповідь.</p>
+<p><b>І що саме в них вимірюється.</b> Текстові перевірки читають кожен <b>TextBlock</b> і <b>TextBox</b>, який несе текст — це і є те, що банер рахує як «46 фрагментів тексту», — бо осі, які постачаються, змінюють розмір, колір і розташування тексту. Порівняння <a href="#a11y">доступності</a> проходить по всьому дереву, тож знахідка про фокус чи відсутню назву може стосуватися будь-якого контрола, текстового чи ні.</p>
+<p class="tip"><b>Порада.</b> Для застосунку з вкладками чи навігацією перевіряйте по одному екрану: відкрийте view, натисніть Check variants, полагодьте знайдене, тоді переходьте до наступного. Запуск — це відповідь про екран перед вами, а не про застосунок узагалі.</p>
+<table>
+<tr><th>Вісь</th><th>Значення</th><th>Що змінюється і що ловить</th></tr>
+<tr><td>Theme</td><td>Light, Dark</td><td>Варіант, у якому ваші top level'и просять себе намалювати — там і чекає текст, що зникає у своєму тлі в темі, якої ніхто в команді не запускає.</td></tr>
+<tr><td>Text scale</td><td>125, 150, 200, 300%, або наберіть своє</td><td>Кожен ресурс розміру шрифту, який видає тема, помножений так, як це робить налаштування розміру тексту в операційній системі. Підписи, що обрізаються, рядки, що налазять, і текст, який взагалі ігнорує це налаштування.</td></tr>
+<tr><td>Window size</td><td>Вузьке 360 × 640 аж до 4K, або наберіть 1024x768</td><td>Розмір ваших вікон. Вміст, виштовхнутий за край, який нічим не прокрутити назад, і розкладка, що працює лише на тому розмірі, на якому її робили.</td></tr>
+<tr><td>Text direction</td><td>Справа наліво, зліва направо</td><td>Напрямок потоку — та половина дзеркалення, яку не отримуєш безкоштовно.</td></tr>
+<tr><td>Language</td><td>Спершу ваші, далі ще зо два десятки, або будь-яка культура</td><td>Культура, в якій шукаються ваші рядки, і перемикання на «справа наліво», що приходить з арабською та івритом. Кожна коробка, яку виміряли з англійським рядком усередині. Потрібні два рядки від вас — див. нижче.</td></tr>
+</table>
+<h3>Лише те, що стало гірше</h3>
+<p>Саме це робить панель вартою відкриття. Три крапки — не баг: якщо ви поставили <b>TextTrimming</b>, ви їх просили. Дрібний текст — не баг. Тому ніщо не повідомляється за те, що воно <em>є</em>; знахідка — це <em>різниця</em> з вашим застосунком у тому стані, в якому він зараз:</p>
+<ul>
+<li><b>Текст обрізано</b> — на базовій лінії читається повністю, тут урізаний. Прочитано зі звіту самого текстового layout'у про рядок, який він мусив згорнути, а не вгадано порівнянням ширин.</li>
+<li><b>Виштовхнуто за межі вікна</b> — на базовій лінії на екрані, тут за краєм, і нічого прокручуваного між ними. Усе всередині ScrollViewer пропускається: вміст поза viewport'ом — це те, для чого він існує.</li>
+<li><b>Текст надто блідий, щоб читати</b> — на базовій лінії контраст проходить, тут ні, виміряно так само, як це робить <a href="#a11y">аудит доступності</a>. Саме число — у поясненні, а не в заголовку: число — це не симптом, а заголовок із виміром у ньому робить із кожного елемента окрему категорію.</li>
+<li><b>Текст, який не побільшав</b> — читач збільшив текст, а цей не зрушив. Його розмір написаний на самому контролі або в стилі, а не взятий із теми, тож він лишається такого самого розміру, хоч би що читач виставив. Повідомляється один раз — із кількістю, розмірами, тим, до чого дійшов решта тексту, і тим, за скільки ще рядків він говорить: застосунок, що прибиває розміри шрифту, прибиває більшість із них, і тридцять вісім копій одного речення — це стіна, а не звіт.</li>
+</ul>
+<div class="shot"><img src="assets/img/docs/conditions-report.png" alt="Після запуску: по рядку на кожну властивість із позначками на значеннях, а знахідки відкритого варіанта стоять під його власним рядком"><span class="cap">Після запуску списку немає — на його місці стоїть сам запуск, а разом зі списком зникають і його власні кнопки: звіт — це те, що читають, і єдиний вихід зі сторінки — <b>← Back</b>. Це <b>By variant</b>, перший із трьох способів прочитання: по рядку на кожну властивість, а на значеннях позначки: <b>✓</b> чисто, <b>!</b> стало гірше, але нічого не втрачено, <b>✕</b> втрачено вміст, <b>–</b> не запускалося взагалі — і ключ до цих чотирьох надрукований під рядками, а не схований під наведенням. Натисніть на позначку — і знахідки цього значення відкриються <b>під його власним рядком</b>, прив’язані до нього лінією того самого кольору, яким підсвічено чіп; натисніть ще раз — і вони згорнуться. Заголовка над ними немає: властивість стоїть рядком вище, а значення — у чіпі, тож заголовок був би тими самими двома словами, які ви щойно натиснули. Банер тримає кількість, рядок під ним каже, що саме прочитав запуск, а перший рядок самих знахідок — що змінює ця властивість, і найпотрібніший він для осей, які реєструє ваш власний застосунок: там сама назва не каже читачеві нічого. Знахідки згруповані за видом, а не повторені під кожним елементом: заголовок називає симптом звичайними словами, речення під ним пояснює, чому це проблема, а в кожному рядку — контрол і його зображення <b>таким, яким воно було під варіантом</b> (знімок робиться під час запуску, бо за мить застосунок уже повернуто). Там, де в рядків свої власні числа — три підписи, що провалили контраст із трьома різними співвідношеннями, — це речення лишається на <b>?</b> і на самих рядках: вимір одного елемента не є твердженням про решту.</span></div>
+<p>Знахідки потрапляють у <a href="#problems">панель Problems</a> під <b>Variants</b>, з варіантом у самому реченні, і клікаються до елемента, як і кожен інший рядок там.</p>
+<h3>Три способи це прочитати</h3>
+<p>Один запуск, три способи прочитання, і жоден із них не є переказом інших. <b>By variant</b> — це форма самого запуску (зображення вище), і він відповідає на питання, в яких обставинах ваш застосунок найгірший. <b>Table</b> — це форма роботи, і вона відповідає, скільки її. <b>One at a time</b> — це форма однієї проблеми, і лише вона відповідає на питання, якого не беруть інші два: як воно насправді виглядало. На чому ви лишили вкладку, з тим вона й відкриється наступного разу.</p>
+<div class="shot"><img src="assets/img/docs/conditions-table.png" alt="Табличний вигляд: три колонки — варіант, проблема і елементи, з якими вона сталася"><span class="cap"><b>Варіант</b>, <b>проблема</b>, <b>елементи</b>. Варіант друкується там, де він змінюється, і вид проблеми — там, де змінюється він, тож посередині сторінки ви проглядаєте список різних проблем, а не те саме речення тричі: одна проблема, спільна для трьох елементів, — це один рядок із <b>×3</b>, а всі три стоять у колонці поруч. Дві знахідки, у яких збігається лише заголовок — «текст надто блідий», на трьох різних співвідношеннях, — лишаються окремими, бо кожна тримає власний вимір, а він і є всім, що вона має сказати. Натисніть заголовок — і ця проблема відкриється окремо.</span></div>
+<div class="shot"><img src="assets/img/docs/conditions-detail.png" alt="По одній проблемі за раз: лічильник, дві стрілки, речення і знімок на всю панель"><span class="cap">Одна проблема, а над нею <b>‹ 2 / 6 ›</b>: котра з якої кількості, значення, з якого вона взялася, речення, елемент — і зображення. Знімок заповнює панель, а не сидить у натуральну величину: до чотирьох разів, квадратними пікселями, а не згладжено, бо половина цих випадків — чотири пікселі обрізаного хвостика літери, а 90-піксельний знімок посеред порожньої панелі — це звіт без доказів. <b>−</b> і <b>+</b> наближають, <b>Life size</b> повертає до того, що бачив користувач. Стрілки зупиняються на обох кінцях, а не починають спочатку, тож видно, коли ви побачили все. Єдиний вид знахідки, який ніколи не фотографують — текст, що лишився свого розміру, коли все навколо побільшало, і на знімку виглядає як звичайний текст, — каже про це на місці зображення, а не лишає порожнечу, яку читають як невдалий знімок.</span></div>
+<h3>Поза вкладкою, як документ</h3>
+<p>Більшість тих, кому доведеться щось робити з цими знахідками, кнопки натиснути не можуть: рецензент у pull request, дизайнер, якого питають, чи так і має виглядати арабська верстка, аудит доступності наступного кварталу. <b>Save as PDF…</b> виписує для них увесь запуск — що перевірено, що відмовилося і чому, кожна проблема таблицею, а тоді кожна ще раз зі своїм знімком. Заради знімків усе й робиться: вони існують лише поки застосовано варіант, тож винести їх — не зручність, а єдина мить, коли їх узагалі можна винести.</p>
+<p class="tip"><b>Порада.</b> PDF не коштує пакету нічого — його написано вручну з того, що вже є у фреймворку, тож AvaDevTools і далі не залежить ні від чого, крім Avalonia.</p>
+<h3>Мови вашого застосунку</h3>
+<p>Мова — та вісь, що знаходить баг майже на кожному екрані, і єдина, яку інструмент не може застосувати сам: поставити культуру легко, і це не змінює нічого, бо лише ваш застосунок знає, як шукаються його рядки. Тож ви даєте обидві половини — мови, які постачаєте, і той єдиний виклик, що змушує екрани перечитати текст, — а вісь робить решту, зокрема й перемикання на «справа наліво», яке приходить разом з арабською та івритом, незалежно від того, чи застосунок про це пам’ятав.</p>
+<pre><code>var options = <span class="k">new</span> DevToolsOptions();
+options.Languages.Add(<span class="s">"en-GB"</span>);
+options.Languages.Add(<span class="s">"de-DE"</span>);
+options.Languages.Add(<span class="s">"ar-SA"</span>);
+options.ApplyLanguage = culture =&gt; Strings.Reload(culture);
+<span class="k">this</span>.AttachAvaDevTools(options);</code></pre>
+<p>Ваші мови стоять у списку першими, бо саме їхні рядки змінюються; за ними йдуть ще зо два десятки — ті, що чогось коштують розкладці, від німецьких складних слів до письма справа наліво й тайської, — а набрати можна будь-яку культуру. Якщо мов не оголошено, осі на вкладці не буде. Якщо оголошено, але <b>ApplyLanguage</b> не задано, вісь з’явиться і відмовлятиметься — із причиною. Це чесна відповідь, і вона краща за чистий звіт мовою, якої екран ніколи не показував.</p>
+<h3>Власні осі</h3>
+<p>Вбудовані осі — це властивості, справедливі для будь-якого застосунку на Avalonia. Ті, за яких ламається саме ваш, зазвичай його власні: клієнт, чий фірмовий колір лягає просто на тло, щільність, за якої таблиця перестає читатися, профіль обладнання, на якому працює половина ваших користувачів. Вісь — це властивість зі значеннями: назвіть її, скажіть одним реченням, що саме змінюється, перелічіть значення, які варто спробувати, і зареєструйте в <b>DevToolsOptions.ExtraAxes</b> до приєднання. Вона з’явиться у вкладці з власним списком значень і відгукуватиметься на ім’я своєї осі через MCP.</p>
+<pre><code>sealed class TenantAxis : VariantAxis
+{
+    public override string Id =&gt; "tenant";
+    public override string Name =&gt; "Tenant";
+    public override string Varies =&gt; "whose branding this is painted in";
+
+    public override IReadOnlyList&lt;VariantChoice&gt; Suggested { get; } = new[]
+    {
+        new VariantChoice("meridian", "Meridian", () =&gt; new Painted(Colors.Teal)),
+        new VariantChoice("orbit", "Orbit", () =&gt; new Painted(Colors.Crimson)),
+    };
+}</code></pre>
+<p>Кожне значення будує <b>Variant</b> — те, що застосовує, підтверджує і повертає назад. Перевизначте <b>TypedHint</b> і <b>TryParse</b> — і вісь прийматиме значення, набрані вручну: саме так розмір вікна приймає 1024x768, а масштаб тексту — 175.</p>
+<p>Матриця вимагає від реалізації двох речей. Записуйте скасування тієї ж миті, коли робите зміну, і ніколи пізніше — журнал звільняється у <code>finally</code>, а зміна без записаного скасування залишається розробникові назавжди. І повертайте <code>false</code> з причиною, коли зміну неможливо зробити чесно, замість того щоб звітувати про успіх, якого ви не вимірювали. Є ще <b>TryConfirm</b> — його питають, коли розкладка вже наздогнала, — для випадку, коли властивість встановилася, а не змінилося нічого: це різниця між «нічого не зламалося» і «нічого не сталося».</p>
+<h3>Нічого не лишається позаду</h3>
+<p>Кожна зміна записується в момент, коли її роблять, і звільняється у <code>finally</code> — та сама дисципліна реєстру відновлення, якою <a href="#hold">❄ Hold</a> користується з 12.1.0, і збій одного відновлення не лишає покинутими ті, що стоять за ним у черзі. Самотести стверджують, що застосунок після цього ідентичний — аж до словника ресурсів, який затінює масштаб тексту.</p>
+<p>Умова, яку неможливо застосувати чесно, відмовляється і каже чому — у вбудованого top level'а немає вікна, щоб змінити розмір, — бо колонка з нулем знахідок читається точно як успіх.</p>
+<p class="tip">По одній осі за раз, а не всі комбінації: чотири осі по дві точки — це шістнадцять проходів, які треба висидіти, а баг, якому потрібні водночас темна тема <em>і</em> справа-наліво <em>і</em> 200%, трапляється рідше, ніж терпіння його шукати.</p>` },
       { id: 'palette', t: 'Ctrl+K: знайти будь-що', html: `<p>Тип чи ім'я того, що ви шукаєте, рідко відомі — відомі слова, які воно показує на екрані. Натисніть <span class="kbd">Ctrl</span>+<span class="kbd">K</span> (або <span class="kbd">⌘</span>+<span class="kbd">K</span>) у DevTools: один пошук по всьому, з категоріями в міру набору. Кожен рядок несе кольорову іконку типу в словнику, яким уже говорить решта DevTools — гліфи елементів із дерева, <code>◈</code> для ресурсів, <code>◆</code> для властивостей, іконки меню для дій — тож що це за знахідка, видно раніше, ніж прочитано текст.</p>
 <h3>Порожній запит — меню дій</h3>
 <div class="shot"><img src="assets/img/docs/palette-actions.png" alt="Ctrl+K з порожнім запитом: кожна дія DevTools з іконкою та підказкою"><span class="cap">Кожна команда DevTools в одному списку — палітра водночас є меню знайомства з можливостями.</span></div>
@@ -1726,10 +1925,11 @@ uk: {
 <h3>Timeline</h3><ul><li>Події, зміни властивостей, сповіщення VM, зміни фокуса й помилки біндінгів в одній стрічці за вашим списком спостереження — з причинними зв’язками, розбором біндінгів та інспектором інстансів. Див. <a href="#timeline">Таймлайн</a>.</li>
 <li>Фіолетова смуга <b>⌁ Input</b> несе те, що агент зробив із застосунком — кожен клік, клавішу й драг, які він інжектував, над змінами, що з них вийшли. Див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li></ul>
 <h3>Problems</h3><ul><li>Лише зламане — помилки біндінгів, error-логи — помилки перед попередженнями, кожна з причиною, посиланням reveal у дерево та повним розбором біндінгу. Scan now ловить біндінги, що впали до відкриття DevTools. Див. <a href="#problems">Панель Problems</a>.</li></ul>
-<h3>MCP Server</h3><ul><li>Є, поки ендпойнт слухає, і зникає разом із ним: що саме слухає, на якому порту й під яким іменем, той єдиний рядок, що реєструє застосунок у вашого агента, і кожен інструмент із кількістю зроблених до нього викликів — невдалі рахуються окремо. Інструменти, що можуть діяти на застосунок, позначено в цьому списку знаком <b>⌁</b>, тож видно, що саме агент міг зробити, не пам'ятаючи імен напам'ять. Перемикач, порт і два дозволи — на сторінці MCP у картці ⚙. Див. <a href="#mcp">Хай подивиться агент</a>.</li></ul>
+<h3>MCP Server</h3><ul><li>Є, поки ендпойнт слухає, і зникає разом із ним: що саме слухає, на якому порту й під яким іменем, той єдиний рядок, що реєструє застосунок у вашого агента, і кожен інструмент із кількістю зроблених до нього викликів — невдалі рахуються окремо. Кожен інструмент, що пише в застосунок, — ті, що клікають і вводять текст, ті, що морозять, і той, що змінює обставини, — позначено в цьому списку знаком <b>⌁</b>, тож видно, що саме агент міг зробити, не пам'ятаючи імен напам'ять. Перемикач, порт і три дозволи — на сторінці MCP у картці ⚙. Див. <a href="#mcp">Хай подивиться агент</a>.</li></ul>
 <h3>Logs</h3><ul><li>Живі логи Avalonia з Pause та фільтрами за рівнем, областю і текстом. За замовчуванням — Warning. Записи від самого DevTools відкидаються, оновлення батчаться — «зациклення» неможливе.</li>
 <li><code>LogCapture.Publish</code> додає в панель події вашого застосунку — див. <a href="#applogs">Логи застосунку</a>.</li></ul>
-<h3>Session</h3><ul><li>Записує, що отримує застосунок, заморожує те, що має бути правдою, поки воно нею є, і відтворює це — у вікні в чотирьох темпах або без вікна на білд-машині. Перше розходження спиняє прогін із причиною, знімком і вибраним у дереві елементом. Див. <a href="#session">Збережи відтворення: запис, перевірка, відтворення</a>.</li></ul>` },
+<h3>Session</h3><ul><li>Записує, що отримує застосунок, заморожує те, що має бути правдою, поки воно нею є, і відтворює це — у вікні в чотирьох темпах або без вікна на білд-машині. Перше розходження спиняє прогін із причиною, знімком і вибраним у дереві елементом. Див. <a href="#session">Збережи відтворення: запис, перевірка, відтворення</a>.</li></ul>
+<h3>Variants</h3><ul><li>Оберіть властивість, оберіть значення, натисніть Add — тема, масштаб тексту, розмір вікна, напрямок тексту, мова — тоді натисніть <b>Check variants</b>, і застосунок буде прочитано знову на кожному значенні зі списку, з повідомленням лише про те, що стало гірше, і поверненням усього назад. Кожна вісь каже, що вона змінює, і називає кілька своїх значень; список запам’ятовується саме для цього застосунку, а застосунок може зареєструвати власні осі.</li><li>Результат читається трьома способами — за варіантом, таблицею «варіант, проблема, елементи» або по одній проблемі за раз зі знімком на всю панель, — а <b>Save as PDF</b> виносить увесь запуск за межі вкладки, разом із зображеннями. Знахідки приєднуються до панелі Problems під <b>Variants</b>. Див. <a href="#conditions">Воно виглядає правильно лише у ваших умовах</a>.</li></ul>` },
       { id: 'capture', t: 'Скриншоти та баг-репорти', html: `<p>«Надішли скриншот і XAML-шлях» — тут це один клік: елемент, його bounds і властивості, що відрізняються від типових, їдуть разом із картинкою.</p>
 <h3>Крок 1. Оберіть, що копіювати</h3>
 <p><b>Кнопка 📷 на панелі</b> — вибір у два кліки: <em>Copy screenshot</em> або <em>Copy report (screenshot + XAML)</em> — для вибраного елемента чи всього вікна. Ті самі дії живуть у контекстному меню дерева під <b>Copy ▸</b>: <b>Path</b> (<span class="kbd">Ctrl+C</span>), <b>As XAML</b> (<span class="kbd">Ctrl+Shift+C</span>), <b>Screenshot</b> і <b>As bug report</b>.</p>
@@ -1779,9 +1979,10 @@ uk: {
 <li><b>Зайнятий застосунок так і каже.</b> Якщо UI-потік не відповідає протягом хвилини — піднято модальне вікно або його зупинив дебагер — виклик повертає саме це, замість лишити агента на мертвому сокеті.</li></ul>
 <h3>Що йому можна і чого не можна</h3>
 <ul><li><b>Лише локальний інтерфейс</b>, і це не налаштування: день, коли це прив'яжеться до 0.0.0.0, буде днем, коли допоміжний інструмент стане способом читати чужий екран із сусіднього столу. Заголовок <code>Origin</code> теж перевіряється, тож сторінка в браузері не дістанеться сюди через DNS rebinding.</li>
-<li><b>Шістнадцять із двадцяти п’яти інструментів — чисте читання.</b> Вони не інжектують введення, не записують жодної властивості застосунку і не запускають жодного обробника. Їм не потрібні підтвердження, бо підтверджувати нічого.</li>
+<li><b>Вісімнадцять із двадцяти дев’яти інструментів — чисте читання.</b> Вони не інжектують введення, не записують жодної властивості застосунку і не запускають жодного обробника. Їм не потрібні підтвердження, бо підтверджувати нічого.</li>
 <li><b>Два інструменти морозять тимчасовий стан і потребують окремого дозволу.</b> <code>hold</code> і <code>pin_class</code> тримають попапи відкритими і форсують псевдокласи — єдиний спосіб для того, хто не має вказівника, побачити стан наведення. Вони вимкнені, доки не скаже інакше галочка <b>Allow freezing</b> на сторінці MCP у картці ⚙ — <code>McpAllowHold</code> або <code>AVA_DEVTOOLS_MCP_HOLD=1</code>; змінюють лише тимчасовий стан UI, кожне утримання має дедлайн, який його звільняє, застосунок показує банер, доки воно триває, і <span class="kbd">Esc</span> у застосунку теж його звільняє.</li>
-<li><b>Сім інструментів діють на застосунок — за власним перемикачем.</b> <code>click</code>, <code>hover</code>, <code>drag</code>, <code>scroll</code>, <code>press_key</code>, <code>type_text</code> і <code>focus_element</code> запускають ваші обробники, а ті можуть зробити все, що вміє ваш застосунок, — тож вони чекають на власний дозвіл, а не на дозвіл заморожування. Вимкнені, доки ви не скажете інакше; див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li>
+<li><b>Один інструмент читає застосунок за інших умов і чекає на власний дозвіл.</b> <code>run_variants</code>, поки дивиться, записує власні властивості застосунку — варіант теми, розміри шрифтів, які видає тема, ширину вікна, напрямок тексту, — тож ваші обробники працюють, і повертає кожну з них у <code>finally</code>, зокрема й тоді, коли перевірка кидає виняток. Жодного введення не інжектується і нічого не натискається — саме тому він чекає ні на перемикач заморожування, ні на дозвіл вводу, а на <b>Allow other variants</b>: <code>McpAllowVariants</code> або <code>AVA_DEVTOOLS_MCP_VARIANTS=1</code>. Знайдене одразу лягає в панель Problems розробника; див. <a href="#conditions">Воно виглядає правильно лише у ваших умовах</a>.</li>
+<li><b>Вісім інструментів діють на застосунок — за власним перемикачем.</b> <code>click</code>, <code>hover</code>, <code>drag</code>, <code>scroll</code>, <code>press_key</code>, <code>type_text</code> і <code>focus_element</code> запускають ваші обробники, а ті можуть зробити все, що вміє ваш застосунок, а <code>replay_session</code> програє цілу записану сесію з них, — тож вони чекають на власний дозвіл, а не на дозвіл заморожування. Вимкнені, доки ви не скажете інакше; див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li>
 <li><b>Він віддає те, що взяв.</b> Утримання агента саме звільняє лише те, що агент і зайняв: натисніть <span class="kbd">Shift</span>+<span class="kbd">F12</span> самі після цього — і дедлайн не забере ваше утримання.</li></ul>
 <p class="tip">Постачайте це лише в Debug, як і решту DevTools. Ендпойнт вимкнено у будь-якій збірці, але застосунок, який ніколи не під'єднує DevTools у Release, не зможе випадково його підняти.</p>` },
       { id: 'mcpconnect', t: 'Під’єднати до Claude Code чи Codex', html: `<p>Ендпойнт існує лише поки працює ваш застосунок, тож порядок незмінний: запустіть застосунок, увімкніть сервер, наведіть на нього агента. Реєструється він під іменем <code>&lt;назва збірки&gt;-avadevtools</code> — саме це ви побачите у списку клієнта.</p>
@@ -1789,8 +1990,8 @@ uk: {
 <ol class="steps"><li>Запустіть застосунок і натисніть <span class="kbd">F12</span>.</li>
 <li>Відкрийте сторінку <b>MCP</b> у картці ⚙ і поставте <b>Serve MCP on loopback</b>.</li>
 <li>Скопіюйте блок під <em>Point your agent at it</em> — там уже правильні ім’я та порт.</li></ol>
-<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="Сторінка MCP у картці налаштувань: перемикач, порт і два дозволи, а нижче — рядок про те, що слухає"><span class="cap">⚙ → MCP: усе, що ви задаєте, і нічого більше — перемикач, порт, дозволи на заморожування і на введення, і рядок про те, що з цього вийшло.</span></div>
-<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="Вкладка MCP Server: що слухає і кожен інструмент із кількістю зроблених до нього викликів"><span class="cap">Вкладка, яка є лише поки є ендпойнт: двадцять п'ять інструментів і те, що агент справді просив у кожного. Риска — інструмент, якого він не чіпав; бурштинове число містить невдалі виклики; позначені ⌁ можуть діяти на застосунок.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="Сторінка MCP у картці налаштувань: перемикач, порт і три дозволи, а нижче — рядок про те, що слухає"><span class="cap">⚙ → MCP: усе, що ви задаєте, і нічого більше — перемикач, порт, дозволи на заморожування, на варіанти і на введення, і рядок про те, що з цього вийшло.</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="Вкладка MCP Server: що слухає і кожен інструмент із кількістю зроблених до нього викликів"><span class="cap">Вкладка, яка є лише поки є ендпойнт: двадцять дев'ять інструментів і те, що агент справді просив у кожного. Риска — інструмент, якого він не чіпав; бурштинове число містить невдалі виклики; позначені ⌁ пишуть у застосунок, а непозначена назва лише читає.</span></div>
 <h3>Крок 2a. Claude Code</h3>
 <pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
 <p>Область визначає, кому це дістанеться. <code>--scope local</code> (типово) — цей проєкт і лише вам; <code>--scope project</code> пише <code>.mcp.json</code> у корені репозиторію, тож запис отримають усі, хто працює над застосунком; <code>--scope user</code> — усі проєкти на вашій машині. Пишеться той самий JSON, що показує вкладка:</p>
@@ -1811,8 +2012,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Два застосунки водночас</h3>
 <p>Дайте другому власний порт (поле <b>Port</b> на сторінці MCP у картці ⚙, <code>McpPort</code> або <code>AVA_DEVTOOLS_MCP_PORT</code>) і додайте другим записом. Імена вже різні, тож список інструментів агента лишиться читабельним.</p>
 <p class="tip">Клієнт, запущений раніше за застосунок, зазвичай не бачить інструментів, доки не перез’єднається — <code>/mcp</code> у Claude Code, нова сесія в Codex. Це перез’єднання, а не проблема конфігурації.</p>` },
-      { id: 'mcptools', t: 'Двадцять вісім інструментів', html: `<p>Двадцять вісім інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
-<p>Вісімнадцять лише дивляться. Два морозять тимчасовий стан і чекають на дозвіл заморожування. Вісім діють на застосунок і чекають на <a href="#mcpinput">дозвіл на введення</a> — сім, що надсилають введення, і один, що відтворює цілу сесію з нього.</p>
+      { id: 'mcptools', t: 'Двадцять дев\'ять інструментів', html: `<p>Двадцять дев\'ять інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
+<p>Вісімнадцять лише дивляться. Два морозять тимчасовий стан і чекають на дозвіл заморожування. Один читає застосунок в інших варіантах і чекає на власний дозвіл. Вісім діють на застосунок і чекають на <a href="#mcpinput">дозвіл на введення</a> — сім, що надсилають введення, і один, що відтворює цілу сесію з нього.</p>
 <h3>Зорієнтуватись</h3>
 <table>
 <tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
@@ -1880,7 +2081,13 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>check_that</code></td><td>Проговорює те, що має бути правдою, у запис, який іде. Без очікуваного значення заморожує те, що властивість каже просто зараз.</td><td><code>elementId</code>, <code>check</code>, <code>property</code>, <code>expect</code></td></tr>
 <tr><td><code>replay_session</code></td><td>Знову проганяє записану сесію по застосунку і звітує про перший крок, що розійшовся, із причиною. Діє, тож чекає на дозвіл на введення.</td><td><code>path</code>, <code>json</code></td></tr>
 </table>
-<p>Утрьох вони і є те, як агент лишає по собі щось, що може запустити людина — див. <a href="#session">Збережи відтворення: запис, перевірка, відтворення</a>.</p>` },
+<p>Утрьох вони і є те, як агент лишає по собі щось, що може запустити людина — див. <a href="#session">Збережи відтворення: запис, перевірка, відтворення</a>.</p>
+<h3>Прочитати його в інших варіантах</h3>
+<table>
+<tr><th>Інструмент</th><th>Відповідає</th><th>Аргументи</th></tr>
+<tr><td><code>run_variants</code></td><td>Читає застосунок знову на одному значенні однієї властивості — або на одному значенні кожної, якщо не назвати жодної, — і звітує лише про те, що стало гірше. Поки дивиться, пише власні властивості застосунку і повертає кожну назад, тож чекає на власний дозвіл — жодного введення не надсилає й нічого не натискає. На вісь, якої немає, відповідає списком осей і значень, що їх пропонує кожна.</td><td><code>axis</code>: theme / text / size / direction / language, або та, що її зареєстрував застосунок. <code>values</code>: ["200"], ["1024x768"], ["de-DE"]</td></tr>
+</table>
+<p>Один виклик покриває питання, на які скриншот не відповідає — див. <a href="#conditions">Воно виглядає правильно лише у ваших умовах</a>. Знайдене одночасно потрапляє в панель Problems розробника: запуск агента — це не приватна розмова про чийсь застосунок.</p>` },
       { id: 'mcpinput', t: 'Ввід через MCP: клік, текст, перетягування', html: `<p>Читання відповідає на <em>чому воно такої ширини</em> і <em>що зламано</em>. Воно ніколи не відповідає на <em>чи працює ця кнопка</em>. Для цього кнопку треба натиснути — тож за власним перемикачем агент може її натиснути: сім інструментів, які клікають, наводять, тягнуть, крутять колесо, тиснуть клавіші, друкують текст і переносять фокус.</p>
 <h3>Це справжнє введення, а не скорочення</h3>
 <p>Тут ніщо не піднімає подію на контролі. Кожна дія збирається як сира платформна подія і йде крізь власний менеджер введення Avalonia — ті самі двері, крізь які штовхають бекенди macOS, X11 і Windows. Хіт-тест вирішує, у що влучили, кількість кліків береться зі справжніх міток часу, захоплення вказівника й pointer-over поводяться, як для людини, а ваші обробники спрацьовують тому, що до них <em>дійшли</em>, а не тому, що їх викликали.</p>
@@ -2049,8 +2256,9 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
     McpPort              = 5171,                               <span class="c">// лише на 127.0.0.1 — типово: 5171</span>
     McpAllowHold         = <span class="k">true</span>,                               <span class="c">// дозволити агентові морозити попапи / закріплювати :pointerover — типово: false</span>
     McpAllowInput        = <span class="k">true</span>,                               <span class="c">// дозволити агентові клікати, друкувати й тягнути — типово: false</span>
+    McpAllowVariants   = <span class="k">true</span>,                               <span class="c">// дозволити агентові читати його в інших варіантах — типово: false</span>
 });</code></pre>
-<p>Чотири опції <code>Mcp*</code> описано в розділах <a href="#mcp">Дати агентові подивитись (MCP)</a> і <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>. Усе інше вимкнене або відсутнє, доки його не попросять, а налаштування, збережені користувачем у <a href="#settings">картці ⚙</a>, мають пріоритет над тим, що передав код.</p>` },
+<p>П'ять опцій <code>Mcp*</code> описано в розділах <a href="#mcp">Дати агентові подивитись (MCP)</a>, <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a> і <a href="#conditions">Воно виглядає правильно лише у ваших умовах</a>. Усе інше вимкнене або відсутнє, доки його не попросять, а налаштування, збережені користувачем у <a href="#settings">картці ⚙</a>, мають пріоритет над тим, що передав код.</p>` },
       { id: 'env', t: 'Змінні середовища', html: `<table>
 <tr><th>Змінна</th><th>Значення</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>Відкривати DevTools автоматично при завантаженні вікна.</td></tr>
@@ -2063,16 +2271,17 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>Порт для нього. Типово 5171.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>Дозволити ще й <code>hold</code> та <code>pin_class</code> — два інструменти, що морозять тимчасовий стан.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td><td>Дозволити ще й сім інструментів, що <a href="#mcpinput">діють на застосунок</a> — клік, наведення, драг, прокрутка, клавіші, текст, фокус.</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_VARIANTS=1</code></td><td>Дозволити ще й <code>run_variants</code> — читання застосунку <a href="#conditions">в інших варіантах</a> із поверненням його назад.</td></tr>
 <tr><td><code>AVA_DEVTOOLS_REPLAY=repro.json</code></td><td>Відтворити цю <a href="#session">сесію</a> на старті, надрукувати рядок PASS/FAIL на кожен крок і вийти з відповіддю.</td></tr>
 </table>
-<p class="tip">Чотири змінні <code>MCP</code> — це стартовий стан, а не остаточне слово: перемикачі на сторінці MCP у <a href="#settings">картці ⚙</a> зберігаються для машини й мають перевагу над ними. Порт, який ви закрили в інструменті, лишиться закритим і наступного запуску, хоч би що експортував ваш лаунчер.</p>` },
+<p class="tip">П'ять змінних <code>MCP</code> — це стартовий стан, а не остаточне слово: перемикачі на сторінці MCP у <a href="#settings">картці ⚙</a> зберігаються для машини й мають перевагу над ними. Порт, який ви закрили в інструменті, лишиться закритим і наступного запуску, хоч би що експортував ваш лаунчер.</p>` },
       { id: 'limits', t: 'Обмеження', html: `<ul>
 <li>Лише десктоп — додаткові вікна не підтримуються на мобільних/браузерних платформах.</li>
 <li>DevTools приносить власну тему — тема застосунку, чи її відсутність, не має значення.</li>
 <li>З <code>LiveTree = false</code> дерево знову є знімком: після структурних змін натисніть ↻ Refresh (значення властивостей оновлюються наживо в обох режимах).</li>
 <li>Скріншоти та звіти про ваду подвоюють масштаб <em>вмісту</em> рамок із тінню (BoxShadow) на HiDPI-екранах — особливість шару рендеру Avalonia 12. Знімок самого елемента, а не цілого вікна, зазвичай це обходить.</li>
 <li>MCP-ендпойнт прив'язується лише до 127.0.0.1. Це навмисно і не налаштовується.</li>
-<li>Інжектоване введення доходить до вашого застосунку, а не до робочого стола: вказівник ОС не рухається, тож нативні файлові діалоги, рядок меню macOS і перетягування в інший застосунок лишаються поза досяжністю. Див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li><li>Запис зберігає факт, що текст набрали в поле з маскою, і ніколи — сам текст: відтворення відхиляє такий крок, замість надсилати щось хибне. Див. <a href="#session">Збережи відтворення</a>.</li></ul>` },
+<li>Інжектоване введення доходить до вашого застосунку, а не до робочого стола: вказівник ОС не рухається, тож нативні файлові діалоги, рядок меню macOS і перетягування в інший застосунок лишаються поза досяжністю. Див. <a href="#mcpinput">Ввід через MCP: клік, текст, перетягування</a>.</li><li>Запис зберігає факт, що текст набрали в поле з маскою, і ніколи — сам текст: відтворення відхиляє такий крок, замість надсилати щось хибне. Див. <a href="#session">Збережи відтворення</a>.</li><li><a href="#conditions">Умова масштабу тексту</a> рухає те, що розмічує тема, тож текст із розміром, написаним на елементі чи в його стилі, не рухається — це подається як знахідка, а не обходиться. Її перевірки читають текст, тож контрол, чия проблема не текстова, лишається поза тим, що видно за один прохід.</li></ul>` },
       { id: 'feedback', t: 'Фідбек', html: `<p>Кнопка <b>Feedback</b> у правому верхньому куті панелі відкриває трекер задач AvaDevTools — повідомте про баг чи попросіть фічу одним кліком. Та сама дія живе у <span class="kbd">Ctrl</span>+<span class="kbd">K</span> як «Send feedback».</p>
 <p>Зручніше в чаті? <a href="https://t.me/avadevtools">Telegram-канал</a> приймає запитання та швидку допомогу.</p>` },
       { id: 'updates', t: 'Сповіщення про оновлення', html: `<p>Панель завжди показує версію, яку ви запустили, — приглушено, поруч із <b>Feedback</b>. Нові версії AvaDevTools приносять нові вкладки й виправлення, але NuGet-залежність сама про них не оголошує, тож коли виходить новіша версія, цей самий напис стає синім і отримує <b>↑</b>.</p>
@@ -2100,13 +2309,37 @@ zh: {
     get: '快速上手', stories: '看实际效果', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.1.7 新特性', docs: '文档 →', notes: '版本历史 →' },
+  wn: { h: '12.1.8 新特性', docs: '文档 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   stories: {
-    h: '功能演示', wn: 'repro',
+    h: '功能演示', wn: 'conditions',
     lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
     list: [
+      { key: 'conditions', h: '◐ 它只在你的条件下才好看', sub: '你的主题、你的字号、你的窗口宽度。换成别人的条件再读一遍 —— 只听变差的那部分。',
+        steps: [
+          { t: '◐ 它只在你的条件下才好看',
+            d: '到目前为止 DevTools 告诉你的一切，都是在同一个地方量出来的：你的主题、你的字号、你的窗口宽度、你的阅读方向。那是你的应用必须工作的那个空间里的一个点 —— 而且正是这个点上没有 bug。',
+            d2: '所以这个选项卡负责挪动你的椅子。挑一个属性，挑一个值，按 Add —— 主题、文字缩放、窗口尺寸、文字方向、语言，外加你的应用自己注册的任意轴 —— 一次一个，每一个都施加到真实的应用上再取下来 —— 只报<i>变差</i>的部分，因为一个罗列「本来就如此」的工具，是一个会被划过去的工具。',
+            newsTitle: '12.1.8 新特性',
+            news: [
+              { k: 'Variants 选项卡', d: '换一个主题、字号、窗口尺寸、方向、语言 \u2014\u2014 或者你自己的一条轴。只报变差的部分，三种读法，还能存成 PDF。' },
+            ] },
+          { img: 'story/c02.png', t: '轴、值、Add', d: '屏幕上摆着的是属性，不是值：<b>Theme</b>、<b>Text scale</b>、<b>Window size</b>、<b>Text direction</b>、<b>Language</b>，每一个都配一句话说明它一动会动什么，以及一份值得一试的值清单。挑一个按 Add，它就加入这次运行；清单上没有的，直接输入也一样加入 —— 所以窗口尺寸可以是 1024x768，也可以是你真正交付的那块屏。下拉里的每个名字都带着一行字，说明这个属性会改变什么，以及它会在哪三个值上改变；清单上的每一行也都挂着一个 <b>?</b>，写的是同一句话 \u2014\u2014 这对你的应用自己注册的轴最要紧：像 <b>Console profile</b> 这样的名字，光看它读者什么也读不出来。什么都不用先填：打开时每个轴上已经有一个值，因为价值在于按下那个按钮。你攒出来的清单是记在<em>这个应用</em>名下的，所以换一个项目不会把上一个的答案塞给你。每个变体都是对「环境」而不是对应用的可逆改动：窗口被要求绘制时所用的变体、主题发出的字号、窗口尺寸、文字的流向、查找字符串所用的区域文化。' },
+          { img: 'story/c04.png', t: '只报变差的部分', d: '四个变体上得出六个问题 —— 而点这次运行的那份清单已经收起来了：攒一次运行和读一次运行，本来就是两回事。按钮下面，选项卡写着一次运行读的是什么：它所连着的那个窗口，以及窗口里在按下 Run 的那一刻正在屏幕上的东西。站在它位置上的是同样那几行，只是带上了标记：浅色主题和从右到左干干净净地回来，用一个勾说明；200% 变差了，但没让任何人少读一个字；360 px 是那个叉。对一个干净通过的值来说，一个勾就是整份报告；而从未跑成的变体另有标记 —— 这正是这个选项卡要守住的区别。按一下标记，它的发现就在下面展开，按类别归拢，而不是在每个元素上重复一遍：两个标签被截断，三个标题被推出边缘且没有任何东西能滚回来。每一条都带着那个控件在该变体下的样子 —— 截图是在运行当中拍的，因为再过一会儿应用就被放回原样了；而那个被挤到只剩半个像素的标签，拍的是它本该在的那个位置。' },
+          { img: 'story/c06.png', t: '同一次运行，归拢起来', d: '一次运行，三种读法，而且没有哪一种是另外两种的摘要。这是<b>表格</b>：变体、问题，以及问题落在哪些元素上。变体在它变的地方才印一次，问题的类别也在它变的地方才印一次，所以你沿着页面中间扫下去看到的是一串不同的问题，而不是同一段话重复三遍 \u2014\u2014 三个元素共有的一个问题就是带着 <b>\u00d73</b> 的一行，那三个元素就在旁边那一列里。另外请注意这里<i>没有</i>什么：没有 Check variants，没有清单，也没有那行「下次运行会读什么」。报告是用来读的，离开这一页的唯一出口是 <b>\u2190 Back</b>。' },
+          { img: 'story/c07.png', t: '一次一个，按它当时的大小', d: '这就是那些图片存在的意义。顶上是 <b>\u2039 2 / 6 \u203a</b>：第几个、一共几个、它来自哪个值、那句话、那个元素 \u2014\u2014 还有那张填满面板的截图，而不是按原始尺寸缩在角落：最多放大到四倍，用方块像素而不是平滑插值。这类问题里有一半就是某个字母被切掉的四个像素，而一张 90 像素的截图摆在空荡荡的面板中间，就是一份把证据落下了的报告。箭头在两端会停住而不是绕回开头，所以你能知道自己是不是已经看完了。而 <b>Save as PDF</b> 把整次运行带出选项卡 \u2014\u2014 检查了什么、什么拒绝执行以及为什么、每个问题一张表，然后每个问题再配上它的图片 \u2014\u2014 给 pull request 上的评审者，也给那位得点头承认版式确实不对的设计师：他们两位都按不了那个按钮。' },
+          { img: 'story/c05.png', t: '就在你本来就开着的那个面板里', d: '在某个变体下找到的 bug 不是另一类 bug —— 它只是在你没站过的地方被找到的 bug。发现会落进 Problems 的 <b>Variants</b> 类别，变体写在句子里，和应用其他所有毛病一起排序，并且和那里每一行一样点一下就跳到元素。修好一个再跑一次：这次跑不再找到的那些行，会跟着一起离开。' },
+          { t: '而应用还在你离开它的地方',
+            d: '每一次改动都在做出的当下被记下来，并在 finally 里释放 —— 就是 ❄ Hold 自 12.1.0 起使用的恢复账本纪律 —— 而且其中一次恢复失败不会把排在它后面的拖下水。自测断言之后的应用完全一致，连文字缩放所遮蔽的那本资源字典也包括在内。智能体在自己的许可下得到同一次运行：它会写你应用的属性，所以你的处理器会执行，而它不按下任何东西。',
+            code: [
+              '$ run_variants  {\"axis\": \"size\", \"values\": [\"360x640\", \"1024x768\"]}',
+              '  Window size · 360 × 640   — 5 findings',
+              '      error #2 TextBlock “RECENT BUILDS”  text is cut off here',
+              '            and reads in full at the baseline',
+              '  Window size · 1024 × 768  — nothing changed for the worse',
+            ] },
+        ] },
       { key: 'repro', h: '⏺ 把复现留下来', sub: '把你做过的记下来，把该成立的冻住，之后再重放 —— 在窗口里，或者在没人看着的构建机上。',
         steps: [
           { t: '⏺ 把复现留下来',
@@ -2388,6 +2621,7 @@ zh: {
   feat: {
     h: 'DevTools 应有的一切', sub: '接入一次，在任意窗口按 F12。',
     cards: [
+      { i: '◐', t: '它只在你的条件下才好看', d: '挑一个属性，挑一个值，按 Add —— 主题、文字缩放、窗口尺寸、文字方向、语言 —— 在清单上的每一个值下重新读一遍应用，只听变差的部分：被截断的文字、被推出窗口的内容、丢失的对比度、读者把字调大了却没变大的文字。数字随你修改，一个轴会把你给的每个数字都跑一遍，应用也可以加上自己的轴。一切都会原封不动地放回去。' },
       { i: '⏺', t: '把复现留下来', d: '记录应用收到的一切 —— 你的和智能体的一样 —— 趁"该成立的"还成立时把它冻住，之后再重放：在窗口里任选节奏，或在构建服务器上，遇到第一处分岔就以非零码退出。' },
       { i: '🌳', t: '实时智能树', d: '像 XAML 一样的树，并实时跟随应用：结构变化即时拼入并闪烁提示，暂停按钮让你安心细读。语法着色、代码式折叠、拾取后的紧凑视图、隐藏、Focus、Scope 与搜索。' },
       { i: '🪟', t: '所有窗口，一个 DevTools', d: '树以应用为根 —— 每个窗口都是顶层节点，实时出现与消失。任意窗口按 F12 都聚焦同一个 DevTools；Scope 让单个窗口拥有整棵树。' },
@@ -2410,7 +2644,7 @@ zh: {
       { i: '⏱', t: '时间线', d: '路由事件、属性变化、VM 通知与焦点变化汇入一条按时间排序的流，范围由你的观察列表决定。因果链接把通知与它产生的绑定更新连在一起；每条记录都可展开完整细节。' },
     { i: '🕰', t: '原因捕获', d: '每条被记录的变化都带着引发它的调用栈，并裁剪到你自己的帧。复现一次就能按顺序读完所有「凶手」，每一帧都可跳转源码 —— 不必每命中一次下一个断点。Break next 则只为一次变化升级到调试器。' },
     { i: '📈', t: 'Perf 泳道', d: '慢帧与布局过程归入与其它一切相同的信息流，于是卡顿可以放在「应用当时在做什么」旁边阅读。「慢」以你的显示器实际维持的预算衡量，而不是平均值。' },
-    { i: '🤖', t: '让智能体来看（MCP）', d: '回环上的 Model Context Protocol 端点，不索取即关闭，你不点头就一直只读：二十五个工具把运行中应用的树、属性、样式、布局、资源、问题、时间线、日志与截图交给编码智能体 —— 再加上一道自己的开关之后，在里面点击和输入的能力。' },
+    { i: '🤖', t: '让智能体来看（MCP）', d: '回环上的 Model Context Protocol 端点，不索取即关闭，你不点头就一直只读：二十九个工具把运行中应用的树、属性、样式、布局、资源、问题、时间线、日志与截图交给编码智能体 —— 再加上一道自己的开关之后，在里面点击和输入的能力。' },
       { i: '📜', t: '日志查看器', d: '绑定错误、布局与属性系统消息 —— 无需 LogToTrace()。带过滤、批量刷新，杜绝反馈循环。' },
       { i: '📊', t: '渲染器叠加层', d: 'FPS 计数、布局/渲染耗时曲线与脏矩形闪烁，一个开关即可打开。' },
       { i: '🕵️', t: '每个值的来源', d: '一眼看出取值来自默认、手动设置、样式、模板还是继承 —— 并可跳到祖先元素或设置它的那行 XAML。' },
@@ -2426,7 +2660,7 @@ zh: {
     contents: '目录',
     groups: [
       { t: '入门', ids: ['install', 'quickstart'] },
-      { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
+      { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
       { t: '智能体（MCP）', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: '参考', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -2473,7 +2707,7 @@ zh: {
 <li>按下新的组合键 —— 按下即保存。<span class="kbd">Esc</span> 取消；× 恢复默认。</li></ol>
 <div class="shot"><img src="assets/img/docs/settings-card.png" alt="带手势捕获框的设置卡"><span class="cap">设置卡：手势、悬停检查组合键、Hold 倒计时、置顶、实时树、更新检查。</span></div>
 <h3>第 3 步：为智能体打开端口</h3>
-<p><b>MCP</b> 页管着端点：一个当场开关它的开关、端口、两道许可 —— 是否允许智能体冻结弹出层，以及是否允许它<a href="#mcpinput">点击和输入</a> —— 还有把这个应用注册到 Claude Code 或 Codex 的那一行命令，带复制按钮。在这里关掉它的优先级高于 <code>AVA_DEVTOOLS_MCP</code>：你关掉的端口，下次启动依然是关的。见<a href="#mcpconnect">接到 Claude Code 或 Codex</a>。</p>
+<p><b>MCP</b> 页管着端点：一个当场开关它的开关、端口、三道许可 —— 是否允许智能体冻结弹出层、是否允许它<a href="#conditions">在其他变体下读取应用</a>，以及是否允许它<a href="#mcpinput">点击和输入</a> —— 还有把这个应用注册到 Claude Code 或 Codex 的那一行命令，带复制按钮。在这里关掉它的优先级高于 <code>AVA_DEVTOOLS_MCP</code>：你关掉的端口，下次启动依然是关的。见<a href="#mcpconnect">接到 Claude Code 或 Codex</a>。</p>
 <h3>第 2 步：驯服悬停检查组合键</h3>
 <p>Ctrl+Shift 悬停是经典的检查手势 —— 而有些应用恰好也用这个组合。可把它改为 <b>Alt</b> 或彻底关闭；Ctrl+K 里的拾取条目始终显示当前组合。</p>` },
       { id: 'problems', t: 'Problems 面板', html: `<p>绑定悄无声息地失败，证据却散落各处：这里一个空白控件，那里一行日志。<b>Problems</b> 选项卡把坏掉的东西收进一个列表 —— 绑定失败排在最前 —— 错误在警告之前，每一条都有一句白话原因。</p>
@@ -2515,6 +2749,75 @@ zh: {
 <h3>第 4 步。对比度是量出来的，不是眼估的</h3>
 <p>文字对比度按 WCAG 2.1 的定义计算：相对亮度，正文 4.5:1、大字 3:1，并且先把文字背后的半透明层合成起来 —— 深色窗口上盖一层半透明面板，颜色跟两者都不一样。渐变、图片和平铺干脆不测，而不是测得很糟：一个渐变有多少像素就有多少个对比度，把其中一个当作答案报出来，比闭嘴更糟。</p>
 <p class="tip"><b>提示。</b>这一切到智能体那里不需要学任何新东西：<code>get_tree</code> 接受 <code>mode: "accessibility"</code>，<code>get_problems</code> 把审计作为又一个类别报出，而 <code>get_tab_order</code> 会把 Tab 按遍整个窗口，说出焦点实际去了哪里。见<a href="#mcptools">工具</a>。</p>` },
+      { id: 'conditions', t: '它只在你的条件下才好看', html: `<p>到目前为止 DevTools 告诉你的一切，都是在同一个地方量出来的：你的主题、你的字号、你的窗口宽度、你的阅读方向。那是你的应用真正需要工作的那个空间里的一个点 —— 而且正是这个点上没有 bug。浅色主题里的对比度失败、读者把字调大后被截断的标签、在窄窗口里掉出边缘的一行：每一个从你的椅子上都看不见，从别人的椅子上都一目了然。</p>
+<p><b>Variants</b> 选项卡负责挪动你的椅子。挑一个属性，挑一个值，按 <b>Add</b> —— 你攒出来的这份清单就是这次运行。按 <b>Check variants</b>，应用就会在清单上的每一个值下被重新读一遍，然后原封不动地放回去 —— 同时清单会收起来，因为攒一次运行和读一次运行是两回事。这份清单是记在<em>这个应用</em>名下的，所以明天等着你的是你真正在意的那次运行，而不是它出厂时的那次 —— 换一个项目也不会把上一个的答案塞给你。</p>
+<div class="shot"><img src="assets/img/docs/conditions-run.png" alt="运行前的 Variants 选项卡：轴选择器、值选择器和一个 Add 按钮，下面是要跑的变体清单"><span class="cap">Vary <b>Window size</b>，挑一个值，按 Add。下拉里的每个名字都带着一行字，说明这个属性会改变什么，以及它会在哪几个值上改变 —— 只列三个，好让一条挂着三十种语言的轴回答问题，而不是背一遍目录 —— 清单上的每一行也都挂着一个 <b>?</b>，写的是同一句话。值选择器旁边那个输入框接受清单上没有的尺寸，而加进去的都归在它所属的那条轴下面。按钮下面写着这次运行会读什么。</span></div>
+<h3>到底检查哪些视图</h3>
+<p>一个应用里的视图，永远比同一时刻能摆在屏幕上的多，所以有必要把「一次运行读哪些」说清楚。它读的是本次 DevTools 会话所连着的那个应用的<b>每一个已打开的窗口</b> —— 选项卡在按钮下面把它们的名字写了出来 —— 以及这些窗口里<b>在你按下按钮那一刻真实存在的控件</b>。那是活的可视树，不是你的 XAML：视图被构建出来了才会被读到，否则不会。</p>
+<p>也就是说，下面这些<em>不会</em>被检查，报告里也不会提它们一个字：</p>
+<ul>
+<li><b>你没有切过去的那个选项卡。</b>未选中的 <b>TabItem</b> 的内容还不在树里 —— 一次运行只看得到当时恰好打开的那一页。这一条最容易让人踩坑。</li>
+<li><b>你没有导航过去的页面</b>，以及你没有打开的窗口。</li>
+<li><b>没有显示出来的对话框、浮出层或菜单。</b>已打开的弹出层住在它自己的 top level 里，同样不会被读到。</li>
+<li><b>虚拟化列表还没有实例化的行</b> —— 滚动到视野之外的那些，作为控件并不存在。</li>
+</ul>
+<p>这些都不会被猜测，也不会被当成「通过」：没人看过的视图，就是压根不会出现在报告里。把它放到屏幕上再检查一次，它就进下一份报告了。这也正是按钮下面那行要写出它将要读哪些窗口的原因：写出来的，就是你能得到答案的范围。</p>
+<p><b>以及在它们里面量的是什么。</b>文字类检查会读每一个带文字的 <b>TextBlock</b> 和 <b>TextBox</b> —— 横幅里那句「46 处文字」数的就是它们 —— 因为随包提供的那些轴改变的正是文字的大小、颜色和位置。<a href="#a11y">无障碍</a>那部分的比较会走整棵树，所以一条关于焦点或缺名字的发现，可能落在任何一个控件上，不管它带不带文字。</p>
+<p class="tip"><b>提示。</b>对带选项卡或带导航的应用，一次检查一个屏：打开视图，按 Check variants，修掉它找到的，再换下一个。一次运行给的是关于你眼前这个屏的答案，而不是关于抽象意义上的整个应用。</p>
+<table>
+<tr><th>轴</th><th>值</th><th>改变什么，抓到什么</th></tr>
+<tr><td>Theme</td><td>Light、Dark</td><td>你的 top level 被要求绘制时所用的变体 —— 在团队里没人运行的那个主题里，融进背景消失掉的文字一直等在那儿。</td></tr>
+<tr><td>Text scale</td><td>125、150、200、300%，或自己输入</td><td>主题发出的每一个字号资源，按操作系统辅助功能设置的方式放大。被截断的标签、挤到一起的行，以及干脆无视这个设置的文字。</td></tr>
+<tr><td>Window size</td><td>窄栏 360 × 640 直到 4K，或输入 1024x768</td><td>你的窗口尺寸。被推出边缘、又没有任何东西能把它滚回来的内容，以及只在你搭它时那个尺寸下才成立的布局。</td></tr>
+<tr><td>Text direction</td><td>从右到左、从左到右</td><td>流向 —— 镜像里不免费的那一半。</td></tr>
+<tr><td>Language</td><td>你的排在前面，后面再跟二十来种，或手输任意 culture</td><td>查找字符串所用的区域文化，以及阿拉伯语、希伯来语随之带来的从右到左翻转。每一个当初是照着英文字符串量出来的框。需要你写两行 —— 见下文。</td></tr>
+</table>
+<h3>只报变差的部分</h3>
+<p>正是这一点让这个面板值得打开。省略号不是 bug —— 你设了 <b>TextTrimming</b>，就是你要的。小字号不是 bug。所以没有任何东西会因为它<em>本来如此</em>而被报出来；一条发现是与你此刻的应用之间的<em>差异</em>：</p>
+<ul>
+<li><b>文字被截断</b> —— 在基线上读得完整，在这里被截。这是从文本布局自己关于「我不得不折叠掉一行」的报告里读出来的，不是靠比较宽度猜的。</li>
+<li><b>被推出窗口之外</b> —— 基线上在屏幕内，这里在边缘之外，中间没有任何可滚动的东西。ScrollViewer 里的一切都会跳过：视口之外的内容正是它存在的理由。</li>
+<li><b>文字太淡，读不动</b> —— 基线上对比度通过，这里不通过，量法与<a href="#a11y">无障碍审计</a>完全一致。具体比值放在解释里，而不是放在标题上：数字不是症状，而带着量数的标题会让每个元素各自成为一类。</li>
+<li><b>没有变大的文字</b> —— 读者把字调大了，它却没有动。它的字号写在控件本身或某个样式上，而不是取自主题，所以无论读者怎么设置，它都是这个大小。只报一次，带上数量、涉及的字号、其余文字变成了多大，以及它替多少行说话：一个把字号钉死的应用会把大多数都钉死，而同一句话的三十八份拷贝是一堵墙，不是一份报告。</li>
+</ul>
+<div class="shot"><img src="assets/img/docs/conditions-report.png" alt="运行之后：每个属性一行，值上带着标记，打开的那个变体的发现就站在它自己那一行下面"><span class="cap">运行之后清单就收起来了，连同它自己那些按钮一起 —— 报告是用来读的，离开这一页的唯一出口是 <b>← Back</b>。站在清单位置上的是这次运行本身，这是三种读法里的第一种 <b>By variant</b>：每个属性一行，值上带着标记 —— <b>✓</b> 干净，<b>!</b> 变差但没丢内容，<b>✕</b> 丢了内容，<b>–</b> 根本没跑成 —— 这四个标记的说明就印在下面一行，而不是藏在悬停里。按一下标记，这个值的发现就在<b>它自己那一行下面</b>展开，用与选中芯片同色的竖线连着它；再按一下就收起来。发现上面没有标题：属性就在上面那一行，值就在芯片里，标题只会把你刚按过的那两个词再说一遍。横幅里是数量，它下面那行说明这次运行读了什么，而发现的第一行说明这个属性会改变什么 —— 后者对你自己应用注册的轴最要紧，那种地方光看名字读者什么也看不出来。发现按类别归拢，而不是在每个元素上重复一遍：标题用大白话说出症状，下面那句话说出它为什么是个问题，每一行则是控件，加上它<b>在该变体下</b>的样子 —— 截图是在运行当中拍的，因为再过一会儿应用就被放回原样了。若各行各有自己的数字 —— 三个标签以三个不同的对比度比值失败 —— 那句话就留在 <b>?</b> 和各行上：一个元素量出来的数，不能当成对其余元素的断言。</span></div>
+<p>发现会落进 <a href="#problems">Problems 面板</a>的 <b>Variants</b> 类别，变体就写在句子里，并且和那里的每一行一样，点一下就跳到元素。</p>
+<h3>三种读法</h3>
+<p>一次运行，三种读法，而且没有哪一种是另外两种的摘要。<b>By variant</b> 是这次运行本身的形状 —— 上面那张图 —— 它回答的是你的应用在哪种环境下最糟。<b>Table</b> 是工作量的形状，回答的是一共有多少。<b>One at a time</b> 是单个问题的形状，回答的是另外两种都答不了的那个问题：它当时到底长什么样。你把选项卡停在哪一种，下次它就从哪一种打开。</p>
+<div class="shot"><img src="assets/img/docs/conditions-table.png" alt="表格读法：三列 —— 变体、问题，以及问题落在哪些元素上"><span class="cap"><b>变体</b>、<b>问题</b>、<b>元素</b>。变体在它变的地方才印一次，问题的类别也在它变的地方才印一次，所以你沿着页面中间扫下去看到的是一串不同的问题，而不是同一句话说三遍 —— 三个元素共有的一个问题就是带着 <b>×3</b> 的一行，那三个元素就在旁边那一列里。仅仅是标题相同的两条发现 —— 「文字太淡」，三个不同的对比度比值 —— 仍然各算各的，因为每一条都留着自己那个量出来的数，而那正是它全部要说的话。按一下标题，那个问题就单独打开。</span></div>
+<div class="shot"><img src="assets/img/docs/conditions-detail.png" alt="一次一个问题：计数器、两个箭头、那句话，以及填满面板的截图"><span class="cap">一个问题，上面是 <b>‹ 2 / 6 ›</b>：第几个、一共几个、来自哪个值、那句话、那个元素，以及那张图。截图填满面板，而不是按原始尺寸缩着 —— 最多放大到四倍，用方块像素而不是平滑插值，因为这类问题里有一半就是某个字母被切掉的四个像素，而一张 90 像素的截图摆在空荡荡的面板中间，就是一份把证据落下了的报告。<b>−</b> 和 <b>+</b> 拉近拉远，<b>Life size</b> 回到用户当时看到的大小。箭头在两端会停住而不是绕回开头，所以你能知道自己是不是已经看完了。唯一一种从不拍照的发现 —— 周围都变大了它却没变的文字，拍出来就是一段普通文字 —— 会在图片本该在的位置说明原因，而不是留下一片空白让人以为是截图失败了。</span></div>
+<h3>带出选项卡，做成一份文档</h3>
+<p>真正要对这些发现动手的人，大多按不了那个按钮：pull request 上的评审者、被问「阿拉伯语版式是不是本来就长这样」的设计师、下个季度的无障碍审计。<b>Save as PDF…</b> 把整次运行写给他们 —— 检查了什么、什么拒绝执行以及为什么、每个问题一张表，然后每个问题再配上它的截图。图片才是重点：它们只在变体施加期间存在，所以把它们带出来不是顺手，而是唯一能带出来的时刻。</p>
+<p class="tip"><b>提示。</b>这份 PDF 没让这个包多花一分钱 —— 它是用框架自带的东西手写出来的，所以 AvaDevTools 依然除了 Avalonia 之外不依赖任何东西。</p>
+<h3>你的应用的语言</h3>
+<p>语言是这几条轴里几乎指哪儿都能找出 bug 的一条，也是工具自己没法施加的一条：设一个 culture 很容易，而且什么都不会变，因为只有你的应用知道它的字符串是怎么查出来的。所以两半都由你给 —— 你交付的那些语言，以及那一个让屏幕重新查文案的调用 —— 剩下的交给这条轴，包括阿拉伯语和希伯来语随之而来的从右到左翻转，不管应用自己有没有记得这回事。</p>
+<pre><code>var options = <span class="k">new</span> DevToolsOptions();
+options.Languages.Add(<span class="s">"en-GB"</span>);
+options.Languages.Add(<span class="s">"de-DE"</span>);
+options.Languages.Add(<span class="s">"ar-SA"</span>);
+options.ApplyLanguage = culture =&gt; Strings.Reload(culture);
+<span class="k">this</span>.AttachAvaDevTools(options);</code></pre>
+<p>你的语言排在选择器最前面，因为只有它们的字符串真的会变；后面再跟二十来种 —— 那些真正会让布局付出代价的，从德语复合词到从右到左再到泰语 —— 而任何一个 culture 都可以手输。一个语言都不声明，这条轴就不会出现在选项卡上。声明了却不给 <b>ApplyLanguage</b>，它会出现并且拒绝 —— 带着理由。这是诚实的答案，比在一门屏幕从未渲染过的语言上报告「干净通过」要好。</p>
+<h3>你自己的轴</h3>
+<p>随包附带的那些轴，是对每个 Avalonia 应用都成立的属性。而你的应用真正会坏掉的那些，通常是它自己的：品牌色正好压在背景上的租户、表格开始读不下去的密度、半数用户所在的硬件档位。轴就是一个带若干取值的属性：给它起名，用一句话说清它一动会动什么，列出值得一试的值，在 attach 之前注册到 <b>DevToolsOptions.ExtraAxes</b>。它就会带着自己的值清单出现在选项卡里，并在 MCP 上以自己的轴名应答。</p>
+<pre><code>sealed class TenantAxis : VariantAxis
+{
+    public override string Id =&gt; "tenant";
+    public override string Name =&gt; "Tenant";
+    public override string Varies =&gt; "whose branding this is painted in";
+
+    public override IReadOnlyList&lt;VariantChoice&gt; Suggested { get; } = new[]
+    {
+        new VariantChoice("meridian", "Meridian", () =&gt; new Painted(Colors.Teal)),
+        new VariantChoice("orbit", "Orbit", () =&gt; new Painted(Colors.Crimson)),
+    };
+}</code></pre>
+<p>每个值构造出一个 <b>Variant</b> —— 负责施加、确认并放回去的那个东西。重写 <b>TypedHint</b> 和 <b>TryParse</b>，这条轴就也接受手输的值：窗口尺寸能接受 1024x768、文字缩放能接受 175，正是这么来的。</p>
+<p>矩阵对一个实现只有两点要求。在做出改动的那一刻就把撤销记下来，绝不事后补 —— 账本是在 <code>finally</code> 里释放的，而没有写下撤销的改动，就是开发者要一直背着的改动。以及，当改动无法诚实地做到时，返回 <code>false</code> 并给出理由，而不是报告一次你根本没测量过的通过。还有 <b>TryConfirm</b>，在布局追上之后才被问到，用于「属性设上了但什么都没变」的情况 —— 那是「没坏」和「没发生」之间的区别。</p>
+<h3>不留下任何痕迹</h3>
+<p>每一次改动都在做出的当下被记下来，并在 <code>finally</code> 里释放 —— 与 <a href="#hold">❄ Hold</a> 自 12.1.0 以来使用的恢复账本是同一套纪律，而且其中一次恢复失败不会把排在它后面的那些拖下水。自测断言之后的应用完全一致，连文字缩放所遮蔽的那本资源字典也包括在内。</p>
+<p>无法诚实施加的变体会拒绝并说明原因 —— 嵌入式 top level 没有窗口可以调整大小，卡在最小尺寸的窗口不会再变窄 —— 因为一栏零发现，读起来和「通过」一模一样。</p>
+<p class="tip">一次一个轴，而不是所有组合：五个轴各两个值，要坐着等的运行趟数比任何人愿意等第二次的都多，而同时需要深色<em>加</em>从右到左<em>加</em> 200% 才会出现的 bug，比找它的耐心还要罕见。</p>` },
       { id: 'palette', t: 'Ctrl+K：找到任何东西', html: `<p>你很少知道要找的东西叫什么类型、什么名字 —— 你知道的是它在屏幕上显示的字。在 DevTools 中按 <span class="kbd">Ctrl</span>+<span class="kbd">K</span>（或 <span class="kbd">⌘</span>+<span class="kbd">K</span>）：一个搜索框覆盖一切，边输入边分类。每一行都带一个彩色类型图标，词汇与 DevTools 其他面板一致 —— 树的元素字形、资源的 <code>◈</code>、属性的 <code>◆</code>、动作用菜单图标 —— 还没读文字就先看出这条结果是什么。</p>
 <h3>空查询就是动作菜单</h3>
 <div class="shot"><img src="assets/img/docs/palette-actions.png" alt="空查询的 Ctrl+K：每个 DevTools 动作带图标和提示"><span class="cap">所有 DevTools 命令在一个列表里 —— 面板同时是功能发现菜单。</span></div>
@@ -2770,10 +3073,11 @@ zh: {
 <h3>Timeline（时间线）</h3><ul><li>事件、属性变化、VM 通知、焦点变化与绑定错误汇入一条流，范围由观察列表决定 —— 带因果链接、绑定逐步展开与实例检查器。见<a href="#timeline">时间线</a>。</li>
 <li>紫色的 <b>⌁ Input</b> 泳道装着智能体对应用做过的事 —— 它注入的每一次点击、按键和拖动，就排在这些操作引起的变化上方。见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li></ul>
 <h3>Problems（问题）</h3><ul><li>只列坏掉的 —— 绑定失败、error 日志 —— 错误在警告之前，每条带原因、树内 reveal 链接与完整绑定链。Scan now 抓住在 DevTools 打开前就失败的绑定。见 <a href="#problems">Problems 面板</a>。</li></ul>
-<h3>MCP Server</h3><ul><li>端点在听的时候才有这个选项卡，停了就随之消失：在听什么、用哪个端口、以什么名字，把本应用注册给智能体的那一行命令，以及每个工具各自被调用了多少次 —— 失败的另算。能对应用动手的工具在列表里标着 <b>⌁</b>，因此不必把名字背下来，也能看清智能体可能做过什么。启停开关、端口和两道许可都在 ⚙ 卡片的 MCP 页。见 <a href="#mcp">让智能体看看</a>。</li></ul>
+<h3>MCP Server</h3><ul><li>端点在听的时候才有这个选项卡，停了就随之消失：在听什么、用哪个端口、以什么名字，把本应用注册给智能体的那一行命令，以及每个工具各自被调用了多少次 —— 失败的另算。凡是会写入应用的工具 —— 点击键入的、冻结的、以及改变环境的那一个 —— 在列表里都标着 <b>⌁</b>，因此不必把名字背下来，也能看清智能体可能做过什么。启停开关、端口和三道许可都在 ⚙ 卡片的 MCP 页。见 <a href="#mcp">让智能体看看</a>。</li></ul>
 <h3>Logs（日志）</h3><ul><li>实时 Avalonia 日志，支持暂停、级别、区域与文本过滤。默认捕获 Warning 及以上。工具自身产生的日志会被丢弃、UI 批量刷新 —— 不会出现反馈循环卡死。</li>
 <li><code>LogCapture.Publish</code> 把应用自己的事件送进此面板 —— 见<a href="#applogs">应用日志接入</a>。</li></ul>
-<h3>Session</h3><ul><li>记录应用收到的东西，趁"该成立的"还成立时把它冻住，然后重放 —— 在窗口里有四种节奏，或在构建机上无窗口运行。第一处分岔会停下整次运行，给出原因、截图，并在树里选中该元素。见<a href="#session">把复现留下来：录制、检查、重放</a>。</li></ul>` },
+<h3>Session</h3><ul><li>记录应用收到的东西，趁"该成立的"还成立时把它冻住，然后重放 —— 在窗口里有四种节奏，或在构建机上无窗口运行。第一处分岔会停下整次运行，给出原因、截图，并在树里选中该元素。见<a href="#session">把复现留下来：录制、检查、重放</a>。</li></ul>
+<h3>Variants</h3><ul><li>挑一个属性，挑一个值，按 Add —— 主题、文字缩放、窗口尺寸、文字方向、语言 —— 然后按 <b>Check variants</b>，应用就会在清单上的每一个值下被重新读一遍，只报变差的部分，并把一切放回原样。每条轴都会说明自己改变什么，并列出它的几个值；清单记在这个应用名下，应用也可以注册自己的轴。</li><li>结果有三种读法 —— 按变体、按「变体 / 问题 / 元素」的表格，或者一次一个问题、截图填满面板 —— 而 <b>Save as PDF</b> 把整次运行连同图片一起带出选项卡。发现会并入 Problems 面板的 <b>Variants</b> 类别。见<a href="#conditions">它只在你的条件下才好看</a>。</li></ul>` },
       { id: 'capture', t: '截图与缺陷报告', html: `<p>「发我一张截图和 XAML 路径」在这里是一次点击 —— 元素、它的 bounds 和与默认值不同的属性，随图片一起上路。</p>
 <h3>第 1 步：选择要复制的内容</h3>
 <p><b>📷 工具栏按钮</b>两次点击即可 —— <em>Copy screenshot</em> 或 <em>Copy report (screenshot + XAML)</em> —— 捕获选中元素或整个窗口。同样的操作也在树右键菜单的 <b>Copy ▸</b> 下：<b>Path</b>（<span class="kbd">Ctrl+C</span>）、<b>As XAML</b>（<span class="kbd">Ctrl+Shift+C</span>）、<b>Screenshot</b> 与 <b>As bug report</b>。</p>
@@ -2823,9 +3127,10 @@ zh: {
 <li><b>繁忙的应用会直说。</b>如果 UI 线程一分钟内没有响应 —— 弹出了模态框，或者被调试器停住了 —— 调用会明确返回这一点，而不是把智能体丢在一个死掉的套接字上。</li></ul>
 <h3>它能做什么、不能做什么</h3>
 <ul><li><b>只监听回环</b>，而且这不是一个配置项：它绑定到 0.0.0.0 的那天，就是一个调试辅助变成隔壁工位读你屏幕的手段的那天。<code>Origin</code> 头同样会检查，因此浏览器页面无法通过 DNS 重绑定摸到它。</li>
-<li><b>二十五个工具里有十六个是纯读。</b>它们不注入任何输入，不写任何应用属性，不运行任何处理器。它们不需要确认流程，因为没有什么需要确认。</li>
-<li><b>七个工具会对应用动手，各有自己的开关。</b><code>click</code>、<code>hover</code>、<code>drag</code>、<code>scroll</code>、<code>press_key</code>、<code>type_text</code> 和 <code>focus_element</code> 会运行你的处理器，而你的处理器能做你的应用能做的一切 —— 所以它们等的是自己那道许可，而不是冻结那道。不主动开启；见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li>
+<li><b>二十九个工具里有十八个是纯读。</b>它们不注入任何输入，不写任何应用属性，不运行任何处理器。它们不需要确认流程，因为没有什么需要确认。</li>
 <li><b>两个工具冻结瞬时状态，需要第二道开关。</b><code>hold</code> 和 <code>pin_class</code> 让弹出层保持打开、强制伪类 —— 这是没有指针的一方查看悬停状态的唯一途径。除非 ⚙ 卡片 MCP 页里的 <b>Allow freezing</b> 勾选框、<code>McpAllowHold</code> 或 <code>AVA_DEVTOOLS_MCP_HOLD=1</code> 另有说法，否则它们是关的；它们只改变瞬时 UI 状态，每次保持都带一个自动释放的期限，保持期间应用会显示横幅，应用里按 <span class="kbd">Esc</span> 同样能释放。</li>
+<li><b>一个工具在其他变体下读应用，等的是自己那道许可。</b><code>run_variants</code> 一边看一边写应用自己的属性 —— 主题变体、主题发出的字号、窗口宽度、文字流向 —— 所以你的处理器会跑；它又在 <code>finally</code> 里把每一项都放回去，检查抛异常时也一样。它不注入任何输入，也不按下任何东西，所以它等的既不是冻结开关，也不是输入许可，而是 <b>Allow other variants</b>：<code>McpAllowVariants</code> 或 <code>AVA_DEVTOOLS_MCP_VARIANTS=1</code>。它找到的东西会当场进开发者的 Problems 面板；见<a href="#conditions">它只在你的条件下才好看</a>。</li>
+<li><b>八个工具会对应用动手，各有自己的开关。</b><code>click</code>、<code>hover</code>、<code>drag</code>、<code>scroll</code>、<code>press_key</code>、<code>type_text</code> 和 <code>focus_element</code> 会运行你的处理器，而你的处理器能做你的应用能做的一切，<code>replay_session</code> 则把整段录好的会话重放一遍 —— 所以它们等的是自己那道许可，而不是冻结那道。不主动开启；见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li>
 <li><b>它只归还自己拿走的。</b>智能体的保持只会自动释放智能体自己发起的那部分：之后你自己按 <span class="kbd">Shift</span>+<span class="kbd">F12</span>，期限不会把你的保持一并撤掉。</li></ul>
 <p class="tip">和 DevTools 的其余部分一样，只在 Debug 里发布。端点在任何构建里都默认关闭，但一个在 Release 中根本不附加 DevTools 的应用，就不可能意外地把它开起来。</p>` },
       { id: 'mcpconnect', t: '接到 Claude Code 或 Codex', html: `<p>端点只在你的应用运行期间存在，所以顺序始终不变：启动应用、打开服务器、把智能体指过去。它注册的名字是 <code>&lt;程序集名&gt;-avadevtools</code> —— 这也是你在客户端列表里会看到的名字。</p>
@@ -2833,8 +3138,8 @@ zh: {
 <ol class="steps"><li>运行你的应用，按 <span class="kbd">F12</span>。</li>
 <li>打开 ⚙ 卡片的 <b>MCP</b> 页，勾上 <b>Serve MCP on loopback</b>。</li>
 <li>复制 <em>Point your agent at it</em> 下面那段 —— 里面已经是正确的名字和端口。</li></ol>
-<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="设置卡片的 MCP 页：开关、端口和两道许可，下面一行说明当前在听什么"><span class="cap">⚙ → MCP：要设置的都在这里，别的都不在 —— 开关、端口、冻结与输入两道许可，外加一行结果。</span></div>
-<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="MCP Server 选项卡：在听什么，以及每个工具各被调用了多少次"><span class="cap">端点在，这个选项卡才在：二十五个工具，以及智能体对每一个究竟问过多少次。横杠表示从没碰过；琥珀色的数字里含失败调用；标着 ⌁ 的能对应用动手。</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-settings.png" alt="设置卡片的 MCP 页：开关、端口和三道许可，下面一行说明当前在听什么"><span class="cap">⚙ → MCP：要设置的都在这里，别的都不在 —— 开关、端口、冻结、变体与输入三道许可，外加一行结果。</span></div>
+<div class="shot"><img src="assets/img/docs/mcp-tab.png" alt="MCP Server 选项卡：在听什么，以及每个工具各被调用了多少次"><span class="cap">端点在，这个选项卡才在：二十九个工具，以及智能体对每一个究竟问过多少次。横杠表示从没碰过；琥珀色的数字里含失败调用；标着 ⌁ 的会写入应用，没标的只会读。</span></div>
 <h3>第 2a 步。Claude Code</h3>
 <pre><code>claude mcp add --transport http myapp-avadevtools http://127.0.0.1:5171/</code></pre>
 <p>作用域决定谁能用到它。<code>--scope local</code>（默认）是这个项目、只给你自己；<code>--scope project</code> 会在仓库根目录写一个 <code>.mcp.json</code>，参与这个应用的每个人都拿到同一条配置；<code>--scope user</code> 是这台机器上的所有项目。写进去的就是选项卡里显示的那段 JSON：</p>
@@ -2855,8 +3160,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>同时开着两个应用</h3>
 <p>给第二个应用自己的端口（⚙ 卡片 MCP 页上的 <b>Port</b> 框、<code>McpPort</code>，或 <code>AVA_DEVTOOLS_MCP_PORT</code>），然后作为第二条配置加进去。它们的名字本来就不同，智能体的工具列表依然清楚。</p>
 <p class="tip">比应用先启动的客户端通常要重连之后才看得到工具 —— Claude Code 里的 <code>/mcp</code>，Codex 里开新会话。那是重连问题，不是配置问题。</p>` },
-      { id: 'mcptools', t: '二十八个工具', html: `<p>二十八个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
-<p>十八个只看。两个冻结瞬时状态，等冻结许可。八个对应用动手，等<a href="#mcpinput">输入许可</a> —— 七个注入输入，一个把整段会话重放一遍。</p>
+      { id: 'mcptools', t: '二十九个工具', html: `<p>二十九个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
+<p>十八个只看。两个冻结瞬时状态，等冻结许可。一个在其他变体下读应用，等它自己的许可。八个对应用动手，等<a href="#mcpinput">输入许可</a> —— 七个注入输入，一个把整段会话重放一遍。</p>
 <h3>先找到方向</h3>
 <table>
 <tr><th>工具</th><th>回答</th><th>参数</th></tr>
@@ -2924,7 +3229,13 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>check_that</code></td><td>把一件"应该成立"的事说进正在进行的录制里。不给期望值时，就把属性此刻说的话冻住。</td><td><code>elementId</code>、<code>check</code>、<code>property</code>、<code>expect</code></td></tr>
 <tr><td><code>replay_session</code></td><td>把录好的会话再对应用跑一遍，报出第一处分岔的步骤和原因。会动手，所以要等输入许可。</td><td><code>path</code>、<code>json</code></td></tr>
 </table>
-<p>这三个加在一起，就是智能体如何留下一份人能直接跑的东西 —— 见<a href="#session">把复现留下来：录制、检查、重放</a>。</p>` },
+<p>这三个加在一起，就是智能体如何留下一份人能直接跑的东西 —— 见<a href="#session">把复现留下来：录制、检查、重放</a>。</p>
+<h3>在其他变体下读它</h3>
+<table>
+<tr><th>工具</th><th>回答</th><th>参数</th></tr>
+<tr><td><code>run_variants</code></td><td>在一个属性的一个值下重新读一遍应用 —— 一个属性都不点名，就是每个属性各取一个值 —— 只报变差的部分。它在观察时会写应用自己的属性，并把每一个都放回去，所以要等它自己的许可 —— 不注入任何输入，也不按下任何东西。点名一个不存在的轴，会得到全部轴以及各自可选值的清单。</td><td><code>axis</code>：theme / text / size / direction / language，或本应用注册的轴。<code>values</code>：["200"]、["1024x768"]、["de-DE"]</td></tr>
+</table>
+<p>一次调用就覆盖了截图回答不了的那些问题 —— 见<a href="#conditions">它只在你的条件下才好看</a>。它找到的东西同时会归入开发者的 Problems 面板：智能体的一次运行，不是关于别人应用的私下对话。</p>` },
       { id: 'mcpinput', t: 'MCP 输入：点击、键入、拖动', html: `<p>读能回答<em>它为什么这么宽</em>和<em>哪里坏了</em>。它永远回答不了<em>这个按钮到底能不能用</em>。那得把按钮按下去 —— 所以，在一道自己的开关之后，智能体可以按：七个工具，点击、悬停、拖动、滚动、按键、输入文本、移动焦点。</p>
 <h3>这是真实输入，不是抄近路</h3>
 <p>这里没有任何东西是在控件上直接抛事件。每个动作都构造成原始平台事件，穿过 Avalonia 自己的输入管理器 —— 和 macOS、X11、Windows 后端推进去的是同一扇门。命中测试决定打到谁，点击次数来自真实时间戳，指针捕获与 pointer-over 的表现和对人一样，而你的处理器之所以会跑，是因为输入<em>到达</em>了它们，不是因为被人调用。</p>
@@ -3093,8 +3404,9 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
     McpPort              = 5171,                               <span class="c">// 仅 127.0.0.1 —— 默认 5171</span>
     McpAllowHold         = <span class="k">true</span>,                               <span class="c">// 允许智能体冻结弹出层 / 钉住 :pointerover —— 默认 false</span>
     McpAllowInput        = <span class="k">true</span>,                               <span class="c">// 允许智能体点击、输入和拖动 —— 默认 false</span>
+    McpAllowVariants   = <span class="k">true</span>,                               <span class="c">// 允许智能体在其他变体下读它 —— 默认 false</span>
 });</code></pre>
-<p>四个 <code>Mcp*</code> 选项详见 <a href="#mcp">让智能体来看（MCP）</a>与<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。其余一切不索取即关闭或不存在；用户在 <a href="#settings">⚙ 设置卡</a>里保存的选择优先于代码传入的值。</p>` },
+<p>五个 <code>Mcp*</code> 选项详见 <a href="#mcp">让智能体来看（MCP）</a>、<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>与<a href="#conditions">它只在你的条件下才好看</a>。其余一切不索取即关闭或不存在；用户在 <a href="#settings">⚙ 设置卡</a>里保存的选择优先于代码传入的值。</p>` },
       { id: 'env', t: '环境变量', html: `<table>
 <tr><th>变量</th><th>含义</th></tr>
 <tr><td><code>AVA_DEVTOOLS_AUTO_OPEN=1</code></td><td>窗口加载时自动打开 DevTools。</td></tr>
@@ -3107,16 +3419,17 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <tr><td><code>AVA_DEVTOOLS_MCP_PORT=5171</code></td><td>它使用的端口，默认 5171。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td><td>额外允许 <code>hold</code> 与 <code>pin_class</code> —— 两个冻结瞬时状态的工具。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td><td>额外允许七个<a href="#mcpinput">对应用动手</a>的工具 —— 点击、悬停、拖动、滚动、按键、文本、焦点。</td></tr>
+<tr><td><code>AVA_DEVTOOLS_MCP_VARIANTS=1</code></td><td>额外允许 <code>run_variants</code> —— 在<a href="#conditions">其他变体下</a>读应用，并把它放回原样。</td></tr>
 <tr><td><code>AVA_DEVTOOLS_REPLAY=repro.json</code></td><td>启动时重放这个<a href="#session">会话</a>，每步打印一行 PASS/FAIL，并以答案作为退出码。</td></tr>
 </table>
-<p class="tip">这四个 <code>MCP</code> 变量只是起始状态，不是最终决定：<a href="#settings">⚙ 卡片</a> MCP 页里的开关按机器保存，并且优先于它们。你在工具里关掉的端口，下次启动依然是关的，无论启动脚本导出了什么。</p>` },
+<p class="tip">这五个 <code>MCP</code> 变量只是起始状态，不是最终决定：<a href="#settings">⚙ 卡片</a> MCP 页里的开关按机器保存，并且优先于它们。你在工具里关掉的端口，下次启动依然是关的，无论启动脚本导出了什么。</p>` },
       { id: 'limits', t: '限制', html: `<ul>
 <li>仅桌面端 —— 移动/浏览器平台不支持辅助窗口。</li>
 <li>DevTools 自带主题 —— 应用用什么主题、甚至没有主题，都不影响它。</li>
 <li>设为 <code>LiveTree = false</code> 后树重新变回快照：结构变化后请点 ↻ Refresh（两种模式下属性值都是实时更新的）。</li>
 <li>在 HiDPI 屏幕上，截图与缺陷报告会把带 BoxShadow 的边框<em>内容</em>放大一倍 —— 这是 Avalonia 12 渲染层的一个特性。改为截取元素而不是整扇窗口通常可以绕开。</li>
 <li>MCP 端点只绑定 127.0.0.1。这是刻意为之，且不可配置。</li>
-<li>注入的输入到达的是你的应用，不是桌面：操作系统的指针不会移动，所以原生文件对话框、macOS 菜单栏以及拖到另一个应用都在它够不到的地方。见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li><li>录制只记下"文本被敲进了掩码输入框"，绝不记下敲的是什么 —— 重放会拒绝这一步，而不是送出一个错的东西。见<a href="#session">把复现留下来</a>。</li></ul>` },
+<li>注入的输入到达的是你的应用，不是桌面：操作系统的指针不会移动，所以原生文件对话框、macOS 菜单栏以及拖到另一个应用都在它够不到的地方。见<a href="#mcpinput">MCP 输入：点击、键入、拖动</a>。</li><li>录制只记下"文本被敲进了掩码输入框"，绝不记下敲的是什么 —— 重放会拒绝这一步，而不是送出一个错的东西。见<a href="#session">把复现留下来</a>。</li><li><a href="#conditions">文字缩放轴</a>动的是主题分发的尺寸，所以把字号写死在元素或其样式上的文字不会动 —— 这会作为一条发现报出来，而不是被绕过去。它的检查读的是文字，所以问题不在文字上的控件，不在一次运行看得见的范围内。</li></ul>` },
       { id: 'feedback', t: '反馈', html: `<p>工具栏右上角的 <b>Feedback</b> 按钮打开 AvaDevTools 的问题跟踪器 —— 一键报告缺陷或请求功能。同一动作也在 <span class="kbd">Ctrl</span>+<span class="kbd">K</span> 里，叫 “Send feedback”。</p>
 <p>更喜欢聊天？<a href="https://t.me/avadevtools">Telegram 频道</a>接受提问和快速帮助。</p>` },
       { id: 'updates', t: '更新通知', html: `<p>工具栏上 <b>Feedback</b> 旁边始终以淡色显示你正在运行的版本号。AvaDevTools 的新版本带来新的面板和修复，但 NuGet 依赖不会自己宣布它们 —— 所以有更新的版本发布时，同一个版本号会变成蓝色并长出一个 <b>↑</b>。</p>

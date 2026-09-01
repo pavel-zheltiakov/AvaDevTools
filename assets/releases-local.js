@@ -3,9 +3,9 @@
 // whose tag already exists on GitHub is ignored, so this never duplicates or
 // overrides a published release. Updated each release round with RELEASE_NOTES.md.
 window.LOCAL_RELEASES = [{
-  tag_name: 'v12.1.7',
-  name: 'AvaDevTools 12.1.7',
-  published_at: '2026-08-19T00:00:00Z',
+  tag_name: 'v12.1.8',
+  name: 'AvaDevTools 12.1.8',
+  published_at: '2026-09-01T00:00:00Z',
   html_url: 'https://github.com/pavel-zheltiakov/AvaDevTools/releases',
-  body: "Keep the repro: record what you do, play it back later.\n\n## New Features\n\n- **Session tab** \u2014 records your clicks and typing, plays them back. Agents can do the same over MCP.\n- **Checks** \u2014 mark what should be true; the build server replays and fails when it isn't.\n\n## Bug Fixes\n\n- **Fixed the 3D view** \u2014 layers sat in the wrong place, text read mirrored.\n- **Clicks from the tool no longer miss** \u2014 they landed on nothing right after the screen changed.\n- **Dragging starts where you pressed** \u2014 sliders ended up at the wrong value.\n- **Search no longer finds our own marker** \u2014 the label the tool draws over your app.\n\nDocs: https://pavel-zheltiakov.github.io/AvaDevTools/docs.html\n",
+  body: "It only looks right in your conditions \u2014 so check it in the others.\n\n## New Features\n\n- **Variants tab** \u2014 read your app under another theme, size, direction or language.\n  - **Only what got worse** \u2014 a choice you made is never reported back at you.\n  - **Findings you can act on** \u2014 cut off, pushed off screen, contrast lost, text that stayed small.\n  - **Three ways to read it** \u2014 by variant, as a table, or one at a time.\n  - **Save as PDF** \u2014 the whole run as a document, pictures and all.\n  - **Every axis explains itself** \u2014 what it varies, and three of its values.\n  - **Your list, per project** \u2014 remembered against that application, not the next one.\n  - **Axes of your own** \u2014 your tenant's colours, your density, your hardware profile.\n  - **A Language axis** \u2014 declare your cultures; right-to-left comes with them.\n  - **Nothing left behind** \u2014 every change put back, even when a check throws.\n  - **run_variants over MCP** \u2014 an agent names an axis and its values.\n\n## Changes\n\n- An agent's findings now reach your open Problems tab, not a list only it could see.\n- The MCP tool list marks every tool that can change your app, not just the input ones.\n\n## Bug Fixes\n\n- The highlight's size chip was drawn off the top edge on a scaled canvas.\n\nDocs: https://pavel-zheltiakov.github.io/AvaDevTools/docs.html\n"
 }];

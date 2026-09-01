@@ -152,7 +152,14 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .relbody li b{color:#e9ebf0}
 .relbody p{margin:6px 0 10px;color:#bfc5d0}
 .relbody p b{color:#e9ebf0}
-.relbody ul ul{margin:6px 0 8px 22px}
+/* A release whose whole story is one feature lists that feature's parts under it.
+   Indentation alone was not enough to say so: ten bullets at one weight read as ten
+   features however far the inner ones are pushed across. The sub-level is a size down,
+   a shade back and wears a hollow mark, so the eye takes the hierarchy before it starts
+   reading. */
+.relbody ul ul{margin:4px 0 12px 22px}
+.relbody ul ul li{margin:2px 0;font-size:13.5px;color:#a3aab8;list-style-type:circle}
+.relbody ul ul li b{color:#ccd2dd;font-weight:600}
 .relbody hr{border:none;border-top:1px solid var(--border);margin:12px 0}
 
 /* scrollytelling stories */
