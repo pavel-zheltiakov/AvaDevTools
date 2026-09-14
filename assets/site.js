@@ -12,6 +12,12 @@ function esc(s) {
   return (s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 }
 
+// Story prose is ours and carries the few inline tags a sentence needs — bold for a name on
+// screen, italics for stress. Those come through; everything else is escaped as before.
+function inline(s) {
+  return esc(s).replace(/&lt;(\/?)(b|i|em)&gt;/g, '<$1$2>').replace(/&amp;#39;/g, '&#39;');
+}
+
 // --- i18n engine -------------------------------------------------------------
 // One HTML per page; all strings come from assets/i18n.js (window.I18N).
 // Language: ?lang= param > localStorage > browser language. Switching is instant.
@@ -125,8 +131,8 @@ function renderStoryTrack(track, steps, flat, head, foot) {
     track.style.height = '';
     track.innerHTML = (head || '') + steps.map(b =>
       '<div class="story-flat-step">' + storyVisual(b, -1) +
-      (b.t ? '<h3>' + esc(b.t) + '</h3>' : '') + '<p>' + esc(b.d || b.lead) + '</p>' +
-      (b.d2 ? '<p>' + esc(b.d2) + '</p>' : '') + '</div>').join('') + (foot || '');
+      (b.t ? '<h3>' + esc(b.t) + '</h3>' : '') + '<p>' + inline(b.d || b.lead) + '</p>' +
+      (b.d2 ? '<p>' + inline(b.d2) + '</p>' : '') + '</div>').join('') + (foot || '');
     return;
   }
   track.classList.remove('flat');
@@ -136,9 +142,9 @@ function renderStoryTrack(track, steps, flat, head, foot) {
     '<div class="story-bar"><span class="story-fill"></span></div><div class="story-grid">' +
     '<div class="story-text">' + steps.map((b, i) =>
       '<div class="story-step" data-i="' + i + '">' + (b.t ? '<h3>' + esc(b.t) + '</h3>' : '') +
-      '<p>' + esc(b.d || b.lead) + '</p>' +
-      (b.d2 ? '<p>' + esc(b.d2) + '</p>' : '') +
-      (b.pts ? '<ul>' + b.pts.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>' : '') + '</div>').join('') + '</div>' +
+      '<p>' + inline(b.d || b.lead) + '</p>' +
+      (b.d2 ? '<p>' + inline(b.d2) + '</p>' : '') +
+      (b.pts ? '<ul>' + b.pts.map(p => '<li>' + inline(p) + '</li>').join('') + '</ul>' : '') + '</div>').join('') + '</div>' +
     '<div class="story-shot">' + steps.map((b, i) => storyVisual(b, i)).join('') + '</div>' +
     '</div>' + (foot || '') + '</div>';
   window.__storyTracks.push({
@@ -178,7 +184,7 @@ function buildHomeStories(R) {
       '<h2 class="sec">' + esc(R.wn.h) + '</h2>' +
       '</div></div>';
     const foot = '<div class="story-track-foot"><div class="wrap">' +
-      '<a href="docs.html#mcp">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
+      '<a href="docs.html#mcpmobile">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
       '<a href="releases.html">' + esc(R.wn.notes) + '</a></div></div>';
     if (wn) renderStoryTrack(wnTrack, wn.steps, !wide, head, foot);
   }

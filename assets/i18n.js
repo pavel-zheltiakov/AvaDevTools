@@ -12,13 +12,56 @@ en: {
     get: 'Get started', stories: 'See it in action', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.1.8", docs: 'Documentation →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.1.9", docs: 'Documentation →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   stories: {
-    h: 'Stories', wn: 'conditions',
+    h: 'Stories', wn: 'mobile',
     lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
     list: [
+      { key: 'mobile', h: '📱 Off the desktop', sub: 'Your phone app, over MCP: every tool answers against the view it is showing, and the tools that act use a finger.',
+        steps: [
+          { t: '📱 Off the desktop',
+            d: 'A phone app never had an inspector. There is no F12 on a phone and no room for a second window, and an agent asked to fix a phone screen could read the XAML but not the screen it produced.',
+            d2: 'So the tool goes where the application goes. The MCP endpoint runs inside your app, so on an iPhone or an Android phone every tool answers against the view it is showing \u2014 the tree, problems, screenshots, recording and replay \u2014 and the tools that act use a finger.',
+            newsTitle: 'New in 12.1.9',
+            news: [
+              { k: 'MCP on iOS and Android', d: 'every tool against your phone app; click taps, drag and scroll move a finger.' },
+            ] },
+          { t: 'One port forward, and the tools arrive', d: 'Attach with the server on, run the app, and reach it from your computer: the iOS simulator shares the Mac\u2019s loopback as it is, an iPhone on a cable needs <b>iproxy</b>, an Android phone <b>adb forward</b>. The server is named after your app, as on the desktop, and the view the phone is showing is the top of the tree.',
+        code: [
+          '$ iproxy 5171:5171',
+          '',
+          '$ list_windows',
+          '  #1 EmbeddableControlRoot 430x932 holding MainView',
+          '',
+          '$ find_elements  {"query": "TabItem", "limit": 3}',
+          '  #6 TabItem 242x48',
+          '  #7 TabItem 217x48',
+          '  #8 TabItem 190x48',
+        ] },
+          { t: 'A click is a tap', d: 'On a touch screen nothing a user does arrives as a mouse, so nothing the agent does does either. <b>click</b> puts a finger down and lifts it, <b>drag</b> and <b>scroll</b> move one at the pace a hand moves, and gesture recognisers see what they see from a thumb. The reply is still the application\u2019s verdict \u2014 whether anything handled it, and where focus went.',
+        code: [
+          '$ click  {"elementId": 6}',
+          '  Tapped #6 TabItem at (141, 649).',
+          '  The application handled it.',
+          '  Focus moved from nothing to #6 TabItem.',
+        ] },
+          { t: 'And what a phone does not have, it says', d: 'A finger does not hover, and a phone view has no size of its own to set. Rather than answer about a state no user can reach, the tool refuses, says why, and points at what does work. F12 is left to your app: there is no window to open.',
+        code: [
+          '$ hover  {"elementId": 6}',
+          '  This is a touch screen, and a finger does not hover: it is',
+          '  over something only while it presses it, so nothing a user',
+          '  does leaves the pointer over an element. pin_class with',
+          '  :pointerover shows the hover styling if that is what you',
+          '  need to see, and click taps.',
+          '',
+          '$ run_variants  {"axis": "Window size", "values": ["360x640"]}',
+          '  Window size \u00b7 360 \u00d7 640  \u2014 not run: nothing here is a',
+          '  window \u2014 on a phone the operating system sets the view\u2019s',
+          '  size, so there is no size of its own to set',
+        ] },
+        ] },
       { key: 'conditions', h: '◐ It only looks right in your conditions', sub: 'Your theme, your text size, your window width. Read it again in somebody else’s — and hear only what got worse.',
         steps: [
           { t: '◐ It only looks right in your conditions',
@@ -364,7 +407,7 @@ en: {
     groups: [
       { t: 'Getting started', ids: ['install', 'quickstart'] },
       { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
-      { t: 'Agents (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
+      { t: 'Agents (MCP)', ids: ['mcp', 'mcpconnect', 'mcpmobile', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: 'Reference', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -863,6 +906,29 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Two applications at once</h3>
 <p>Give the second one its own port (the <b>Port</b> box on the ⚙ card's MCP page, <code>McpPort</code>, or <code>AVA_DEVTOOLS_MCP_PORT</code>) and add it as a second entry. Their names differ already, so the agent's tool list stays readable.</p>
 <p class="tip">A client that started before your application usually shows no tools until it reconnects — <code>/mcp</code> in Claude Code, a new session in Codex. That is a reconnect, not a config problem.</p>` },
+      { id: 'mcpmobile', t: 'On iOS and Android', html: `<p>The endpoint runs inside your application, so it runs wherever the application does — on an iPhone or an Android phone too. Every tool answers against the view the app is showing: the tree, properties, problems, the timeline, screenshots, recording and replay, variants. There is no DevTools window on a phone; the agent is the one looking.</p>
+<h3>Step 1. Turn it on in code</h3>
+<p>A phone app is not started from a shell, so options in code are the dependable switch. Attach before you set the main view, as you would on the desktop:</p>
+<pre><code>#if DEBUG
+this.AttachAvaDevTools(new DevToolsOptions { McpServer = true, McpAllowInput = true });
+#endif</code></pre>
+<h3>Step 2. Reach it from your computer</h3>
+<p><b>iOS simulator.</b> The simulator shares the Mac's network, so <code>http://127.0.0.1:5171/</code> works as it is. Environment variables reach a simulator app with the <code>SIMCTL_CHILD_</code> prefix, if you prefer them to code:</p>
+<pre><code>SIMCTL_CHILD_AVA_DEVTOOLS_MCP=1 xcrun simctl launch booted com.example.myapp</code></pre>
+<p><b>iPhone connected by USB.</b> The app listens on the phone's own loopback, so forward the port over USB. <code>iproxy</code> from libimobiledevice does that:</p>
+<pre><code>iproxy 5171:5171</code></pre>
+<p><b>Android emulator or device.</b> Forward the port once per connection:</p>
+<pre><code>adb forward tcp:5171 tcp:5171</code></pre>
+<p>Then register the endpoint as in <a href="#mcpconnect">Connect it to Claude Code or Codex</a>. The server is named after your app's assembly, as on the desktop.</p>
+<h3>What changes on a touch screen</h3>
+<ul>
+<li><b>click</b> taps, <b>drag</b> moves a finger and <b>scroll</b> pans, so gestures reach your controls the way a thumb does.</li>
+<li><b>hover</b> is refused, because a finger does not hover. <b>pin_class</b> with <code>:pointerover</code> still shows the hover styling.</li>
+<li><b>F12</b> and <b>Shift+F12</b> open nothing — there is no window on a phone, so the keys stay your app's.</li>
+<li><b>list_windows</b> lists the view's root and what it holds.</li>
+<li>The <b>Window size</b> axis refuses: the operating system sets a phone view's size. The other axes run.</li>
+</ul>
+<p class="tip">On Android, environment variables go through <code>debug.mono.env</code>, which holds at most 91 characters — three switches, not four. Use options in code when you need more.</p>` },
       { id: 'mcptools', t: 'The twenty-nine tools', html: `<p>Twenty-nine tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
 <p>Eighteen only look. Two freeze transient state and wait on the freeze permission. One reads the application under other variants and waits on a permission of its own. Eight act on the application and wait on <a href="#mcpinput">the input permission</a> — the seven that inject input, and the one that replays a whole session of it.</p>
 <h3>Finding your way around</h3>
@@ -1001,7 +1067,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>What it will not touch</h3>
 <ul><li><b>The DevTools window is never a target.</b> Asked to click something inside it, the tool says so and does nothing. A tool that can drive its own controls can turn its own switches off.</li>
 <li><b>The operating system's pointer does not move.</b> Events are delivered into the application, not onto the desktop — so anything the OS owns rather than your application (a native file dialog, the macOS menu bar, dragging to another application) is outside what this reaches.</li>
-<li><b>Nothing is retried and nothing is guessed.</b> One call is one action; if it could not happen it is reported, not approximated with something adjacent.</li></ul>
+<li><b>Nothing is retried and nothing is guessed.</b> One call is one action; if it could not happen it is reported, not approximated with something adjacent.</li>
+<li><b>One action at a time.</b> Calls an agent sends in parallel wait their turn, so a tap never lands in the middle of a drag and each reply describes its own action.</li></ul>
 <p class="tip"><b>Tip.</b> <code>hover</code> and <code>pin_class</code> are not the same tool. <code>pin_class</code> forces the styling so a hover state can be read with nothing happening; <code>hover</code> is the real pointer, so the control's own handlers run and a tooltip appears on its own delay. Use the first to look, the second to test.</p>` },
       { id: 'mcpcases', t: 'MCP: five real cases', html: `<p>Four sessions against the sample application, verbatim. Every reply below is what the tool actually printed — the point is not that the tools exist, it is how few calls a real question takes.</p>
 <h3>Case 1. The approver line is empty</h3>
@@ -1127,7 +1194,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 </table>
 <p class="tip">The five <code>MCP</code> variables are a starting state, not the last word: the switches on the <a href="#settings">⚙ card</a>'s MCP page are saved per machine and win over them. A port you closed in the tool stays closed on the next run, whatever the launcher exports.</p>` },
       { id: 'limits', t: 'Limitations', html: `<ul>
-<li>Desktop only — secondary windows are not supported on mobile/browser targets.</li>
+<li>The DevTools window is desktop only. On iOS and Android the <a href="#mcpmobile">MCP endpoint</a> works without it; browser targets are not supported.</li>
 <li>DevTools brings its own theme — the application's theme, or its absence, does not matter.</li>
 <li>With <code>LiveTree = false</code> the tree is a snapshot again — use ↻ Refresh after structural changes (property values update live either way).</li>
 <li>Screenshots and bug reports double-scale the <em>contents</em> of box-shadowed borders on HiDPI displays — a render-layer quirk of Avalonia 12. Capturing the element rather than the whole window usually sidesteps it.</li>
@@ -1161,13 +1228,56 @@ uk: {
     get: 'Почати', stories: 'Подивитися в дії', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.1.8', docs: 'Документація →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.1.9', docs: 'Документація →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   stories: {
-    h: 'Історії', wn: 'conditions',
+    h: 'Історії', wn: 'mobile',
     lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
     list: [
+      { key: 'mobile', h: '📱 За межами десктопа', sub: 'Ваш застосунок на телефоні — через MCP: кожен інструмент відповідає про те подання, яке на екрані, а інструменти, що діють, користуються пальцем.',
+        steps: [
+          { t: '📱 За межами десктопа',
+            d: 'Застосунок на телефоні ніколи не мав інспектора. На телефоні немає F12 і немає місця для другого вікна, а агент, якого просять виправити екран телефона, міг прочитати XAML, але не екран, що з нього вийшов.',
+            d2: 'Тож інструмент іде туди, куди йде застосунок. MCP-ендпойнт працює всередині вашого застосунку, тому на iPhone чи Android-телефоні кожен інструмент відповідає про те подання, яке показано на екрані, \u2014 дерево, проблеми, знімки екрана, запис і відтворення, \u2014 а інструменти, що діють, користуються пальцем.',
+            newsTitle: 'Нове у 12.1.9',
+            news: [
+              { k: 'MCP на iOS та Android', d: 'кожен інструмент — для застосунку на телефоні; клік — це дотик, перетягування й прокручування ведуть пальцем.' },
+            ] },
+          { t: 'Один переадресований порт — і інструменти на місці', d: 'Під\u2019єднайте DevTools з увімкненим сервером, запустіть застосунок і дістаньтеся до нього з комп\u2019ютера: симулятор iOS ділить loopback із Mac, iPhone на кабелі потребує <b>iproxy</b>, Android-телефон — <b>adb forward</b>. Сервер названо за вашим застосунком, як і на десктопі, а подання, яке показує телефон, — вершина дерева.',
+        code: [
+          '$ iproxy 5171:5171',
+          '',
+          '$ list_windows',
+          '  #1 EmbeddableControlRoot 430x932 holding MainView',
+          '',
+          '$ find_elements  {"query": "TabItem", "limit": 3}',
+          '  #6 TabItem 242x48',
+          '  #7 TabItem 217x48',
+          '  #8 TabItem 190x48',
+        ] },
+          { t: 'Клік — це дотик', d: 'На сенсорному екрані жодна дія користувача не приходить як миша, тож і дія агента теж. <b>click</b> ставить палець і піднімає його, <b>drag</b> і <b>scroll</b> ведуть ним у темпі руки, і розпізнавачі жестів бачать те саме, що й від великого пальця. Відповідь, як і раніше, — вердикт застосунку: чи щось це обробило і куди перейшов фокус.',
+        code: [
+          '$ click  {"elementId": 6}',
+          '  Tapped #6 TabItem at (141, 649).',
+          '  The application handled it.',
+          '  Focus moved from nothing to #6 TabItem.',
+        ] },
+          { t: 'А чого на телефоні немає, про те інструмент і каже', d: 'Палець не зависає над елементом, а подання на телефоні не має власного розміру, який можна задати. Замість відповіді про стан, якого жоден користувач не досягне, інструмент відмовляє, пояснює чому і вказує на те, що працює. F12 лишається вашому застосунку: вікна, яке можна відкрити, немає.',
+        code: [
+          '$ hover  {"elementId": 6}',
+          '  This is a touch screen, and a finger does not hover: it is',
+          '  over something only while it presses it, so nothing a user',
+          '  does leaves the pointer over an element. pin_class with',
+          '  :pointerover shows the hover styling if that is what you',
+          '  need to see, and click taps.',
+          '',
+          '$ run_variants  {"axis": "Window size", "values": ["360x640"]}',
+          '  Window size \u00b7 360 \u00d7 640  \u2014 not run: nothing here is a',
+          '  window \u2014 on a phone the operating system sets the view\u2019s',
+          '  size, so there is no size of its own to set',
+        ] },
+        ] },
       { key: 'conditions', h: '◐ Воно виглядає правильно лише у ваших умовах', sub: 'Ваша тема, ваш розмір тексту, ваша ширина вікна. Прочитайте його знову в чужих — і почуйте лише те, що стало гірше.',
         steps: [
           { t: '◐ Воно виглядає правильно лише у ваших умовах',
@@ -1513,7 +1623,7 @@ uk: {
     groups: [
       { t: 'Початок роботи', ids: ['install', 'quickstart'] },
       { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
-      { t: 'Агенти (MCP)', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
+      { t: 'Агенти (MCP)', ids: ['mcp', 'mcpconnect', 'mcpmobile', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: 'Довідник', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -2012,6 +2122,29 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Два застосунки водночас</h3>
 <p>Дайте другому власний порт (поле <b>Port</b> на сторінці MCP у картці ⚙, <code>McpPort</code> або <code>AVA_DEVTOOLS_MCP_PORT</code>) і додайте другим записом. Імена вже різні, тож список інструментів агента лишиться читабельним.</p>
 <p class="tip">Клієнт, запущений раніше за застосунок, зазвичай не бачить інструментів, доки не перез’єднається — <code>/mcp</code> у Claude Code, нова сесія в Codex. Це перез’єднання, а не проблема конфігурації.</p>` },
+      { id: 'mcpmobile', t: 'На iOS та Android', html: `<p>Ендпойнт працює всередині вашого застосунку, тож він працює скрізь, де працює застосунок, — і на iPhone чи Android-телефоні теж. Кожен інструмент відповідає про те подання, яке показує застосунок: дерево, властивості, проблеми, таймлайн, знімки екрана, запис і відтворення, варіанти. Вікна DevTools на телефоні немає — дивиться агент.</p>
+<h3>Крок 1. Увімкніть у коді</h3>
+<p>Телефонний застосунок не запускають із терміналу, тож надійний перемикач — опції в коді. Під’єднуйте до того, як задаєте головне подання, так само як на десктопі:</p>
+<pre><code>#if DEBUG
+this.AttachAvaDevTools(new DevToolsOptions { McpServer = true, McpAllowInput = true });
+#endif</code></pre>
+<h3>Крок 2. Дістаньтеся до нього з комп’ютера</h3>
+<p><b>Симулятор iOS.</b> Симулятор ділить мережу з Mac, тож <code>http://127.0.0.1:5171/</code> працює як є. Змінні середовища доходять до застосунку в симуляторі з префіксом <code>SIMCTL_CHILD_</code>, якщо вам зручніше без коду:</p>
+<pre><code>SIMCTL_CHILD_AVA_DEVTOOLS_MCP=1 xcrun simctl launch booted com.example.myapp</code></pre>
+<p><b>iPhone, під’єднаний USB-кабелем.</b> Застосунок слухає власний loopback телефона, тож перекиньте порт через USB. Це робить <code>iproxy</code> з libimobiledevice:</p>
+<pre><code>iproxy 5171:5171</code></pre>
+<p><b>Емулятор або пристрій Android.</b> Перекиньте порт один раз на з’єднання:</p>
+<pre><code>adb forward tcp:5171 tcp:5171</code></pre>
+<p>Далі зареєструйте ендпойнт, як у розділі <a href="#mcpconnect">Під’єднати до Claude Code чи Codex</a>. Сервер названо за збіркою вашого застосунку, як і на десктопі.</p>
+<h3>Що змінюється на сенсорному екрані</h3>
+<ul>
+<li><b>click</b> торкається, <b>drag</b> веде пальцем, а <b>scroll</b> прокручує жестом — тож жести доходять до ваших контролів так, як від великого пальця.</li>
+<li><b>hover</b> відхиляється, бо палець не зависає над елементом. <b>pin_class</b> з <code>:pointerover</code> і далі показує стиль наведення.</li>
+<li><b>F12</b> і <b>Shift+F12</b> нічого не відкривають — вікна на телефоні немає, тож клавіші лишаються вашому застосунку.</li>
+<li><b>list_windows</b> показує корінь подання й те, що в ньому.</li>
+<li>Вісь <b>Window size</b> відмовляє: розмір подання на телефоні задає операційна система. Інші осі працюють.</li>
+</ul>
+<p class="tip">На Android змінні середовища передаються через <code>debug.mono.env</code>, де вміщається щонайбільше 91 символ — три перемикачі, не чотири. Коли треба більше, використовуйте опції в коді.</p>` },
       { id: 'mcptools', t: 'Двадцять дев\'ять інструментів', html: `<p>Двадцять дев\'ять інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
 <p>Вісімнадцять лише дивляться. Два морозять тимчасовий стан і чекають на дозвіл заморожування. Один читає застосунок в інших варіантах і чекає на власний дозвіл. Вісім діють на застосунок і чекають на <a href="#mcpinput">дозвіл на введення</a> — сім, що надсилають введення, і один, що відтворює цілу сесію з нього.</p>
 <h3>Зорієнтуватись</h3>
@@ -2150,7 +2283,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Чого воно не торкнеться</h3>
 <ul><li><b>Вікно DevTools ніколи не є ціллю.</b> На прохання клікнути щось усередині нього інструмент так і каже і не робить нічого. Інструмент, здатний керувати власними контролами, здатен вимкнути власні перемикачі.</li>
 <li><b>Вказівник операційної системи не рухається.</b> Події доставляються в застосунок, а не на робочий стіл — тож усе, що належить ОС, а не вашому застосунку (нативний файловий діалог, рядок меню macOS, перетягування в інший застосунок), лишається поза досяжністю.</li>
-<li><b>Нічого не повторюється і не вгадується.</b> Один виклик — одна дія; якщо вона не могла статися, про це повідомляють, а не наближають чимось сусіднім.</li></ul>
+<li><b>Нічого не повторюється і не вгадується.</b> Один виклик — одна дія; якщо вона не могла статися, про це повідомляють, а не наближають чимось сусіднім.</li>
+<li><b>Одна дія за раз.</b> Виклики, які агент надсилає паралельно, чекають своєї черги, тож дотик ніколи не потрапляє посеред перетягування, а кожна відповідь описує власну дію.</li></ul>
 <p class="tip"><b>Порада.</b> <code>hover</code> і <code>pin_class</code> — не той самий інструмент. <code>pin_class</code> форсує стилі, щоб стан наведення можна було прочитати і щоб при цьому нічого не сталося; <code>hover</code> — справжній вказівник, тож спрацьовують власні обробники контрола і тултіп з'являється за своєю затримкою. Перший — щоб подивитись, другий — щоб перевірити.</p>` },
       { id: 'mcpcases', t: 'MCP: п\'ять реальних випадків', html: `<p>П'ять сесій проти демозастосунку, дослівно. Кожна відповідь нижче — те, що інструмент справді надрукував. Суть не в тому, що інструменти існують, а в тому, як мало викликів займає справжнє питання.</p>
 <h3>Випадок 1. Рядок «approver» порожній</h3>
@@ -2276,7 +2410,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 </table>
 <p class="tip">П'ять змінних <code>MCP</code> — це стартовий стан, а не остаточне слово: перемикачі на сторінці MCP у <a href="#settings">картці ⚙</a> зберігаються для машини й мають перевагу над ними. Порт, який ви закрили в інструменті, лишиться закритим і наступного запуску, хоч би що експортував ваш лаунчер.</p>` },
       { id: 'limits', t: 'Обмеження', html: `<ul>
-<li>Лише десктоп — додаткові вікна не підтримуються на мобільних/браузерних платформах.</li>
+<li>Вікно DevTools працює лише на десктопі. На iOS та Android <a href="#mcpmobile">MCP-ендпойнт</a> працює без нього; браузерні платформи не підтримуються.</li>
 <li>DevTools приносить власну тему — тема застосунку, чи її відсутність, не має значення.</li>
 <li>З <code>LiveTree = false</code> дерево знову є знімком: після структурних змін натисніть ↻ Refresh (значення властивостей оновлюються наживо в обох режимах).</li>
 <li>Скріншоти та звіти про ваду подвоюють масштаб <em>вмісту</em> рамок із тінню (BoxShadow) на HiDPI-екранах — особливість шару рендеру Avalonia 12. Знімок самого елемента, а не цілого вікна, зазвичай це обходить.</li>
@@ -2309,13 +2443,56 @@ zh: {
     get: '快速上手', stories: '看实际效果', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.1.8 新特性', docs: '文档 →', notes: '版本历史 →' },
+  wn: { h: '12.1.9 新特性', docs: '文档 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   stories: {
-    h: '功能演示', wn: 'conditions',
+    h: '功能演示', wn: 'mobile',
     lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
     list: [
+      { key: 'mobile', h: '📱 走出桌面', sub: '通过 MCP 检查你的手机应用：每个工具都针对它正在显示的视图作答，动手的工具用的是手指。',
+        steps: [
+          { t: '📱 走出桌面',
+            d: '手机应用从来没有检查器。手机上没有 F12，也放不下第二个窗口；让智能体去修一个手机界面，它能读 XAML，却看不到 XAML 生成的那个界面。',
+            d2: '所以工具跟着应用走。MCP 端点运行在你的应用内部，所以在 iPhone 或 Android 手机上，每个工具都针对它正在显示的视图作答 \u2014\u2014 树、问题、截图、录制与回放 \u2014\u2014 而动手的工具用的是手指。',
+            newsTitle: '12.1.9 新特性',
+            news: [
+              { k: 'iOS 与 Android 上的 MCP', d: '每个工具都能用于你的手机应用；click 是轻点，drag 和 scroll 用手指移动。' },
+            ] },
+          { t: '转发一个端口，工具就到了', d: '开启服务器并附加，运行应用，再从电脑连上它：iOS 模拟器与 Mac 共用回环地址，直接可用；用线连着的 iPhone 需要 <b>iproxy</b>，Android 手机需要 <b>adb forward</b>。服务器按你的应用命名，和桌面上一样；手机正在显示的视图就是树的顶端。',
+        code: [
+          '$ iproxy 5171:5171',
+          '',
+          '$ list_windows',
+          '  #1 EmbeddableControlRoot 430x932 holding MainView',
+          '',
+          '$ find_elements  {"query": "TabItem", "limit": 3}',
+          '  #6 TabItem 242x48',
+          '  #7 TabItem 217x48',
+          '  #8 TabItem 190x48',
+        ] },
+          { t: '点击就是轻点', d: '在触摸屏上，用户的任何操作都不会以鼠标的形式到达，所以智能体的操作也不会。<b>click</b> 放下手指再抬起，<b>drag</b> 和 <b>scroll</b> 以手的速度移动手指，手势识别器看到的和来自拇指的一样。回复仍是应用自己的判定 \u2014\u2014 有没有东西处理了它，焦点去了哪里。',
+        code: [
+          '$ click  {"elementId": 6}',
+          '  Tapped #6 TabItem at (141, 649).',
+          '  The application handled it.',
+          '  Focus moved from nothing to #6 TabItem.',
+        ] },
+          { t: '手机上没有的，它会直说', d: '手指不会悬停，手机视图也没有可以自己设置的尺寸。工具不会就一个用户根本到不了的状态作答，而是拒绝、说明原因，并指出什么可以用。F12 留给你的应用：没有窗口可开。',
+        code: [
+          '$ hover  {"elementId": 6}',
+          '  This is a touch screen, and a finger does not hover: it is',
+          '  over something only while it presses it, so nothing a user',
+          '  does leaves the pointer over an element. pin_class with',
+          '  :pointerover shows the hover styling if that is what you',
+          '  need to see, and click taps.',
+          '',
+          '$ run_variants  {"axis": "Window size", "values": ["360x640"]}',
+          '  Window size \u00b7 360 \u00d7 640  \u2014 not run: nothing here is a',
+          '  window \u2014 on a phone the operating system sets the view\u2019s',
+          '  size, so there is no size of its own to set',
+        ] },
+        ] },
       { key: 'conditions', h: '◐ 它只在你的条件下才好看', sub: '你的主题、你的字号、你的窗口宽度。换成别人的条件再读一遍 —— 只听变差的那部分。',
         steps: [
           { t: '◐ 它只在你的条件下才好看',
@@ -2661,7 +2838,7 @@ zh: {
     groups: [
       { t: '入门', ids: ['install', 'quickstart'] },
       { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
-      { t: '智能体（MCP）', ids: ['mcp', 'mcpconnect', 'mcptools', 'mcpinput', 'mcpcases'] },
+      { t: '智能体（MCP）', ids: ['mcp', 'mcpconnect', 'mcpmobile', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: '参考', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
     sections: [
@@ -3160,6 +3337,29 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>同时开着两个应用</h3>
 <p>给第二个应用自己的端口（⚙ 卡片 MCP 页上的 <b>Port</b> 框、<code>McpPort</code>，或 <code>AVA_DEVTOOLS_MCP_PORT</code>），然后作为第二条配置加进去。它们的名字本来就不同，智能体的工具列表依然清楚。</p>
 <p class="tip">比应用先启动的客户端通常要重连之后才看得到工具 —— Claude Code 里的 <code>/mcp</code>，Codex 里开新会话。那是重连问题，不是配置问题。</p>` },
+      { id: 'mcpmobile', t: '在 iOS 与 Android 上', html: `<p>端点运行在你的应用内部，所以应用在哪里运行，它就在哪里运行 —— iPhone 和 Android 手机也一样。每个工具都针对应用正在显示的视图作答：树、属性、问题、Timeline、截图、录制与回放、变体。手机上没有 DevTools 窗口；看的是智能体。</p>
+<h3>第 1 步：在代码里打开</h3>
+<p>手机应用不是从命令行启动的，所以代码里的选项才是可靠的开关。在设置主视图之前附加，和桌面端一样：</p>
+<pre><code>#if DEBUG
+this.AttachAvaDevTools(new DevToolsOptions { McpServer = true, McpAllowInput = true });
+#endif</code></pre>
+<h3>第 2 步：从电脑连过去</h3>
+<p><b>iOS 模拟器。</b>模拟器与 Mac 共用网络，所以 <code>http://127.0.0.1:5171/</code> 直接可用。如果你更想用环境变量而不是代码，给变量加上 <code>SIMCTL_CHILD_</code> 前缀即可传进模拟器里的应用：</p>
+<pre><code>SIMCTL_CHILD_AVA_DEVTOOLS_MCP=1 xcrun simctl launch booted com.example.myapp</code></pre>
+<p><b>通过 USB 连接的 iPhone。</b>应用监听的是手机自己的回环地址，所以要经 USB 转发端口。libimobiledevice 里的 <code>iproxy</code> 可以做到：</p>
+<pre><code>iproxy 5171:5171</code></pre>
+<p><b>Android 模拟器或真机。</b>每次连接转发一次端口：</p>
+<pre><code>adb forward tcp:5171 tcp:5171</code></pre>
+<p>然后按<a href="#mcpconnect">接到 Claude Code 或 Codex</a>里的方式注册端点。服务器名取自你应用的程序集，和桌面端一样。</p>
+<h3>触摸屏上有什么不同</h3>
+<ul>
+<li><b>click</b> 是轻点，<b>drag</b> 是手指拖动，<b>scroll</b> 是手指平移 —— 手势以拇指的方式到达你的控件。</li>
+<li><b>hover</b> 会被拒绝，因为手指不会悬停。<b>pin_class</b> 配合 <code>:pointerover</code> 仍能显示悬停样式。</li>
+<li><b>F12</b> 和 <b>Shift+F12</b> 什么也不打开 —— 手机上没有窗口，这两个键留给你的应用。</li>
+<li><b>list_windows</b> 列出视图的根以及它承载的内容。</li>
+<li><b>Window size</b> 轴会拒绝：手机上视图的尺寸由操作系统决定。其他轴照常运行。</li>
+</ul>
+<p class="tip">在 Android 上，环境变量通过 <code>debug.mono.env</code> 传入，它最多只容纳 91 个字符 —— 够三个开关，不够四个。需要更多时请用代码里的选项。</p>` },
       { id: 'mcptools', t: '二十九个工具', html: `<p>二十九个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
 <p>十八个只看。两个冻结瞬时状态，等冻结许可。一个在其他变体下读应用，等它自己的许可。八个对应用动手，等<a href="#mcpinput">输入许可</a> —— 七个注入输入，一个把整段会话重放一遍。</p>
 <h3>先找到方向</h3>
@@ -3298,7 +3498,8 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>它不会碰什么</h3>
 <ul><li><b>DevTools 窗口永远不是目标。</b>被要求点它里面的东西时，工具会照实说明并且什么也不做。一个能驱动自己控件的工具，也能把自己的开关关掉。</li>
 <li><b>操作系统的指针不会移动。</b>事件送进应用，而不是送到桌面上 —— 因此凡是归操作系统而不归你的应用管的（原生文件对话框、macOS 菜单栏、拖到另一个应用），都在它够不到的地方。</li>
-<li><b>不重试，也不猜。</b>一次调用就是一个动作；做不到就如实上报，不会拿相邻的东西凑近似。</li></ul>
+<li><b>不重试，也不猜。</b>一次调用就是一个动作；做不到就如实上报，不会拿相邻的东西凑近似。</li>
+<li><b>一次一个动作。</b>智能体并行发出的调用会依次排队，所以轻点永远不会落在拖动的半途，每条回复描述的也都是自己那个动作。</li></ul>
 <p class="tip"><b>提示。</b><code>hover</code> 和 <code>pin_class</code> 不是同一个工具。<code>pin_class</code> 强制样式，让悬停状态可以在什么都不发生的情况下被读取；<code>hover</code> 是真的指针，控件自己的处理器会跑，工具提示按自己的延迟出现。前者用来看，后者用来试。</p>` },
       { id: 'mcpcases', t: 'MCP：五个真实案例', html: `<p>对示例应用的五次会话，原样照录。下面每一条回复都是工具真实打印出来的。重点不在于这些工具存在，而在于一个真实问题只需要这么少的几次调用。</p>
 <h3>案例 1。approver 那一行是空的</h3>
@@ -3424,7 +3625,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 </table>
 <p class="tip">这五个 <code>MCP</code> 变量只是起始状态，不是最终决定：<a href="#settings">⚙ 卡片</a> MCP 页里的开关按机器保存，并且优先于它们。你在工具里关掉的端口，下次启动依然是关的，无论启动脚本导出了什么。</p>` },
       { id: 'limits', t: '限制', html: `<ul>
-<li>仅桌面端 —— 移动/浏览器平台不支持辅助窗口。</li>
+<li>DevTools 窗口仅限桌面端。在 iOS 与 Android 上，<a href="#mcpmobile">MCP 端点</a>无需它即可工作；不支持浏览器平台。</li>
 <li>DevTools 自带主题 —— 应用用什么主题、甚至没有主题，都不影响它。</li>
 <li>设为 <code>LiveTree = false</code> 后树重新变回快照：结构变化后请点 ↻ Refresh（两种模式下属性值都是实时更新的）。</li>
 <li>在 HiDPI 屏幕上，截图与缺陷报告会把带 BoxShadow 的边框<em>内容</em>放大一倍 —— 这是 Avalonia 12 渲染层的一个特性。改为截取元素而不是整扇窗口通常可以绕开。</li>

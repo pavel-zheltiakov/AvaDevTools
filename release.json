@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "version": "12.1.8",
+  "version": "12.1.9",
   "notesUrl": "https://pavel-zheltiakov.github.io/AvaDevTools/releases.html",
   "notes": [
     {
       "kind": "p",
-      "text": "It only looks right in your conditions \u2014 so check it in the others."
+      "text": "It only works on your desktop \u2014 so take it to the phone."
     },
     {
       "kind": "h1",
@@ -13,59 +13,19 @@
     },
     {
       "kind": "bullet",
-      "text": "Variants tab \u2014 read your app under another theme, size, direction or language."
+      "text": "MCP on iOS and Android \u2014 an agent inspects your phone app with every tool."
     },
     {
       "kind": "sub",
-      "text": "Only what got worse \u2014 a choice you made is never reported back at you."
+      "text": "Simulator or device \u2014 a USB iPhone or an Android phone is one port forward away."
     },
     {
       "kind": "sub",
-      "text": "Findings you can act on \u2014 cut off, pushed off screen, contrast lost, text that stayed small."
+      "text": "Touch input \u2014 click taps, drag and scroll move a finger."
     },
     {
       "kind": "sub",
-      "text": "Three ways to read it \u2014 by variant, as a table, or one at a time."
-    },
-    {
-      "kind": "sub",
-      "text": "Save as PDF \u2014 the whole run as a document, pictures and all."
-    },
-    {
-      "kind": "sub",
-      "text": "Every axis explains itself \u2014 what it varies, and three of its values."
-    },
-    {
-      "kind": "sub",
-      "text": "Your list, per project \u2014 remembered against that application, not the next one."
-    },
-    {
-      "kind": "sub",
-      "text": "Axes of your own \u2014 your tenant's colours, your density, your hardware profile."
-    },
-    {
-      "kind": "sub",
-      "text": "A Language axis \u2014 declare your cultures; right-to-left comes with them."
-    },
-    {
-      "kind": "sub",
-      "text": "Nothing left behind \u2014 every change put back, even when a check throws."
-    },
-    {
-      "kind": "sub",
-      "text": "run_variants over MCP \u2014 an agent names an axis and its values."
-    },
-    {
-      "kind": "h1",
-      "text": "Changes"
-    },
-    {
-      "kind": "bullet",
-      "text": "An agent's findings now reach your open Problems tab, not a list only it could see."
-    },
-    {
-      "kind": "bullet",
-      "text": "The MCP tool list marks every tool that can change your app, not just the input ones."
+      "text": "Honest refusals \u2014 no hover on a touch screen, no window size on a phone."
     },
     {
       "kind": "h1",
@@ -73,7 +33,11 @@
     },
     {
       "kind": "bullet",
-      "text": "The highlight's size chip was drawn off the top edge on a scaled canvas."
+      "text": "A click on an element its scroller clips away is now refused, not reported as delivered."
+    },
+    {
+      "kind": "bullet",
+      "text": "Scrolling sideways over MCP now goes right as documented, not left."
     }
   ]
 }
