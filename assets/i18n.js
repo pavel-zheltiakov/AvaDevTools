@@ -12,13 +12,27 @@ en: {
     get: 'Get started', stories: 'See it in action', copy: 'copy',
   },
   video: { h: 'See it in action', sub: 'A real workflow: pick, edit, trace, watch events fire — fifty seconds from F12 to fixed.' },
-  wn: { h: "What's New in 12.1.9", docs: 'Documentation →', notes: 'Version history →' },
+  wn: { h: "What's New in 12.1.10", docs: 'Documentation →', notes: 'Version history →' },
   video2: { h: 'The smart tree, in 40 seconds', sub: 'Pick, peel hidden levels, open folds precisely, hide noise, scope and search — one continuous workflow.' },
   video3: { h: 'Value tracking, in 45 seconds', sub: 'Track one property across the whole tree: colors by value, a live legend, fold-to-changes and pinned rows — one continuous workflow.' },
   stories: {
-    h: 'Stories', wn: 'mobile',
+    h: 'Stories', wn: 'phone',
     lead: 'Every major feature as a step-by-step story: scroll, and each action unfolds exactly the way it happens on screen — at your pace, nothing to scrub or rewind.',
     list: [
+      { key: 'phone', h: '📱 DevTools for your phone app', sub: 'The window you use on the desktop, pointed at an app on a phone — with the phone\u2019s screen beside the tree, one click from any element.',
+        steps: [
+          { t: '📱 DevTools for your phone app',
+            d: '12.1.9 gave an agent every tool against an iPhone or Android app and gave you nothing to look at. The tree, the properties and the screenshots all existed on the phone and reached your desk as prose.',
+            d2: 'So the window goes to the phone. The library already inside your app answers with data, and the DevTools window on your computer draws it: every tab, the same as on the desktop, and the phone\u2019s screen beside the tree.',
+            newsTitle: 'New in 12.1.10',
+            news: [
+              { k: 'DevTools for your phone app', d: 'the full window on an app on an iPhone, an Android phone or a simulator; Connect finds it, and a click on the display preview selects.' },
+            ] },
+          { img: 'story/p02.png', t: 'Connect, and the window is the phone\u2019s', d: 'Press <b>Connect</b> in DevTools on your computer. It lists every app that answers, by its own name \u2014 on the simulator, on an iPhone on a cable, on an Android phone \u2014 with no port to forward. Choose one and a DevTools window opens on it, with the phone\u2019s screen standing beside the tree.' },
+          { img: 'story/p03.png', t: 'Click the screen, not the phone', d: 'The <b>display preview</b> is the phone\u2019s screen, refreshed about once a second. Click anything on it and that element is selected and outlined \u2014 the click only selects, it never reaches the app. The phone can stay on its cable; <b>Pick</b> still takes a tap on it when you have it in hand.' },
+          { img: 'story/p04.png', t: 'Every tab, as on the desktop', d: 'It is the same window, not a second viewer that drifts from the first: properties with their priorities and sources, styles, the size story, problems, the timeline, logs, sessions and variants \u2014 answered by the engines inside the app and drawn by the window you already know.' },
+          { img: 'story/p05.png', t: 'Even the 3D view', d: 'The phone\u2019s screen, exploded into its layers: orbit it and click a layer to select it. Editing values, \u2744 Hold and variants work over the connection too, behind the same switches an agent needs to do the same.' },
+        ] },
       { key: 'mobile', h: '📱 Off the desktop', sub: 'Your phone app, over MCP: every tool answers against the view it is showing, and the tools that act use a finger.',
         steps: [
           { t: '📱 Off the desktop',
@@ -367,6 +381,7 @@ en: {
   feat: {
     h: 'Everything you expect from DevTools', sub: 'Attach once, press F12 in any window.',
     cards: [
+      { i: '📱', t: 'DevTools for your phone app', d: 'Press Connect and the DevTools window opens on an app running on an iPhone, an Android phone or a simulator \u2014 every tab, no port forwarding, and a display preview of the phone\u2019s screen that selects whatever you click.' },
       { i: '◐', t: 'It only looks right in your conditions', d: 'Pick a property, pick a value, press Add \u2014 theme, text scale, window size, text direction, language \u2014 and read the application again at every value on the list, hearing only what got worse: text cut off, content pushed off the window, contrast lost, text that did not get bigger when the reader turned it up. Presets from a phone column to 4K, or type the size you actually ship on. An application can register axes of its own. Everything is put back exactly as it was found.' },
       { i: '⏺', t: 'Keep the repro', d: 'Record what the application receives — yours and an agent’s alike — freeze what should be true while it still is, and replay it later: in the window at any pace, or on the build server, where it exits non-zero at the first divergence.' },
       { i: '🌳', t: 'Live smart tree', d: 'A tree that reads like XAML and follows the application live: structural changes splice in as they happen and flash, with a pause button for reading. Syntax colors, code-style folding, a compact pick view, hide, focus, scope and search.' },
@@ -406,7 +421,7 @@ en: {
     contents: 'Contents',
     groups: [
       { t: 'Getting started', ids: ['install', 'quickstart'] },
-      { t: 'Features', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
+      { t: 'Features', ids: ['livetree', 'windows', 'phone', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
       { t: 'Agents (MCP)', ids: ['mcp', 'mcpconnect', 'mcpmobile', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: 'Reference', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -906,7 +921,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Two applications at once</h3>
 <p>Give the second one its own port (the <b>Port</b> box on the ⚙ card's MCP page, <code>McpPort</code>, or <code>AVA_DEVTOOLS_MCP_PORT</code>) and add it as a second entry. Their names differ already, so the agent's tool list stays readable.</p>
 <p class="tip">A client that started before your application usually shows no tools until it reconnects — <code>/mcp</code> in Claude Code, a new session in Codex. That is a reconnect, not a config problem.</p>` },
-      { id: 'mcpmobile', t: 'On iOS and Android', html: `<p>The endpoint runs inside your application, so it runs wherever the application does — on an iPhone or an Android phone too. Every tool answers against the view the app is showing: the tree, properties, problems, the timeline, screenshots, recording and replay, variants. There is no DevTools window on a phone; the agent is the one looking.</p>
+      { id: 'mcpmobile', t: 'On iOS and Android', html: `<p>The endpoint runs inside your application, so it runs wherever the application does — on an iPhone or an Android phone too. Every tool answers against the view the app is showing: the tree, properties, problems, the timeline, screenshots, recording and replay, variants. There is no DevTools window on the phone itself: the agent looks through the endpoint, and you look through a desktop window — see <a href="#phone">DevTools for your phone app</a>.</p>
 <h3>Step 1. Turn it on in code</h3>
 <p>A phone app is not started from a shell, so options in code are the dependable switch. Attach before you set the main view, as you would on the desktop:</p>
 <pre><code>#if DEBUG
@@ -929,6 +944,29 @@ this.AttachAvaDevTools(new DevToolsOptions { McpServer = true, McpAllowInput = t
 <li>The <b>Window size</b> axis refuses: the operating system sets a phone view's size. The other axes run.</li>
 </ul>
 <p class="tip">On Android, environment variables go through <code>debug.mono.env</code>, which holds at most 91 characters — three switches, not four. Use options in code when you need more.</p>` },
+      { id: 'phone', t: 'DevTools for your phone app', html: `<p>Open DevTools on your computer and point it at an app running on an iPhone, an Android phone or a simulator. It is the window you use on the desktop, and every tab works: tree, properties, styles, layout, 3D, timeline, problems, logs, session and variants.</p>
+<h3>Step 1. Turn on the endpoint in the app</h3>
+<p>The phone app serves its data through the same loopback endpoint an <a href="#mcpmobile">agent</a> uses:</p>
+<pre><code>#if DEBUG
+<span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span> });
+#endif</code></pre>
+<h3>Step 2. Connect</h3>
+<p>Start any desktop app that attaches DevTools, open DevTools and press <b>Connect</b>, the phone button in the toolbar. The list shows every app that answers, by its own name: on the iOS simulator, on an iPhone connected by USB, on an Android emulator or device. Choose one and a DevTools window opens on it. No port forwarding is needed — Connect talks to usbmuxd and adb itself.</p>
+<p class="tip">Keep the app in the foreground and the phone unlocked. iOS suspends an app in the background, and a suspended app drops out of the list until it is open again.</p>
+<h3>Display preview</h3>
+<p>A window connected to a phone shows the phone's screen to the left of the tree. Click anything on it to select that element — the click only selects and never reaches the app. The selection is outlined, the element under the pointer is traced, and the picture refreshes about once a second. The screen button in the toolbar hides and shows the preview; drag its edge to resize it.</p>
+<p>To select with a finger instead, press <b>Pick</b> and tap the phone. The window selects what you tapped, and the phone draws the highlight.</p>
+<div class="shot"><img src="assets/img/docs/phone-preview.png" alt="The Orbit console on an iPhone, shown in the display preview beside the tree, with the Deploy button's text selected"><span class="cap">A click on the preview selected the button's text: outlined on the picture, selected in the tree.</span></div>
+<p>A window connected to a desktop app has no preview: that app's own window is already on your screen.</p>
+<h3>Changing the app</h3>
+<p>Reading needs nothing more. Changing the app from the window needs the switch an agent needs for the same thing:</p>
+<table>
+<tr><th>To</th><th>Option</th><th>Or run with</th></tr>
+<tr><td>Edit values, run element actions, replay a session</td><td><code>McpAllowInput</code></td><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td></tr>
+<tr><td>❄ Hold and pinned states</td><td><code>McpAllowHold</code></td><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td></tr>
+<tr><td>Run variants</td><td><code>McpAllowVariants</code></td><td><code>AVA_DEVTOOLS_MCP_VARIANTS=1</code></td></tr>
+</table>
+<p>With a switch off, the pane says it is read-only and names the switch. If the app runs an older or newer AvaDevTools than the window, Connect says which package to update.</p>` },
       { id: 'mcptools', t: 'The twenty-nine tools', html: `<p>Twenty-nine tools, each one a thin line of plumbing over an engine a tab already uses — the rule the code holds itself to is that MCP owns no inspection logic of its own. Anything in the MCP layer that recomputes what a tab computes is a bug, because that is exactly how two answers to the same question start to drift apart.</p>
 <p>Eighteen only look. Two freeze transient state and wait on the freeze permission. One reads the application under other variants and waits on a permission of its own. Eight act on the application and wait on <a href="#mcpinput">the input permission</a> — the seven that inject input, and the one that replays a whole session of it.</p>
 <h3>Finding your way around</h3>
@@ -1194,7 +1232,7 @@ this.AttachAvaDevTools(new DevToolsOptions { McpServer = true, McpAllowInput = t
 </table>
 <p class="tip">The five <code>MCP</code> variables are a starting state, not the last word: the switches on the <a href="#settings">⚙ card</a>'s MCP page are saved per machine and win over them. A port you closed in the tool stays closed on the next run, whatever the launcher exports.</p>` },
       { id: 'limits', t: 'Limitations', html: `<ul>
-<li>The DevTools window is desktop only. On iOS and Android the <a href="#mcpmobile">MCP endpoint</a> works without it; browser targets are not supported.</li>
+<li>The DevTools window runs on the desktop. A phone app is inspected from a desktop window over <a href="#phone">Connect</a>, and by an agent over the <a href="#mcpmobile">MCP endpoint</a>; browser targets are not supported.</li>
 <li>DevTools brings its own theme — the application's theme, or its absence, does not matter.</li>
 <li>With <code>LiveTree = false</code> the tree is a snapshot again — use ↻ Refresh after structural changes (property values update live either way).</li>
 <li>Screenshots and bug reports double-scale the <em>contents</em> of box-shadowed borders on HiDPI displays — a render-layer quirk of Avalonia 12. Capturing the element rather than the whole window usually sidesteps it.</li>
@@ -1228,13 +1266,27 @@ uk: {
     get: 'Почати', stories: 'Подивитися в дії', copy: 'копіювати',
   },
   video: { h: 'Подивіться в дії', sub: 'Реальний робочий процес: вибір, редагування, трасування, події — п’ятдесят секунд від F12 до виправлення.' },
-  wn: { h: 'Що нового у 12.1.9', docs: 'Документація →', notes: 'Історія версій →' },
+  wn: { h: 'Що нового у 12.1.10', docs: 'Документація →', notes: 'Історія версій →' },
   video2: { h: 'Розумне дерево за 40 секунд', sub: 'Вибір елемента, розкриття прихованих рівнів по одному, точне відкриття згорток, приховування зайвого, scope і пошук — один безперервний сценарій.' },
   video3: { h: 'Трекінг значень за 45 секунд', sub: 'Відстежуйте одну властивість по всьому дереву: кольори за значенням, жива легенда, згортання до змін і закріплені рядки — один безперервний сценарій.' },
   stories: {
-    h: 'Історії', wn: 'mobile',
+    h: 'Історії', wn: 'phone',
     lead: 'Кожна велика можливість — покрокова історія: гортайте, і кожна дія розгортається саме так, як на екрані — у вашому темпі, без перемотування.',
     list: [
+      { key: 'phone', h: '📱 DevTools для застосунку на телефоні', sub: 'Вікно, яким ви користуєтеся на десктопі, спрямоване на застосунок на телефоні, — з екраном телефона поруч із деревом, за клік від будь-якого елемента.',
+        steps: [
+          { t: '📱 DevTools для застосунку на телефоні',
+            d: '12.1.9 дав агентові всі інструменти для застосунку на iPhone чи Android — а вам не дав нічого, на що подивитися. Дерево, властивості й знімки існували на телефоні й доходили до вас лише прозою.',
+            d2: 'Тож вікно йде до телефона. Бібліотека, що вже є у вашому застосунку, відповідає даними, а вікно DevTools на комп\u2019ютері їх малює: усі вкладки, як на десктопі, і екран телефона поруч із деревом.',
+            newsTitle: 'Нове у 12.1.10',
+            news: [
+              { k: 'DevTools для застосунку на телефоні', d: 'повне вікно для застосунку на iPhone, Android-телефоні чи в симуляторі; Connect його знаходить, а клік по перегляду екрана виділяє.' },
+            ] },
+          { img: 'story/p02.png', t: 'Connect — і вікно вже телефонне', d: 'Натисніть <b>Connect</b> у DevTools на комп\u2019ютері. Він покаже кожен застосунок, що відповідає, під власною назвою — у симуляторі, на iPhone через кабель, на Android-телефоні — без жодної переадресації портів. Оберіть один, і для нього відкриється вікно DevTools з екраном телефона поруч із деревом.' },
+          { img: 'story/p03.png', t: 'Клацайте екран, а не телефон', d: '<b>Попередній перегляд екрана</b> — це екран телефона, що оновлюється приблизно раз на секунду. Клацніть будь-що на ньому, і цей елемент буде виділено й обведено — клік лише виділяє й ніколи не доходить до застосунку. Телефон може лишатися на кабелі; <b>Pick</b> і далі приймає дотик, коли телефон у руці.' },
+          { img: 'story/p04.png', t: 'Усі вкладки, як на десктопі', d: 'Це те саме вікно, а не другий переглядач, що з часом розійдеться з першим: властивості з пріоритетами й джерелами, стилі, історія розміру, проблеми, таймлайн, логи, сесії та варіанти — відповідають рушії всередині застосунку, а малює вікно, яке ви вже знаєте.' },
+          { img: 'story/p05.png', t: 'Навіть 3D', d: 'Екран телефона, розкладений на шари: обертайте його й клацайте шар, щоб виділити. Редагування значень, \u2744 Hold і варіанти теж працюють через з\u2019єднання — за тими самими перемикачами, що потрібні агентові.' },
+        ] },
       { key: 'mobile', h: '📱 За межами десктопа', sub: 'Ваш застосунок на телефоні — через MCP: кожен інструмент відповідає про те подання, яке на екрані, а інструменти, що діють, користуються пальцем.',
         steps: [
           { t: '📱 За межами десктопа',
@@ -1583,6 +1635,7 @@ uk: {
   feat: {
     h: 'Усе, що очікуєш від DevTools', sub: 'Підключіть один раз і натискайте F12 у будь-якому вікні.',
     cards: [
+      { i: '📱', t: 'DevTools для застосунку на телефоні', d: 'Натисніть Connect — і вікно DevTools відкриється для застосунку на iPhone, Android-телефоні чи в симуляторі: усі вкладки, без переадресації портів, і попередній перегляд екрана телефона, що виділяє все, по чому ви клацнете.' },
       { i: '◐', t: 'Воно виглядає правильно лише у ваших умовах', d: 'Оберіть властивість, оберіть значення, натисніть Add — тема, масштаб тексту, розмір вікна, напрямок тексту, мова — і прочитайте застосунок знову на кожному значенні зі списку, чуючи лише те, що стало гірше: обрізаний текст, вміст, виштовхнутий за межі вікна, втрачений контраст, текст, який не побільшав, коли читач збільшив шрифт. Пресети від телефонної колонки до 4K — або наберіть той розмір, на якому ви справді працюєте. Застосунок може зареєструвати власні осі. Усе повертається рівно таким, яким його знайшли.' },
       { i: '⏺', t: 'Збережи відтворення', d: 'Запишіть, що отримує застосунок — ваше й агентове однаково — заморозьте те, що має бути правдою, поки воно нею є, і відтворіть пізніше: у вікні в будь-якому темпі або на білд-сервері, де воно виходить з ненульовим кодом на першому розходженні.' },
       { i: '🌳', t: 'Живе розумне дерево', d: 'Дерево, що читається як XAML і живе разом із застосунком: структурні зміни вплітаються щойно стаються і спалахують, а кнопка паузи дає спокійно читати. Підсвічування синтаксису, згортання як у редакторі, компактний вигляд після вибору, hide, focus, scope і пошук.' },
@@ -1622,7 +1675,7 @@ uk: {
     contents: 'Зміст',
     groups: [
       { t: 'Початок роботи', ids: ['install', 'quickstart'] },
-      { t: 'Можливості', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
+      { t: 'Можливості', ids: ['livetree', 'windows', 'phone', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
       { t: 'Агенти (MCP)', ids: ['mcp', 'mcpconnect', 'mcpmobile', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: 'Довідник', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -2122,7 +2175,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>Два застосунки водночас</h3>
 <p>Дайте другому власний порт (поле <b>Port</b> на сторінці MCP у картці ⚙, <code>McpPort</code> або <code>AVA_DEVTOOLS_MCP_PORT</code>) і додайте другим записом. Імена вже різні, тож список інструментів агента лишиться читабельним.</p>
 <p class="tip">Клієнт, запущений раніше за застосунок, зазвичай не бачить інструментів, доки не перез’єднається — <code>/mcp</code> у Claude Code, нова сесія в Codex. Це перез’єднання, а не проблема конфігурації.</p>` },
-      { id: 'mcpmobile', t: 'На iOS та Android', html: `<p>Ендпойнт працює всередині вашого застосунку, тож він працює скрізь, де працює застосунок, — і на iPhone чи Android-телефоні теж. Кожен інструмент відповідає про те подання, яке показує застосунок: дерево, властивості, проблеми, таймлайн, знімки екрана, запис і відтворення, варіанти. Вікна DevTools на телефоні немає — дивиться агент.</p>
+      { id: 'mcpmobile', t: 'На iOS та Android', html: `<p>Ендпойнт працює всередині вашого застосунку, тож він працює скрізь, де працює застосунок, — і на iPhone чи Android-телефоні теж. Кожен інструмент відповідає про те подання, яке показує застосунок: дерево, властивості, проблеми, таймлайн, знімки екрана, запис і відтворення, варіанти. Вікна DevTools на самому телефоні немає: агент дивиться через ендпойнт, а ви — через вікно на десктопі, див. <a href="#phone">DevTools для застосунку на телефоні</a>.</p>
 <h3>Крок 1. Увімкніть у коді</h3>
 <p>Телефонний застосунок не запускають із терміналу, тож надійний перемикач — опції в коді. Під’єднуйте до того, як задаєте головне подання, так само як на десктопі:</p>
 <pre><code>#if DEBUG
@@ -2145,6 +2198,29 @@ this.AttachAvaDevTools(new DevToolsOptions { McpServer = true, McpAllowInput = t
 <li>Вісь <b>Window size</b> відмовляє: розмір подання на телефоні задає операційна система. Інші осі працюють.</li>
 </ul>
 <p class="tip">На Android змінні середовища передаються через <code>debug.mono.env</code>, де вміщається щонайбільше 91 символ — три перемикачі, не чотири. Коли треба більше, використовуйте опції в коді.</p>` },
+      { id: 'phone', t: 'DevTools для застосунку на телефоні', html: `<p>Відкрийте DevTools на комп’ютері й спрямуйте його на застосунок, що працює на iPhone, Android-телефоні чи в симуляторі. Це те саме вікно, що й на десктопі, і працюють усі вкладки: дерево, властивості, стилі, layout, 3D, таймлайн, проблеми, логи, сесія та варіанти.</p>
+<h3>Крок 1. Увімкніть ендпойнт у застосунку</h3>
+<p>Застосунок на телефоні віддає дані через той самий loopback-ендпойнт, яким користується <a href="#mcpmobile">агент</a>:</p>
+<pre><code>#if DEBUG
+<span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span> });
+#endif</code></pre>
+<h3>Крок 2. Під’єднайтеся</h3>
+<p>Запустіть будь-який десктопний застосунок, що підключає DevTools, відкрийте DevTools і натисніть <b>Connect</b> — кнопку з телефоном на панелі. У списку під власною назвою з’явиться кожен застосунок, що відповідає: у симуляторі iOS, на iPhone через USB, в емуляторі чи на пристрої Android. Оберіть потрібний, і для нього відкриється вікно DevTools. Переадресація портів не потрібна — Connect сам говорить з usbmuxd і adb.</p>
+<p class="tip">Тримайте застосунок на передньому плані, а телефон розблокованим. iOS призупиняє застосунок у фоні, і призупинений застосунок зникає зі списку, доки його знову не відкрити.</p>
+<h3>Попередній перегляд екрана</h3>
+<p>Вікно, під’єднане до телефона, показує його екран ліворуч від дерева. Клацніть будь-що на ньому, щоб виділити цей елемент, — клік лише виділяє й ніколи не доходить до застосунку. Виділення обведене, елемент під курсором позначено пунктиром, а зображення оновлюється приблизно раз на секунду. Кнопка з екраном на панелі ховає й показує перегляд; потягніть його край, щоб змінити ширину.</p>
+<p>Щоб виділяти пальцем, натисніть <b>Pick</b> і торкніться телефона. Вікно виділить те, чого ви торкнулися, а телефон намалює підсвітку.</p>
+<div class="shot"><img src="assets/img/docs/phone-preview.png" alt="Консоль Orbit на iPhone у попередньому перегляді поруч із деревом, виділено текст кнопки Deploy"><span class="cap">Клік по перегляду виділив текст кнопки: обведено на зображенні, виділено в дереві.</span></div>
+<p>У вікні, під’єднаному до десктопного застосунку, перегляду немає: вікно того застосунку й так на вашому екрані.</p>
+<h3>Зміни в застосунку</h3>
+<p>Для читання більше нічого не треба. Щоб змінювати застосунок із вікна, потрібен той самий перемикач, що й агентові для тієї ж дії:</p>
+<table>
+<tr><th>Щоб</th><th>Опція</th><th>Або запустіть з</th></tr>
+<tr><td>Редагувати значення, виконувати дії з елементом, відтворювати сесію</td><td><code>McpAllowInput</code></td><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td></tr>
+<tr><td>❄ Hold і закріплені стани</td><td><code>McpAllowHold</code></td><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td></tr>
+<tr><td>Запускати варіанти</td><td><code>McpAllowVariants</code></td><td><code>AVA_DEVTOOLS_MCP_VARIANTS=1</code></td></tr>
+</table>
+<p>Коли перемикач вимкнено, панель каже, що вона лише для читання, і називає перемикач. Якщо в застосунку старіша чи новіша версія AvaDevTools, ніж у вікні, Connect скаже, який пакет оновити.</p>` },
       { id: 'mcptools', t: 'Двадцять дев\'ять інструментів', html: `<p>Двадцять дев\'ять інструментів, кожен — тонкий шар над рушієм, який уже використовує якась вкладка. Правило, якого тримається код: MCP не володіє власною логікою інспекції. Усе в шарі MCP, що перераховує те, що вже рахує вкладка, — це баг, бо саме так дві відповіді на одне питання починають розходитись.</p>
 <p>Вісімнадцять лише дивляться. Два морозять тимчасовий стан і чекають на дозвіл заморожування. Один читає застосунок в інших варіантах і чекає на власний дозвіл. Вісім діють на застосунок і чекають на <a href="#mcpinput">дозвіл на введення</a> — сім, що надсилають введення, і один, що відтворює цілу сесію з нього.</p>
 <h3>Зорієнтуватись</h3>
@@ -2410,7 +2486,7 @@ this.AttachAvaDevTools(new DevToolsOptions { McpServer = true, McpAllowInput = t
 </table>
 <p class="tip">П'ять змінних <code>MCP</code> — це стартовий стан, а не остаточне слово: перемикачі на сторінці MCP у <a href="#settings">картці ⚙</a> зберігаються для машини й мають перевагу над ними. Порт, який ви закрили в інструменті, лишиться закритим і наступного запуску, хоч би що експортував ваш лаунчер.</p>` },
       { id: 'limits', t: 'Обмеження', html: `<ul>
-<li>Вікно DevTools працює лише на десктопі. На iOS та Android <a href="#mcpmobile">MCP-ендпойнт</a> працює без нього; браузерні платформи не підтримуються.</li>
+<li>Вікно DevTools працює на десктопі. Застосунок на телефоні інспектують з десктопного вікна через <a href="#phone">Connect</a>, а агент — через <a href="#mcpmobile">MCP-ендпойнт</a>; браузерні платформи не підтримуються.</li>
 <li>DevTools приносить власну тему — тема застосунку, чи її відсутність, не має значення.</li>
 <li>З <code>LiveTree = false</code> дерево знову є знімком: після структурних змін натисніть ↻ Refresh (значення властивостей оновлюються наживо в обох режимах).</li>
 <li>Скріншоти та звіти про ваду подвоюють масштаб <em>вмісту</em> рамок із тінню (BoxShadow) на HiDPI-екранах — особливість шару рендеру Avalonia 12. Знімок самого елемента, а не цілого вікна, зазвичай це обходить.</li>
@@ -2443,13 +2519,27 @@ zh: {
     get: '快速上手', stories: '看实际效果', copy: '复制',
   },
   video: { h: '实际效果', sub: '真实的工作流：拾取、编辑、溯源、观察事件 —— 从 F12 到修好只要五十秒。' },
-  wn: { h: '12.1.9 新特性', docs: '文档 →', notes: '版本历史 →' },
+  wn: { h: '12.1.10 新特性', docs: '文档 →', notes: '版本历史 →' },
   video2: { h: '智能树，40 秒看懂', sub: '拾取、逐层展开隐藏级别、精确打开折叠、隐藏噪音、Scope 与搜索 —— 一个连贯的工作流。' },
   video3: { h: '值追踪，45 秒看懂', sub: '在整棵树上追踪一个属性：按值着色、实时图例、折叠到变化处、置顶属性行 —— 一个连贯的工作流。' },
   stories: {
-    h: '功能演示', wn: 'mobile',
+    h: '功能演示', wn: 'phone',
     lead: '每个主要功能都是一段循序渐进的图解演示：滚动页面，每个动作都按屏幕上真实发生的顺序展开 —— 节奏由你掌握，无需拖动视频。',
     list: [
+      { key: 'phone', h: '📱 手机应用的 DevTools', sub: '你在桌面端用的那个窗口，指向手机上的应用 —— 手机屏幕就在树旁边，任何元素一点即达。',
+        steps: [
+          { t: '📱 手机应用的 DevTools',
+            d: '12.1.9 让智能体能对 iPhone 或 Android 应用使用所有工具，却没给你任何可看的东西。树、属性和截图都在手机上，传到你桌前的只有文字。',
+            d2: '所以窗口去了手机那边。你的应用里本来就有的库用数据作答，电脑上的 DevTools 窗口把它画出来：每个选项卡都和桌面端一样，手机屏幕就在树旁边。',
+            newsTitle: '12.1.10 新增',
+            news: [
+              { k: '手机应用的 DevTools', d: '完整的窗口，面向 iPhone、Android 手机或模拟器上的应用；Connect 负责找到它，点击屏幕预览即可选中。' },
+            ] },
+          { img: 'story/p02.png', t: '点 Connect，窗口就属于手机了', d: '在电脑上的 DevTools 里点 <b>Connect</b>。它按应用自己的名字列出每个有应答的应用 —— 模拟器里的、连着线的 iPhone 上的、Android 手机上的 —— 无需转发任何端口。选一个，就会为它打开一个 DevTools 窗口，手机屏幕就立在树旁边。' },
+          { img: 'story/p03.png', t: '点屏幕，而不是点手机', d: '<b>屏幕预览</b>就是手机的屏幕，大约每秒刷新一次。点击其中任何东西，那个元素就会被选中并描出轮廓 —— 点击只用于选择，绝不会传到应用里。手机可以一直连着线；手机在手边时，<b>Pick</b> 照样接受在手机上的点按。' },
+          { img: 'story/p04.png', t: '每个选项卡，都和桌面端一样', d: '这是同一个窗口，而不是一个会慢慢与第一个脱节的第二个查看器：带优先级和来源的属性、样式、尺寸的来龙去脉、问题、Timeline、日志、会话和变体 —— 由应用内部的引擎作答，由你早已熟悉的窗口来画。' },
+          { img: 'story/p05.png', t: '连 3D 视图也在', d: '手机屏幕被拆成一层层：旋转它，点一层即可选中。编辑值、\u2744 Hold 和变体也能通过连接使用 —— 需要的开关和智能体做同样事情时需要的一样。' },
+        ] },
       { key: 'mobile', h: '📱 走出桌面', sub: '通过 MCP 检查你的手机应用：每个工具都针对它正在显示的视图作答，动手的工具用的是手指。',
         steps: [
           { t: '📱 走出桌面',
@@ -2798,6 +2888,7 @@ zh: {
   feat: {
     h: 'DevTools 应有的一切', sub: '接入一次，在任意窗口按 F12。',
     cards: [
+      { i: '📱', t: '手机应用的 DevTools', d: '点 Connect，DevTools 窗口就会为 iPhone、Android 手机或模拟器上运行的应用打开 —— 每个选项卡都在，无需端口转发，还有手机屏幕的预览，点哪里就选中哪里。' },
       { i: '◐', t: '它只在你的条件下才好看', d: '挑一个属性，挑一个值，按 Add —— 主题、文字缩放、窗口尺寸、文字方向、语言 —— 在清单上的每一个值下重新读一遍应用，只听变差的部分：被截断的文字、被推出窗口的内容、丢失的对比度、读者把字调大了却没变大的文字。数字随你修改，一个轴会把你给的每个数字都跑一遍，应用也可以加上自己的轴。一切都会原封不动地放回去。' },
       { i: '⏺', t: '把复现留下来', d: '记录应用收到的一切 —— 你的和智能体的一样 —— 趁"该成立的"还成立时把它冻住，之后再重放：在窗口里任选节奏，或在构建服务器上，遇到第一处分岔就以非零码退出。' },
       { i: '🌳', t: '实时智能树', d: '像 XAML 一样的树，并实时跟随应用：结构变化即时拼入并闪烁提示，暂停按钮让你安心细读。语法着色、代码式折叠、拾取后的紧凑视图、隐藏、Focus、Scope 与搜索。' },
@@ -2837,7 +2928,7 @@ zh: {
     contents: '目录',
     groups: [
       { t: '入门', ids: ['install', 'quickstart'] },
-      { t: '功能', ids: ['livetree', 'windows', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
+      { t: '功能', ids: ['livetree', 'windows', 'phone', 'settings', 'problems', 'a11y', 'conditions', 'palette', 'resources', 'inlines', 'applogs', 'hold', 'tree', 'tracking', 'layout', 'inspector', 'timeline', 'cause', 'perf', 'session', 'tabs', 'capture', 'source'] },
       { t: '智能体（MCP）', ids: ['mcp', 'mcpconnect', 'mcpmobile', 'mcptools', 'mcpinput', 'mcpcases'] },
       { t: '参考', ids: ['options', 'env', 'limits', 'feedback', 'updates'] },
     ],
@@ -3337,7 +3428,7 @@ args = [<span class="s">"-y"</span>, <span class="s">"mcp-remote"</span>, <span 
 <h3>同时开着两个应用</h3>
 <p>给第二个应用自己的端口（⚙ 卡片 MCP 页上的 <b>Port</b> 框、<code>McpPort</code>，或 <code>AVA_DEVTOOLS_MCP_PORT</code>），然后作为第二条配置加进去。它们的名字本来就不同，智能体的工具列表依然清楚。</p>
 <p class="tip">比应用先启动的客户端通常要重连之后才看得到工具 —— Claude Code 里的 <code>/mcp</code>，Codex 里开新会话。那是重连问题，不是配置问题。</p>` },
-      { id: 'mcpmobile', t: '在 iOS 与 Android 上', html: `<p>端点运行在你的应用内部，所以应用在哪里运行，它就在哪里运行 —— iPhone 和 Android 手机也一样。每个工具都针对应用正在显示的视图作答：树、属性、问题、Timeline、截图、录制与回放、变体。手机上没有 DevTools 窗口；看的是智能体。</p>
+      { id: 'mcpmobile', t: '在 iOS 与 Android 上', html: `<p>端点运行在你的应用内部，所以应用在哪里运行，它就在哪里运行 —— iPhone 和 Android 手机也一样。每个工具都针对应用正在显示的视图作答：树、属性、问题、Timeline、截图、录制与回放、变体。手机本身上没有 DevTools 窗口：智能体通过端点来看，你则通过桌面上的窗口来看 —— 见<a href="#phone">手机应用的 DevTools</a>。</p>
 <h3>第 1 步：在代码里打开</h3>
 <p>手机应用不是从命令行启动的，所以代码里的选项才是可靠的开关。在设置主视图之前附加，和桌面端一样：</p>
 <pre><code>#if DEBUG
@@ -3360,6 +3451,29 @@ this.AttachAvaDevTools(new DevToolsOptions { McpServer = true, McpAllowInput = t
 <li><b>Window size</b> 轴会拒绝：手机上视图的尺寸由操作系统决定。其他轴照常运行。</li>
 </ul>
 <p class="tip">在 Android 上，环境变量通过 <code>debug.mono.env</code> 传入，它最多只容纳 91 个字符 —— 够三个开关，不够四个。需要更多时请用代码里的选项。</p>` },
+      { id: 'phone', t: '手机应用的 DevTools', html: `<p>在电脑上打开 DevTools，把它指向运行在 iPhone、Android 手机或模拟器上的应用。这就是你在桌面端使用的那个窗口，每个选项卡都能用：树、属性、样式、布局、3D、Timeline、问题、日志、会话和变体。</p>
+<h3>第 1 步：在应用里打开端点</h3>
+<p>手机应用通过<a href="#mcpmobile">智能体</a>使用的同一个回环端点提供数据：</p>
+<pre><code>#if DEBUG
+<span class="k">this</span>.AttachAvaDevTools(<span class="k">new</span> DevToolsOptions { McpServer = <span class="k">true</span> });
+#endif</code></pre>
+<h3>第 2 步：连接</h3>
+<p>启动任意一个挂载了 DevTools 的桌面应用，打开 DevTools，点工具栏上带手机图标的 <b>Connect</b> 按钮。列表按应用自己的名字列出每个有应答的应用：iOS 模拟器里的、USB 连接的 iPhone 上的、Android 模拟器或设备上的。选一个，就会为它打开一个 DevTools 窗口。无需端口转发 —— Connect 自己与 usbmuxd 和 adb 通信。</p>
+<p class="tip">让应用保持在前台，手机保持解锁。iOS 会挂起后台应用，被挂起的应用会从列表中消失，直到再次打开。</p>
+<h3>屏幕预览</h3>
+<p>连接到手机的窗口会在树的左侧显示手机屏幕。点击其中任何地方即可选中那个元素 —— 点击只用于选择，绝不会传到应用里。选中的元素带轮廓，指针下的元素以虚线标出，画面大约每秒刷新一次。工具栏上带屏幕图标的按钮用来隐藏或显示预览；拖动它的边缘可以调整宽度。</p>
+<p>想用手指选择，就按 <b>Pick</b> 再点手机。窗口会选中你点到的元素，高亮画在手机上。</p>
+<div class="shot"><img src="assets/img/docs/phone-preview.png" alt="iPhone 上的 Orbit 控制台显示在树旁边的屏幕预览中，Deploy 按钮的文字已选中"><span class="cap">在预览上点一下，选中了按钮的文字：图上描出轮廓，树里同时选中。</span></div>
+<p>连接到桌面应用的窗口没有预览：那个应用自己的窗口本来就在你的屏幕上。</p>
+<h3>修改应用</h3>
+<p>读取不需要任何额外设置。要从窗口修改应用，需要打开智能体做同样事情时所需的开关：</p>
+<table>
+<tr><th>要做的事</th><th>选项</th><th>或以此运行</th></tr>
+<tr><td>编辑值、执行元素操作、重放会话</td><td><code>McpAllowInput</code></td><td><code>AVA_DEVTOOLS_MCP_INPUT=1</code></td></tr>
+<tr><td>❄ Hold 与固定状态</td><td><code>McpAllowHold</code></td><td><code>AVA_DEVTOOLS_MCP_HOLD=1</code></td></tr>
+<tr><td>运行变体</td><td><code>McpAllowVariants</code></td><td><code>AVA_DEVTOOLS_MCP_VARIANTS=1</code></td></tr>
+</table>
+<p>开关关闭时，面板会说明它是只读的并给出开关名。如果应用里的 AvaDevTools 版本比窗口旧或新，Connect 会说明该更新哪个包。</p>` },
       { id: 'mcptools', t: '二十九个工具', html: `<p>二十九个工具，每一个都是某个选项卡已经在用的引擎之上薄薄的一层管道 —— 代码给自己定的规矩是：MCP 不拥有任何自己的检查逻辑。MCP 层里任何重新计算选项卡已算之物的代码都是 bug，因为同一个问题的两个答案正是这样开始分岔的。</p>
 <p>十八个只看。两个冻结瞬时状态，等冻结许可。一个在其他变体下读应用，等它自己的许可。八个对应用动手，等<a href="#mcpinput">输入许可</a> —— 七个注入输入，一个把整段会话重放一遍。</p>
 <h3>先找到方向</h3>
@@ -3625,7 +3739,7 @@ this.AttachAvaDevTools(new DevToolsOptions { McpServer = true, McpAllowInput = t
 </table>
 <p class="tip">这五个 <code>MCP</code> 变量只是起始状态，不是最终决定：<a href="#settings">⚙ 卡片</a> MCP 页里的开关按机器保存，并且优先于它们。你在工具里关掉的端口，下次启动依然是关的，无论启动脚本导出了什么。</p>` },
       { id: 'limits', t: '限制', html: `<ul>
-<li>DevTools 窗口仅限桌面端。在 iOS 与 Android 上，<a href="#mcpmobile">MCP 端点</a>无需它即可工作；不支持浏览器平台。</li>
+<li>DevTools 窗口运行在桌面端。手机应用通过 <a href="#phone">Connect</a> 从桌面窗口检查，智能体则通过 <a href="#mcpmobile">MCP 端点</a>；不支持浏览器平台。</li>
 <li>DevTools 自带主题 —— 应用用什么主题、甚至没有主题，都不影响它。</li>
 <li>设为 <code>LiveTree = false</code> 后树重新变回快照：结构变化后请点 ↻ Refresh（两种模式下属性值都是实时更新的）。</li>
 <li>在 HiDPI 屏幕上，截图与缺陷报告会把带 BoxShadow 的边框<em>内容</em>放大一倍 —— 这是 Avalonia 12 渲染层的一个特性。改为截取元素而不是整扇窗口通常可以绕开。</li>

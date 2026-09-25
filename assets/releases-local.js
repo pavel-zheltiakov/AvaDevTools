@@ -3,9 +3,9 @@
 // whose tag already exists on GitHub is ignored, so this never duplicates or
 // overrides a published release. Updated each release round with RELEASE_NOTES.md.
 window.LOCAL_RELEASES = [{
-  tag_name: 'v12.1.9',
-  name: 'AvaDevTools 12.1.9',
-  published_at: '2026-09-15T00:00:00Z',
+  tag_name: 'v12.1.10',
+  name: 'AvaDevTools 12.1.10',
+  published_at: '2026-09-25T00:00:00Z',
   html_url: 'https://github.com/pavel-zheltiakov/AvaDevTools/releases',
-  body: "It only works on your desktop \u2014 so take it to the phone.\n\n## New Features\n\n- **MCP on iOS and Android** \u2014 an agent inspects your phone app with every tool.\n  - **Simulator or device** \u2014 a USB iPhone or an Android phone is one port forward away.\n  - **Touch input** \u2014 click taps, drag and scroll move a finger.\n  - **Honest refusals** \u2014 no hover on a touch screen, no window size on a phone.\n\n## Bug Fixes\n\n- A click on an element its scroller clips away is now refused, not reported as delivered.\n- Scrolling sideways over MCP now goes right as documented, not left.\n\nDocs: https://pavel-zheltiakov.github.io/AvaDevTools/docs.html\n"
+  body: "Your agent could see the phone app \u2014 now you can too.\n\n## New Features\n\n- **DevTools for your phone app** \u2014 the full DevTools window, connected to an app on a phone.\n  - **Connect** \u2014 finds apps on the simulator, a USB iPhone or Android, no port forwarding.\n  - **Every tab** \u2014 tree, properties, styles, layout, 3D, timeline, problems, logs, session and variants.\n  - **Edit and hold** \u2014 change values and freeze states on the phone from your desktop.\n  - **Display preview** \u2014 the phone's screen beside the tree; click it to select.\n  - **Pick by tap** \u2014 tap the phone to select, and the highlight draws on the phone.\n  - **Several apps at once** \u2014 one window per connected app, side by side.\n\nDocs: https://pavel-zheltiakov.github.io/AvaDevTools/docs.html\n"
 }];

@@ -184,7 +184,7 @@ function buildHomeStories(R) {
       '<h2 class="sec">' + esc(R.wn.h) + '</h2>' +
       '</div></div>';
     const foot = '<div class="story-track-foot"><div class="wrap">' +
-      '<a href="docs.html#mcpmobile">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
+      '<a href="docs.html#phone">' + esc(R.wn.docs) + '</a> &nbsp;·&nbsp; ' +
       '<a href="releases.html">' + esc(R.wn.notes) + '</a></div></div>';
     if (wn) renderStoryTrack(wnTrack, wn.steps, !wide, head, foot);
   }

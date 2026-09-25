@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "version": "12.1.9",
+  "version": "12.1.10",
   "notesUrl": "https://pavel-zheltiakov.github.io/AvaDevTools/releases.html",
   "notes": [
     {
       "kind": "p",
-      "text": "It only works on your desktop \u2014 so take it to the phone."
+      "text": "Your agent could see the phone app \u2014 now you can too."
     },
     {
       "kind": "h1",
@@ -13,31 +13,31 @@
     },
     {
       "kind": "bullet",
-      "text": "MCP on iOS and Android \u2014 an agent inspects your phone app with every tool."
+      "text": "DevTools for your phone app \u2014 the full DevTools window, connected to an app on a phone."
     },
     {
       "kind": "sub",
-      "text": "Simulator or device \u2014 a USB iPhone or an Android phone is one port forward away."
+      "text": "Connect \u2014 finds apps on the simulator, a USB iPhone or Android, no port forwarding."
     },
     {
       "kind": "sub",
-      "text": "Touch input \u2014 click taps, drag and scroll move a finger."
+      "text": "Every tab \u2014 tree, properties, styles, layout, 3D, timeline, problems, logs, session and variants."
     },
     {
       "kind": "sub",
-      "text": "Honest refusals \u2014 no hover on a touch screen, no window size on a phone."
+      "text": "Edit and hold \u2014 change values and freeze states on the phone from your desktop."
     },
     {
-      "kind": "h1",
-      "text": "Bug Fixes"
+      "kind": "sub",
+      "text": "Display preview \u2014 the phone's screen beside the tree; click it to select."
     },
     {
-      "kind": "bullet",
-      "text": "A click on an element its scroller clips away is now refused, not reported as delivered."
+      "kind": "sub",
+      "text": "Pick by tap \u2014 tap the phone to select, and the highlight draws on the phone."
     },
     {
-      "kind": "bullet",
-      "text": "Scrolling sideways over MCP now goes right as documented, not left."
+      "kind": "sub",
+      "text": "Several apps at once \u2014 one window per connected app, side by side."
     }
   ]
 }
