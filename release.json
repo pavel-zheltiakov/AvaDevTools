@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "version": "12.1.10",
+  "version": "12.1.11",
   "notesUrl": "https://pavel-zheltiakov.github.io/AvaDevTools/releases.html",
   "notes": [
     {
       "kind": "p",
-      "text": "Your agent could see the phone app \u2014 now you can too."
+      "text": "See the value, shape the gradient, and follow the binding."
     },
     {
       "kind": "h1",
@@ -13,31 +13,55 @@
     },
     {
       "kind": "bullet",
-      "text": "DevTools for your phone app \u2014 the full DevTools window, connected to an app on a phone."
+      "text": "Color previews \u2014 view solid colors and gradients over a transparency checkerboard, with contrasting hex labels for solid colors."
     },
     {
-      "kind": "sub",
-      "text": "Connect \u2014 finds apps on the simulator, a USB iPhone or Android, no port forwarding."
+      "kind": "bullet",
+      "text": "Gradient editor \u2014 drag linear-gradient endpoints and stops, rotate the direction, edit brush geometry, and copy the current brush as XAML."
     },
     {
-      "kind": "sub",
-      "text": "Every tab \u2014 tree, properties, styles, layout, 3D, timeline, problems, logs, session and variants."
+      "kind": "bullet",
+      "text": "Binding editor \u2014 follow live values through a flow diagram with property completion, converter stages, errors, and return-flow testing."
     },
     {
-      "kind": "sub",
-      "text": "Edit and hold \u2014 change values and freeze states on the phone from your desktop."
+      "kind": "bullet",
+      "text": "MultiBinding \u2014 group inputs by source instance and open each child\u2019s own flow diagram with independent converter, format, null and fallback settings."
     },
     {
-      "kind": "sub",
-      "text": "Display preview \u2014 the phone's screen beside the tree; click it to select."
+      "kind": "bullet",
+      "text": "Converter picker \u2014 select application, resource and standard Avalonia converters using the binding\u2019s single-value or multi-value interface."
     },
     {
-      "kind": "sub",
-      "text": "Pick by tap \u2014 tap the phone to select, and the highlight draws on the phone."
+      "kind": "bullet",
+      "text": "Thickness editor \u2014 edit four sides around a content rectangle, with Enter advancing to the next input."
     },
     {
-      "kind": "sub",
-      "text": "Several apps at once \u2014 one window per connected app, side by side."
+      "kind": "h1",
+      "text": "Changes"
+    },
+    {
+      "kind": "bullet",
+      "text": "Source links \u2014 open property attributes, property-element bindings and identifiable code assignments with the shared blue editor button."
+    },
+    {
+      "kind": "bullet",
+      "text": "Desktop display preview \u2014 starts hidden until selected; phone previews remain visible by default."
+    },
+    {
+      "kind": "h1",
+      "text": "Bug Fixes"
+    },
+    {
+      "kind": "bullet",
+      "text": "Binding indicators \u2014 direct XAML values no longer appear as bindings, and temporary binding edits no longer appear as animations."
+    },
+    {
+      "kind": "bullet",
+      "text": "Binding experiments \u2014 protect the original binding\u2019s source from experiment values and restore reverse updates on reset."
+    },
+    {
+      "kind": "bullet",
+      "text": "Popup discovery \u2014 recover already-open popups on Avalonia versions that expose the open-popup lists."
     }
   ]
 }
